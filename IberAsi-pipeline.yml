@@ -14,9 +14,9 @@ variables:
   azureContainerRegistryId: '/subscriptions/6a0bc962-2d61-4d6b-9951-8c49004a41df/resourceGroups/BLFCTS-rg-IberAsi/providers/Microsoft.ContainerRegistry/registries/ACRiberasi'
   dockerComposeFile: 'docker-compose.yml'
   action: 'Run a Docker Compose command'
-  devAppServiceName: 'BLFCTS-AppWeb-IberAsi-DEV'
-  preAppServiceName: 'BLFCTS-AppWeb-IberAsi-PRE'
-  proAppServiceName: 'BLFCTS-AppWeb-IberAsi-PRO'
+  devAppServiceName: 'BLE-AppWeb-Win-DEV'
+  preAppServiceName: 'BLE-AppWeb-Win-PRE'
+  proAppServiceName: 'BLE-AppWeb-Win-PRO'
   resourceGroup: 'BLFCTS-rg-IberAsi'
   dockerRepository: 'triviadosweb'    
   dockerImageTag: $[counter('versionCounter', 1)]
@@ -84,7 +84,7 @@ stages:
                   },
                   {
                     "name": "ConnectionStrings__DefaultConnection",
-                    "value": "Server=sqlserversavios.database.windows.net;Database=IberAsi_DEV;User=savios.local;Password=$(STRING_PASSWORD);",
+                    "value": "Server=sqlserversavios.database.windows.net;Database=BLWin_DEV;User=savios.local;Password=$(STRING_PASSWORD);",
                     "slotSetting": false
                   }
                 ]
@@ -127,7 +127,7 @@ stages:
                   },
                   {
                     "name": "ConnectionStrings__DefaultConnection",
-                    "value": "Server=sqlserversavios.database.windows.net;Database=IberAsi_PRE;User=savios.local;Password=$(STRING_PASSWORD);",
+                    "value": "Server=sqlserversavios.database.windows.net;Database=BLWin_PRE;User=savios.local;Password=$(STRING_PASSWORD);",
                     "slotSetting": false
                   }
                 ]
@@ -170,7 +170,7 @@ stages:
                   },
                   {
                     "name": "ConnectionStrings__DefaultConnection",
-                    "value": "Server=sqlserversavios.database.windows.net;Database=IberAsi_PRO;User=savios.local;Password=$(STRING_PASSWORD);",
+                    "value": "Server=sqlserversavios.database.windows.net;Database=BLWin_PRO;User=savios.local;Password=$(STRING_PASSWORD);",
                     "slotSetting": false
                   }
                 ]
