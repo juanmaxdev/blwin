@@ -1,0 +1,10 @@
+**/node_modules
+**/bin
+**/obj
+.git
+Dockerfile
+.dockerignore
+*.log
+**/*.test.tsx
+**/*.spec.tsx
+**/*.Ble.Triviados.UnitTests/

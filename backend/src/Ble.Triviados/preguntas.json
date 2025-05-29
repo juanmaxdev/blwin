@@ -1,0 +1,16 @@
+[
+    {
+        "enunciado": "¿Cuál es el río más largo del mundo?",
+        "tipo": "Geografía",
+        "tema": "Naturaleza",
+        "respuestaCorrecta": "Amazonas",
+        "respuestasPregunta": [ "Amazonas", "Nilo", "Yangtsé", "Misisipi" ]
+    },
+    {
+        "enunciado": "¿Quién escribió 'Cien años de soledad'?",
+        "tipo": "Literatura",
+        "tema": "Autores",
+        "respuestaCorrecta": "Gabriel García Márquez",
+        "respuestasPregunta": [ "Mario Vargas Llosa", "Gabriel García Márquez", "Isabel Allende", "Jorge Luis Borges" ]
+    }
+]
