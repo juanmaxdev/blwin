@@ -5,6 +5,8 @@ import FormInput from '../components/ui/FormInput';
 import GradientCharacter from '../components/GradientCharacter';
 import Button from '../components/ui/Button';
 import { Head } from '../components/Head';
+import { registerPost } from '../hooks/Register';
+import { loginPost } from '../hooks/Login';
 
 
 
@@ -21,35 +23,39 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== confirmarPassword) {
-      setMensaje('❌ Las contraseñas no coinciden');
+      setMensaje('Las contraseñas no coinciden');
       setEsError(true);
       return;
     }
 
-    
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: nombre, password: password }),
-      });
+      const registro = await registerPost(nombre, password);
 
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        setMensaje(`❌ Error al registrar: ${errorText}`);
+      if (!registro) {
+        setMensaje('Error al registrar');
         setEsError(true);
         return;
       }
 
-      const result = await response.text();
-      setMensaje(`✅ ${result}`);
+      setMensaje('Registro exitoso');
       setEsError(false);
-      setTimeout(() => navigate('/login'), 1500);
+
+      try {
+        await loginPost(nombre, password);
+
+      } catch (err) {
+        console.error(err);
+        setMensaje('Error al conectar con el servidor');
+        setEsError(true);
+      }
+
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+
     } catch (err) {
-      // Error de conexión
       console.error(err);
-      setMensaje('❌ Error al conectar con el servidor');
+      setMensaje('Error al conectar con el servidor');
       setEsError(true);
     }
   };
