@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import HeaderWithLogo from '../components/layout/HeaderWithLogo';
-import FormInput from '../components/ui/FormInput';
-import GradientCharacter from '../components/GradientCharacter';
-import Button from '../components/ui/Button';
-import { Head } from '../components/Head';
-import BotonSonido from '../components/ui/ButtonSound';
-import { loginPost } from '../hooks/Login';
+import HeaderWithLogo from '../../components/layout/HeaderWithLogo';
+import FormInput from '../../components/ui/FormInput';
+import GradientCharacter from '../../components/GradientCharacter';
+import Button from '../../components/ui/Button';
+import { Head } from '../../components/Head';
+import BotonSonido from '../../components/ui/ButtonSound';
+import { loginPost } from '../../hooks/Login';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

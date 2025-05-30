@@ -1,13 +1,13 @@
-import { Head } from '../components/Head';
-import LoginButton from '../components/home/LoginButton';
-import Slogan from '../components/home/Slogan';
-import RankingPreview, { RankingItem } from '../components/home/RankingPreview';
+import { Head } from '../../components/Head';
+import LoginButton from '../../components/home/LoginButton';
+import Slogan from '../../components/home/Slogan';
+import RankingPreview, { RankingItem } from '../../components/home/RankingPreview';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import PersonajeCarrusel from '../components/home/PersonajeCarrusel';
-import BotonSonido from '../components/ui/ButtonSound';
+import PersonajeCarrusel from '../../components/home/PersonajeCarrusel';
+import BotonSonido from '../../components/ui/ButtonSound';
 
 function decodeToken(token: string) {
   try {
