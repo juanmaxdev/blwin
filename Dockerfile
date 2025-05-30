@@ -4,15 +4,15 @@ FROM node:23-alpine AS frontend-builder
 WORKDIR /frontend
 
 # Copiar los archivos del frontend
-COPY frontend/src/App-React/package.json ./ 
-COPY frontend/src/App-React/package-lock.json ./
-COPY frontend/src/App-React/tailwind.config.js ./
-COPY frontend/src/App-React/tsconfig.json ./
+COPY frontend/src/package.json ./ 
+COPY frontend/src/package-lock.json ./
+COPY frontend/src/tailwind.config.js ./
+COPY frontend/src/tsconfig.json ./
 
 RUN npm install
 
 # Copiar el resto de los archivos
-COPY frontend/src/App-React/ ./
+COPY frontend/src/ ./
 
 RUN npm run build
 
