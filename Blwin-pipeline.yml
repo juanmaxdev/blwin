@@ -18,7 +18,7 @@ variables:
   preAppServiceName: 'BLE-AppWeb-Win-PRE'
   proAppServiceName: 'BLE-AppWeb-Win-PRO'
   resourceGroup: 'BLFCTS-rg-IberAsi'
-  dockerRepository: 'triviadosweb'    
+  dockerRepository: 'blwin'    
   dockerImageTag: $[counter('versionCounter', 1)]
 stages:
   - stage: Build
