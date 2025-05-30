@@ -6,7 +6,7 @@ const HeaderWithLogo = () => (
         className="w-16 h-16 object-contain drop-shadow-md"
       />
       <h1 className="text-6xl font-extrabold text-indigo-700 drop-shadow-xl">
-        TRIVIADOS
+        BL WIN
       </h1>
     </div>
   );

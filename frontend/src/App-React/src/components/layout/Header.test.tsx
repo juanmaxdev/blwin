@@ -7,14 +7,14 @@ import Header from './Header';
 describe('Header', () => {
   it('se renderiza correctamente', () => {
     render(<Header />);
-    const header = screen.getByText('TRIVIADOS');
+    const header = screen.getByText('BLWIN');
     expect(header).toBeInTheDocument();
   });
 
-  it('muestra el texto "TRIVIADOS"', () => {
+  it('muestra el texto "BLWIN"', () => {
     render(<Header />);
-    const header = screen.getByText('TRIVIADOS');
-    expect(header).toHaveTextContent('TRIVIADOS');
+    const header = screen.getByText('BLWIN');
+    expect(header).toHaveTextContent('BLWIN');
   });
 
   it('utiliza un elemento <header>', () => {

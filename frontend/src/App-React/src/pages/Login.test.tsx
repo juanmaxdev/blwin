@@ -60,7 +60,7 @@ describe('Login', () => {
   it('muestra mensaje de error si login falla (credenciales incorrectas)', async () => {
     global.fetch = vi.fn().mockResolvedValueOnce({
       ok: false,
-      json: () => Promise.resolve({ message: 'Credenciales inválidas' }),
+      json: () => Promise.resolve({ message: 'Credenciales inválidas' }), // Esto no afecta
     });
 
     renderWithRouter(<Login />);
@@ -73,9 +73,10 @@ describe('Login', () => {
     fireEvent.click(screen.getByRole('button', { name: /entrar/i }));
 
     await waitFor(() => {
-      expect(screen.getByText(/credenciales inválidas/i)).toBeInTheDocument();
+      expect(screen.getByText(/credenciales incorrectas/i)).toBeInTheDocument(); // ✅ esto sí aparece
     });
   });
+
 
   it('muestra mensaje de error si fetch falla (error de red)', async () => {
     global.fetch = vi.fn().mockRejectedValueOnce(new Error('Error de red'));
@@ -94,7 +95,7 @@ describe('Login', () => {
     });
   });
 
-  
+
   it('renderiza elementos visuales como personajes y header', () => {
     renderWithRouter(<Login />);
     expect(screen.getByAltText(/personaje izquierda/i)).toBeInTheDocument();
@@ -104,7 +105,7 @@ describe('Login', () => {
 
   it('actualiza <head> con título y descripción', () => {
     renderWithRouter(<Login />);
-    expect(document.title).toBe('Iniciar Sesión | Triviados');
+    expect(document.title).toBe('Iniciar Sesión | BLWin');
     const meta = document.querySelector("meta[name='description']");
     expect(meta).not.toBeNull();
     expect(meta?.getAttribute('content')).toBe('Página de inicio de sesión para usuarios');

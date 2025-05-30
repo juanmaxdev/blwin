@@ -9,7 +9,7 @@ export default defineConfig({
     port: 3000,        // Asegúrate de que el puerto sea 3000
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:5290',
         changeOrigin: true,
         secure: false
       }

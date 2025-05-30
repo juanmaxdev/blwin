@@ -7,21 +7,21 @@ import HeaderWithLogo from './HeaderWithLogo';
 describe('HeaderWithLogo', () => {
   it('se renderiza sin errores', () => {
     render(<HeaderWithLogo />);
-    const title = screen.getByText('TRIVIADOS');
+    const title = screen.getByText('BL WIN');
     const logo = screen.getByAltText('Logo');
     expect(title).toBeInTheDocument();
     expect(logo).toBeInTheDocument();
   });
 
-  it('muestra el título "TRIVIADOS"', () => {
+  it('muestra el título "BL WIN"', () => {
     render(<HeaderWithLogo />);
-    const title = screen.getByRole('heading', { name: 'TRIVIADOS' });
-    expect(title).toHaveTextContent('TRIVIADOS');
+    const title = screen.getByRole('heading', { name: 'BL WIN' });
+    expect(title).toHaveTextContent('BL WIN');
   });
 
   it('el título está en un <h1>', () => {
     render(<HeaderWithLogo />);
-    const title = screen.getByRole('heading', { name: 'TRIVIADOS' });
+    const title = screen.getByRole('heading', { name: 'BL WIN' });
     expect(title.tagName).toBe('H1');
   });
 
@@ -43,7 +43,7 @@ describe('HeaderWithLogo', () => {
 
   it('el título tiene las clases de estilo esperadas', () => {
     render(<HeaderWithLogo />);
-    const title = screen.getByRole('heading', { name: 'TRIVIADOS' });
+    const title = screen.getByRole('heading', { name: 'BL WIN' });
     expect(title).toHaveClass('text-6xl');
     expect(title).toHaveClass('font-extrabold');
     expect(title).toHaveClass('text-indigo-700');
