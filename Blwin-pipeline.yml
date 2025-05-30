@@ -6,7 +6,7 @@ trigger:
 pool:
   name: 'FCTBL'
   demands:
-    - agent.name -equals BLFCT-mv1-SAVIOS-3
+    - agent.name -equals BLFCT-mv1-SAVIOS
 variables:
   containerregistrytype: 'Azure Container Registry'
   azureSubscription: 'SAVIA-PRUEBAS'
