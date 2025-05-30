@@ -16,7 +16,7 @@ export default defineConfig({
     }
   },
   preview: {
-  allowedHosts: ['blfcts-appweb-iberasi-dev.azurewebsites.net'] 
+  allowedHosts: ['ble-appweb-win-dev-caa4ajb6hdargkb7.westeurope-01.azurewebsites.net'] 
   },
   build: {
     outDir: 'dist',
