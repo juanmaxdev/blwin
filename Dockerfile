@@ -4,15 +4,15 @@ FROM node:23-alpine AS frontend-builder
 WORKDIR /frontend
 
 # Copiar los archivos del frontend
-COPY frontend/src/package.json ./ 
-COPY frontend/src/package-lock.json ./
-COPY frontend/src/tailwind.config.js ./
-COPY frontend/src/tsconfig.json ./
+COPY frontend/package.json ./ 
+COPY frontend/package-lock.json ./
+COPY frontend/tailwind.config.js ./
+COPY frontend/tsconfig.json ./
 
 RUN npm install
 
 # Copiar el resto de los archivos
-COPY frontend/src/ ./
+COPY frontend/ ./
 
 RUN npm run build
 
