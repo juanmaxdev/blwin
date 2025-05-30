@@ -19,7 +19,7 @@ describe('Slogan', () => {
     const heading = screen.getByRole('heading', { level: 1 });
 
     expect(heading).toHaveTextContent(
-      '¡Pon a prueba tus conocimientos en el reto más divertido de preguntas!'
+      '¡Pon a prueba tus conocimientos con los minijuegos más divertido de programación!'
     );
   });
 
@@ -28,7 +28,7 @@ describe('Slogan', () => {
     const paragraph = screen.getByText(/juega, aprende y desafía/i);
 
     expect(paragraph).toHaveTextContent(
-      'Juega, aprende y desafía a tus amigos con Triviados 🎉'
+      'Juega, aprende y desafía a tus amigos con BLWin 🎉'
     );
   });
 
@@ -52,7 +52,7 @@ describe('Slogan', () => {
 
   it('el párrafo tiene las clases de estilo esperadas', () => {
     render(<Slogan />);
-    const paragraph = screen.getByText(/triviados/i);
+    const paragraph = screen.getByText(/blwin/i);
 
     expect(paragraph).toHaveClass('text-lg');
     expect(paragraph).toHaveClass('text-indigo-800');

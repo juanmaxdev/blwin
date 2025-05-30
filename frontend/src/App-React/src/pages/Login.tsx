@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <>
-      <Head title="Iniciar Sesión | Triviados" description="Página de inicio de sesión para usuarios" />
+      <Head title="Iniciar Sesión | BLWin" description="Página de inicio de sesión para usuarios" />
       <BotonSonido />
 
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-100 p-6">

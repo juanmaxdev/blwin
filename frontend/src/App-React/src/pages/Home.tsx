@@ -75,7 +75,7 @@ const Home = () => {
 
   return (
     <>
-      <Head title="Inicio | Triviados" description="Juego de trivia en línea" />
+      <Head title="Inicio | BLWin" description="Juego para aprender programación en línea" />
       <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 relative overflow-hidden">
         <BotonSonido />
         <LoginButton />
@@ -83,14 +83,14 @@ const Home = () => {
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-16 gap-10">
           <div className="flex flex-col md:flex-row items-center gap-10">
             <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-800 drop-shadow mt-6">
-              ¡Bienvenido a Triviados!
+              ¡Bienvenido a BLWin!
             </h1>
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-10">
             <motion.img
               src="/logo.png"
-              alt="Logo Triviados"
+              alt="Logo BLWin"
               className="w-72 h-72 object-contain drop-shadow-2xl"
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -109,7 +109,7 @@ const Home = () => {
                   onClick={handleJugar}
                   className="mt-4 px-8 py-4 text-lg font-bold bg-indigo-600 text-white rounded-xl shadow-lg hover:bg-indigo-700 transition-all duration-300 hover:scale-105"
                 >
-                  Jugar Ahora
+                  Minijuego aleatorio
                 </button>
               )}
             </motion.div>

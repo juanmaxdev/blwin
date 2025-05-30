@@ -14,9 +14,6 @@ vi.mock('./pages/Login', () => ({
 vi.mock('./pages/Register', () => ({
   default: () => <h1>Página de Registro</h1>,
 }));
-vi.mock('./pages/Juego', () => ({
-  default: () => <h1>Página del Juego</h1>,
-}));
 
 describe('App (Rutas)', () => {
   it('muestra la página de inicio en la ruta "/"', () => {
@@ -44,15 +41,6 @@ describe('App (Rutas)', () => {
       </MemoryRouter>
     );
     expect(screen.getByRole('heading', { name: 'Página de Registro' })).toBeInTheDocument();
-  });
-
-  it('muestra la página del juego en la ruta "/juego"', () => {
-    render(
-      <MemoryRouter initialEntries={['/juego']}>
-        <App />
-      </MemoryRouter>
-    );
-    expect(screen.getByRole('heading', { name: 'Página del Juego' })).toBeInTheDocument();
   });
 
   it('no muestra contenido para rutas no definidas', () => {

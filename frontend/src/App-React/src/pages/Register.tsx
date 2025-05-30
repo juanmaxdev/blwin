@@ -62,7 +62,7 @@ const Register = () => {
 
   return (
     <>
-      <Head title="Registro | Triviados" description="Crea tu cuenta en Triviados" />
+      <Head title="Registro | BLWin" description="Crea tu cuenta en BLWin" />
 
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-100 p-6">
         <HeaderWithLogo />

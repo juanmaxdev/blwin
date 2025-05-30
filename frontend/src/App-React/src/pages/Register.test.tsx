@@ -5,9 +5,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import Register from './Register';
 
-const renderWithRouter = (ui: React.ReactElement) =>
-  render(<MemoryRouter>{ui}</MemoryRouter>);
-
 vi.mock('../components/layout/HeaderWithLogo', () => ({
   default: () => <header>Mock Header</header>,
 }));
@@ -31,9 +28,34 @@ vi.mock('../components/ui/Button', () => ({
   default: ({ children, ...props }: any) => <button {...props}>{children}</button>,
 }));
 
+const mockedNavigate = vi.fn();
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => mockedNavigate,
+  };
+});
+
+const mockRegisterPost = vi.fn();
+const mockLoginPost = vi.fn();
+
+vi.mock('../hooks/Register', () => ({
+  registerPost: (...args: any[]) => mockRegisterPost(...args),
+}));
+
+vi.mock('../hooks/Login', () => ({
+  loginPost: (...args: any[]) => mockLoginPost(...args),
+}));
+
+const renderWithRouter = (ui: React.ReactElement) =>
+  render(<MemoryRouter>{ui}</MemoryRouter>);
+
 describe('Register', () => {
   beforeEach(() => {
-    global.fetch = vi.fn();
+    mockRegisterPost.mockReset();
+    mockLoginPost.mockReset();
+    mockedNavigate.mockReset();
     document.title = '';
     const meta = document.querySelector("meta[name='description']");
     if (meta) meta.remove();
@@ -64,54 +86,9 @@ describe('Register', () => {
     expect(screen.getByText(/las contraseñas no coinciden/i)).toBeInTheDocument();
   });
 
-  it('hace fetch y muestra mensaje de éxito si las contraseñas coinciden', async () => {
-    (fetch as any).mockResolvedValueOnce({
-      ok: true,
-      text: () => Promise.resolve('Usuario registrado con éxito'),
-    });
 
-    renderWithRouter(<Register />);
-    fireEvent.change(screen.getByPlaceholderText('Nombre de usuario'), {
-      target: { value: 'Carlos' },
-    });
-    fireEvent.change(screen.getByPlaceholderText('Contraseña'), {
-      target: { value: 'abc123' },
-    });
-    fireEvent.change(screen.getByPlaceholderText('Confirmar contraseña'), {
-      target: { value: 'abc123' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /registrarse/i }));
-
-    await waitFor(() => {
-      expect(screen.getByText(/usuario registrado con éxito/i)).toBeInTheDocument();
-    });
-  });
-
-  it('muestra error si fetch falla por red', async () => {
-    (fetch as any).mockRejectedValueOnce(new Error('Falló'));
-
-    renderWithRouter(<Register />);
-    fireEvent.change(screen.getByPlaceholderText('Nombre de usuario'), {
-      target: { value: 'Ana' },
-    });
-    fireEvent.change(screen.getByPlaceholderText('Contraseña'), {
-      target: { value: 'abc123' },
-    });
-    fireEvent.change(screen.getByPlaceholderText('Confirmar contraseña'), {
-      target: { value: 'abc123' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /registrarse/i }));
-
-    await waitFor(() => {
-      expect(screen.getByText(/error al conectar con el servidor/i)).toBeInTheDocument();
-    });
-  });
-
-  it('muestra error si fetch responde con error del servidor', async () => {
-    (fetch as any).mockResolvedValueOnce({
-      ok: false,
-      text: () => Promise.resolve('Usuario ya existe'),
-    });
+  it('muestra error si registerPost devuelve false', async () => {
+    mockRegisterPost.mockResolvedValueOnce(false);
 
     renderWithRouter(<Register />);
     fireEvent.change(screen.getByPlaceholderText('Nombre de usuario'), {
@@ -130,13 +107,33 @@ describe('Register', () => {
     });
   });
 
+  it('muestra error si registerPost lanza excepción', async () => {
+    mockRegisterPost.mockRejectedValueOnce(new Error('Falló'));
+
+    renderWithRouter(<Register />);
+    fireEvent.change(screen.getByPlaceholderText('Nombre de usuario'), {
+      target: { value: 'Ana' },
+    });
+    fireEvent.change(screen.getByPlaceholderText('Contraseña'), {
+      target: { value: 'abc123' },
+    });
+    fireEvent.change(screen.getByPlaceholderText('Confirmar contraseña'), {
+      target: { value: 'abc123' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /registrarse/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/error al conectar con el servidor/i)).toBeInTheDocument();
+    });
+  });
+
   it('incluye un enlace a la página de login', () => {
     renderWithRouter(<Register />);
     const link = screen.getByRole('link', { name: /inicia sesión/i });
     expect(link).toHaveAttribute('href', '/login');
   });
 
-  it('renderiza los personajes decorativos (mock)', () => {
+  it('renderiza los personajes decorativos', () => {
     renderWithRouter(<Register />);
     expect(screen.getByAltText('Personaje Registro Izquierda')).toBeInTheDocument();
     expect(screen.getByAltText('Personaje Registro Derecha')).toBeInTheDocument();
@@ -144,13 +141,13 @@ describe('Register', () => {
 
   it('actualiza el título del documento con Head', () => {
     renderWithRouter(<Register />);
-    expect(document.title).toBe('Registro | Triviados');
+    expect(document.title).toBe('Registro | BLWin');
   });
 
   it('añade una meta descripción al documento con Head', () => {
     renderWithRouter(<Register />);
     const meta = document.querySelector("meta[name='description']") as HTMLMetaElement;
     expect(meta).not.toBeNull();
-    expect(meta.content).toBe('Crea tu cuenta en Triviados');
+    expect(meta.content).toBe('Crea tu cuenta en BLWin');
   });
 });

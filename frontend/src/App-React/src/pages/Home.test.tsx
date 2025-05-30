@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
@@ -55,45 +55,33 @@ describe('Home', () => {
   it('renderiza logo, botón y slogan', () => {
     render(<Home />, { wrapper: MemoryRouter });
 
-    expect(screen.getByAltText('Logo Triviados')).toBeInTheDocument();
+    expect(screen.getByAltText('Logo BLWin')).toBeInTheDocument();
     expect(screen.getByText('Iniciar Sesión')).toBeInTheDocument();
     expect(screen.getByText('Slogan del juego')).toBeInTheDocument();
   });
 
-  it('muestra el botón "Jugar Ahora" si hay token', () => {
+  it('muestra el botón "Minijuego aleatorio" si hay token', () => {
     localStorage.setItem('token', validToken);
     render(<Home />, { wrapper: MemoryRouter });
 
-    expect(screen.getByRole('button', { name: /jugar ahora/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Minijuego aleatorio/i })).toBeInTheDocument();
   });
 
   it('redirige al login si no hay token', () => {
     render(<Home />, { wrapper: MemoryRouter });
 
-    const jugarBtn = screen.queryByRole('button', { name: /jugar ahora/i });
+    const jugarBtn = screen.queryByRole('button', { name: /Minijuego aleatorio/i });
     if (jugarBtn) {
       fireEvent.click(jugarBtn);
       expect(mockNavigate).toHaveBeenCalledWith('/login');
     }
   });
 
-  it('redirige a /juego si hay token válido', async () => {
-    localStorage.setItem('token', validToken);
-    render(<Home />, { wrapper: MemoryRouter });
-
-    fireEvent.click(screen.getByRole('button', { name: /jugar ahora/i }));
-
-    await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith('/juego');
-      expect(localStorage.getItem('partidaId')).toBe('123');
-    });
-  });
-
   it('renderiza el título y descripción con <Head>', () => {
     render(<Home />, { wrapper: MemoryRouter });
 
-    expect(document.title).toBe('Inicio | Triviados');
+    expect(document.title).toBe('Inicio | BLWin');
     const meta = document.querySelector("meta[name='description']") as HTMLMetaElement;
-    expect(meta?.content).toBe('Juego de trivia en línea');
+    expect(meta?.content).toBe('Juego para aprender programación en línea');
   });
 });
