@@ -37,6 +37,7 @@ stages:
               action: 'Build services'
               additionalImageTags: '$(dockerImageTag)'
               dockerComposeVersion: '2'
+              useDockerComposeV2: true
           - task: DockerCompose@0
             displayName: 'Push Docker Imagen a ACR'
             inputs:
@@ -47,6 +48,7 @@ stages:
               action: 'Push services'
               additionalImageTags: '$(dockerImageTag)'
               dockerComposeVersion: '2'
+              useDockerComposeV2: true
   - stage: DespliegueDevelop
     displayName: 'Despliegue en DEVELOP'
     jobs:
