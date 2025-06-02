@@ -5,7 +5,7 @@ type ModeloImagenProps = {
 
 export default function ModeloImagen({rutaImagen, descripImagen}: ModeloImagenProps) {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen">
       <img src={rutaImagen} alt={descripImagen} />
     </div>
   );
