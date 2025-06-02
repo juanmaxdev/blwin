@@ -2,7 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Home from './pages/home/Home';
-import PanelDetectiveJuego from './components/juegos/juegos_selectores/detectiveJuegoPanel/DetectiveJuegoPanel';
+import PanelDetectiveJuego from './components/juegos/juego_selectores/detectiveJuegoPanel/DetectiveJuegoPanel';
+import MinijuegoCSS from './components/juegos/juego_selectores/nivel1/nivel1';
 
 const App = () => (
   <Routes>
@@ -17,6 +18,8 @@ const App = () => (
 
     {/* Página de login */}
     <Route path="/juego/selectores" element={<PanelDetectiveJuego />} />
+    <Route path="/juego/selectores/nive-uno" element={<MinijuegoCSS />} />
+
 
   </Routes>
 );
