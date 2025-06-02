@@ -61,7 +61,7 @@ export const preguntasProgramacionWeb = [
   },
   {
     pregunta: "¿Qué es un hook en React?",
-    respuesta: "Función reactiva"
+    respuesta: "Funcion reactiva"
   },
   {
     pregunta: "¿Qué hace useEffect en React?",

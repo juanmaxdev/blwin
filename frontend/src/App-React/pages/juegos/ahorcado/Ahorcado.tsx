@@ -56,7 +56,7 @@ const Ahorcado = () => {
   const [numeroFallos, setNumeroFallos] = useState<number>(0);
   const imgSegunFallo = imagenesAhorcado[numeroFallos];
 
-  const [indicePregunta] = useState(() =>
+  const [indicePregunta, setIndicePregunta] = useState<number>(
     Math.floor(Math.random() * preguntasProgramacionWeb.length)
   );
 
@@ -73,9 +73,12 @@ const Ahorcado = () => {
   };
 
   const handleVolverAJugar = () => {
+    const nuevoIndice = Math.floor(Math.random() * preguntasProgramacionWeb.length);
+    setIndicePregunta(nuevoIndice);
     setLetrasSeleccionadas([]);
     setNumeroFallos(0);
     setIsGameOver(false);
+    setPuntuacion(0);
   };
 
   const handleGameEnd = (finalScore: number) => {
@@ -85,13 +88,27 @@ const Ahorcado = () => {
 
   const onClickLetra = (letra: string) => {
     if (letrasSeleccionadas.includes(letra)) return;
-    setLetrasSeleccionadas([...letrasSeleccionadas, letra]);
+
+    const nuevasLetras = [...letrasSeleccionadas, letra];
+    setLetrasSeleccionadas(nuevasLetras);
+
     if (!respuesta.includes(letra)) {
       if (numeroFallos === 5) {
-       handleGameEnd(puntuacion);
-      
+        handleGameEnd(puntuacion);
+        return;
       }
-      setNumeroFallos((prev) => Math.min(prev + 1, imagenesAhorcado.length - 1));
+      setNumeroFallos((prev) => prev + 1);
+      return;
+    }
+    const caracteresUnicos = Array.from(new Set(respuesta.replace(/\s+/g, '')));
+    const todasDescubiertas = caracteresUnicos.every((c) => [...nuevasLetras].includes(c));
+
+    if (todasDescubiertas) {
+      setPuntuacion((prev) => prev + 100);
+      const nuevoIndice = Math.floor(Math.random() * preguntasProgramacionWeb.length);
+      setIndicePregunta(nuevoIndice);
+      setLetrasSeleccionadas([]);
+      setNumeroFallos(0);
     }
   };
 
@@ -124,20 +141,16 @@ const Ahorcado = () => {
       </header>
 
       <main className="flex-1 flex overflow-hidden">
-        <div className="w-1/2 h-full flex items-center justify-center p-4">
+        <div className="w-1/2 h-full flex flex-col items-center justify-center p-4">
+          <p className="mt-8 text-center text-lg font-semibold text-gray-800 ">Puntuación: {puntuacion}</p>
           <div className="max-w-full max-h-full">
-            <ModeloImagen
-              rutaImagen={imgSegunFallo.imagen}
-              descripImagen={imgSegunFallo.descripcion}
-            />
+            <ModeloImagen rutaImagen={imgSegunFallo.imagen} descripImagen={imgSegunFallo.descripcion} />
           </div>
         </div>
 
         <div className="w-3/4 flex flex-col p-6 overflow-hidden">
           <div className="flex items-center justify-center my-8">
-            <h5 className="text-4xl font-bold text-gray-600">
-              Pregunta: {preguntaAleatoria}
-            </h5>
+            <h5 className="text-4xl font-bold text-gray-600">Pregunta: {preguntaAleatoria}</h5>
           </div>
 
           <div className="flex-1 flex items-center justify-center">
@@ -163,9 +176,7 @@ const Ahorcado = () => {
           </div>
 
           <div className="flex-none mt-4">
-            <h3 className="text-center text-xxl font-bold text-gray-700 mb-5">
-              Elige una letra
-            </h3>
+            <h3 className="text-center text-xxl font-bold text-gray-700 mb-5">Elige una letra</h3>
 
             <div className="flex flex-wrap gap-2">
               {ALFABETO.map((letra) => {
