@@ -32,5 +32,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SeedData\" />
+  </ItemGroup>
+
 
 </Project>

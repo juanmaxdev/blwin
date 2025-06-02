@@ -9,16 +9,14 @@ namespace Ble.Triviados.Infraestructure.Persistence
 
 
            // DbSets para las entidades
-           public DbSet<Partida> Partidas { get; set; }
            public DbSet<Usuario> Usuarios { get; set; }
-           public DbSet<Pregunta> Preguntas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("YourConnectionString",
-                    b => b.MigrationsAssembly("Ble.Triviados.Services.WebApi")); // Cambia esto
+                    b => b.MigrationsAssembly("Ble.Triviados.Services.WebApi"));
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,7 +31,6 @@ namespace Ble.Triviados.Infraestructure.Persistence
                  Name = "usuarioAdmin",
                  Password = "password123",
                  FechaRegistro = new DateTime(2025, 4, 1),
-                 Rol = "Admin"
              },
             new Usuario
             {
@@ -41,7 +38,6 @@ namespace Ble.Triviados.Infraestructure.Persistence
                 Name = "Juan",
                 Password = "bl1234",
                 FechaRegistro = new DateTime(2025, 4, 1),
-                Rol = "User"
             });
 
         }

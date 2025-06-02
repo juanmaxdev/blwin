@@ -37,7 +37,6 @@ namespace Ble.Triviados.Application.Services
             {
                 Name = dto.Name,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                Rol = "User",
                 FechaRegistro = DateTime.Now
             };
 
@@ -77,7 +76,6 @@ namespace Ble.Triviados.Application.Services
                 new Claim("id",usuario.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Name),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, usuario.Rol)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

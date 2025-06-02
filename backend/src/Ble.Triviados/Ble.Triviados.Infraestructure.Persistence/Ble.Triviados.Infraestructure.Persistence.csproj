@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Ble.Triviados.Domain.Entity\Ble.Triviados.Domain.Entity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

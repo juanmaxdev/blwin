@@ -1,6 +1,5 @@
 ﻿using Ble.Triviados.Domain.Entity.Interfaces;
 using Ble.Triviados.Application.Services;
-using Ble.Triviados.Domain.Entity.Services;
 using Ble.Triviados.Infraestructure.Persistence;
 using Ble.Triviados.Infraestructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -46,17 +45,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//Servicios de dominio / aplicación
-builder.Services.AddScoped<IPartidaService, PartidaAppService>();
-builder.Services.AddScoped<IPartidaRepository, PartidaRepository>();
-
 // Servicios de usuario
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
-// Servicios de preguntas
-builder.Services.AddScoped<IPreguntaService, PreguntaService>();
-builder.Services.AddScoped<IPreguntaRepository, PreguntaRepository>();
 
 // Controladores
 builder.Services.AddControllers();
