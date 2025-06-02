@@ -1,6 +1,15 @@
 import { Grid } from "@mui/material";
+import { useState } from "react";
+import Temporizador from "../../components/juegos/juego_esquivar/temporizador/Temporizador";
+import Boton from "../../components/juegos/juego_esquivar/boton/Boton";
 
-export default function PaginaEsquivar() {
+export default function PaginaJuegoEsquivar() {
+    const [isRunning, setIsRunning] = useState(false);
+    const handleStart = () => {
+        isRunning == true ? 
+        setIsRunning(false):
+        setIsRunning(true)
+    };
     return(
         <Grid container height={"100vh"} width={"100vw"} alignItems={"stretch"} sx={{}}>
             {/* Row 1 */}
@@ -23,7 +32,7 @@ export default function PaginaEsquivar() {
                 </Grid>
                 {/*Column 5*/}
                 <Grid size={2} display={"flex"} border={1} height={"100%"} justifyContent={"center"} alignItems={"center"}>
-                    <p>1x5</p>
+                    <Temporizador isRunning={isRunning} />
                 </Grid>
             </Grid>
 
@@ -158,7 +167,7 @@ export default function PaginaEsquivar() {
                 </Grid>
                 {/*Column 3*/}
                 <Grid size={2} display={"flex"} border={1} height={"100%"} justifyContent={"center"} alignItems={"center"}>
-                    <p>7x3</p>
+                    <Boton valor={isRunning == true ? "STOP" : "START"} funcion={handleStart}/>
                 </Grid>
                 {/*Column 4*/}
                 <Grid size={2} display={"flex"} border={1} height={"100%"} justifyContent={"center"} alignItems={"center"}>
