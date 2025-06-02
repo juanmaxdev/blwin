@@ -26,5 +26,17 @@ namespace Ble.Triviados.Infraestructure.Persistence.Repositories
         {
             return await _context.Usuarios.FirstOrDefaultAsync(u => u.Name == name);
         }
+
+        public async Task<Usuario?> AgregarPuntosAsync(int usuarioId, int puntosASumar)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == usuarioId);
+            if (usuario == null) return null;
+
+            usuario.Puntos += puntosASumar;
+            await _context.SaveChangesAsync();
+            return usuario;
+        }
+
+
     }
 }

@@ -6,6 +6,7 @@ using Ble.Triviados.Application.Dtos;
 using Ble.Triviados.Application.Interfaces;
 using Ble.Triviados.Domain.Entity.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Ble.Triviados.Domain.Entity.Entities;
 
 namespace Ble.Triviados.Application.Services
 {
@@ -54,10 +55,10 @@ namespace Ble.Triviados.Application.Services
             var usuario = await _usuarioRepository.ObtenerPorNombreAsync(dto.Name);
 
             if (usuario == null)
-                return "❌ Usuario no encontrado.";
+                return "Usuario no encontrado.";
 
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, usuario.Password))
-                return "❌ Contraseña incorrecta.";
+                return "Contraseña incorrecta.";
 
             // Generar el token JWT
             var token = GenerarToken(usuario);
@@ -90,5 +91,24 @@ namespace Ble.Triviados.Application.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
+        public async Task<PuntuacionDto?> AgregarPuntosUsuarioAsync(PuntuacionDto dto)
+        {
+            var usuario = await _usuarioRepository.AgregarPuntosAsync(dto.UsuarioId, dto.Puntos);
+            if (usuario == null)
+                return null;
+
+            return new PuntuacionDto
+            {
+                UsuarioId = usuario.Id,
+                Puntos = usuario.Puntos
+            };
+        }
+
+
+
+
+
     }
 }
