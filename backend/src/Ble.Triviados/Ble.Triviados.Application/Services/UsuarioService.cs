@@ -93,22 +93,18 @@ namespace Ble.Triviados.Application.Services
         }
 
 
-        public async Task<PuntuacionDto?> AgregarPuntosUsuarioAsync(PuntuacionDto dto)
+        public async Task<PtosDto?> AgregarPuntosUsuarioAsync(int usuarioId, int puntos)
         {
-            var usuario = await _usuarioRepository.AgregarPuntosAsync(dto.UsuarioId, dto.Puntos);
+            var usuario = await _usuarioRepository.AgregarPuntosAsync(usuarioId, puntos);
             if (usuario == null)
                 return null;
 
-            return new PuntuacionDto
+            return new PtosDto
             {
                 UsuarioId = usuario.Id,
                 Puntos = usuario.Puntos
             };
         }
-
-
-
-
 
     }
 }
