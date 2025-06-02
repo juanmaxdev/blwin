@@ -1,15 +1,16 @@
 ﻿using Ble.Triviados.Domain.Entity.Entities;
 using Ble.Triviados.Domain.Entity.Interfaces;
 using Ble.Triviados.Infraestructure.Persistence;
+using Ble.Triviados.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ble.Triviados.Infraestructure.Persistence.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly TriviadosDbContext _context;
+        private readonly AppDbContext _context;
 
-        public UsuarioRepository(TriviadosDbContext context)
+        public UsuarioRepository(AppDbContext context)
         {
             _context = context;
         }

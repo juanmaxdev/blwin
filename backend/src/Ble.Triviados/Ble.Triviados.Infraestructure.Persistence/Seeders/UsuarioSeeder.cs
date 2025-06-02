@@ -1,11 +1,12 @@
 ﻿using Ble.Triviados.Domain.Entity.Entities;
+using Ble.Triviados.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ble.Triviados.Infraestructure.Persistence.Seeders
 {
     public static class UsuarioSeeder
     {
-        public static async Task SeedAsync(TriviadosDbContext context)
+        public static async Task SeedAsync(AppDbContext context)
         {
             if (!await context.Usuarios.AnyAsync())
             {

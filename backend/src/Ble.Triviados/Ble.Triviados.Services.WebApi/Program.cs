@@ -9,27 +9,23 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Hosting;
 using Ble.Triviados.Infraestructure.Persistence.Seeders;
+using Ble.Triviados.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración de la base de datos
-builder.Services.AddDbContext<TriviadosDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
-// Configuración de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") // Cambia si tu frontend usa otro puerto
+        policy.WithOrigins("http://localhost:3000")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
 
-// Servicios de dominio / aplicación
-// Configuración de JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -45,46 +41,39 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Servicios de usuario
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-// Controladores
 builder.Services.AddControllers();
 
-// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Migraciones
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
     try
     {
-        var context = services.GetRequiredService<TriviadosDbContext>();
-        context.Database.Migrate(); // Aplica las migraciones pendientes
-        await SeederRunner.RunAsync(context); // Ejecuta todos los seeders
-
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.Migrate(); 
+        await SeederRunner.RunAsync(context);
     }
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Error al aplicar migraciones o seeder en la base de datos.");
+        logger.LogError(ex, "Error al aplicar migraciones o ejecutar el seeder.");
     }
 }
 
-// Middleware de desarrollo
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Usa CORS antes de controllers
 app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
