@@ -1,75 +1,107 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Head } from '../../../../components/Head';
+import { CheckCircle, XCircle } from 'lucide-react';
+import confetti from 'canvas-confetti';
 import BotonSonido from '../../../../components/ui/ButtonSound';
-import LoginButton from '../../../../components/home/LoginButton';
 
-const elementosEjemplo = [
-  { id: 'rojo', className: 'cuadro bg-red-500', tag: 'div', contenido: 'Elemento Rojo' },
-  { id: 'verde', className: 'cuadro bg-green-500', tag: 'div', contenido: 'Elemento Verde' },
-  { id: '', className: 'cuadro especial bg-blue-500', tag: 'div', contenido: 'Especial Azul' },
+const elementosHTML = [
+  { tag: 'p', contenido: 'Texto importante', className: '' },
+  { tag: 'p', contenido: 'Otro texto sin importancia', className: '' },
 ];
 
-const MinijuegoCSS = () => {
+const Nivel1 = () => {
   const [css, setCss] = useState('');
+  const [mensaje, setMensaje] = useState<React.ReactNode>(null);
+  const navigate = useNavigate();
+
+  const verificarCSS = () => {
+    const regexSelector = /^\s*p\s*\{[^}]+\}/m;
+    if (regexSelector.test(css)) {
+      confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+      setMensaje(
+        <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
+          <CheckCircle className="w-5 h-5" />
+          <span>¡Bien hecho! Has aplicado estilo correctamente.</span>
+        </div>
+      );
+      setTimeout(() => navigate('/juego/selectores/nivel-2'), 3000);
+    } else {
+      setMensaje(
+        <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
+          <XCircle className="w-5 h-5" />
+          <span>Recuerda usar <code>p &#123; propiedad: valor; &#125;</code> para dar estilo.</span>
+        </div>
+      );
+    }
+  };
 
   useEffect(() => {
-    const dynamicStyle = document.getElementById('css-juego');
-    if (dynamicStyle) dynamicStyle.innerHTML = css;
+    const styleTag = document.getElementById('css-nivel-1');
+    if (styleTag) styleTag.innerHTML = css;
   }, [css]);
 
   return (
     <>
-      <Head title="Minijuego CSS | BLWin" description="Aprende selectores CSS jugando" />
-      <style id="css-juego" />
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
+      <Head title="Nivel 1 - CSS Detective" />
+      <style id="css-nivel-1" />
+      <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
         <BotonSonido />
-        <LoginButton />
 
         <main className="flex flex-col items-center p-6 gap-6">
-          <h1 className="text-3xl font-bold text-indigo-800 drop-shadow">
-            🎨 Minijuego de Selectores CSS
+          <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
+            Nivel 1 - CSS Detective
           </h1>
 
-          {/* Zona central de juego */}
-          <section
-            id="zona-juego"
-            className="w-full max-w-4xl min-h-[200px] bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-wrap justify-center gap-4"
-          >
-            {elementosEjemplo.map((el, i) => (
-              <motion.div
-                key={i}
-                id={el.id}
-                className={el.className}
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.4 }}
-              >
-                {el.contenido}
-              </motion.div>
-            ))}
+          <p className="text-lg text-indigo-700 text-center max-w-2xl">
+            Aplica algún estilo directamente a todas las etiquetas <strong><code>&lt;p&gt;</code></strong>
+          </p>
+
+          <section className="w-full max-w-4xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row gap-6">
+            {/* Bloque de Vista previa */}
+            <div className="flex-1 flex flex-col gap-2">
+              <h2 className="font-mono text-lg font-semibold text-indigo-800">Vista previa:</h2>
+              <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base">
+                <p>Texto importante</p>
+                <p>Otro texto sin importancia</p>
+              </div>
+            </div>
+
+            {/* Imagen decorativa */}
+            <div className="flex justify-center items-center mt-4 md:mt-0 md:w-1/3">
+              <img
+                src="/foto-detective-viñeta.png"
+                alt="Detective"
+                className="w-32 sm:w-36 md:w-40 h-auto drop-shadow-md pointer-events-none select-none"
+              />
+            </div>
           </section>
 
-          {/* Zona de edición */}
-          <section className="w-full max-w-6xl flex flex-col md:flex-row gap-4 mt-8">
-            {/* Editor CSS */}
+
+          <section className="w-full max-w-4xl flex flex-col md:flex-row gap-6">
             <div className="w-full md:w-1/2 bg-zinc-900 text-green-200 p-4 rounded-lg shadow-lg">
               <h2 className="font-mono text-lg mb-2">Escribe tu CSS aquí:</h2>
               <textarea
-                className="w-full h-60 bg-zinc-800 text-green-100 font-mono p-2 rounded resize-none"
-                placeholder={`/* Ejemplo:\n  #rojo { transform: rotate(5deg); }\n  .especial { border: 3px dashed yellow; }\n*/`}
+                className="w-full h-40 bg-zinc-800 text-green-100 font-mono p-2 rounded resize-none"
+                placeholder={`/* Ejemplo:\n  p {\n\tcolor: red;\n  } \n*/`}
                 value={css}
                 onChange={(e) => setCss(e.target.value)}
               />
+              <button
+                onClick={verificarCSS}
+                className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Confirmar
+              </button>
+              {mensaje && <div className="mt-3 text-center">{mensaje}</div>}
             </div>
 
-            {/* Vista HTML */}
-            <div className="w-full md:w-1/2 bg-gray-100 p-4 rounded-lg shadow-inner overflow-auto">
-              <h2 className="font-mono text-lg mb-2">Estructura HTML:</h2>
-              <pre className="text-sm font-mono bg-white p-2 rounded border border-gray-300 overflow-x-auto">
-{elementosEjemplo.map(el => 
-`<${el.tag} ${el.id ? `id="${el.id}" ` : ''}${el.className ? `class="${el.className}"` : ''}>${el.contenido}</${el.tag}>`
-).join('\n')}
+            <div className="w-full md:w-1/2 bg-white p-4 rounded-xl shadow-xl border border-indigo-300 flex flex-col">
+              <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Código HTML:</h2>
+              <pre className="flex-1 text-sm font-mono bg-gray-50 p-3 rounded-lg border border-gray-300 whitespace-pre-wrap overflow-x-auto w-full h-full min-h-[10rem]">
+                {elementosHTML
+                  .map(el => `<${el.tag}>${el.contenido}</${el.tag}>`)
+                  .join('\n')}
               </pre>
             </div>
           </section>
@@ -79,4 +111,4 @@ const MinijuegoCSS = () => {
   );
 };
 
-export default MinijuegoCSS;
+export default Nivel1;

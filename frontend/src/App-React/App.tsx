@@ -4,6 +4,8 @@ import Register from './pages/register/Register';
 import Home from './pages/home/Home';
 import PanelDetectiveJuego from './components/juegos/juego_selectores/detectiveJuegoPanel/DetectiveJuegoPanel';
 import MinijuegoCSS from './components/juegos/juego_selectores/nivel1/nivel1';
+import Nivel2 from './components/juegos/juego_selectores/nivel2/nivel2';
+import Nivel3 from './components/juegos/juego_selectores/nivel3/nivel3';
 
 const App = () => (
   <Routes>
@@ -16,11 +18,17 @@ const App = () => (
     {/* Página de login */}
     <Route path="/login" element={<Login />} />
 
-    {/* Página de login */}
+    {/* Página de Principal de Juego Detective CSS */}
     <Route path="/juego/selectores" element={<PanelDetectiveJuego />} />
-    <Route path="/juego/selectores/nive-uno" element={<MinijuegoCSS />} />
 
+    {/* Página-Nivel 1 de Juego Detective CSS */}
+    <Route path="/juego/selectores/nivel-1" element={<MinijuegoCSS />} />
 
+    {/* Página-Nivel 2 de Juego Detective CSS */}
+    <Route path="/juego/selectores/nivel-2" element={<Nivel2 />} />
+
+    {/* Página-Nivel 3 de Juego Detective CSS */}
+    <Route path="/juego/selectores/nivel-3" element={<Nivel3 />} />
   </Routes>
 );
 
