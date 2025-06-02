@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Hosting;
-using Ble.Triviados.Infraestructure.Persistence.Seeders;
 using Ble.Triviados.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -59,7 +58,6 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<AppDbContext>();
         context.Database.Migrate(); 
-        await SeederRunner.RunAsync(context);
     }
     catch (Exception ex)
     {
