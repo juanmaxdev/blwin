@@ -27,7 +27,7 @@ stages:
       - job: BuildAndPush
         displayName: 'Build y Push de imagen Docker en ACR'
         steps:
-          - task: DockerCompose@0
+          - task: DockerCompose@1
             displayName: 'Build Docker Imagen con Docker Compose'
             inputs:
               containerregistrytype: '$(containerregistrytype)'
@@ -38,7 +38,7 @@ stages:
               additionalImageTags: '$(dockerImageTag)'
               dockerComposeVersion: '2'
               useDockerComposeV2: true
-          - task: DockerCompose@0
+          - task: DockerCompose@1
             displayName: 'Push Docker Imagen a ACR'
             inputs:
               containerregistrytype: '$(containerregistrytype)'
