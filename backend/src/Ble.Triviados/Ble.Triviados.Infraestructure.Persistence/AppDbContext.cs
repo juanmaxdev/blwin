@@ -61,7 +61,7 @@ namespace Ble.Triviados.Infrastructure.Data
             if (!optionsBuilder.IsConfigured)
             {
                 var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .SetBasePath(@"../Ble.Triviados.Services.WebApi")
                     .AddJsonFile("appsettings.json")
                     .Build();
 
