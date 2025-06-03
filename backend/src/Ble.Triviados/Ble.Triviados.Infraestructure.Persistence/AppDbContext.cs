@@ -7,8 +7,8 @@ namespace Ble.Triviados.Infrastructure.Data
     public class AppDbContext : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
-
-
+        public DbSet<Juego> Juegos { get; set; }
+        public DbSet<UsuarioJuego> UsuarioJuegos { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -23,8 +23,37 @@ namespace Ble.Triviados.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Usuario>().Property(u => u.Name).IsRequired().HasMaxLength(100);
-            modelBuilder.Entity<Usuario>().Property(u => u.Password).IsRequired().HasMaxLength(100);
+            modelBuilder.Entity<Usuario>()
+                .Property(u => u.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Usuario>()
+                .Property(u => u.Password)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Juego>()
+                .Property(j => j.Nombre)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Juego>()
+                .Property(j => j.Descripcion)
+                .HasMaxLength(500);
+
+            modelBuilder.Entity<UsuarioJuego>()
+                .HasKey(uj => new { uj.UsuarioId, uj.JuegoId });
+
+            modelBuilder.Entity<UsuarioJuego>()
+                .HasOne(uj => uj.Usuario)
+                .WithMany(u => u.UsuarioJuegos)
+                .HasForeignKey(uj => uj.UsuarioId);
+
+            modelBuilder.Entity<UsuarioJuego>()
+                .HasOne(uj => uj.Juego)
+                .WithMany(j => j.UsuariosJuego)
+                .HasForeignKey(uj => uj.JuegoId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,7 +61,7 @@ namespace Ble.Triviados.Infrastructure.Data
             if (!optionsBuilder.IsConfigured)
             {
                 var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())  
+                    .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
                     .Build();
 

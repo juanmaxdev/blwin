@@ -14,6 +14,7 @@ namespace Ble.Triviados.Domain.Entity.Entities
         public DateTime FechaRegistro { get; set; }
 
         public int Puntos { get; set; } = 0;
+        public ICollection<UsuarioJuego> UsuarioJuegos { get; set; } = new List<UsuarioJuego>();
 
         public Usuario()
         {

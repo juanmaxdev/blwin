@@ -41,6 +41,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IJuegoService, JuegoService>();
+builder.Services.AddScoped<IJuegoRepository, JuegoRepository>();
+builder.Services.AddScoped<IUsuarioJuegoService, UsuarioJuegoService>();
+builder.Services.AddScoped<IUsuarioJuegoRepository, UsuarioJuegoRepository>();
 
 builder.Services.AddControllers();
 
