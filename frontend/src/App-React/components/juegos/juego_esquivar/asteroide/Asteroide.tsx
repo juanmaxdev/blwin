@@ -7,13 +7,14 @@ type AsteroideProps = {
   ejeX: boolean;
   fila: number;
   columna: number;
+  velocidad: number;
 };
 
 export type AsteroideRef = {
   getPos: () => { fila: number; columna: number };
 };
 
-const Asteroide = forwardRef<AsteroideRef, AsteroideProps>(({ ejeX, fila, columna }, ref) => {
+const Asteroide = forwardRef<AsteroideRef, AsteroideProps>(({ ejeX, fila, columna, velocidad }, ref) => {
   const { jugando } = useGameContext();
   const [pos, setPos] = useState({ fila: fila, columna: columna });
   const [ejeXLocal, setEjeXLocal] = useState(ejeX);
@@ -37,7 +38,7 @@ const Asteroide = forwardRef<AsteroideRef, AsteroideProps>(({ ejeX, fila, column
           ? { fila: prevPos.fila + 1, columna: prevPos.columna }
           : { fila: prevPos.fila, columna: prevPos.columna + 1 };
 
-        if (siguientePos.columna === 5 || siguientePos.fila === 5) {
+        if (siguientePos.columna === 6 || siguientePos.fila === 6) {
           setEjeXLocal(!ejeXLocal);
           return ejeXLocal
             ? { fila: numeroAleatorio(), columna: 2 }
@@ -46,7 +47,7 @@ const Asteroide = forwardRef<AsteroideRef, AsteroideProps>(({ ejeX, fila, column
 
         return siguientePos;
       });
-    }, 1000);
+    }, velocidad);
 
     return () => clearInterval(intervalo);
   }, [jugando, ejeXLocal]);

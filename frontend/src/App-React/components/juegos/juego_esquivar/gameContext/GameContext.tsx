@@ -13,6 +13,8 @@ type GameContextType = {
     setJugadorPos: (pos: Position) => void;
     asteroidePos: Position;
     setAsteroidePos: (pos: Position) => void;
+    puntacion: number;
+    setPuntuacion: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -21,10 +23,11 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     const [jugando, setJugando] = useState(false);
     const [jugadorPos, setJugadorPos] = useState<Position>({ fila: 3, columna: 3 });
     const [asteroidePos, setAsteroidePos] = useState<Position>({ fila: 1, columna: 2 });
+    const [puntacion, setPuntuacion] = useState(0);
 
 
     return (
-        <GameContext.Provider value={{ jugando, setJugando, jugadorPos, setJugadorPos, asteroidePos, setAsteroidePos }}>
+        <GameContext.Provider value={{ jugando, setJugando, jugadorPos, setJugadorPos, asteroidePos, setAsteroidePos, puntacion, setPuntuacion }}>
             {children}
         </GameContext.Provider>
     );

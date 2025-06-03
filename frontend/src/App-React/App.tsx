@@ -6,9 +6,9 @@ import PaginaJuegoEsquivar from './pages/juegos/PaginaJuegoEsquivar';
 
 const App = () => (
   <Routes>
-    {/* Página de inicio */
-    // <Route path="/" element={<Home />} />
-    }
+    {/* Página de inicio */}
+    <Route path="/" element={<Home />} />
+    
     {/* Página de registro */}
     <Route path="/register" element={<Register />} />
 
