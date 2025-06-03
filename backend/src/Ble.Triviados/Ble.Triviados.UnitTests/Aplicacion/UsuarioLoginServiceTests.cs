@@ -71,7 +71,7 @@ namespace Ble.Triviados.UnitTests.Aplicacion
         {
             // Arrange
             var dto = new LoginUsuarioDto { Name = "Paco", Password = "Paco1234" };
-            var usuario = new Usuario { Name = "Paco", Password = BCrypt.Net.BCrypt.HashPassword("Paco1234"), Rol = "User" }; // Hash de la contraseña correcta
+            var usuario = new Usuario { Name = "Paco", Password = BCrypt.Net.BCrypt.HashPassword("Paco1234")}; // Hash de la contraseña correcta
 
             _usuarioRepositoryMock.Setup(r => r.ObtenerPorNombreAsync(dto.Name)).ReturnsAsync(usuario);
 

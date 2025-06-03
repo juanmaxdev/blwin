@@ -12,7 +12,6 @@ namespace Ble.Triviados.Services.WebApi.Helpers
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, "TestUser"),
-                new Claim(ClaimTypes.Role, role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

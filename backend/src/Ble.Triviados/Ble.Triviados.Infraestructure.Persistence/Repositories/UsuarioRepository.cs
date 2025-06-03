@@ -1,15 +1,16 @@
 ﻿using Ble.Triviados.Domain.Entity.Entities;
 using Ble.Triviados.Domain.Entity.Interfaces;
 using Ble.Triviados.Infraestructure.Persistence;
+using Ble.Triviados.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ble.Triviados.Infraestructure.Persistence.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly TriviadosDbContext _context;
+        private readonly AppDbContext _context;
 
-        public UsuarioRepository(TriviadosDbContext context)
+        public UsuarioRepository(AppDbContext context)
         {
             _context = context;
         }
@@ -25,5 +26,17 @@ namespace Ble.Triviados.Infraestructure.Persistence.Repositories
         {
             return await _context.Usuarios.FirstOrDefaultAsync(u => u.Name == name);
         }
+
+        public async Task<Usuario?> AgregarPuntosAsync(int usuarioId, int puntosASumar)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id == usuarioId);
+            if (usuario == null) return null;
+
+            usuario.Puntos += puntosASumar;
+            await _context.SaveChangesAsync();
+            return usuario;
+        }
+
+
     }
 }
