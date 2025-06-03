@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Ble.Triviados.Domain.Entity.Entities
@@ -14,6 +15,9 @@ namespace Ble.Triviados.Domain.Entity.Entities
         public DateTime FechaRegistro { get; set; }
 
         public int Puntos { get; set; } = 0;
+
+        [JsonIgnore]
+        public ICollection<UsuarioJuego> UsuarioJuegos { get; set; } = new List<UsuarioJuego>();
 
         public Usuario()
         {
