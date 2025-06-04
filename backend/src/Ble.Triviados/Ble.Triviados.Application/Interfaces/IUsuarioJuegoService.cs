@@ -12,5 +12,6 @@ namespace Ble.Triviados.Application.Interfaces
         Task<UsuarioJuego> RegistrarPuntuacionAsync(int usuarioId, int juegoId, int puntuacion);
         Task<UsuarioJuego?> ObtenerRelacionAsync(int usuarioId, int juegoId);
         Task<IEnumerable<UsuarioJuego>> ObtenerJuegosPorUsuarioAsync(int usuarioId);
+        Task<UsuarioJuego?> ActualizarRelacionAsync(UsuarioJuego usuarioJuego);
     }
 }

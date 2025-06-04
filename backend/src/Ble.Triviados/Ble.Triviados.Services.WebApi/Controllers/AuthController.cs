@@ -50,30 +50,5 @@ namespace Ble.Triviados.Services.WebApi.Controllers
 
             return Ok(new { Token = resultado });
         }
-
-        /// <summary>
-        /// POST: api/auth/agregar-puntos
-        /// Añade puntos a un usuario existente
-        /// </summary>
-        /// <param name="dto">DTO con UsuarioId y Puntos a agregar</param>
-        /// <returns>PuntuacionDto actualizado o NotFound si el usuario no existe</returns>
-        [HttpPut("agregarPuntos")]
-        [Authorize]
-        public async Task<IActionResult> AgregarPuntos([FromBody] int puntos)
-        {
-            var usuarioIdString = User.FindFirst("id")?.Value;
-
-            if (!int.TryParse(usuarioIdString, out var usuarioId))
-            {
-                return Unauthorized(new { Message = "No se pudo obtener la ID del usuario desde el token." });
-            }
-
-            var resultado = await _usuarioService.AgregarPuntosUsuarioAsync(usuarioId, puntos);
-            if (resultado == null)
-                return NotFound(new { Message = "Usuario no encontrado." });
-
-            return Ok(resultado);
-        }
-
     }
 }
