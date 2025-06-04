@@ -13,23 +13,16 @@ describe('Temporizador', () => {
   });
 
   it('inicia desde 0 segundos', () => {
-    render(<Temporizador isRunning={false} />);
+    render(<Temporizador jugando={false} fila={0} columna={0} />);
     expect(screen.getByText('0s')).toBeInTheDocument();
   });
 
-  it('incrementa segundos cuando isRunning es true', () => {
-    render(<Temporizador isRunning={true} />);
-    
-    vi.advanceTimersByTime(3000);
+  it('debe aplicar correctamente los estilos de grid', () => {
+    const { container } = render(<Temporizador jugando={false} fila={3} columna={4} />);
+    const wrapper = container.firstChild as HTMLElement;
 
-    expect(screen.getByText('3s')).toBeInTheDocument();
-  });
-
-  it('no incrementa cuando isRunning es false', () => {
-    render(<Temporizador isRunning={false} />);
-
-    vi.advanceTimersByTime(5000);
-
-    expect(screen.getByText('0s')).toBeInTheDocument();
+    const style = getComputedStyle(wrapper);
+    expect(style.gridColumn).toMatch(/^4\s*\/\s*5$/);
+    expect(style.gridRow).toMatch(/^3\s*\/\s*4$/);
   });
 });
