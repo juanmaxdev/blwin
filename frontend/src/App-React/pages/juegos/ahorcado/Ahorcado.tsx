@@ -175,8 +175,8 @@ const Ahorcado = () => {
 
       <main className="flex-1 flex overflow-hidden">
         <div className="w-1/2 h-full flex flex-col items-center justify-center p-4">
-          <p className="text-center text-lg font-semibold text-gray-800 puntuacion">Nivel: {nivelActual()}</p>
-          <p className="my-8 text-center text-lg font-semibold text-gray-800 puntuacion">Puntuación: {puntuacion}</p>
+          <p className="text-center text-lg font-semibold text-gray-800 puntuacion mt-8">Nivel: {nivelActual()}</p>
+          <p className="my-4 text-center text-lg font-semibold text-gray-800 puntuacion">Puntuación: {puntuacion}</p>
           <div className="max-w-full w-full h-[90%] flex items-center justify-center">
             <ModeloImagen rutaImagen={imgSegunFallo.imagen} descripImagen={imgSegunFallo.descripcion} />
           </div>
@@ -227,7 +227,7 @@ const Ahorcado = () => {
                       ${
                         yaSeleccionada
                           ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
-                          : 'bg-blue-500 hover:bg-blue-600 text-white'
+                          : 'bg-violet-500 hover:bg-violet-700 text-white'
                       }
                     `}
                   >

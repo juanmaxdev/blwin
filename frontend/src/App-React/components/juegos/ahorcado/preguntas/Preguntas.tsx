@@ -1,440 +1,388 @@
 export const preguntasProgramacionWebNivel1 = [
   {
-    pregunta: "¿Qué función cumple la propiedad z-index en CSS?",
-    respuesta: "Orden apilamiento"
+    pregunta: '¿Qué función cumple la propiedad z-index en CSS?',
+    respuesta: 'Orden apilamiento',
   },
   {
-    pregunta: "¿Qué es el modelo de caja de CSS?",
-    respuesta: "Box model"
+    pregunta: '¿Qué es el modelo de caja de CSS?',
+    respuesta: 'Box model',
   },
   {
-    pregunta: "¿Cuál es la diferencia principal entre Flexbox y Grid?",
-    respuesta: "Eje unico"
+    pregunta: '¿Qué significa SSR en entornos web?',
+    respuesta: 'Server-side',
   },
   {
-    pregunta: "¿Qué significa el valor rem en CSS?",
-    respuesta: "Raiz relativa"
+    pregunta: '¿Qué hace el atributo defer en un script?',
+    respuesta: 'Carga diferida',
   },
   {
-    pregunta: "¿Qué es event delegation en JavaScript?",
-    respuesta: "Delegacion eventos"
+    pregunta: '¿Cuál es la utilidad de localStorage?',
+    respuesta: 'Almacenamiento local',
   },
   {
-    pregunta: "¿Qué indica el código HTTP 500?",
-    respuesta: "Error servidor"
+    pregunta: '¿Qué indica HTTP 403 Forbidden?',
+    respuesta: 'Acceso prohibido',
   },
   {
-    pregunta: "¿Cómo se llama el patrón que separa datos y vista?",
-    respuesta: "MVC"
+    pregunta: '¿Qué hace el service worker en PWA?',
+    respuesta: 'Cache offline',
   },
   {
-    pregunta: "¿Qué es Cross-Site Scripting?",
-    respuesta: "XSS"
+    pregunta: '¿Qué es el DOMContentLoaded?',
+    respuesta: 'Carga DOM',
   },
   {
-    pregunta: "¿Para qué sirve el método fetch en JS?",
-    respuesta: "Peticiones HTTP"
+    pregunta: '¿Para qué se usa RESTful API?',
+    respuesta: 'Intercambio datos',
   },
   {
-    pregunta: "¿Qué significa SSR en entornos web?",
-    respuesta: "Server-side"
+    pregunta: '¿Qué significa SPA en aplicaciones web?',
+    respuesta: 'Single Page',
   },
   {
-    pregunta: "¿Qué hace el atributo defer en un script?",
-    respuesta: "Carga diferida"
+    pregunta: '¿Qué es HTTPS y en qué difiere de HTTP?',
+    respuesta: 'Cifrado TLS',
   },
   {
-    pregunta: "¿Qué es CORS y para qué sirve?",
-    respuesta: "Compartir recursos"
+    pregunta: '¿Para qué sirve JWT en autenticación?',
+    respuesta: 'Token seguro',
   },
   {
-    pregunta: "¿Cuál es la utilidad de localStorage?",
-    respuesta: "Almacenamiento local"
+    pregunta: '¿Qué se consigue con el atributo aria en HTML?',
+    respuesta: 'Accesibilidad',
   },
   {
-    pregunta: "¿Qué hace la función JSON.stringify?",
-    respuesta: "Convertir JSON"
+    pregunta: '¿Qué es Shadow DOM en web components?',
+    respuesta: 'Encapsulamiento',
   },
   {
-    pregunta: "¿Qué es el Virtual DOM en React?",
-    respuesta: "Representación ligera"
+    pregunta: '¿Para qué sirve la etiqueta <picture> en HTML?',
+    respuesta: 'Imagenes responsivas',
   },
   {
-    pregunta: "¿Qué es un hook en React?",
-    respuesta: "Funcion reactiva"
+    pregunta: '¿Qué función cumple la propiedad z-index en CSS?',
+    respuesta: 'Orden apilamiento',
   },
   {
-    pregunta: "¿Qué hace useEffect en React?",
-    respuesta: "Efectos secundarios"
+    pregunta: '¿Qué es el modelo de caja de CSS?',
+    respuesta: 'Box model',
   },
   {
-    pregunta: "¿Para qué sirve Babel en proyectos JS?",
-    respuesta: "Transpilar código"
+    pregunta: '¿Cuál es la diferencia principal entre Flexbox y Grid?',
+    respuesta: 'Eje unico',
   },
   {
-    pregunta: "¿Qué es Webpack en desarrollo web?",
-    respuesta: "Agrupador modulos"
+    pregunta: '¿Qué significa el valor rem en CSS?',
+    respuesta: 'Raiz relativa',
   },
   {
-    pregunta: "¿Qué indica HTTP 403 Forbidden?",
-    respuesta: "Acceso prohibido"
+    pregunta: '¿Qué es event delegation en JavaScript?',
+    respuesta: 'Delegacion eventos',
   },
   {
-    pregunta: "¿Qué hace el service worker en PWA?",
-    respuesta: "Cache offline"
+    pregunta: '¿Qué indica el código HTTP 500?',
+    respuesta: 'Error servidor',
   },
   {
-    pregunta: "¿Qué es el DOMContentLoaded?",
-    respuesta: "Carga DOM"
+    pregunta: '¿Cómo se llama el patrón que separa datos y vista?',
+    respuesta: 'MVC',
   },
   {
-    pregunta: "¿Para qué se usa RESTful API?",
-    respuesta: "Intercambio datos"
+    pregunta: '¿Qué es Cross-Site Scripting?',
+    respuesta: 'XSS',
   },
   {
-    pregunta: "¿Qué hace el operador spread en JS?",
-    respuesta: "Expandir elementos"
+    pregunta: '¿Para qué sirve el método fetch en JS?',
+    respuesta: 'Peticiones HTTP',
   },
   {
-    pregunta: "¿Qué significa SPA en aplicaciones web?",
-    respuesta: "Single Page"
+    pregunta: '¿Qué hace el atributo defer en un script?',
+    respuesta: 'Carga diferida',
   },
   {
-    pregunta: "¿Qué es HTTPS y en qué difiere de HTTP?",
-    respuesta: "Cifrado TLS"
+    pregunta: '¿Qué es CORS y para qué sirve?',
+    respuesta: 'Compartir recursos',
   },
   {
-    pregunta: "¿Qué es GraphQL frente a REST?",
-    respuesta: "Consultas flexibles"
+    pregunta: '¿Cuál es la utilidad de localStorage?',
+    respuesta: 'Almacenamiento local',
   },
   {
-    pregunta: "¿Cuál es la función de Node.js?",
-    respuesta: "Servidor JS"
+    pregunta: '¿Qué hace la función JSON.stringify?',
+    respuesta: 'Convertir JSON',
   },
   {
-    pregunta: "¿Qué es el hook useState en React?",
-    respuesta: "Estado local"
+    pregunta: '¿Qué es el Virtual DOM en React?',
+    respuesta: 'Representacion ligera',
   },
   {
-    pregunta: "¿Para qué sirve JWT en autenticación?",
-    respuesta: "Token seguro"
+    pregunta: '¿Qué es el hook useState en React?',
+    respuesta: 'Estado local',
   },
   {
-    pregunta: "¿Qué es una promesa encadenada en JS?",
-    respuesta: "Thenable"
+    pregunta: '¿Para qué sirve Babel en proyectos JS?',
+    respuesta: 'Transpilar codigo',
   },
   {
-    pregunta: "¿Qué hace el método map en un array?",
-    respuesta: "Transformar elementos"
+    pregunta: '¿Qué es Webpack en desarrollo web?',
+    respuesta: 'Agrupador modulos',
   },
   {
-    pregunta: "¿Qué es un middleware en Express?",
-    respuesta: "Función intermedia"
+    pregunta: '¿Qué indica HTTP 403 Forbidden?',
+    respuesta: 'Acceso prohibido',
   },
   {
-    pregunta: "¿Cuál es la diferencia entre var y let?",
-    respuesta: "Ámbito bloque"
+    pregunta: '¿Qué hace el service worker en PWA?',
+    respuesta: 'Cache offline',
   },
   {
-    pregunta: "¿Qué fragmento HTML define metadatos?",
-    respuesta: "Meta etiquetas"
+    pregunta: '¿Qué es el DOMContentLoaded?',
+    respuesta: 'Carga DOM',
   },
-  {
-    pregunta: "¿Qué se consigue con el atributo aria en HTML?",
-    respuesta: "Accesibilidad"
-  },
-  {
-    pregunta: "¿Qué es Shadow DOM en web components?",
-    respuesta: "Encapsulamiento"
-  },
-  {
-    pregunta: "¿Para qué sirve la etiqueta <picture> en HTML?",
-    respuesta: "Imagenes responsivas"
-  },
-  {
-    pregunta: "¿Qué hace el operador ?? en JS?",
-    respuesta: "Nullish coalescing"
-  }
 ];
 
 export const preguntasProgramacionWebNivel2 = [
   {
-    pregunta: "¿Que termino describe prioridad selectores en CSS?",
-    respuesta: "especificidad css"
+    pregunta: "¿Cómo se selecciona un elemento con id en CSS?",
+    respuesta: "Selectores ID"
   },
   {
-    pregunta: "¿Para que sirve Sass en CSS?",
-    respuesta: "preprocesador sass"
+    pregunta: "¿Qué diferencia hay entre margin y padding?",
+    respuesta: "Espacio externo"
   },
   {
-    pregunta: "¿Que termino describe una clausura en JS?",
-    respuesta: "clausura scope"
+    pregunta: "¿Qué es una promesa en JavaScript?",
+    respuesta: "Objeto asincrono"
   },
   {
-    pregunta: "¿Como se llama la herencia de objetos en JS?",
-    respuesta: "prototipo"
+    pregunta: "¿Para qué sirve async/await?",
+    respuesta: "Sintaxis asincrona"
   },
   {
-    pregunta: "¿Que tecnica limita frecuencia de eventos?",
-    respuesta: "limitacion frecuencia"
+    pregunta: "¿Qué hace el operador spread en objetos?",
+    respuesta: "Clonar objeto"
   },
   {
-    pregunta: "¿Como se diferencian Promise.all y Promise.race?",
-    respuesta: "todos vs primero"
+    pregunta: "¿Cómo se crea un componente funcional en React?",
+    respuesta: "Funcion flecha"
   },
   {
-    pregunta: "¿Que estructura se usa para errores en async/await?",
-    respuesta: "try catch"
+    pregunta: "¿Qué hace el hook useContext?",
+    respuesta: "Contexto React"
   },
   {
-    pregunta: "¿Que mejora de HTTP/2 permite enviar multiples solicitudes?",
-    respuesta: "multiplexacion http2"
+    pregunta: "¿Qué es un callback en JavaScript?",
+    respuesta: "Funcion retorno"
   },
   {
-    pregunta: "¿Que eventos inicializan un service worker?",
-    respuesta: "install activate"
+    pregunta: "¿Qué es un Hoisting en JS?",
+    respuesta: "Elevacion variables"
   },
   {
-    pregunta: "¿Que archivo configura una PWA?",
-    respuesta: "configuracion pwa"
+    pregunta: "¿Para que sirve mapStateToProps en Redux?",
+    respuesta: "Conectar estado"
   },
   {
-    pregunta: "¿En que difieren CSR y SSR?",
-    respuesta: "cliente vs servidor"
+    pregunta: "¿Qué es un closure en JavaScript?",
+    respuesta: "Alcance interno"
   },
   {
-    pregunta: "¿Que tecnica en Webpack elimina codigo no usado?",
-    respuesta: "eliminar codigo muerto"
+    pregunta: "¿Cuál es la diferencia entre == y ===?",
+    respuesta: "Comparacion estrica"
   },
   {
-    pregunta: "¿Como se distinguen presets de polyfills en Babel?",
-    respuesta: "preset vs polyfill"
+    pregunta: "¿Qué es un REST endpoint?",
+    respuesta: "Punto acceso"
   },
   {
-    pregunta: "¿Que metodo usa un preflight CORS?",
-    respuesta: "OPTIONS encabezados"
+    pregunta: "¿Cómo se configura un proxy en React?",
+    respuesta: "Proxy paquete"
   },
   {
-    pregunta: "¿Que cabeceras inicia un WebSocket?",
-    respuesta: "upgrade headers"
+    pregunta: "¿Qué hace el debounce en JavaScript?",
+    respuesta: "Retrasar ejecucion"
   },
   {
-    pregunta: "¿Que describe CSP?",
-    respuesta: "politica seguridad"
+    pregunta: "¿Qué es un Fragment en React?",
+    respuesta: "Contenedor ligero"
   },
   {
-    pregunta: "¿Que header evita deteccion tipo contenido?",
-    respuesta: "nosniff"
+    pregunta: "¿Para qué sirve React Router?",
+    respuesta: "Navegacion SPA"
   },
   {
-    pregunta: "¿Que atributo limita envio cookies en terceros?",
-    respuesta: "limitacion terceros"
+    pregunta: "¿Qué es un State Hook?",
+    respuesta: "Estado componente"
   },
   {
-    pregunta: "¿Que caracteristica tiene OAuth2 frente a OAuth1?",
-    respuesta: "flujo token"
+    pregunta: "¿Cuál es la diferencia entre null y undefined?",
+    respuesta: "Valor ausente"
   },
   {
-    pregunta: "¿Que operacion en GraphQL escribe datos?",
-    respuesta: "operacion escritura"
+    pregunta: "¿Qué hace el método reduce en arrays?",
+    respuesta: "Reducir valores"
   },
   {
-    pregunta: "¿Que metodo HTTP es cachable?",
-    respuesta: "GET cachable"
+    pregunta: "¿Qué es JSON Web Token?",
+    respuesta: "Token autentico"
   },
   {
-    pregunta: "¿Que diferencia LocalStorage y SessionStorage?",
-    respuesta: "duracion datos"
+    pregunta: "¿Para qué sirve Caching en HTTP?",
+    respuesta: "Almacenar respuestas"
   },
   {
-    pregunta: "¿Que almacenamiento ofrece IndexedDB?",
-    respuesta: "almacenamiento clave valor"
+    pregunta: "¿Qué es WebSockets?",
+    respuesta: "Conexion bidireccional"
   },
   {
-    pregunta: "¿Que proceso compara arboles en Virtual DOM?",
-    respuesta: "diferencia arbol"
+    pregunta: "¿Cómo funciona la circularizacion de CSS?",
+    respuesta: "Orden cascada"
   },
   {
-    pregunta: "¿Que funcion React evita re-render innecesario?",
-    respuesta: "memoizacion componente"
+    pregunta: "¿Qué es un Controlador en MVC?",
+    respuesta: "Gestion peticiones"
   },
   {
-    pregunta: "¿Que API ofrece estado global en React?",
-    respuesta: "estado global"
+    pregunta: "¿Para qué sirve el service worker?",
+    respuesta: "Cache navegador"
   },
   {
-    pregunta: "¿Que ofrece ISR en Next.js?",
-    respuesta: "regeneracion estatica"
+    pregunta: "¿Qué diferencia hay entre PUT y PATCH?",
+    respuesta: "Actualizacion parcial"
   },
   {
-    pregunta: "¿Que modos soporta Nuxt.js universal?",
-    respuesta: "ssr y spa"
+    pregunta: "¿Qué es un middleware en Express?",
+    respuesta: "Funcion intermedia"
   },
   {
-    pregunta: "¿Que fases incluye event loop de Node.js?",
-    respuesta: "poll timers"
+    pregunta: "¿Cómo se protege contra CSRF?",
+    respuesta: "Token sincronico"
   },
   {
-    pregunta: "¿Que modulo escala procesos en Node.js?",
-    respuesta: "multiples procesos"
-  },
-  {
-    pregunta: "¿Cual es el primer parametro de un middleware de error en Express?",
-    respuesta: "err"
-  },
-  {
-    pregunta: "¿Que tecnica HTTP/2 usa multiples streams?",
-    respuesta: "multiples streams"
-  },
-  {
-    pregunta: "¿Que ventaja tiene Brotli sobre gzip?",
-    respuesta: "mejor tasa compresion"
-  },
-  {
-    pregunta: "¿Que formato ejecutable usa WebAssembly?",
-    respuesta: "codigo compilado"
+    pregunta: "¿Qué es Tree Shaking en Webpack?",
+    respuesta: "Eliminar codigo"
   }
 ];
 
 export const preguntasProgramacionWebNivel3 = [
   {
-    pregunta: "¿Que son container queries en CSS?",
-    respuesta: "consulta contenedor"
+    pregunta: "¿Qué es el event loop de JavaScript?",
+    respuesta: "Bucle eventos"
   },
   {
-    pregunta: "¿Como heredan custom properties en CSS?",
-    respuesta: "variables heredadas"
+    pregunta: "¿En qué consiste el concepto de currying?",
+    respuesta: "Funciones parciales"
   },
   {
-    pregunta: "¿Para que sirve subgrid en CSS Grid?",
-    respuesta: "rejilla interna"
+    pregunta: "¿Cuál es la función del método call en JS?",
+    respuesta: "Contexto this"
   },
   {
-    pregunta: "¿Que diferencia microtask de macrotask en JS?",
-    respuesta: "colapso micro macrotarea"
+    pregunta: "¿Para qué sirve la técnica de memoization?",
+    respuesta: "Cache resultados"
   },
   {
-    pregunta: "¿Para que sirve Proxy en JS?",
-    respuesta: "interceptar operaciones"
+    pregunta: "¿Qué son los promesas microtasks en el event loop?",
+    respuesta: "Cola microtareas"
   },
   {
-    pregunta: "¿Que hace API Reflect en JS?",
-    respuesta: "operaciones objeto"
+    pregunta: "¿Qué es la delegacion de eventos en React?",
+    respuesta: "Synthetic events"
   },
   {
-    pregunta: "¿Que proporcionan los Web Workers en navegador?",
-    respuesta: "hilos secundarios"
+    pregunta: "¿Cómo funciona el reconciliation en React?",
+    respuesta: "Comparacion virtual"
   },
   {
-    pregunta: "¿Que funcionalidad ofrece Background Sync?",
-    respuesta: "sincronizacion atrasada"
+    pregunta: "¿Qué hace el hook useMemo en React?",
+    respuesta: "Memorizacion valores"
   },
   {
-    pregunta: "¿Que mejora HTTP/3 frente a HTTP/2?",
-    respuesta: "multiplexacion udp"
+    pregunta: "¿Qué es un portal en React?",
+    respuesta: "Render externo"
   },
   {
-    pregunta: "¿Que usan CDNs para proximidad usuario?",
-    respuesta: "proxys edge"
+    pregunta: "¿Para qué sirven los refs en React?",
+    respuesta: "Acceso DOM"
   },
   {
-    pregunta: "¿Que tipo operaciones ofrece GraphQL para tiempo real?",
-    respuesta: "suscripciones tiempo real"
+    pregunta: "¿Qué es una HOC (High Order Component)?",
+    respuesta: "Componente superior"
   },
   {
-    pregunta: "¿Que tecnica usa Apollo Client para caching?",
-    respuesta: "normalizacion cache"
+    pregunta: "¿Cuál es la diferencia entre render props y HOC?",
+    respuesta: "Patron distinto"
   },
   {
-    pregunta: "¿Que mejora Concurrent Mode en React?",
-    respuesta: "rendimiento concurrente"
+    pregunta: "¿Qué es la Hoisting de funciones en JS?",
+    respuesta: "Elevacion declaraciones"
   },
   {
-    pregunta: "¿Que ofrece ISR en Next.js?",
-    respuesta: "regeneracion incremental"
+    pregunta: "¿En qué consiste el prototype chain?",
+    respuesta: "Cadena prototipos"
   },
   {
-    pregunta: "¿Que proporciona Composition API en Vue 3?",
-    respuesta: "estado reactivo"
+    pregunta: "¿Qué es un Service Worker en PWA avanzado?",
+    respuesta: "Gestor red"
   },
   {
-    pregunta: "¿Que caracteristica ofrecen reactive statements en Svelte?",
-    respuesta: "reactividad declarativa"
+    pregunta: "¿Para qué se usa la API de WebSockets?",
+    respuesta: "Comunicacion bidireccional"
   },
   {
-    pregunta: "¿Que problema gestionan los Streams en Node.js?",
-    respuesta: "backpressure"
+    pregunta: "¿Qué ventaja ofrece HTTP/2 sobre HTTP/1.1?",
+    respuesta: "Multiplexacion peticiones"
   },
   {
-    pregunta: "¿Que distingue Cluster de worker_threads en Node.js?",
-    respuesta: "procesos vs hilos"
+    pregunta: "¿Qué es GraphQL Schema Stitching?",
+    respuesta: "Unir esquemas"
   },
   {
-    pregunta: "¿Que caracteristica integra Deno vs Node.js?",
-    respuesta: "seguridad builtin"
+    pregunta: "¿Cómo funciona la autentificacion OAuth2?",
+    respuesta: "Tokens acceso"
   },
   {
-    pregunta: "¿Que extension permite hilos en WebAssembly?",
-    respuesta: "wasm threads"
+    pregunta: "¿Qué son los CSS custom properties?",
+    respuesta: "Variables CSS"
   },
   {
-    pregunta: "¿Que ventaja da Rust con WebAssembly?",
-    respuesta: "rendimiento nativo"
+    pregunta: "¿Cuál es la ventaja de usar CSS Grid sobre Flexbox?",
+    respuesta: "Mallas bidimensionales"
   },
   {
-    pregunta: "¿Que proceso carga parcialmente HTML?",
-    respuesta: "carga parcial"
+    pregunta: "¿Cómo implementar lazy loading en React?",
+    respuesta: "React lazy"
   },
   {
-    pregunta: "¿Que CSS es esencial para LCP?",
-    respuesta: "css critico"
+    pregunta: "¿Qué es SSR en Next.js?",
+    respuesta: "Render servidor"
   },
   {
-    pregunta: "¿Que directiva HTTP permite cache y revalida?",
-    respuesta: "cache mientras revalida"
+    pregunta: "¿Para qué sirve el ISR (Incremental Static Regeneration)?",
+    respuesta: "Refrescar paginas"
   },
   {
-    pregunta: "¿Que directiva CSP controla iframes?",
-    respuesta: "control iframes"
+    pregunta: "¿Qué es el Shadow DOM profundo?",
+    respuesta: "Encapsulamiento total"
   },
   {
-    pregunta: "¿Que significa PKCE en OAuth2?",
-    respuesta: "proof key exchange"
+    pregunta: "¿Qué son los Custom Elements en Web Components?",
+    respuesta: "Etiquetas personalizadas"
   },
   {
-    pregunta: "¿Que ofrece OpenID Connect sobre OAuth2?",
-    respuesta: "identidad federada"
+    pregunta: "¿Cómo funciona la especificacion CSP (Content Security Policy)?",
+    respuesta: "Restriccion recursos"
   },
   {
-    pregunta: "¿Que principio define Zero Trust?",
-    respuesta: "verificar siempre"
+    pregunta: "¿Para qué sirve la tecnica BEM en CSS?",
+    respuesta: "Organizacion clases"
   },
   {
-    pregunta: "¿Que caracteriza edge computing en JAMstack?",
-    respuesta: "logica cerca usuario"
+    pregunta: "¿Qué es el Context API en React?",
+    respuesta: "Estado global"
   },
   {
-    pregunta: "¿Que protocolo ofrece autenticacion sin contrasena?",
-    respuesta: "autenticacion bifactor"
-  },
-  {
-    pregunta: "¿Que proteccion ofrece forward secrecy?",
-    respuesta: "sesiones seguras"
-  },
-  {
-    pregunta: "¿Que lista refuerza HSTS en navegadores?",
-    respuesta: "lista prerreforzada"
-  },
-  {
-    pregunta: "¿Que definicion tienen Privacy Budget defenses?",
-    respuesta: "limites informacion"
-  },
-  {
-    pregunta: "¿Que mejora reduce saltos de layout (CLS)?",
-    respuesta: "estabilidad layout"
-  },
-  {
-    pregunta: "¿Que mide LCP en Core Web Vitals?",
-    respuesta: "tiempo carga principal"
+    pregunta: "¿Cuál es la diferencia entre fetch y axios?",
+    respuesta: "Dependencia externa"
   }
 ];
