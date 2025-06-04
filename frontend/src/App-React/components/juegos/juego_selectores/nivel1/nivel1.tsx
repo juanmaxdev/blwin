@@ -17,7 +17,6 @@ const Nivel1 = () => {
   const [mensaje, setMensaje] = useState<React.ReactNode>(null);
   const navigate = useNavigate();
 
-  
   const procesarCSS = (inputCSS: string) => {
     return inputCSS.replace(/(^|\s)(p\s*\{)/g, '.vista-previa $2');
   };
@@ -37,6 +36,7 @@ const Nivel1 = () => {
       return;
     }
 
+    //Validaciones
     const sheet = new CSSStyleSheet();
     try {
       sheet.replaceSync(procesarCSS(css));
@@ -44,7 +44,7 @@ const Nivel1 = () => {
       setMensaje(
         <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
           <XCircle className="w-5 h-5" />
-          <span>El código CSS tiene errores de sintaxis.</span>
+          <span>El código CSS tiene errores de sintaxis</span>
         </div>
       );
       return;
@@ -53,28 +53,27 @@ const Nivel1 = () => {
     const reglas = css.match(/p\s*\{([^}]*)\}/);
     if (!reglas) return;
 
-    const declaraciones = reglas[1]
-      .split(';')
-      .map(linea => linea.trim())
-      .filter(Boolean);
+    const declaraciones = reglas[1].split(';').map(linea => linea.trim()).filter(Boolean);
 
     const contieneValida = declaraciones.some(decl => {
       const [prop, valor] = decl.split(':').map(str => str?.trim());
       return prop && valor && CSS.supports(`${prop}: ${valor}`);
     });
 
+    //Si el contenido no es valido muestra debajo una alerta 
     if (!contieneValida) {
       setMensaje(
         <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
           <XCircle className="w-5 h-5" />
           <span>
-            Al menos una propiedad debe tener un valor CSS válido. Ej: <code>color: red;</code>
+            Al menos una propiedad debe tener un valor CSS válido - Ej: <code>color: red;</code>
           </span>
         </div>
       );
       return;
     }
 
+    //Resultado de exito
     confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
     setMensaje(
       <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
@@ -85,6 +84,7 @@ const Nivel1 = () => {
     setTimeout(() => navigate('/juego/selectores/nivel-2'), 3000);
   };
 
+  //Aplica el estilo a la parte indicada
   useEffect(() => {
     const styleTag = document.getElementById('css-nivel-1');
     if (styleTag) {
@@ -100,10 +100,10 @@ const Nivel1 = () => {
         <BotonSonido />
 
         <main className="flex flex-col items-center p-6 gap-6">
+          {/* Vista Información*/}
           <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
             Nivel 1 - CSS Detective
           </h1>
-
           <p className="text-lg text-indigo-700 text-center max-w-2xl">
             Aplica algún estilo directamente a todas las etiquetas{' '}
             <strong>
@@ -113,7 +113,6 @@ const Nivel1 = () => {
 
           {/* Vista previa*/}
           <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative">
-            {/* Vista previa */}
             <div className="flex-1">
               <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa:</h2>
               <div className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base w-full">
