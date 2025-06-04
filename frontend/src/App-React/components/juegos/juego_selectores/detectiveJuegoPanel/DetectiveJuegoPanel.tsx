@@ -1,6 +1,10 @@
+import BotonSonido from '../../../../components/ui/ButtonSound';
+
 function CssDetectivePanel() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 flex flex-col items-center justify-center p-8 font-sans">
+      <BotonSonido />
+
       <img src="/foto-detective1.png" alt="Detective principal" className="w-64 h-auto mb-8 drop-shadow-2xl drop-shadow-[0_0_25px_white]" />
 
       <h1 className="text-4xl font-extrabold text-indigo-800 tracking-tight mb-6 drop-shadow-md">CSS Detective</h1>

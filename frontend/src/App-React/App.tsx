@@ -4,8 +4,8 @@ import Register from './pages/register/Register';
 import Home from './pages/home/Home';
 import PanelDetectiveJuego from './components/juegos/juego_selectores/detectiveJuegoPanel/DetectiveJuegoPanel';
 import MinijuegoCSS from './components/juegos/juego_selectores/nivel1/nivel1';
-import Nivel2 from './components/juegos/juego_selectores/nivel2/nivel2';
 import Nivel3 from './components/juegos/juego_selectores/nivel3/nivel3';
+import Nivel2 from './components/juegos/juego_selectores/nivel2/nivel2';
 
 const App = () => (
   <Routes>

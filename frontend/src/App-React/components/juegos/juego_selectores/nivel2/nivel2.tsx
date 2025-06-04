@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Head } from '../../../../components/Head';
+import { Head } from '../../../Head';
 import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-import BotonSonido from '../../../../components/ui/ButtonSound';
+import BotonSonido from '../../../ui/ButtonSound';
 
 const elementosHTML = [
     { tag: 'p', contenido: 'Esto es una pista', className: 'pista' },
