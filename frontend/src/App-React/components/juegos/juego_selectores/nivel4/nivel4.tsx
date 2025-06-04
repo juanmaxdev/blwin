@@ -3,90 +3,73 @@ import { useNavigate } from 'react-router-dom';
 import { Head } from '../../../../components/Head';
 import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
-
 import BotonSonido from '../../../../components/ui/ButtonSound';
 
-//Datos que sale en el codigo HTML
 const elementosHTML = [
-  { tag: 'p', contenido: 'Texto importante', className: '' },
-  { tag: 'p', contenido: 'Otro texto sin importancia', className: '' },
+  { tag: 'h6', contenido: '¡¡¡' },
+  { tag: 'h6', contenido: 'HOLAAAAAAAAA' },
+  { tag: 'h6', contenido: 'MUNDOOOOOOOO' },
+  { tag: 'h6', contenido: '!!!' },
+
 ];
 
-const Nivel1 = () => {
+const Nivel4 = () => {
   const [css, setCss] = useState('');
   const [mensaje, setMensaje] = useState<React.ReactNode>(null);
   const navigate = useNavigate();
 
   const procesarCSS = (inputCSS: string) => {
-    return inputCSS.replace(/(^|\s)(p\s*\{)/g, '.vista-previa $2');
+    return inputCSS.replace(/(^|\s)(h6\s*\{)/g, '.vista-previa $2');
   };
 
   const verificarCSS = () => {
-    const regexSelector = /^\s*p\s*\{[^}]+\}/m;
-
-    if (!regexSelector.test(css)) {
+    const regex = /^\s*h6\s*\{[^}]*\}/m;
+    if (!regex.test(css)) {
       setMensaje(
         <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
           <XCircle className="w-5 h-5" />
           <span>
-            Usa el selector <code>p</code> correctamente: <code>p &#123; propiedad: valor; &#125;</code>
+            Usa el selector <code>h6</code> correctamente con la propiedad:valor
           </span>
         </div>
       );
       return;
     }
 
-    //Validaciones
-    const sheet = new CSSStyleSheet();
-    try {
-      sheet.replaceSync(procesarCSS(css));
-    } catch {
-      setMensaje(
-        <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
-          <XCircle className="w-5 h-5" />
-          <span>El código CSS tiene errores de sintaxis</span>
-        </div>
-      );
-      return;
-    }
-
-    const reglas = css.match(/p\s*\{([^}]*)\}/);
+    const reglas = css.match(/h6\s*\{([^}]*)\}/);
     if (!reglas) return;
 
-    const declaraciones = reglas[1].split(';').map(linea => linea.trim()).filter(Boolean);
+    const declaraciones = reglas[1]
+      .split(';')
+      .map(linea => linea.trim())
+      .filter(Boolean);
 
-    const contieneValida = declaraciones.some(decl => {
-      const [prop, valor] = decl.split(':').map(str => str?.trim());
-      return prop && valor && CSS.supports(`${prop}: ${valor}`);
-    });
+    const soloBackgroundBlue = declaraciones.length === 1 && declaraciones[0] === 'background-color: blue';
 
-    //Si el contenido no es valido muestra debajo una alerta 
-    if (!contieneValida) {
+    if (!soloBackgroundBlue) {
       setMensaje(
         <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
           <XCircle className="w-5 h-5" />
           <span>
-            Al menos una propiedad debe tener un valor CSS válido - Ej: <code>color: red;</code>
+            Debes usar solo: <code>background-color: blue;</code> en <code>h6</code>
           </span>
         </div>
       );
       return;
     }
 
-    //Resultado de exito
-    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+    confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
     setMensaje(
       <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
         <CheckCircle className="w-5 h-5" />
-        <span>¡Bien hecho! Has aplicado estilo correctamente</span>
+        <span>¡Perfecto! Estilo aplicado correctamente</span>
       </div>
     );
-    setTimeout(() => navigate('/juego/selectores/nivel-2'), 3000);
+    setTimeout(() => navigate('/juego/selectores/nivel-5'), 3000);
   };
 
-  //Aplica el estilo a la parte indicada
   useEffect(() => {
-    const styleTag = document.getElementById('css-nivel-1');
+    const styleTag = document.getElementById('css-nivel-facil-h6');
     if (styleTag) {
       styleTag.innerHTML = procesarCSS(css);
     }
@@ -94,37 +77,36 @@ const Nivel1 = () => {
 
   return (
     <>
-      <Head title="Nivel 1 - CSS Detective" />
-      <style id="css-nivel-1" />
+      <Head title="Nivel 4 - CSS Detective" />
+      <style id="css-nivel-facil-h6" />
       <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
         <BotonSonido />
 
         <main className="flex flex-col items-center p-6 gap-6">
-          {/* Vista Información*/}
+          {/* Vista Información */}
           <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
-            Nivel 1 - CSS Detective
+            Nivel 4 - CSS Detective
           </h1>
           <p className="text-lg text-indigo-700 text-center max-w-2xl">
-            Aplica algún estilo directamente a todas las etiquetas{' '}
-            <strong>
-              <code>&lt;p&gt;</code>
-            </strong>
+            Aplica un <strong>color de fondo azul</strong> a todos los <strong><code>&lt;h6&gt;</code></strong>
           </p>
 
-          {/* Vista previa*/}
-          <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative">
-            <div className="flex-1">
+          {/* Vista previa */}
+          <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative min-h-[10rem]">
+            <div className="flex-1 h-full flex flex-col">
               <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa:</h2>
-              <div className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base w-full">
-                <p>Texto importante</p>
-                <p>Otro texto sin importancia</p>
+              <div className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base w-full flex-1 min-h-[10rem]">
+                  <h6>¡¡¡</h6>
+                  <h6>HOLAAAAAAAAA</h6>
+                  <h6>MUNDOOOOOOOO</h6>
+                  <h6>!!!</h6>
               </div>
             </div>
 
             {/* Imagen decorativa */}
             <div className="hidden md:flex justify-center items-center">
               <img
-                src="/foto-detective-viñeta.png"
+                src="/foto-detective-linterna.png"
                 alt="Detective"
                 className="w-36 h-auto drop-shadow-[0_5px_15px_rgba(129,140,248,0.4)] pointer-events-none select-none"
               />
@@ -138,7 +120,7 @@ const Nivel1 = () => {
               <h2 className="font-mono text-lg mb-2">Escribe tu CSS aquí:</h2>
               <textarea
                 className="w-full h-40 bg-zinc-800 text-green-100 font-mono p-2 rounded resize-none"
-                placeholder={`/* Ejemplo:\n  selector {\n\tpropiedad: valor;\n  } \n*/`}
+                placeholder={`selector {\n  propiedad: valor;\n}`}
                 value={css}
                 onChange={(e) => setCss(e.target.value)}
               />
@@ -165,4 +147,4 @@ const Nivel1 = () => {
   );
 };
 
-export default Nivel1;
+export default Nivel4;

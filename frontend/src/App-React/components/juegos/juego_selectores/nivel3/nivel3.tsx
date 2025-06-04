@@ -28,7 +28,7 @@ const Nivel3 = () => {
                     <span>Correcto - Avanzando al Nivel 4...</span>
                 </div>
             );
-            setTimeout(() => navigate('/nivel-4'), 3000);
+            setTimeout(() => navigate('/juego/selectores/nivel-4'), 3000);
         } else {
             setMensaje(
                 <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">

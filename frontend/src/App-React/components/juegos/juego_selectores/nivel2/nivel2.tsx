@@ -125,7 +125,7 @@ const Nivel2 = () => {
                             <h2 className="font-mono text-lg mb-2">Escribe tu CSS aquí:</h2>
                             <textarea
                                 className="w-full h-40 bg-zinc-800 text-green-100 font-mono p-2 rounded resize-none"
-                                placeholder={`/* Ejemplo:\n  .pista {\n\tcolor: red;\n  } \n*/`}
+                                placeholder={`/* Ejemplo:\n  selector {\n\tpropiedad: valor;\n  } \n*/`}
                                 value={css}
                                 onChange={(e) => setCss(e.target.value)}
                             />
