@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ble.Triviados.Application\Ble.Triviados.Application.csproj" />
+    <ProjectReference Include="..\Ble.Triviados.Services.WebApi\Ble.Triviados.Services.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

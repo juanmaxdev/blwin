@@ -21,7 +21,7 @@ namespace Ble.Triviados.Services.WebApi.Controllers
         /// Registra una puntuación para el usuario en un juego
         /// </summary>
         [HttpPost("registrar")]
-        [Authorize]
+        [Authorize] 
         public async Task<IActionResult> RegistrarPuntuacion([FromBody] RegistrarPuntuacionDto dto)
         {
             var usuarioIdClaim = User.FindFirst("id")?.Value;
@@ -69,7 +69,7 @@ namespace Ble.Triviados.Services.WebApi.Controllers
                 return Unauthorized(new { Message = "No se pudo obtener el ID del usuario del token." });
             }
 
-            var relacion = await _usuarioJuegoService.ObtenerRelacionAsync(usuarioId, juegoId);
+            var relacion = await _usuarioJuegoService.ObtenerRelacionAsync(usuarioId, juegoId);      
             if (relacion == null)
                 return NotFound(new { Message = "No se encontró la relación usuario-juego." });
 
