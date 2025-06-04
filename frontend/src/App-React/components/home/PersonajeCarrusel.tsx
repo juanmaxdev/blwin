@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const personajes = [
   {
-    nombre: "Don Quijote de la Trivianza",
-    historia: "Desde las vastas tierras de la Mancha del conocimiento, cabalga Don Quijote de la Trivianza, un caballero de mente inquieta y lanza afilada de sabiduría...",
-    imagen: "/personajes/personaje1.png",
-    fondo: "from-yellow-300 to-yellow-500"
+    nombre: "El juego del Ahorcado",
+    historia: "En los oscuros pasillos de una escuela abandonada, se rumorea que un juego prohibido aparece en la pizarra cada medianoche. Quien intente jugar al Ahorcado escuchará susurros que revelan letras...",
+    imagen: "/avatarJuegos/avatar_juego_ahorcado.png",
+    fondo: "from-gray-800 to-black",
+    boton: {
+      nombre: "Atrevete...",
+      ruta: "/ahorcado",
+    }
   },
   {
     nombre: "Robotín v2.0",
@@ -66,6 +71,7 @@ const personajes = [
 
 const PersonajeCarrusel = () => {
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState<null | typeof personajes[0]>(null);
+  const navigate = useNavigate();
 
   return (
     <section className="w-full pt-0 pb-24 px-4">
@@ -103,13 +109,21 @@ const PersonajeCarrusel = () => {
                 whileHover={{ rotate: [0, -3, 3, 0] }}
                 transition={{ duration: 0.5 }}
               />
-              <div className="text-center md:text-left max-w-md">
+              <div className="flex flex-col items-center max-w-md space-y-4">
                 <h3 className="text-3xl font-bold text-indigo-800 mb-3">
                   {personajeSeleccionado.nombre}
                 </h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   {personajeSeleccionado.historia}
                 </p>
+                {personajeSeleccionado.boton && (
+                  <button
+                    className={`mt-4 px-6 py-2 rounded-full text-white bg-gradient-to-br ${personajeSeleccionado.fondo} hover:opacity-90 transition mx-auto`}
+                    onClick={() => navigate(personajeSeleccionado.boton!.ruta)}
+                  >
+                    {personajeSeleccionado.boton.nombre}
+                  </button>
+                )}
               </div>
             </motion.div>
           )}
