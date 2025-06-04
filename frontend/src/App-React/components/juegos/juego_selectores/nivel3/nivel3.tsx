@@ -18,17 +18,31 @@ const Nivel3 = () => {
     const navigate = useNavigate();
 
     const verificarCSS = () => {
-        const valido = /section\s+\.activo\s*\{[^}]*[a-z-]+\s*:\s*[^}]+;?\s*\}/.test(css);
+        const match = css.match(/section\s+\.activo\s*\{\s*([a-z-]+)\s*:\s*([^;}]+);?\s*\}/);
 
-        if (valido) {
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-            setMensaje(
-                <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
-                    <CheckCircle className="w-5 h-5" />
-                    <span>Correcto - Avanzando al Nivel 4...</span>
-                </div>
-            );
-            setTimeout(() => navigate('/nivel-4'), 3000);
+        if (match) {
+            const propiedad = match[1].trim();
+            const valor = match[2].trim();
+
+            const esSoportado = CSS.supports(propiedad, valor);
+
+            if (esSoportado) {
+                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                setMensaje(
+                    <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
+                        <CheckCircle className="w-5 h-5" />
+                        <span>Correcto - Avanzando al Nivel 4...</span>
+                    </div>
+                );
+                setTimeout(() => navigate('/nivel-4'), 3000);
+            } else {
+                setMensaje(
+                    <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
+                        <XCircle className="w-5 h-5" />
+                        <span>Fallo - Combinación inválida: {propiedad}: {valor}</span>
+                    </div>
+                );
+            }
         } else {
             setMensaje(
                 <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
@@ -60,7 +74,6 @@ const Nivel3 = () => {
 
                     {/* Vista previa */}
                     <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row gap-6 relative">
-                        {/* Contenido de vista previa */}
                         <div className="flex-1">
                             <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa:</h2>
                             <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base">
@@ -71,7 +84,6 @@ const Nivel3 = () => {
                             </div>
                         </div>
 
-                        {/* Imagen decorativa con sombra cálida */}
                         <div className="hidden md:flex items-center justify-center">
                             <img
                                 src="/foto-detective-interrogacion.png"
@@ -79,7 +91,6 @@ const Nivel3 = () => {
                                 className="w-36 h-auto drop-shadow-[0_5px_15px_rgba(129,140,248,0.4)] pointer-events-none select-none" />
                         </div>
                     </section>
-
 
                     {/* Editor y HTML */}
                     <section className="w-full max-w-6xl flex flex-col md:flex-row gap-6">
