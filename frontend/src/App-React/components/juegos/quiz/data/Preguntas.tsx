@@ -318,4 +318,151 @@ class Program
     explicacion:
       "Las palabras clave 'virtual', 'override', la sintaxis de herencia con ':' y Console.WriteLine son características de C#",
   },
+  {
+    id: 16,
+    codigo: `print("Hola mundo")
+    nombre = input("¿Cuál es tu nombre? ")
+    print(f"Hola, {nombre}!")`,
+    respuestaCorrecta: "Python",
+    opciones: ["Python", "Ruby", "JavaScript", "Perl"],
+    explicacion: "La función print, input y el uso de f-strings son distintivos de Python",
+  },
+  {
+    id: 17,
+    codigo: `puts "Hola mundo"
+    print "¿Cómo te llamas? "
+    nombre = gets.chomp
+    puts "Hola, #{nombre}"`,
+    respuestaCorrecta: "Ruby",
+    opciones: ["Ruby", "Python", "JavaScript", "PHP"],
+    explicacion: "El uso de 'puts', 'gets.chomp' y la interpolación con #{...} son característicos de Ruby",
+  },
+  {
+    id: 18,
+    codigo: `<?php
+    $name = "Carlos";
+    echo "Hola, " . $name;
+    ?>`,
+    respuestaCorrecta: "PHP",
+    opciones: ["PHP", "Perl", "JavaScript", "HTML"],
+    explicacion: "El uso de etiquetas <?php ?> y 'echo' son propios de PHP",
+  },
+  {
+    id: 19,
+    codigo: `let nombre = "Ana";
+    console.log(\`Hola, \${nombre}\`);`,
+    respuestaCorrecta: "JavaScript",
+    opciones: ["JavaScript", "TypeScript", "Python", "Ruby"],
+    explicacion: "Uso de backticks y template literals es característico de JavaScript",
+  },
+  {
+    id: 20,
+    codigo: `fun main() {
+    val nombres = listOf("Ana", "Luis", "Carlos")
+    for (nombre in nombres) {
+        println("Hola, \$nombre")
+    }
+}`,
+    respuestaCorrecta: "Kotlin",
+    opciones: ["Kotlin", "Java", "Swift", "Scala"],
+    explicacion: "La palabra clave 'fun', 'val', y el uso de listOf son característicos de Kotlin",
+  },
+  {
+    id: 21,
+    codigo: `val names = listOf("Alice", "Bob", "Charlie")
+    names.foreach(name => println(s"Hello, $name"))`,
+    respuestaCorrecta: "Scala",
+    opciones: ["Scala", "Kotlin", "Java", "Haskell"],
+    explicacion: "El uso de 'val', 'foreach' y la interpolación con 's\"\"' son distintivos de Scala",
+  },
+  {
+    id: 22,
+    codigo: `main() {
+  var names = ['Ana', 'Luis', 'Carlos'];
+  for (var name in names) {
+    print('Hola \$name');
+  }
+}`,
+    respuestaCorrecta: "Dart",
+    opciones: ["Dart", "JavaScript", "Kotlin", "Swift"],
+    explicacion: "El uso de 'var', listas con corchetes y la sintaxis del main es típica de Dart",
+  },
+  {
+    id: 23,
+    codigo: `fn greet(name: &str) {
+    println!("Hello, {}", name);
+}
+
+fn main() {
+    greet("Alice");
+}`,
+    respuestaCorrecta: "Rust",
+    opciones: ["Rust", "Go", "C++", "Swift"],
+    explicacion: "La sintaxis 'fn', referencias con '&str' y el macro println! son característicos de Rust",
+  },
+  {
+    id: 24,
+    codigo: `fun main() {
+  val greeting = "Hola"
+  println("\$greeting mundo")
+}`,
+    respuestaCorrecta: "Kotlin",
+    opciones: ["Kotlin", "Swift", "Scala", "Java"],
+    explicacion: "El uso de 'val', 'fun' y la interpolación de strings con \$ es típico de Kotlin",
+  },
+  {
+    id: 25,
+    codigo: `print *, "Hello, world!"
+    end`,
+    respuestaCorrecta: "Fortran",
+    opciones: ["Fortran", "Pascal", "COBOL", "Ada"],
+    explicacion: `"print *" y la estructura sin paréntesis son distintivas de Fortran`,
+  },
+  {
+    id: 26,
+    codigo: `with Ada.Text_IO;
+use Ada.Text_IO;
+
+procedure Hello is
+begin
+   Put_Line ("Hello, world!");
+end Hello;`,
+    respuestaCorrecta: "Ada",
+    opciones: ["Ada", "Pascal", "Modula-2", "Fortran"],
+    explicacion: "El uso de 'procedure', 'Put_Line', y la sintaxis estructurada es propia de Ada",
+  },
+  {
+    id: 27,
+    codigo: `BEGIN
+    DBMS_OUTPUT.PUT_LINE('Hello, World!');
+    END;`,
+    respuestaCorrecta: "PL/SQL",
+    opciones: ["PL/SQL", "T-SQL", "SQL", "Pascal"],
+    explicacion: "El uso de DBMS_OUTPUT.PUT_LINE es típico de PL/SQL de Oracle",
+  },
+  {
+    id: 28,
+    codigo: `SELECT name FROM users WHERE age > 30;`,
+    respuestaCorrecta: "SQL",
+    opciones: ["SQL", "T-SQL", "PL/SQL", "LINQ"],
+    explicacion: "La sentencia SELECT-FROM-WHERE es básica de SQL estándar",
+  },
+  {
+    id: 29,
+    codigo: `echo "Hola mundo"
+    read -p "¿Cómo te llamas? " nombre
+    echo "Hola \$nombre"`,
+    respuestaCorrecta: "Bash",
+    opciones: ["Bash", "Zsh", "PowerShell", "Perl"],
+    explicacion: "El uso de 'echo', 'read -p' y la expansión con \$ es típico de Bash",
+  },
+  {
+    id: 30,
+    codigo: `Write-Host "Hola mundo"
+    $name = Read-Host "¿Cómo te llamas?"
+    Write-Host "Hola $name"`,
+    respuestaCorrecta: "PowerShell",
+    opciones: ["PowerShell", "Bash", "CMD", "Perl"],
+    explicacion: "Uso de Write-Host, Read-Host y variables con \$ es distintivo de PowerShell",
+  }
 ]

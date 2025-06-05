@@ -12,7 +12,7 @@ interface preguntaCartaProps {
   esUltimaPregunta: boolean
 }
 
-export default function preguntaCarta({
+export default function PreguntaCarta({
   pregunta,
   respuestaSeleccionada,
   mostrarResultados,
