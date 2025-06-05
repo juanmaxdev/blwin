@@ -32,7 +32,7 @@ const personajes = [
     imagen: "/personajes/personaje5.png",
     fondo: "from-pink-300 to-pink-500"
   },
-   {
+  {
     nombre: "Agilín BL",
     historia: "Nacido en los pasillos digitales de Berger-Levrault, Agilín BL domina el arte del método Agile. Planifica sprints en segundos, automatiza tareas y odia los cuellos de botella. Su superpoder: transformar papeleo en productividad con solo un clic.“¡Scrum, café... y al backlog!",
     imagen: "/personajes/personaje9.png",
@@ -56,10 +56,10 @@ const personajes = [
     imagen: "/personajes/personaje8.png",
     fondo: "from-purple-400 to-purple-600"
   },
-   {
-    nombre: "Sabel Otodo",
+  {
+    nombre: "Css Detective",
     historia: "Sabel se crió con Aristotéles y fue el mejor amigo de Einstein, dice la leyenda que con 3k puntos te da una ayudita ya que... ¡prácticamente lo sabe todo!",
-    imagen: "/personajes/sabio.png",
+    imagen: "/foto-detective-completa.png",
     fondo: "from-gray-200 to-gray-200"
   }
 ];
@@ -107,9 +107,17 @@ const PersonajeCarrusel = () => {
                 <h3 className="text-3xl font-bold text-indigo-800 mb-3">
                   {personajeSeleccionado.nombre}
                 </h3>
+
                 <p className="text-gray-700 text-lg leading-relaxed">
                   {personajeSeleccionado.historia}
                 </p>
+
+                <button
+                  onClick={() => window.location.href = '/juego/selectores'}
+                  className="bg-white text-indigo-700 text-lg font-semibold px-6 py-2 rounded-xl shadow-lg hover:bg-indigo-100 transition-all duration-300 hover:scale-105 mt-4"
+                >
+                  Iniciar caso
+                </button>
               </div>
             </motion.div>
           )}
