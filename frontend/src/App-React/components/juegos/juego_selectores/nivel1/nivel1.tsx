@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Head } from '../../../../components/Head';
+import { Head } from '../../../Head';
 import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-import BotonSonido from '../../../../components/ui/ButtonSound';
+import BotonSonido from '../../../ui/ButtonSound';
 import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 import BotonVolverInicio from '../botonInicio/botonInicio';
 

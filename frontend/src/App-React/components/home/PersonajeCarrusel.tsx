@@ -1,71 +1,20 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const personajes = [
-  {
-    nombre: "Don Quijote de la Trivianza",
-    historia: "Desde las vastas tierras de la Mancha del conocimiento, cabalga Don Quijote de la Trivianza, un caballero de mente inquieta y lanza afilada de sabiduría...",
-    imagen: "/personajes/personaje1.png",
-    fondo: "from-yellow-300 to-yellow-500"
-  },
-  {
-    nombre: "Robotín v2.0",
-    historia: "Forjado en los laboratorios secretos del ciberespacio, Robotín es un androide ultraprogramado con inteligencia artificial cuántica...",
-    imagen: "/personajes/personaje2.png",
-    fondo: "from-blue-300 to-blue-500"
-  },
-  {
-    nombre: "Máximo 'Max' Turbo",
-    historia: "Desde pequeño, Max Turbo soñaba con ser campeón en todos los deportes… y terminó siéndolo...",
-    imagen: "/personajes/personaje3.png",
-    fondo: "from-orange-300 to-orange-500"
-  },
-  {
-    nombre: "Profesor Alquion Vialhart",
-    historia: "En lo más alto de la Torre del Saber, Alquion mezcla ciencia con alquimia. Maestro de las fórmulas imposibles...",
-    imagen: "/personajes/personaje4.png",
-    fondo: "from-green-300 to-green-500"
-  },
-  {
-    nombre: "Paloma Lumière",
-    historia: "Paloma creció entre rollos de película y butacas de terciopelo en el cine clásico de su abuelo... la llaman “Palomita”.",
-    imagen: "/personajes/personaje5.png",
-    fondo: "from-pink-300 to-pink-500"
-  },
-  {
-    nombre: "Agilín BL",
-    historia: "Nacido en los pasillos digitales de Berger-Levrault, Agilín BL domina el arte del método Agile. Planifica sprints en segundos, automatiza tareas y odia los cuellos de botella. Su superpoder: transformar papeleo en productividad con solo un clic.“¡Scrum, café... y al backlog!",
-    imagen: "/personajes/personaje9.png",
-    fondo: "from-red-700 to-red-800"
-  },
-  {
-    nombre: "Globy el Navegante",
-    historia: "Globy nació en una antigua biblioteca de mapas... puede nombrar capitales y cordilleras en segundos.",
-    imagen: "/personajes/personaje6.png",
-    fondo: "from-emerald-400 to-emerald-600"
-  },
-  {
-    nombre: "Pincelina DaVinci",
-    historia: "Pincelina nació del primer trazo de una obra maestra olvidada... Cree que el arte está en todo.",
-    imagen: "/personajes/personaje7.png",
-    fondo: "from-red-400 to-red-600"
-  },
-  {
-    nombre: "BeatBox",
-    historia: "BeatBox nació del ruido de una batalla de rap y una sinfonía... su lema: “desde Mozart hasta Eminem, todo tiene su beat”.",
-    imagen: "/personajes/personaje8.png",
-    fondo: "from-purple-400 to-purple-600"
-  },
   {
     nombre: "Css Detective",
     historia: "¿Alguna vez has soñado con ser detective? Pon a prueba tus habilidades resolviendo casos mientras aprendes selectores CSS en escenarios HTML interactivos",
     imagen: "/foto-detective-completa.png",
-    fondo: "from-gray-200 to-gray-200"
+    fondo: "from-gray-200 to-gray-200",
+    enlace: "juego/selectores/nivel-1"
   }
 ];
 
 const PersonajeCarrusel = () => {
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState<null | typeof personajes[0]>(null);
+  const navigate = useNavigate();
 
   return (
     <section className="w-full pt-0 pb-24 px-4">
@@ -113,7 +62,7 @@ const PersonajeCarrusel = () => {
                 </p>
 
                 <button
-                  onClick={() => window.location.href = '/juego/selectores'}
+                  onClick={() => navigate(`/${personajeSeleccionado.enlace}`)}
                   className="bg-white text-indigo-700 text-lg font-semibold px-6 py-2 rounded-xl shadow-lg hover:bg-indigo-100 transition-all duration-300 hover:scale-105 mt-4"
                 >
                   Iniciar Juego
