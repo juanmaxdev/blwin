@@ -1,5 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { TODAS_LAS_PALABRAS } from './Palabras';
+import React, { useEffect, useState } from "react";
+import Cuadricula from "./Cuadricula";
+import { TODAS_LAS_PALABRAS } from "./Palabras"; // asegúrate de tener este archivo
+import "./SopaDeLetras.css";
+
+type Coordenada = { fila: number; col: number };
+type PalabraEncontrada = { texto: string; coords: Coordenada[] };
 
 interface TableroProps {
   resetKey: number;
@@ -7,17 +12,17 @@ interface TableroProps {
 
 const obtenerPalabrasAleatorias = (cantidad: number) => {
   const copia = [...TODAS_LAS_PALABRAS];
-  const seleccionadas = [];
+  const seleccionadas: string[] = [];
   while (seleccionadas.length < cantidad && copia.length > 0) {
-    const indice = Math.floor(Math.random() * copia.length);
-    seleccionadas.push(copia.splice(indice, 1)[0]);
+    const i = Math.floor(Math.random() * copia.length);
+    seleccionadas.push(copia.splice(i, 1)[0]);
   }
   return seleccionadas;
 };
 
 const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
   const matriz = Array.from({ length: filas }, () =>
-    Array.from({ length: columnas }, () => '')
+    Array.from({ length: columnas }, () => "")
   );
 
   palabras.forEach((palabra) => {
@@ -26,16 +31,16 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
       const fila = Math.floor(Math.random() * filas);
       const maxCol = columnas - palabra.length;
       const colInicio = Math.floor(Math.random() * (maxCol + 1));
+      let libre = true;
 
-      let espacioLibre = true;
       for (let i = 0; i < palabra.length; i++) {
-        if (matriz[fila][colInicio + i] !== '') {
-          espacioLibre = false;
+        if (matriz[fila][colInicio + i] !== "") {
+          libre = false;
           break;
         }
       }
 
-      if (espacioLibre) {
+      if (libre) {
         for (let i = 0; i < palabra.length; i++) {
           matriz[fila][colInicio + i] = palabra[i];
         }
@@ -44,10 +49,10 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
     }
   });
 
-  const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (let f = 0; f < filas; f++) {
     for (let c = 0; c < columnas; c++) {
-      if (matriz[f][c] === '') {
+      if (matriz[f][c] === "") {
         matriz[f][c] = letras[Math.floor(Math.random() * letras.length)];
       }
     }
@@ -58,39 +63,77 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
 
 const Tablero: React.FC<TableroProps> = ({ resetKey }) => {
   const [matriz, setMatriz] = useState<string[][]>([]);
-  const [palabras, setPalabras] = useState<string[]>([]);
-
-  const iniciarJuego = () => {
-    const seleccionadas = obtenerPalabrasAleatorias(5);
-    const nuevaMatriz = generarMatriz(10, 18, seleccionadas);
-    setPalabras(seleccionadas);
-    setMatriz(nuevaMatriz);
-  };
+  const [palabrasObjetivo, setPalabrasObjetivo] = useState<string[]>([]);
+  const [seleccion, setSeleccion] = useState<Coordenada[]>([]);
+  const [palabrasEncontradas, setPalabrasEncontradas] = useState<PalabraEncontrada[]>([]);
+  const [seleccionActiva, setSeleccionActiva] = useState(false);
 
   useEffect(() => {
-    iniciarJuego();
+    const palabras = obtenerPalabrasAleatorias(5);
+    setPalabrasObjetivo(palabras);
+    setMatriz(generarMatriz(10, 18, palabras));
+    setSeleccion([]);
+    setPalabrasEncontradas([]);
   }, [resetKey]);
 
-  return (
-    <div className="flex flex-col items-center mt-4">
-      <div className="cuadricula grid grid-cols-18 gap-1">
-        {matriz.map((fila, i) =>
-          fila.map((letra, j) => (
-            <span
-              key={`${i}-${j}`}
-              className="w-6 h-6 bg-white rounded flex items-center justify-center text-sm font-bold shadow"
-            >
-              {letra}
-            </span>
-          ))
-        )}
-      </div>
+  const iniciarSeleccion = (coord: Coordenada) => {
+    setSeleccionActiva(true);
+    setSeleccion([coord]);
+  };
 
+  const agregarACoordenadas = (coord: Coordenada) => {
+    if (!seleccionActiva) return;
+
+    const yaIncluida = seleccion.some((c) => c.fila === coord.fila && c.col === coord.col);
+    if (!yaIncluida) {
+      setSeleccion((prev) => [...prev, coord]);
+    }
+  };
+
+  const terminarSeleccion = () => {
+    if (!seleccionActiva || seleccion.length === 0) return;
+    setSeleccionActiva(false);
+
+    const palabra = seleccion.map(({ fila, col }) => matriz[fila][col]).join("");
+    const reversa = palabra.split("").reverse().join("");
+
+    const valida = palabrasObjetivo.includes(palabra)
+      ? palabra
+      : palabrasObjetivo.includes(reversa)
+        ? reversa
+        : null;
+
+    if (valida && !palabrasEncontradas.some((p) => p.texto === valida)) {
+      setPalabrasEncontradas((prev) => [...prev, { texto: valida, coords: [...seleccion] }]);
+    }
+
+    setSeleccion([]);
+  };
+
+  return (
+    <div className="flex flex-col items-center">
+      <Cuadricula
+        matriz={matriz}
+        seleccion={seleccion}
+        palabrasEncontradas={palabrasEncontradas}
+        iniciarSeleccion={iniciarSeleccion}
+        agregarACoordenadas={agregarACoordenadas}
+        terminarSeleccion={terminarSeleccion}
+      />
       <div className="mt-4">
         <h3 className="font-bold text-lg mb-2">🔍 Palabras a buscar:</h3>
         <ul className="grid grid-cols-2 gap-x-4 text-sm">
-          {palabras.map((p, i) => (
-            <li key={i}>• {p}</li>
+          {palabrasObjetivo.map((p, i) => (
+            <li
+              key={i}
+              className={
+                palabrasEncontradas.some((encontrada) => encontrada.texto === p)
+                  ? "line-through text-green-600"
+                  : ""
+              }
+            >
+              • {p}
+            </li>
           ))}
         </ul>
       </div>
