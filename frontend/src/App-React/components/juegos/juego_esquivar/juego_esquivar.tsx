@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import Contador from "./contador/Contador";
 import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion";
 import ButtonSound from "../../ui/ButtonSound";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 export default function JuegoEsquivar() {
     const {
@@ -23,7 +25,7 @@ export default function JuegoEsquivar() {
     const nombreJuego = "z-wing";
 
     const [ejeX, setEjeX] = useState(true);
-    const [velocidad, setVelocidad] = useState(2000);
+    const [velocidad, setVelocidad] = useState(1500);
     const [resetKey, setResetKey] = useState(0);
     const asteroideRef = useRef<AsteroideRef>(null);
     const asteroideRef2 = useRef<AsteroideRef>(null);
@@ -42,7 +44,7 @@ export default function JuegoEsquivar() {
                 (posAsteroide.fila === jugadorPos.fila && posAsteroide.columna === jugadorPos.columna) ||
                 (posAsteroide2.fila === jugadorPos.fila && posAsteroide2.columna === jugadorPos.columna)
             ) {
-                alert("💥 Impacto detectado!");
+                toast.error('💥 ¡Impacto detectado!');
                 handleStop();
                 return;
             }
@@ -78,19 +80,22 @@ export default function JuegoEsquivar() {
             }
 
             if (puntacion == 40) {
-                setVelocidad(1500);
+                setVelocidad(1300);
             }
             if (puntacion == 80) {
-                setVelocidad(1200);
-            }
-            if (puntacion == 120) {
                 setVelocidad(1000);
             }
-            if (puntacion == 150) {
+            if (puntacion == 120) {
                 setVelocidad(800);
+            }
+            if (puntacion == 150) {
+                setVelocidad(750);
             }
             if (puntacion == 200) {
                 setVelocidad(500);
+            }
+            if (puntacion == 300) {
+                setVelocidad(250);
             }
         }, 1000);
 
@@ -134,6 +139,8 @@ export default function JuegoEsquivar() {
 
     return (
         <>
+            <Toaster position="top-center" />
+
             <ButtonSound></ButtonSound>
             <Grid container display="grid" gridTemplateColumns="repeat(5, 20%)" gridTemplateRows="repeat(5, 20%)"
                 sx={{
