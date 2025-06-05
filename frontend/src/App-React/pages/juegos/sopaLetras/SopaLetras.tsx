@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ContadorTiempo from "../../../components/juegos/sopaLetras/ContadorTiempo";
 import Tablero from "../../../components/juegos/sopaLetras/Tablero";
 import { motion } from "framer-motion";
-import BotonSonido from "../../../components/juegos/sopaLetras/BotonSonido";
 import BotonHome from "../../../components/juegos/sopaLetras/BotonHome";
 
 const SopaLetras = () => {
@@ -17,13 +16,8 @@ const SopaLetras = () => {
   return (
     <div className="h-screen w-screen flex flex-col bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200">
       <header className="h-20 flex items-center justify-center bg-white/50 shadow-md">
-        <div>
-          <BotonSonido />
-          <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-800 drop-shadow my-6">Juego de Sopa de Letras</h1>
-        </div>
-        <div>
           <BotonHome />
-        </div>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-800 drop-shadow my-6">Juego de Sopa de Letras</h1>
       </header>
 
       {contadorActivo ? (
