@@ -38,6 +38,8 @@ namespace Test.BLWin.Controllers
         [TestMethod]
         public async Task RegistrarUsuarioAsync_NombreYContraseñaInvalidos() 
         {
+            // Registrar Usuario con Nombre y Contraseña Invalidos
+
             // Arrange
             var dto = new RegistroUsuarioDto
             {
@@ -55,6 +57,8 @@ namespace Test.BLWin.Controllers
         [TestMethod]
         public async Task RegistrarUsuarioAsync_UsuarioRegistradoCorrectamente()
         {
+            // Registrar Usuario con credenciales correctas
+
             // Arrange
             var dto = new RegistroUsuarioDto
             {
@@ -84,6 +88,8 @@ namespace Test.BLWin.Controllers
         [TestMethod]
         public async Task LoginUsuarioAsync_UsuarioNoExiste()
         {
+            // Login con un Usuario no existente
+
             // Arrange
             var dto = new LoginUsuarioDto { Name = "inexistente", Password = "1234" };
             _mockUsuarioRepository.Setup(r => r.ObtenerPorNombreAsync(dto.Name)).ReturnsAsync((Usuario)null);
@@ -98,6 +104,8 @@ namespace Test.BLWin.Controllers
         [TestMethod]
         public async Task LoginUsuarioAsync_ContraseñaIncorrecta()
         {
+            // Login con Contraseña incorrecta
+
             // Arrange
             var dto = new LoginUsuarioDto { Name = "usuario1", Password = "incorrecta" };
             var usuario = new Usuario
@@ -119,6 +127,8 @@ namespace Test.BLWin.Controllers
         [TestMethod]
         public async Task LoginUsuarioAsync_CredencialesValidas_DevuelveToken()
         {
+            // Login Usuario con credenciales validas y devuelve el token
+
             // Arrange
             var dto = new LoginUsuarioDto { Name = "usuario1", Password = "correcta" };
             var usuario = new Usuario
@@ -129,7 +139,7 @@ namespace Test.BLWin.Controllers
             };
 
             _mockUsuarioRepository.Setup(r => r.ObtenerPorNombreAsync(dto.Name)).ReturnsAsync(usuario);
-            
+
             // Act
             var resultado = await _service.LoginUsuarioAsync(dto);
 
@@ -142,6 +152,8 @@ namespace Test.BLWin.Controllers
         [TestMethod]
         public async Task LoginUsuarioAsync_CredencialesCorrectas_RetornaTokenJWTValido()
         {
+            // Login Usuario credenciales correctas y se asegura que el token tiene el formato JWT válido.
+
             // Arrange
             var dto = new LoginUsuarioDto { Name = "usuario1", Password = "correcta" };
             var usuario = new Usuario
@@ -168,6 +180,9 @@ namespace Test.BLWin.Controllers
         [TestMethod]
         public async Task AgregarPuntosUsuarioAsync_UsuarioExiste_RetornaPtosDto()
         {
+            // Si el repositorio devuelve un usuario existente con los puntos actualizados,
+            // Entonces el servicio devuelve correctamente un PtosDto con esos datos.
+
             // Arrange
             int usuarioId = 1;
             int puntosAgregar = 50;
