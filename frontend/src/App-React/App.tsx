@@ -9,6 +9,7 @@ import Nivel2 from './components/juegos/juego_selectores/nivel2/nivel2';
 import Nivel4 from './components/juegos/juego_selectores/nivel4/Nivel4';
 import Nivel5 from './components/juegos/juego_selectores/nivel5/Nivel5';
 import Nivel8 from './components/juegos/juego_selectores/nivel8/Nivel8';
+import Nivel6 from './components/juegos/juego_selectores/nivel6/nivel6';
 
 const App = () => (
   <Routes>
@@ -41,6 +42,8 @@ const App = () => (
 
     {/* Página-Nivel 8 de Juego Detective CSS */}
     <Route path="/juego/selectores/nivel-8" element={<Nivel8 />} />
+    {/* Página-Nivel 6 de Juego Detective CSS */}
+    <Route path="/juego/selectores/nivel-6" element={<Nivel6 />} />
   </Routes>
 );
 
