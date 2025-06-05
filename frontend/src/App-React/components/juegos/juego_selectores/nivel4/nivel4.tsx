@@ -4,6 +4,7 @@ import { Head } from '../../../../components/Head';
 import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import BotonSonido from '../../../../components/ui/ButtonSound';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 
 const elementosHTML = [
   { tag: 'h6', contenido: '¡¡¡' },
@@ -59,6 +60,7 @@ const Nivel4 = () => {
     }
 
     confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+    sessionStorage.setItem('nivel4Superado', 'true');
     setMensaje(
       <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
         <CheckCircle className="w-5 h-5" />
@@ -87,6 +89,7 @@ const Nivel4 = () => {
           <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
             Nivel 4 - CSS Detective
           </h1>
+          <ProgressBar currentStep={4} />
           <p className="text-lg text-indigo-700 text-center max-w-2xl">
             Aplica un <strong>color de fondo azul</strong> a todos los <strong><code>&lt;h6&gt;</code></strong>
           </p>
@@ -96,10 +99,10 @@ const Nivel4 = () => {
             <div className="flex-1 h-full flex flex-col">
               <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa:</h2>
               <div className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base w-full flex-1 min-h-[10rem]">
-                  <h6>¡¡¡</h6>
-                  <h6>HOLAAAAAAAAA</h6>
-                  <h6>MUNDOOOOOOOO</h6>
-                  <h6>!!!</h6>
+                <h6>¡¡¡</h6>
+                <h6>HOLAAAAAAAAA</h6>
+                <h6>MUNDOOOOOOOO</h6>
+                <h6>!!!</h6>
               </div>
             </div>
 

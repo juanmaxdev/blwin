@@ -5,6 +5,7 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../../components/ui/ButtonSound';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 
 //Datos que sale en el codigo HTML
 const elementosHTML = [
@@ -75,6 +76,7 @@ const Nivel1 = () => {
 
     //Resultado de exito
     confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+    sessionStorage.setItem('nivel1Superado', 'true');
     setMensaje(
       <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
         <CheckCircle className="w-5 h-5" />
@@ -104,6 +106,7 @@ const Nivel1 = () => {
           <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
             Nivel 1 - CSS Detective
           </h1>
+          <ProgressBar currentStep={1} />
           <p className="text-lg text-indigo-700 text-center max-w-2xl">
             Aplica algún estilo directamente a todas las etiquetas{' '}
             <strong>

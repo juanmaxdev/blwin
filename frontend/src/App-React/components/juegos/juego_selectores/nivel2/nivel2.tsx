@@ -5,6 +5,7 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 
 //Datos que sale en el codigo HTML
 const elementosHTML = [
@@ -63,6 +64,7 @@ const Nivel2 = () => {
 
         //Resultado de exito
         confetti({ particleCount: 300, spread: 100, origin: { y: 0.6 } });
+        sessionStorage.setItem('nivel2Superado', 'true');
         setMensaje(
             <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
                 <CheckCircle className="w-5 h-5" />
@@ -92,6 +94,7 @@ const Nivel2 = () => {
                     <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
                         Nivel 2 - CSS Detective
                     </h1>
+                    <ProgressBar currentStep={2} />
                     <p className="text-lg text-indigo-700 text-center max-w-2xl">
                         Aplica estilos CSS a todos los elementos que contienen la clase <code>pista</code>
                     </p>

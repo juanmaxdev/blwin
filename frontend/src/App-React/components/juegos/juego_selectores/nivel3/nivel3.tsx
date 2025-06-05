@@ -4,6 +4,7 @@ import { Head } from '../../../Head';
 import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import BotonSonido from '../../../ui/ButtonSound';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 
 const elementosHTML = [
     { tag: 'section', contenido: '<p class="activo">Elemento dentro de section</p>' },
@@ -28,6 +29,7 @@ const Nivel3 = () => {
 
             if (esSoportado) {
                 confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                sessionStorage.setItem('nivel3Superado', 'true');
                 setMensaje(
                     <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
                         <CheckCircle className="w-5 h-5" />
@@ -68,6 +70,7 @@ const Nivel3 = () => {
                     <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
                         Nivel 3 - CSS Detective
                     </h1>
+                    <ProgressBar currentStep={1} />
                     <p className="text-lg text-indigo-700 text-center max-w-2xl">
                         Aplica estilos solo a los elementos con clase <code>.activo</code> dentro de un <code>&lt;section&gt;</code>
                     </p>
