@@ -17,6 +17,7 @@ export default function ProgressBar({ currentStep }: ProgressBarProps) {
     { id: 6 },
     { id: 7 },
     { id: 8 },
+    { id: 9 },
   ];
 
   const nivelesSuperados = steps.map(
@@ -38,13 +39,12 @@ export default function ProgressBar({ currentStep }: ProgressBarProps) {
               style={{ cursor: "pointer" }}
             >
               <div
-                className={`z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 ${
-                  superado
+                className={`z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 ${superado
                     ? "border-green-500 bg-green-500 text-white"
                     : step.id === currentStep
-                    ? "border-red-600 bg-red-600 text-white"
-                    : "border-gray-700 bg-gray-800 text-gray-400"
-                }`}
+                      ? "border-red-600 bg-red-600 text-white"
+                      : "border-gray-700 bg-gray-800 text-gray-400"
+                  }`}
               >
                 {superado ? (
                   <CheckCircle className="h-6 w-6" />
@@ -54,21 +54,19 @@ export default function ProgressBar({ currentStep }: ProgressBarProps) {
               </div>
 
               <span
-                className={`mt-2 text-sm font-medium text-center ${
-                  superado || step.id === currentStep
+                className={`mt-2 text-sm font-medium text-center ${superado || step.id === currentStep
                     ? "text-white"
                     : "text-gray-500"
-                }`}
+                  }`}
               >
               </span>
 
               {index < steps.length - 1 && (
                 <div
-                  className={`absolute top-5 left-1/2 right-[-50%] h-0.5 ${
-                    nivelesSuperados[step.id - 1]
+                  className={`absolute top-5 left-1/2 right-[-50%] h-0.5 ${nivelesSuperados[step.id - 1]
                       ? "bg-green-500"
                       : "bg-gray-700"
-                  }`}
+                    }`}
                 ></div>
               )}
             </div>

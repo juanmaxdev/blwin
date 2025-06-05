@@ -31,9 +31,7 @@ const Nivel5 = () => {
             setMensaje(
                 <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
                     <XCircle className="w-5 h-5" />
-                    <span>
-                        Usa el selector <code>#estilo</code> correctamente con la propiedad:valor
-                    </span>
+                    <span>Usa el selector indicado correctamente</span>
                 </div>
             );
             return;
@@ -48,7 +46,7 @@ const Nivel5 = () => {
             setMensaje(
                 <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
                     <XCircle className="w-5 h-5" />
-                    <span>Solo debes tener <code>text-align: center;</code> en <code>#estilo</code></span>
+                    <span>Debes incluir exactamente las propiedades y valores indicados</span>
                 </div>
             );
             return;

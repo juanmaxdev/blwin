@@ -8,34 +8,18 @@ import BotonSonido from '../../../ui/ButtonSound';
 import BotonVolverInicio from '../botonInicio/botonInicio';
 import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 
-const elementosHTML = [
-  {
-    tag: 'ul', contenido: [
-      { tag: 'li', texto: 'Primer elemento de la lista 1' },
-      { tag: 'li', texto: 'Segundo elemento de la lista 1' },
-      { tag: 'li', texto: 'Tercer elemento de la lista 1' },
-    ]
-  },
-  {
-    tag: 'ul', contenido: [
-      { tag: 'li', texto: 'Primer elemento de la lista 2' },
-      { tag: 'li', texto: 'Segundo elemento de la lista 2' },
-    ]
-  },
-];
-
-const Nivel6 = () => {
+const Nivel7 = () => {
   const [css, setCss] = useState('');
   const [mensaje, setMensaje] = useState<React.ReactNode>(null);
   const navigate = useNavigate();
 
   const procesarCSS = (inputCSS: string) => {
-    return inputCSS.replace(/(^|\s)(li:first-child\s*\{)/g, '.vista-previa $2');
+    return inputCSS.replace(/(^|\s)(h2\s*\+\s*p\s*\{)/g, '.vista-previa $2');
   };
 
   const verificarCSS = () => {
-    const regex = /^\s*li:first-child\s*\{[^}]*\}/m;
-    if (!regex.test(css)) {
+    const reglas = css.match(/h2\s*\+\s*p\s*\{([^}]*)\}/);
+    if (!reglas) {
       setMensaje(
         <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
           <XCircle className="w-5 h-5" />
@@ -45,20 +29,17 @@ const Nivel6 = () => {
       return;
     }
 
-    const reglas = css.match(/li:first-child\s*\{([^}]*)\}/);
-    if (!reglas) return;
+    const declaraciones = reglas[1].split(';').map(linea => linea.trim()).filter(Boolean);
 
-    const declaraciones = reglas[1]
-      .split(';')
-      .map(linea => linea.trim())
-      .filter(Boolean);
+    const propiedadesValidas = [
+      'text-decoration:underline',
+      'font-style:italic'
+    ];
 
-    const contieneValida = declaraciones.some(decl => {
-      const [prop, valor] = decl.split(':').map(str => str?.trim());
-      return prop && valor && CSS.supports(`${prop}: ${valor}`);
-    });
+    const normalizadas = declaraciones.map(d => d.replace(/\s*:\s*/, ':').toLowerCase());
+    const todasCorrectas = propiedadesValidas.every(prop => normalizadas.includes(prop));
 
-    if (!contieneValida) {
+    if (normalizadas.length !== 2 || !todasCorrectas) {
       setMensaje(
         <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
           <XCircle className="w-5 h-5" />
@@ -69,18 +50,18 @@ const Nivel6 = () => {
     }
 
     confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
-    sessionStorage.setItem('nivel6Superado', 'true');
+    sessionStorage.setItem('nivel7Superado', 'true');
     setMensaje(
       <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
         <CheckCircle className="w-5 h-5" />
         <span>¡Perfecto! Estilo aplicado correctamente</span>
       </div>
     );
-    setTimeout(() => navigate('/juego/selectores/nivel-7'), 2000);
+    setTimeout(() => navigate('/juego/selectores/nivel-8'), 2000);
   };
 
   useEffect(() => {
-    const styleTag = document.getElementById('css-nivel-6');
+    const styleTag = document.getElementById('css-nivel-7');
     if (styleTag) {
       styleTag.innerHTML = procesarCSS(css);
     }
@@ -88,50 +69,46 @@ const Nivel6 = () => {
 
   return (
     <>
-      <Head title="Nivel 6 - CSS Detective" />
-      <style id="css-nivel-6" />
+      <Head title="Nivel 7 - CSS Detective" />
+      <style id="css-nivel-7" />
       <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
         <BotonSonido />
         <BotonVolverInicio />
 
         <main className="flex flex-col items-center p-6 gap-6">
-          {/* Vista Información */}
           <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
-            Nivel 6 - CSS Detective
+            Nivel 7 - CSS Detective
           </h1>
           <p className="text-lg text-indigo-700 text-center max-w-2xl">
-            Aplica un <strong>estilo</strong> solo al <strong>primer elemento de cada lista</strong> usando el selector adecuado
+            Aplica estilo solo al <strong>primer p que siga a un h2</strong> usando el selector <code>h2 + p</code>
           </p>
-          <ProgressBar currentStep={6} />
+          <ProgressBar currentStep={7} />
 
-          {/* Vista previa */}
           <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative min-h-[10rem]">
             <div className="flex-1 h-full flex flex-col">
               <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa:</h2>
-              <div className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-6 text-base w-full flex-1 min-h-[10rem]">
-                {elementosHTML.map((ul, i) => (
-                  <ul key={i} className="mb-4 list-disc list-inside">
-                    {ul.contenido.map((li, j) => (
-                      <li key={j}>{li.texto}</li>
-                    ))}
-                  </ul>
-                ))}
+              <div className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-4 text-base w-full flex-1 min-h-[10rem]">
+                <h2>Título 1</h2>
+                <p>Este debe tener el estilo</p>
+                <p>Este no</p>
+                <h2>Título 2</h2>
+                <div>
+                  <p>Este tampoco</p>
+                </div>
+                <p>Este no</p>
               </div>
             </div>
 
-            {/* Imagen decorativa */}
             <div className="hidden md:flex justify-center items-center">
               <img
-                src="/foto-detective-platano.png"
+                src="/foto-detective-listo.png"
                 alt="Detective"
                 className="w-36 h-auto drop-shadow-[0_5px_15px_rgba(129,140,248,0.4)] pointer-events-none select-none"
               />
             </div>
           </section>
 
-          {/* Editor CSS + HTML */}
           <section className="w-full max-w-6xl flex flex-col md:flex-row gap-6">
-            {/* Editor CSS */}
             <div className="w-full md:w-1/2 bg-zinc-900 text-green-200 p-4 rounded-lg shadow-lg">
               <h2 className="font-mono text-lg mb-2">Escribe tu CSS aquí:</h2>
               <textarea
@@ -149,13 +126,17 @@ const Nivel6 = () => {
               {mensaje && <div className="mt-3 text-center">{mensaje}</div>}
             </div>
 
-            {/* HTML visible */}
             <div className="w-full md:w-1/2 bg-white p-4 rounded-xl shadow-xl border border-indigo-300 flex flex-col">
               <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Código HTML:</h2>
               <pre className="flex-1 text-sm font-mono bg-gray-50 p-3 rounded-lg border border-gray-300 whitespace-pre-wrap overflow-x-auto w-full h-full min-h-[10rem]">
-                {elementosHTML.map(ul =>
-                  `<ul>\n${ul.contenido.map(li => `  <li>${li.texto}</li>`).join('\n')}\n</ul>`
-                ).join('\n\n')}
+                {`<h2>Título 1</h2>
+<p>Este debe tener el estilo</p>
+<p>Este no</p>
+<h2>Título 2</h2>
+<div>
+  <p>Este tampoco</p>
+</div>
+<p>Este no</p>`}
               </pre>
             </div>
           </section>
@@ -165,4 +146,4 @@ const Nivel6 = () => {
   );
 };
 
-export default Nivel6;
+export default Nivel7;
