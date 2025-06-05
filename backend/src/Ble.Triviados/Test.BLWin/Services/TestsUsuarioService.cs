@@ -7,7 +7,7 @@ using Ble.Triviados.Domain.Entity.Entities;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 
-namespace Ble.Triviados.Tests
+namespace Test.BLWin.Services
 {
     [TestClass]
     public class UsuarioServiceTests
