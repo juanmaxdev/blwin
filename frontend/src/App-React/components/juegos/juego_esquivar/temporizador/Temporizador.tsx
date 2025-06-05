@@ -7,8 +7,10 @@ interface TimerProps {
 }
 
 const Temporizador: React.FC<TimerProps> = ({ jugando, fila, columna }) => {
+  // Lleva la cuenta del tiempo jugado en cada partida
   const [seconds, setSeconds] = useState(0);
 
+  // En caso de haber empezado la partida el temporizador se actualiza cada segundo para mostrar el tiempo transcurrido
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
 

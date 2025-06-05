@@ -13,6 +13,8 @@ import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function JuegoEsquivar() {
+
+    // Valores aportados por el gameContext
     const {
         jugando,
         setJugando,
@@ -22,22 +24,38 @@ export default function JuegoEsquivar() {
         setPuntuacion,
     } = useGameContext();
 
+    // Constante necesaria para enviar el nombre del juego al backend (id general del juego)
     const nombreJuego = "z-wing";
 
+    // Marca si el movimiento de la nave se va a realizar entorno al eje X o al eje Y
     const [ejeX, setEjeX] = useState(true);
+
+    // Marca la velocidad de desplazamiento de los asteroides
     const [velocidad, setVelocidad] = useState(1500);
+
+    // Const necesaria para poder resetear los temporizadores
     const [resetKey, setResetKey] = useState(0);
+
+    // Permite seguir el posicionamiento de los asteroides 1 y 2
     const asteroideRef = useRef<AsteroideRef>(null);
     const asteroideRef2 = useRef<AsteroideRef>(null);
+
+    // Permite realizar un seguimiento de si han puntuado los asteroides 1 y 2 al ser esquivados
     const asteroide1ContadoRef = useRef(false);
     const asteroide2ContadoRef = useRef(false);
+
+    // Sonido que se reproduce al realizar un impacto
     const impactoRef = useRef<HTMLAudioElement>(null);
 
 
     useEffect(() => {
+        // Comprueba si ha comenzado la partida para lanzar las siguientes funciones
         if (!jugando) return;
 
+        // Coprueba cada 0.1 segundos si uno de los asteroides se encuentra en la misma posición que el jugador para marcar el impacto
         const interval = setInterval(() => {
+
+            // Posición actual de cada asteroide
             const posAsteroide = asteroideRef.current?.getPos();
             const posAsteroide2 = asteroideRef2.current?.getPos();
             if (!posAsteroide || !posAsteroide2) return;
@@ -56,6 +74,7 @@ export default function JuegoEsquivar() {
         return () => clearInterval(interval);
     }, [jugando, jugadorPos]);
 
+    // Realiza un seguimiento de los asteroides para puntuar
     useEffect(() => {
         if (!jugando) return;
 
@@ -64,6 +83,7 @@ export default function JuegoEsquivar() {
             const posAsteroide2 = asteroideRef2.current?.getPos();
             if (!posAsteroide || !posAsteroide2) return;
 
+            // En caso de que los asteroides hayan salido del tablero suman 10 puntos a la puntuación total, además marcan que este asteroide ya ha puntuado
             if ((posAsteroide.fila > 4 || posAsteroide.columna > 4) && !asteroide1ContadoRef.current) {
                 setPuntuacion(prev => prev + 10);
                 asteroide1ContadoRef.current = true;
@@ -74,6 +94,7 @@ export default function JuegoEsquivar() {
                 asteroide2ContadoRef.current = true;
             }
 
+            // Comprueba que los asteroides hayan vuelto a la posición de inicio
             if ((posAsteroide.fila === 1 || posAsteroide.columna === 1) && asteroide1ContadoRef.current) {
                 asteroide1ContadoRef.current = false;
             }
@@ -82,6 +103,7 @@ export default function JuegoEsquivar() {
                 asteroide2ContadoRef.current = false;
             }
 
+            // Marca unos puntos para comenzar a subir la dificultad del juego aumentando la velocidad de los asteroides
             if (puntacion == 40) {
                 setVelocidad(1300);
             }
@@ -100,39 +122,48 @@ export default function JuegoEsquivar() {
             if (puntacion == 300) {
                 setVelocidad(250);
             }
-        }, 1000);
+        }, 100);
 
         return () => clearInterval(interval);
     }, [jugando, puntacion]);
 
 
+    // Modifica la posición del jugador se usa en los botones 
     const moverJugador = (fila: number, columna: number) => {
         setJugadorPos({ fila, columna });
     };
 
+    // Marca ejeX true para permitir movimiento horizontal
     const moverX = () => {
         setEjeX(true);
     }
+
+    // Marca ejeX false para permitir movimiento vertical
     const moverY = () => {
         setEjeX(false);
     }
+
+    // Marca el inicio de la partida colocando la nave en el centro de la página e inicializando la puntuación a 0
     const handleStart = () => {
         setJugadorPos({ fila: 3, columna: 3 });
         setPuntuacion(0);
         setJugando(!jugando);
     };
 
+    // Envia la puntuación a la API
     const guardarPuntuacion = async () => {
         await mandarPuntuacion(nombreJuego, puntacion);
     }
 
+    // Maneja el fin de la partida, reiniciando los temporizadores y enviando la puntuación
     const handleStop = () => {
         guardarPuntuacion();
-        setJugadorPos({ fila: 3, columna: 3 });
         setJugando(false);
         setResetKey(prev => prev + 1);
     };
 
+
+    // Envia al index
     const handleRedirect = () => {
         const confirmado = window.confirm("¿Estás seguro de que quieres volver al inicio?");
         if (confirmado) {
