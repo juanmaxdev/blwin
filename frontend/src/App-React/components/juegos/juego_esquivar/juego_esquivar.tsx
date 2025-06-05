@@ -31,6 +31,8 @@ export default function JuegoEsquivar() {
     const asteroideRef2 = useRef<AsteroideRef>(null);
     const asteroide1ContadoRef = useRef(false);
     const asteroide2ContadoRef = useRef(false);
+    const impactoRef = useRef<HTMLAudioElement>(null);
+
 
     useEffect(() => {
         if (!jugando) return;
@@ -44,7 +46,8 @@ export default function JuegoEsquivar() {
                 (posAsteroide.fila === jugadorPos.fila && posAsteroide.columna === jugadorPos.columna) ||
                 (posAsteroide2.fila === jugadorPos.fila && posAsteroide2.columna === jugadorPos.columna)
             ) {
-                toast.error('💥 ¡Impacto detectado!');
+                impactoRef.current?.play().catch(console.warn);
+                toast.error('💥 ¡GAME OVER!');
                 handleStop();
                 return;
             }
@@ -140,7 +143,7 @@ export default function JuegoEsquivar() {
     return (
         <>
             <Toaster position="top-center" />
-
+            <audio ref={impactoRef} src="/sonidos/fallo.mp3" preload="auto" />
             <ButtonSound></ButtonSound>
             <Grid container display="grid" gridTemplateColumns="repeat(5, 20%)" gridTemplateRows="repeat(5, 20%)"
                 sx={{
@@ -167,6 +170,7 @@ export default function JuegoEsquivar() {
                     </>
                     :
                     <>
+                        <Contador puntos={puntacion} columna={3} fila={1} />
                         <Nave fila={2} columna={3} />
                         <Boton valor={"Volver al inicio"} funcion={handleRedirect} fila={4} columna={3} />
                         <Boton valor={"Comenzar juego"} funcion={handleStart} fila={3} columna={3} />
