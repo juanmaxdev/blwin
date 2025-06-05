@@ -81,7 +81,7 @@ const Nivel1 = () => {
         <span>¡Bien hecho! Has aplicado estilo correctamente</span>
       </div>
     );
-    setTimeout(() => navigate('/juego/selectores/nivel-2'), 3000);
+    setTimeout(() => navigate('/juego/selectores/nivel-2'), 2000);
   };
 
   //Aplica el estilo a la parte indicada

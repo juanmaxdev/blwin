@@ -11,7 +11,6 @@ const elementosHTML = [
   { tag: 'h6', contenido: 'HOLAAAAAAAAA' },
   { tag: 'h6', contenido: 'MUNDOOOOOOOO' },
   { tag: 'h6', contenido: '!!!' },
-
 ];
 
 const Nivel4 = () => {
@@ -45,9 +44,24 @@ const Nivel4 = () => {
       .map(linea => linea.trim())
       .filter(Boolean);
 
-    const soloBackgroundBlue = declaraciones.length === 1 && declaraciones[0] === 'background-color: blue';
+    if (declaraciones.length !== 1) {
+      setMensaje(
+        <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
+          <XCircle className="w-5 h-5" />
+          <span>
+            Solo debes tener <code>background-color: blue;</code> en <code>h6</code>
+          </span>
+        </div>
+      );
+      return;
+    }
 
-    if (!soloBackgroundBlue) {
+    // Normaliza espacios, quita punto y coma, y pasa a minúsculas
+    const propiedadNormalizada = declaraciones[0].replace(/\s*:\s*/, ':').replace(/\s+/g, ' ').trim().replace(/;$/, '').toLowerCase();
+
+    const esCorrecto = propiedadNormalizada === 'background-color:blue';
+
+    if (!esCorrecto) {
       setMensaje(
         <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
           <XCircle className="w-5 h-5" />
@@ -66,7 +80,7 @@ const Nivel4 = () => {
         <span>¡Perfecto! Estilo aplicado correctamente</span>
       </div>
     );
-    setTimeout(() => navigate('/juego/selectores/nivel-5'), 3000);
+    setTimeout(() => navigate('/juego/selectores/nivel-5'), 2000);
   };
 
   useEffect(() => {
@@ -97,10 +111,10 @@ const Nivel4 = () => {
             <div className="flex-1 h-full flex flex-col">
               <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa:</h2>
               <div className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base w-full flex-1 min-h-[10rem]">
-                  <h6>¡¡¡</h6>
-                  <h6>HOLAAAAAAAAA</h6>
-                  <h6>MUNDOOOOOOOO</h6>
-                  <h6>!!!</h6>
+                <h6>¡¡¡</h6>
+                <h6>HOLAAAAAAAAA</h6>
+                <h6>MUNDOOOOOOOO</h6>
+                <h6>!!!</h6>
               </div>
             </div>
 
@@ -121,7 +135,7 @@ const Nivel4 = () => {
               <h2 className="font-mono text-lg mb-2">Escribe tu CSS aquí:</h2>
               <textarea
                 className="w-full h-40 bg-zinc-800 text-green-100 font-mono p-2 rounded resize-none"
-                placeholder={`selector {\n  propiedad: valor;\n}`}
+                placeholder={`h6 {\n  background-color: blue;\n}`}
                 value={css}
                 onChange={(e) => setCss(e.target.value)}
               />
