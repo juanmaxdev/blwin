@@ -11,6 +11,7 @@ namespace Ble.Triviados.Application.Interfaces
     {
         Task<Juego> CrearJuegoAsync(string nombre, string descripcion);
         Task<Juego?> ObtenerJuegoPorIdAsync(int id);
+        Task<Juego?> ObtenerPorNombreAsync(string nombre);
         Task<IEnumerable<Juego>> ObtenerTodosLosJuegosAsync();
     }
 }

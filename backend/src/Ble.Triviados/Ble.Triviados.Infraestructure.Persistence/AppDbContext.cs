@@ -34,9 +34,13 @@ namespace Ble.Triviados.Infrastructure.Data
                 .HasMaxLength(100);
 
             modelBuilder.Entity<Juego>()
+                .HasIndex(j => j.Nombre)
+                .IsUnique();
+
+            modelBuilder.Entity<Juego>()
                 .Property(j => j.Nombre)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(100);          
 
             modelBuilder.Entity<Juego>()
                 .Property(j => j.Descripcion)

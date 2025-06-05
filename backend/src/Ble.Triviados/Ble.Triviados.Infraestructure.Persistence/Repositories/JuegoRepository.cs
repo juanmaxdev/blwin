@@ -31,6 +31,13 @@ namespace Ble.Triviados.Infraestructure.Persistence.Repositories
             return await _context.Juegos.FindAsync(id);
         }
 
+        public async Task<Juego?> ObtenerPorNombreAsync(string nombre)
+        {
+            return await _context.Juegos
+                .FirstOrDefaultAsync(j => j.Nombre == nombre);
+        }
+
+
         public async Task<IEnumerable<Juego>> ObtenerTodosAsync()
         {
             return await _context.Juegos.ToListAsync();
