@@ -10,9 +10,9 @@ const SopaLetras = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200">
-      <header className="h-16 flex items-center justify-center bg-white/50 shadow-md">
-        <h1 className="text-4xl font-bold text-black">Juego de Sopa de letras</h1>
+    <div className="h-screen flex flex-col bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200">
+      <header className="h-15 flex items-center justify-center bg-white/50 shadow-md">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-800 drop-shadow py-3">Sopa de letras</h1>
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-center">
