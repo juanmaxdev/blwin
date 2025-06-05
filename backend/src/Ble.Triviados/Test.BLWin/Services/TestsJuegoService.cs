@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace Ble.Triviados.Tests
+namespace Test.BLWin.Services
 {
     [TestClass]
     public class JuegoServiceTests
