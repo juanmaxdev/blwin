@@ -1,9 +1,9 @@
 import Button from '@mui/material/Button';
 type Props = {
-    valor : string;
-    funcion? : () => void;
-    fila: number;
-    columna: number;
+  valor: string;
+  funcion?: () => void;
+  fila: number;
+  columna: number;
 }
 export default function Boton({ valor, funcion, fila, columna }: Props) {
   return (
@@ -19,12 +19,12 @@ export default function Boton({ valor, funcion, fila, columna }: Props) {
       <Button
         value={valor}
         onClick={funcion}
-        color="success"
         variant="contained"
         sx={{
           height: "40%",
           width: "80%",
-          fontSize: '1.5rem',
+          background: 'radial-gradient(rgba(0, 234, 255, 0.3), #8f00ff)',
+          fontSize: '1rem',
           fontWeight: 'bold'
         }}
       >

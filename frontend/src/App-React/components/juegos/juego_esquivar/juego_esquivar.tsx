@@ -7,6 +7,8 @@ import Asteroide, { AsteroideRef } from "./asteroide/Asteroide";
 import Background from "../../../assets/juegos/juego_esquivar/Background.png"
 import { useEffect, useRef, useState } from "react";
 import Contador from "./contador/Contador";
+import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion";
+import ButtonSound from "../../ui/ButtonSound";
 
 export default function JuegoEsquivar() {
     const {
@@ -18,6 +20,7 @@ export default function JuegoEsquivar() {
         setPuntuacion,
     } = useGameContext();
 
+    const nombreJuego = "z-wing";
 
     const [ejeX, setEjeX] = useState(true);
     const [velocidad, setVelocidad] = useState(2000);
@@ -26,8 +29,6 @@ export default function JuegoEsquivar() {
     const asteroideRef2 = useRef<AsteroideRef>(null);
     const asteroide1ContadoRef = useRef(false);
     const asteroide2ContadoRef = useRef(false);
-
-
 
     useEffect(() => {
         if (!jugando) return;
@@ -76,19 +77,19 @@ export default function JuegoEsquivar() {
                 asteroide2ContadoRef.current = false;
             }
 
-            if(puntacion == 40) {
+            if (puntacion == 40) {
                 setVelocidad(1500);
             }
-            if(puntacion == 80) {
+            if (puntacion == 80) {
                 setVelocidad(1200);
             }
-            if(puntacion == 120) {
+            if (puntacion == 120) {
                 setVelocidad(1000);
             }
-            if(puntacion == 150) {
+            if (puntacion == 150) {
                 setVelocidad(800);
             }
-            if(puntacion == 200) {
+            if (puntacion == 200) {
                 setVelocidad(500);
             }
         }, 1000);
@@ -113,36 +114,58 @@ export default function JuegoEsquivar() {
         setJugando(!jugando);
     };
 
+    const guardarPuntuacion = async () => {
+        await mandarPuntuacion(nombreJuego, puntacion);
+    }
+
     const handleStop = () => {
+        guardarPuntuacion();
         setJugadorPos({ fila: 3, columna: 3 });
         setJugando(false);
         setResetKey(prev => prev + 1);
     };
 
+    const handleRedirect = () => {
+        const confirmado = window.confirm("¿Estás seguro de que quieres volver al inicio?");
+        if (confirmado) {
+            window.location.href = "/";
+        }
+    }
+
     return (
-        <Grid container display="grid" gridTemplateColumns="repeat(5, 20%)" gridTemplateRows="repeat(5, 20%)"
-            sx={{
-                height: "100vh",
-                backgroundImage: `url(${Background})`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center"
-            }}
-        >
-            <Asteroide ref={asteroideRef} ejeX={false} fila={1} columna={2} velocidad={velocidad}/>
-            <Asteroide ref={asteroideRef2} ejeX={true} fila={2} columna={1} velocidad={velocidad}/>
-            <Nave fila={jugadorPos.fila} columna={jugadorPos.columna} />
-            <Temporizador jugando={jugando} key={resetKey} fila={1} columna={5} />
-            <Contador puntos={puntacion} columna={1} fila={1} />
-            {jugando == true ?
-                <>
-                    <Boton valor="justify-content" funcion={moverX} fila={5} columna={1} />
-                    <Boton valor="flex-start" funcion={() => ejeX == true ? moverJugador(jugadorPos.fila, 2) : moverJugador(2, jugadorPos.columna)} fila={5} columna={2} />
-                    <Boton valor="center" funcion={() => ejeX == true ? moverJugador(jugadorPos.fila, 3) : moverJugador(3, jugadorPos.columna)} fila={5} columna={3} />
-                    <Boton valor="flex-end" funcion={() => ejeX == true ? moverJugador(jugadorPos.fila, 4) : moverJugador(4, jugadorPos.columna)} fila={5} columna={4} />
-                    <Boton valor="align-items" funcion={moverY} fila={5} columna={5} />
-                </>
-                : <Boton valor={"START"} funcion={handleStart} fila={5} columna={3} />}
-        </Grid>
+        <>
+            <ButtonSound></ButtonSound>
+            <Grid container display="grid" gridTemplateColumns="repeat(5, 20%)" gridTemplateRows="repeat(5, 20%)"
+                sx={{
+                    height: "100vh",
+                    backgroundImage: `url(${Background})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center"
+                }}
+            >
+
+                {jugando == true ?
+                    <>
+                        <Temporizador jugando={jugando} key={resetKey} fila={1} columna={5} />
+                        <Contador puntos={puntacion} columna={1} fila={1} />
+                        <Boton valor="justify-content" funcion={moverX} fila={5} columna={1} />
+                        <Boton valor="flex-start" funcion={() => ejeX == true ? moverJugador(jugadorPos.fila, 2) : moverJugador(2, jugadorPos.columna)} fila={5} columna={2} />
+                        <Boton valor="center" funcion={() => ejeX == true ? moverJugador(jugadorPos.fila, 3) : moverJugador(3, jugadorPos.columna)} fila={5} columna={3} />
+                        <Boton valor="flex-end" funcion={() => ejeX == true ? moverJugador(jugadorPos.fila, 4) : moverJugador(4, jugadorPos.columna)} fila={5} columna={4} />
+                        <Boton valor="align-items" funcion={moverY} fila={5} columna={5} />
+                        <Asteroide ref={asteroideRef} ejeX={false} fila={1} columna={2} velocidad={velocidad} />
+                        <Asteroide ref={asteroideRef2} ejeX={true} fila={2} columna={1} velocidad={velocidad} />
+                        <Nave fila={jugadorPos.fila} columna={jugadorPos.columna} />
+                    </>
+                    :
+                    <>
+                        <Nave fila={2} columna={3} />
+                        <Boton valor={"Volver al inicio"} funcion={handleRedirect} fila={4} columna={3} />
+                        <Boton valor={"Comenzar juego"} funcion={handleStart} fila={3} columna={3} />
+                    </>
+                }
+            </Grid>
+        </>
     );
 }

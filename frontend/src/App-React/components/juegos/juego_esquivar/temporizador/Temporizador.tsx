@@ -31,7 +31,7 @@ const Temporizador: React.FC<TimerProps> = ({ jugando, fila, columna }) => {
       }}>
       <div style={{
         padding: '1rem 2rem',
-        backgroundColor: '#28a745',
+        background: 'radial-gradient(rgba(0, 234, 255, 0.3), #8f00ff)',
         color: 'white',
         borderRadius: '12px',
         fontSize: '1.5rem',

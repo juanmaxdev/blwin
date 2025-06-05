@@ -17,7 +17,7 @@ export default function Contador({ puntos, fila, columna, }: Props) {
             }}
         >
             <Box sx={{
-                backgroundColor: "green",
+                background: 'radial-gradient(rgba(0, 234, 255, 0.3), #8f00ff)',
                 borderRadius: 2,
                 display: 'flex',
                 justifyContent: 'center',
