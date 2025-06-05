@@ -45,9 +45,9 @@ const personajes = [
     fondo: "from-emerald-400 to-emerald-600"
   },
   {
-    nombre: "Pincelina DaVinci",
-    historia: "Pincelina nació del primer trazo de una obra maestra olvidada... Cree que el arte está en todo.",
-    imagen: "/personajes/personaje7.png",
+    nombre: "Sopa de letras",
+    historia: "Concentra tu ingenio, desliza tu mirada, encuentra la solución. Porque en esta sopa, cada segundo cuenta.",
+    imagen: "/SopaDeLetras.png",
     fondo: "from-red-400 to-red-600"
   },
   {

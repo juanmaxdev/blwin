@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 interface ContadorTiempoProps {
   resetKey: number;
   onTiempoCompleto: () => void;
+  activo: boolean
 }
 
 const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
   resetKey,
+  activo,
   onTiempoCompleto,
 }) => {
   const [tiempo, setTiempo] = useState(60); // ⏱️ inicia en 60 segundos
@@ -15,8 +17,8 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
     setTiempo(60); // reinicia a 60 cada vez que cambia resetKey
   }, [resetKey]);
 
-  useEffect(() => {
-    if (tiempo <= 0) return;
+   useEffect(() => {
+    if (!activo || tiempo <= 0) return;
 
     const intervalo = setInterval(() => {
       setTiempo((prev) => {
@@ -30,7 +32,8 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
     }, 1000);
 
     return () => clearInterval(intervalo);
-  }, [tiempo, onTiempoCompleto]);
+  }, [activo, tiempo, onTiempoCompleto]);
+
 
   const minutos = Math.floor(tiempo / 60);
   const segundos = tiempo % 60;
