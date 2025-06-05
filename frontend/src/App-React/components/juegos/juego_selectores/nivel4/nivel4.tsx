@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Head } from '../../../../components/Head';
 import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
+
 import BotonSonido from '../../../../components/ui/ButtonSound';
 import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 
@@ -71,7 +72,7 @@ const Nivel4 = () => {
   };
 
   useEffect(() => {
-    const styleTag = document.getElementById('css-nivel-facil-h6');
+    const styleTag = document.getElementById('css-nivel-4');
     if (styleTag) {
       styleTag.innerHTML = procesarCSS(css);
     }
@@ -80,7 +81,7 @@ const Nivel4 = () => {
   return (
     <>
       <Head title="Nivel 4 - CSS Detective" />
-      <style id="css-nivel-facil-h6" />
+      <style id="css-nivel-4" />
       <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
         <BotonSonido />
 
