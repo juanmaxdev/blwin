@@ -5,6 +5,7 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import BotonSonido from '../../../ui/ButtonSound';
 import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/botonInicio';
 
 const elementosHTML = [
     { tag: 'section', contenido: '<p class="activo">Elemento dentro de section</p>' },
@@ -66,14 +67,18 @@ const Nivel3 = () => {
             <style id="css-nivel-3" />
             <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
                 <BotonSonido />
+                <BotonVolverInicio />
+               
                 <main className="flex flex-col items-center p-6 gap-6">
                     <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
                         Nivel 3 - CSS Detective
                     </h1>
-                    <ProgressBar currentStep={1} />
                     <p className="text-lg text-indigo-700 text-center max-w-2xl">
                         Aplica estilos solo a los elementos con clase <code>.activo</code> dentro de un <code>&lt;section&gt;</code>
                     </p>
+
+                    {/* Barra de Progeso */}
+                    <ProgressBar currentStep={3} />
 
                     {/* Vista previa */}
                     <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row gap-6 relative">
@@ -125,12 +130,6 @@ const Nivel3 = () => {
                             </pre>
                         </div>
                     </section>
-                    <button
-                        onClick={() => navigate('/')}
-                        className="mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                        Volver al inicio
-                    </button>
                 </main>
             </div>
         </>

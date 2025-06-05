@@ -5,12 +5,14 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../../components/ui/ButtonSound';
+import BotonVolverInicio from '../botonInicio/botonInicio';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 
 const elementosHTML = [
-  { tag: 'div', contenido: 'const saludo = "Hola mundo";' },
-  { tag: 'div', contenido: 'function sumar(a, b) {' },
-  { tag: 'div', contenido: '  return a + b;' },
-  { tag: 'div', contenido: '}' },
+    { tag: 'div', contenido: 'const saludo = "Hola mundo";' },
+    { tag: 'div', contenido: 'function sumar(a, b) {' },
+    { tag: 'div', contenido: '  return a + b;' },
+    { tag: 'div', contenido: '}' },
 ];
 
 
@@ -40,10 +42,7 @@ const Nivel5 = () => {
         const reglas = css.match(/#estilo\s*\{([^}]*)\}/);
         if (!reglas) return;
 
-        const declaraciones = reglas[1]
-            .split(';')
-            .map(linea => linea.trim())
-            .filter(Boolean);
+        const declaraciones = reglas[1].split(';').map(linea => linea.trim()).filter(Boolean);
 
         if (declaraciones.length !== 1) {
             setMensaje(
@@ -56,7 +55,7 @@ const Nivel5 = () => {
         }
 
         // Normaliza espacios, quita punto y coma, y pasa a minúsculas
-        const propiedadNormalizada = declaraciones[0].replace(/\s*:\s*/, ':').replace(/\s+/g, ' ').trim().replace(/;$/, '').toLowerCase(); 
+        const propiedadNormalizada = declaraciones[0].replace(/\s*:\s*/, ':').replace(/\s+/g, ' ').trim().replace(/;$/, '').toLowerCase();
 
         const correcto = propiedadNormalizada === 'text-align:center';
 
@@ -73,17 +72,18 @@ const Nivel5 = () => {
         }
 
         confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
+        sessionStorage.setItem('nivel5Superado', 'true');
         setMensaje(
             <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
                 <CheckCircle className="w-5 h-5" />
                 <span>¡Perfecto! Estilo aplicado correctamente</span>
             </div>
         );
-        setTimeout(() => navigate('/juego/selectores/nivel-5'), 2000);
+        setTimeout(() => navigate('/juego/selectores/nivel-6'), 2000);
     };
 
     useEffect(() => {
-        const styleTag = document.getElementById('css-nivel-4');
+        const styleTag = document.getElementById('css-nivel-5');
         if (styleTag) {
             styleTag.innerHTML = procesarCSS(css);
         }
@@ -92,18 +92,24 @@ const Nivel5 = () => {
     return (
         <>
             <Head title="Nivel 5 - CSS Detective" />
-            <style id="css-nivel-4" />
+            <style id="css-nivel-5" />
             <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
+                {/* Botones */}
                 <BotonSonido />
+                <BotonVolverInicio />
 
                 <main className="flex flex-col items-center p-6 gap-6">
                     {/* Vista Información */}
                     <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
                         Nivel 5 - CSS Detective
                     </h1>
+
                     <p className="text-lg text-indigo-700 text-center max-w-2xl">
                         Aplica una <strong>alineación de centro</strong> a todos los elementos con el id <strong><code>estilo</code></strong>
                     </p>
+
+                    {/* Barra de Progeso */}
+                    <ProgressBar currentStep={5} />
 
                     {/* Vista previa */}
                     <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative min-h-[10rem]">

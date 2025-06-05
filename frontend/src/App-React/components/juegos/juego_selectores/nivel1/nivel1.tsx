@@ -6,6 +6,7 @@ import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../../components/ui/ButtonSound';
 import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/botonInicio';
 
 //Datos que sale en el codigo HTML
 const elementosHTML = [
@@ -98,21 +99,26 @@ const Nivel1 = () => {
     <>
       <Head title="Nivel 1 - CSS Detective" />
       <style id="css-nivel-1" />
+
+
       <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
         <BotonSonido />
+        <BotonVolverInicio />
 
         <main className="flex flex-col items-center p-6 gap-6">
           {/* Vista Información*/}
           <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">
             Nivel 1 - CSS Detective
           </h1>
-          <ProgressBar currentStep={1} />
           <p className="text-lg text-indigo-700 text-center max-w-2xl">
             Aplica algún estilo directamente a todas las etiquetas{' '}
             <strong>
               <code>&lt;p&gt;</code>
             </strong>
           </p>
+
+          {/* Barra de Progeso */}
+          <ProgressBar currentStep={1} />
 
           {/* Vista previa*/}
           <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative">
@@ -162,12 +168,6 @@ const Nivel1 = () => {
               </pre>
             </div>
           </section>
-          <button
-            onClick={() => navigate('/')}
-            className="mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Volver al inicio
-          </button>
         </main>
       </div>
     </>
