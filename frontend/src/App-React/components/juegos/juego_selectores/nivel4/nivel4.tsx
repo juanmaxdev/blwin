@@ -145,6 +145,12 @@ const Nivel4 = () => {
               </pre>
             </div>
           </section>
+          <button
+            onClick={() => navigate('/')}
+            className="mt-4 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Volver al inicio
+          </button>
         </main>
       </div>
     </>

@@ -14,7 +14,18 @@ function CssDetectivePanel() {
       </p>
 
       <button
-        onClick={() => window.location.href = '/juego/selectores/nivel-1'}
+        onClick={() => {
+          // Eliminar si existen las variables "nivelXSuperado"
+          for (let i = 0; i < sessionStorage.length; i++) {
+            const key = sessionStorage.key(i);
+            if (key?.startsWith('nivel') && key.endsWith('Superado')) {
+              sessionStorage.removeItem(key);
+              i--;
+            }
+          }
+
+          window.location.href = '/juego/selectores/nivel-1';
+        }}
         className="bg-white text-indigo-700 text-lg font-semibold px-6 py-2 rounded-xl shadow-lg hover:bg-indigo-100 transition-all duration-300 hover:scale-105"
       >
         Iniciar caso
