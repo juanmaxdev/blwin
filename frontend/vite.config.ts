@@ -16,14 +16,15 @@ export default defineConfig({
     }
   },
   preview: {
-  allowedHosts: ['ble-appweb-win-dev-caa4ajb6hdargkb7.westeurope-01.azurewebsites.net', 'ble-appweb-win-pre-fkbhc3budqbcf9ez.westeurope-01.azurewebsites.net', 'ble-appweb-win-pro-ckccb4hqb7c9g2ej.westeurope-01.azurewebsites.net']  
+    allowedHosts: ['ble-appweb-win-dev-caa4ajb6hdargkb7.westeurope-01.azurewebsites.net', 'ble-appweb-win-pre-fkbhc3budqbcf9ez.westeurope-01.azurewebsites.net', 'ble-appweb-win-pro-ckccb4hqb7c9g2ej.westeurope-01.azurewebsites.net']
   },
   build: {
     outDir: 'dist',
     emptyOutDir: true
   },
   test: {
+    globals: true,
     environment: 'jsdom',
-    globals: true
-  }
+    setupFiles: './setupTests.ts',
+  },
 });

@@ -33,6 +33,11 @@ namespace Ble.Triviados.Application.Services
             return await _juegoRepository.ObtenerPorIdAsync(id);
         }
 
+        public async Task<Juego?> ObtenerPorNombreAsync(string nombre)
+        {
+            return await _juegoRepository.ObtenerPorNombreAsync(nombre);
+        }
+
         public async Task<IEnumerable<Juego>> ObtenerTodosLosJuegosAsync()
         {
             return await _juegoRepository.ObtenerTodosAsync();

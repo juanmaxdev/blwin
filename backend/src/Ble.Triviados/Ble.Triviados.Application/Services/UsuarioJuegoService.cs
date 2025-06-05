@@ -39,5 +39,10 @@ namespace Ble.Triviados.Application.Services
         {
             return await _usuarioJuegoRepository.ObtenerPorUsuarioAsync(usuarioId);
         }
+
+        public async Task<UsuarioJuego?> ActualizarRelacionAsync(UsuarioJuego usuarioJuego)
+        {
+            return await _usuarioJuegoRepository.ActualizarRelacionAsync(usuarioJuego);
+        }
     }
 }

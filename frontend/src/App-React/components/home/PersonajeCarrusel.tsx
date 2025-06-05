@@ -1,67 +1,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+
 
 const personajes = [
-  {
-    nombre: "Don Quijote de la Trivianza",
-    historia: "Desde las vastas tierras de la Mancha del conocimiento, cabalga Don Quijote de la Trivianza, un caballero de mente inquieta y lanza afilada de sabiduría...",
-    imagen: "/personajes/personaje1.png",
-    fondo: "from-yellow-300 to-yellow-500"
-  },
-  {
-    nombre: "Robotín v2.0",
-    historia: "Forjado en los laboratorios secretos del ciberespacio, Robotín es un androide ultraprogramado con inteligencia artificial cuántica...",
-    imagen: "/personajes/personaje2.png",
-    fondo: "from-blue-300 to-blue-500"
-  },
-  {
-    nombre: "Máximo 'Max' Turbo",
-    historia: "Desde pequeño, Max Turbo soñaba con ser campeón en todos los deportes… y terminó siéndolo...",
-    imagen: "/personajes/personaje3.png",
-    fondo: "from-orange-300 to-orange-500"
-  },
-  {
-    nombre: "Profesor Alquion Vialhart",
-    historia: "En lo más alto de la Torre del Saber, Alquion mezcla ciencia con alquimia. Maestro de las fórmulas imposibles...",
-    imagen: "/personajes/personaje4.png",
-    fondo: "from-green-300 to-green-500"
-  },
-  {
-    nombre: "Paloma Lumière",
-    historia: "Paloma creció entre rollos de película y butacas de terciopelo en el cine clásico de su abuelo... la llaman “Palomita”.",
-    imagen: "/personajes/personaje5.png",
-    fondo: "from-pink-300 to-pink-500"
-  },
    {
-    nombre: "Agilín BL",
-    historia: "Nacido en los pasillos digitales de Berger-Levrault, Agilín BL domina el arte del método Agile. Planifica sprints en segundos, automatiza tareas y odia los cuellos de botella. Su superpoder: transformar papeleo en productividad con solo un clic.“¡Scrum, café... y al backlog!",
-    imagen: "/personajes/personaje9.png",
-    fondo: "from-red-700 to-red-800"
-  },
-  {
-    nombre: "Globy el Navegante",
-    historia: "Globy nació en una antigua biblioteca de mapas... puede nombrar capitales y cordilleras en segundos.",
-    imagen: "/personajes/personaje6.png",
-    fondo: "from-emerald-400 to-emerald-600"
-  },
-  {
-    nombre: "Sopa de letras",
-    historia: "Concentra tu ingenio, desliza tu mirada, encuentra la solución. Porque en esta sopa, cada segundo cuenta.",
-    imagen: "/SopaDeLetras.png",
-    fondo: "from-red-400 to-red-600"
-  },
-  {
-    nombre: "BeatBox",
-    historia: "BeatBox nació del ruido de una batalla de rap y una sinfonía... su lema: “desde Mozart hasta Eminem, todo tiene su beat”.",
-    imagen: "/personajes/personaje8.png",
-    fondo: "from-purple-400 to-purple-600"
-  },
-   {
-    nombre: "Sabel Otodo",
-    historia: "Sabel se crió con Aristotéles y fue el mejor amigo de Einstein, dice la leyenda que con 3k puntos te da una ayudita ya que... ¡prácticamente lo sabe todo!",
-    imagen: "/personajes/sabio.png",
-    fondo: "from-gray-200 to-gray-200"
-  }
+    nombre: "Z-Wing",
+    historia: "Las naves Z-Wing surcan el espacio en busca de conocimiento y descubrimientos. Hoy es tu primer día como piloto, y el universo entero se abre ante ti. ¡Veamos hasta dónde puedes llegar!",
+    imagen: "/personajes/Z-Wing.png",
+    fondo: "from-blue-200 to-blue-500",
+    enlace: "/juego_esquivar"
+  }, 
 ];
 
 const PersonajeCarrusel = () => {
@@ -110,6 +60,8 @@ const PersonajeCarrusel = () => {
                 <p className="text-gray-700 text-lg leading-relaxed">
                   {personajeSeleccionado.historia}
                 </p>
+                <br />
+                <Button variant="contained"><Link to={personajeSeleccionado.enlace}>¡A jugar!</Link></Button>
               </div>
             </motion.div>
           )}

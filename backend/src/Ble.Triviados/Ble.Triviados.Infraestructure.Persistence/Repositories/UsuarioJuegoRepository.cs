@@ -41,5 +41,21 @@ namespace Ble.Triviados.Infraestructure.Persistence.Repositories
                 .Where(uj => uj.UsuarioId == usuarioId)
                 .ToListAsync();
         }
+
+
+        public async Task<UsuarioJuego?> ActualizarRelacionAsync(UsuarioJuego relacion)
+        {
+            var existente = await _context.UsuarioJuegos.FindAsync(relacion.UsuarioId,relacion.JuegoId);
+
+            if (existente == null)
+            {
+                return null; 
+            }
+            _context.Entry(existente).CurrentValues.SetValues(relacion);
+
+            await _context.SaveChangesAsync();
+
+            return existente;
+        }
     }
 }
