@@ -14,8 +14,8 @@
 
 
 # Archivo configuración VITE en este caso concretamente llamada al backend por puerto :8080 para docker siempre estático
-# frontend/src/App-React/vite.config.ts
+frontend/src/App-React/vite.config.ts
 
 
 # ASP.NET appsettings (Configuración conexión BD)
-# backend/src/Ble.Triviados/Ble.Triviados.Services.WebApi/appsettings.json
+backend/src/Ble.Triviados/Ble.Triviados.Services.WebApi/appsettings.json
