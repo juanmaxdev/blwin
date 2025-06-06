@@ -12,6 +12,13 @@ const personajes = [
     fondo: "from-blue-200 to-blue-500",
     enlace: "/juego_esquivar"
   }, 
+  {
+    nombre: "Quiz",
+    historia: "Quiz es un juego de preguntas diseñado para poner a prueba tus conocimientos de lógica, sintaxis y funciones en distintos lenguajes de programación. ¿Tienes lo necesario para convertirte en un maestro de la programación? ¡El reto comienza ahora!",
+    imagen: "/personajes/Quiz.png",
+    fondo: "from-green-200 to-green-500",
+    enlace: "/juego-quiz"
+  }, 
 ];
 
 const PersonajeCarrusel = () => {
