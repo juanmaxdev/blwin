@@ -6,9 +6,11 @@ import BarraProgeso from "../../../components/juegos/quiz/BarraProgreso"
 import PreguntaCarta from "../../../components/juegos/quiz/CartaPregunta"
 import ResultadoJuego from "../../../components/juegos/quiz/ResultadoJuego"
 
+
+
 const QUESTIONS_PER_GAME = 8
 
-export default function JuegoQuiz() {
+export default function ProgrammingQuizGame() {
   const [questions, setQuestions] = useState<Pregunta[]>([])
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [score, setScore] = useState(0)
@@ -17,13 +19,13 @@ export default function JuegoQuiz() {
   const [gameFinished, setGameFinished] = useState(false)
   const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([])
 
-
+  
   useEffect(() => {
     initializeGame()
   }, [])
 
   const initializeGame = () => {
-
+    
     const shuffledQuestions = [...Preguntas].sort(() => 0.5 - Math.random()).slice(0, QUESTIONS_PER_GAME)
 
     setQuestions(shuffledQuestions)
@@ -36,7 +38,7 @@ export default function JuegoQuiz() {
   }
 
   const handleAnswerSelect = (answer: string) => {
-    if (selectedAnswer) return
+    if (selectedAnswer) return 
     setSelectedAnswer(answer)
     setShowResult(true)
 
@@ -61,6 +63,7 @@ export default function JuegoQuiz() {
     initializeGame()
   }
 
+
   const progress = questions.length > 0 ? ((currentQuestion + (showResult ? 1 : 0)) / questions.length) * 100 : 0
 
   if (questions.length === 0) {
@@ -73,38 +76,30 @@ export default function JuegoQuiz() {
 
   const question = questions[currentQuestion];
 
-<<<<<<< HEAD:frontend/src/App-React/pages/juegos/quiz/Juego-Quiz.tsx
 return (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
     <div className="bg-white rounded-xl shadow-xl p-8 space-y-6">
       
       <HeaderJuego />
-=======
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
-      <div className="w-full max-w-3xl bg-white rounded-xl shadow-xl p-8 space-y-6">
->>>>>>> 5c9ecac92d40ba21a372a17b1436acadca40f743:frontend/src/App-React/pages/juegos/quiz/JuegoQuiz.tsx
 
-        <HeaderJuego />
+      <BarraProgeso
+        preguntaActual={currentQuestion}
+        preguntasTotales={questions.length}
+        progreso={progress}
+        puntuacion={score}
+      />
 
-        <BarraProgeso
-          preguntaActual={currentQuestion}
-          preguntasTotales={questions.length}
-          progreso={progress}
-          puntuacion={score}
-        />
-
-        <PreguntaCarta
-          pregunta={question}
-          respuestaSeleccionada={selectedAnswer}
-          mostrarResultados={showResult}
-          onPreguntaSeleccionada={handleAnswerSelect}
-          onSiguientePregunta={handleNextQuestion}
-          esUltimaPregunta={currentQuestion === questions.length - 1}
-        />
-
-      </div>
+      <PreguntaCarta
+        pregunta={question}
+        respuestaSeleccionada={selectedAnswer}
+        mostrarResultados={showResult}
+        onPreguntaSeleccionada={handleAnswerSelect}
+        onSiguientePregunta={handleNextQuestion}
+        esUltimaPregunta={currentQuestion === questions.length - 1}
+      />
+      
     </div>
-  )
+  </div>
+)
 }
 
