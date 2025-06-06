@@ -3,7 +3,7 @@ export async function mandarPuntuacion(nombreJuego: string, puntuacion: number) 
         const token = localStorage.getItem("token");
 
         const response = await fetch("/api/usuario/agregar-puntos", {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
