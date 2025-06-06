@@ -49,7 +49,7 @@ const Nivel8 = () => {
         }
 
         confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
-        sessionStorage.setItem('nivel9Superado', 'true');
+        sessionStorage.setItem('nivel8Superado', 'true');
         setMensaje(
             <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
                 <CheckCircle className="w-5 h-5" />

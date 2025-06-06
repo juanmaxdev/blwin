@@ -80,7 +80,7 @@ const Nivel7 = () => {
             Nivel 7 - CSS Detective
           </h1>
           <p className="text-lg text-indigo-700 text-center max-w-2xl">
-            Aplica estilo solo al <strong>primer p que siga a un h2</strong> usando el selector <code>h2 + p</code>
+            Aplica estilo solo al <strong>primer p que siga a un h2</strong> tipografia italica y subrayado de linea
           </p>
           <ProgressBar currentStep={7} />
 
