@@ -8,6 +8,8 @@ import ResultadoJuego from "../../../components/juegos/quiz/Resultado-Juego"
 
 
 
+
+
 const QUESTIONS_PER_GAME = 8
 
 export default function ProgrammingQuizGame() {
