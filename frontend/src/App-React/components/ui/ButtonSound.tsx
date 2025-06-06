@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 const ButtonSound = () => {
   const [sonidoActivo, setSonidoActivo] = useState(false);
   const [volumen, setVolumen] = useState(0.5);
   const [mostrarControl, setMostrarControl] = useState(false);
   const musicaInicio = useRef<HTMLAudioElement | null>(null);
-
+  const [src, setSrc] = useState("/sonidos/musica-inicio.mp3");
+  const pagina = useLocation();
   // Cargar preferencias al iniciar
   useEffect(() => {
     const prefSonido = sessionStorage.getItem('sonidoActivo');
     const prefVolumen = sessionStorage.getItem('volumenMusica');
-
+    if (pagina.pathname.includes("juego_esquivar")) {
+      setSrc("/sonidos/musica-esquivar.mp3");
+    } 
     if (prefSonido === 'true') setSonidoActivo(true);
     if (prefVolumen) setVolumen(parseFloat(prefVolumen));
   }, []);
@@ -94,7 +98,7 @@ const ButtonSound = () => {
 
   return (
     <>
-      <audio ref={musicaInicio} src="/sonidos/musica-inicio.mp3" preload="auto" loop />
+      <audio ref={musicaInicio} src={src} preload="auto" loop />
 
       <div
         className="absolute top-4 left-4 z-50 group"
