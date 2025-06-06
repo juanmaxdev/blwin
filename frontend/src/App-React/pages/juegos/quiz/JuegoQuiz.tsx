@@ -2,13 +2,10 @@
 import { useState, useEffect } from "react"
 import { Preguntas, type Pregunta } from "../../../components/juegos/quiz/data/Preguntas"
 import HeaderJuego from "../../../components/juegos/quiz/HeaderJuego"
-import BarraProgeso from "../../../components/juegos/quiz/Barra-progresion"
-import PreguntaCarta from "../../../components/juegos/quiz/Carta-pregunta"
-import ResultadoJuego from "../../../components/juegos/quiz/Resultado-Juego"
-
-
-
-
+import BarraProgeso from "../../../components/juegos/quiz/BarraProgreso"
+import PreguntaCarta from "../../../components/juegos/quiz/CartaPregunta"
+import ResultadoJuego from "../../../components/juegos/quiz/ResultadoJuego"
+import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion"
 
 const QUESTIONS_PER_GAME = 8
 
@@ -20,7 +17,7 @@ export default function ProgrammingQuizGame() {
   const [showResult, setShowResult] = useState(false)
   const [gameFinished, setGameFinished] = useState(false)
   const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([])
-
+  const nombreJuego = "Quiz";
   
   useEffect(() => {
     initializeGame()
@@ -73,7 +70,9 @@ export default function ProgrammingQuizGame() {
   }
 
   if (gameFinished) {
-    return <ResultadoJuego score={score} maxScore={questions.length * 10} onRestart={resetGame} />
+    mandarPuntuacion(nombreJuego, score)
+    return <ResultadoJuego score={score} maxScore={questions.length * 10} onRestart={resetGame} 
+    />
   }
 
   const question = questions[currentQuestion];
