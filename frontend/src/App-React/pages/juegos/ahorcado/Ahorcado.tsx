@@ -16,6 +16,7 @@ import {
   preguntasProgramacionWebNivel3,
 } from '../../../components/juegos/ahorcado/preguntas/Preguntas';
 import ModalGameOver from '../../../components/juegos/ahorcado/modalFin/Modal';
+import ModalSubidaNivel from '../../../components/juegos/ahorcado/modalFin/modalSubirNivel/modalNivel';
 import { useNavigate } from 'react-router-dom';
 import '../../../assets/juegos/ahorcado/styles/Styles.css';
 
@@ -65,17 +66,22 @@ const Ahorcado = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [puntuacion, setPuntuacion] = useState(0);
 
+  const [mostrarModalNivel, setMostrarModalNivel] = useState(false);
+  const [nivelSubido, setNivelSubido] = useState<number | null>(null);
+
+
+
   const navigate = useNavigate();
 
   const preguntasNivelActual = (() => {
     if (puntuacion >= 450) return preguntasProgramacionWebNivel3;
-    if (puntuacion >= 150) return preguntasProgramacionWebNivel2;
+    if (puntuacion >= 100) return preguntasProgramacionWebNivel2;
     return preguntasProgramacionWebNivel1;
   })();
 
   const nivelActual = () => {
     if (puntuacion >= 450) return 3;
-    if (puntuacion >= 150) return 2;
+    if (puntuacion >= 100) return 2;
     return 1;
   };
 
@@ -106,6 +112,8 @@ const Ahorcado = () => {
     setNumeroFallos(0);
     setIsGameOver(false);
     setPuntuacion(0);
+    setMostrarModalNivel(false);
+    setNivelSubido(null);
   };
 
   const handleGameEnd = (finalScore: number) => {
@@ -131,7 +139,22 @@ const Ahorcado = () => {
     const todasDescubiertas = caracteresUnicos.every((c) => [...nuevasLetras].includes(c));
 
     if (todasDescubiertas) {
-      setPuntuacion((prevScore) => prevScore + puntosPorNivel());
+      const nuevaPuntuacion = puntuacion + puntosPorNivel();
+      const nivelAnterior = nivelActual();
+
+      const nuevoNivel = (() => {
+        if (nuevaPuntuacion >= 450) return 3;
+        if (nuevaPuntuacion >= 100) return 2;
+        return 1;
+
+      })();
+
+      setPuntuacion(nuevaPuntuacion);
+
+      if (nuevoNivel > nivelAnterior) {
+        setNivelSubido(nuevoNivel);
+        setMostrarModalNivel(true);
+      }
 
       const longitudActual = preguntasNivelActual.length;
       const nuevoIdx = Math.floor(Math.random() * longitudActual);
@@ -141,28 +164,6 @@ const Ahorcado = () => {
       setNumeroFallos(0);
     }
   };
-
-  {
-    /*  const navigate = useNavigate();
-
-  
-  const token = localStorage.getItem('token');
-
-  if (!token) {
-    navigate('/login');
-    return;
-  }
-
-  const decoded = decodeToken(token);
-  const usuarioId = decoded?.id;
-
-  if (!usuarioId) {
-    alert('Token inválido o expirado. Por favor, inicia sesión nuevamente.');
-    localStorage.removeItem('token');
-    navigate('/login');
-    return;
-  }*/
-  }
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-zinc-400 via-zinc-300 to-zinc-200">
@@ -244,6 +245,14 @@ const Ahorcado = () => {
           irInicio={handleIrInicio}
           volverAempezar={handleVolverAJugar}
         />
+
+        <ModalSubidaNivel
+          isOpen={mostrarModalNivel}
+          puntuacion={puntuacion}
+          nivel={nivelSubido ?? nivelActual()}
+          onClose={() => setMostrarModalNivel(false)}
+        />
+
       </main>
     </div>
   );
