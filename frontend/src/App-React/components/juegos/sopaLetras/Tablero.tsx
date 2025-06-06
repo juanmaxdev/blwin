@@ -4,6 +4,7 @@ import ContadorTiempo from "./ContadorTiempo";
 import type { EntradaPalabra } from "./Palabras";
 import { ENTRADAS_PALABRAS } from "./Palabras";
 import "./SopaDeLetras.css";
+import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion";
 
 type Coordenada = { fila: number; col: number };
 type PalabraEncontrada = { texto: string; coords: Coordenada[] };
@@ -81,8 +82,6 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
   return matriz;
 };
 
-
-
 interface TableroProps {
   resetKey?: number;
 }
@@ -90,6 +89,7 @@ interface TableroProps {
 const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) => {
   const [resetKey, setResetKey] = useState(resetKeyFromParent);
   const [puntos, setPuntos] = useState(0);
+  const nombreJuego = "Sopa-De-Letras";
 
   useEffect(() => {
     setResetKey(resetKeyFromParent);
@@ -104,7 +104,7 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
   const [timerActivo, setTimerActivo] = useState(true);
   const [gameOver, setGameOver] = useState(false);
 
-  // Generar tablero
+  // Generar tablero 
   useEffect(() => {
     const entradas = obtenerPalabrasAleatorias(6);
     setPalabrasObjetivo(entradas);
@@ -113,10 +113,9 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
     setPalabrasEncontradas([]);
     setTimerActivo(true);
     setGameOver(false);
-    setPuntos(0);
   }, [resetKey]);
 
-  // Reiniciar cuando se encuentren todas las palabras
+  // Reiniciar cuando se encuentra todas las palabras
   useEffect(() => {
     if (
       !gameOver &&
@@ -171,12 +170,18 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
   const handleTiempoCompleto = () => {
     setTimerActivo(false);
     setGameOver(true);
+    guardarPuntuacion(puntos);
+    setPuntos(0);
   };
 
   const reiniciarPartida = () => {
     setResetKey((k) => k + 1);
     setGameOver(false);
     setTimerActivo(true);
+  };
+
+  const guardarPuntuacion = async (puntos: number) => {
+    await mandarPuntuacion(nombreJuego, puntos);
   };
 
   return (
@@ -190,7 +195,6 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
         <div className="ml-5 text-2xl font-bold text-indigo-800">
           ⭐ Puntos: {puntos}
         </div>
-
       </div>
 
       <div className="flex flex-grow overflow-hidden mt-20">
@@ -218,8 +222,10 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
         </div>
 
         <div className="w-3/5 mt-5">
-          <div className={`flex-grow flex justify-center items-center ${gameOver ? "pointer-events-none opacity-50" : ""
-            }`}>
+          <div
+            className={`flex-grow flex justify-center items-center ${gameOver ? "pointer-events-none opacity-50" : ""
+              }`}
+          >
             <Cuadricula
               matriz={matriz}
               seleccion={seleccion}
@@ -231,6 +237,7 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
           </div>
         </div>
       </div>
+
       {gameOver && (
         <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center z-50">
           <h2 className="text-4xl font-bold text-red-600 mb-6">⏰ ¡Se acabó el tiempo!</h2>
@@ -244,9 +251,6 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
       )}
     </div>
   );
-
-
-
 };
 
 export default Tablero;
