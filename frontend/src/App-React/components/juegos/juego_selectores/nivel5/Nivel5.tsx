@@ -5,8 +5,8 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../../components/ui/ButtonSound';
-import BotonVolverInicio from '../botonInicio/botonInicio';
-import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/BotonInicio';
+import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
 
 const elementosHTML = [
     { tag: 'div', contenido: 'const saludo = "Hola mundo";' },
@@ -61,9 +61,7 @@ const Nivel5 = () => {
             setMensaje(
                 <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
                     <XCircle className="w-5 h-5" />
-                    <span>
-                        Debes usar exactamente <code>text-align: center;</code> en <code>#estilo</code>
-                    </span>
+                    <span>Debes incluir exactamente las propiedades y valores indicados</span>
                 </div>
             );
             return;

@@ -5,8 +5,8 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
-import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
-import BotonVolverInicio from '../botonInicio/botonInicio';
+import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
+import BotonVolverInicio from '../botonInicio/BotonInicio';
 
 //Datos que sale en el codigo HTML
 const elementosHTML = [
@@ -65,11 +65,12 @@ const Nivel1 = () => {
     //Si el contenido no es valido muestra debajo una alerta 
     if (!contieneValida) {
       setMensaje(
-        <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
-          <XCircle className="w-5 h-5" />
-          <span>
-            Al menos una propiedad debe tener un valor CSS válido - Ej: <code>color: red;</code>
-          </span>
+        <div
+          role="status"
+          className="flex items-center justify-center gap-2 text-green-600 font-semibold"
+        >
+          <CheckCircle className="w-5 h-5" />
+          <span>¡Perfecto! Estilo aplicado correctamente</span>
         </div>
       );
       return;
@@ -81,7 +82,7 @@ const Nivel1 = () => {
     setMensaje(
       <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
         <CheckCircle className="w-5 h-5" />
-        <span>¡Bien hecho! Has aplicado estilo correctamente</span>
+        <span>¡Perfecto! Estilo aplicado correctamente</span>
       </div>
     );
     setTimeout(() => navigate('/juego/selectores/nivel-2'), 2000);

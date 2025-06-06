@@ -5,8 +5,8 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../../components/ui/ButtonSound';
-import BotonVolverInicio from '../botonInicio/botonInicio';
-import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/BotonInicio';
+import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
 
 const Nivel8 = () => {
     const [css, setCss] = useState('');
@@ -49,7 +49,7 @@ const Nivel8 = () => {
         }
 
         confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
-        sessionStorage.setItem('nivel9Superado', 'true');
+        sessionStorage.setItem('nivel8Superado', 'true');
         setMensaje(
             <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
                 <CheckCircle className="w-5 h-5" />
