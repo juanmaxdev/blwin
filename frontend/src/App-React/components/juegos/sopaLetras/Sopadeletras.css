@@ -7,7 +7,6 @@
 
 .cuadricula {
   display: grid;
-  grid-template-columns: repeat(18, 30px);
   gap: 4px;
   margin: 20px 0;
   cursor: pointer;
@@ -28,6 +27,7 @@
   font-weight: bold;
   font-size: 18px;
   user-select: none;
+  white-space: nowrap;
   transition: background-color 0.3s ease;
 }
 

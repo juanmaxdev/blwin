@@ -11,17 +11,15 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
   activo,
   onTiempoCompleto,
 }) => {
-  const [tiempo, setTiempo] = useState(60);
+  const [tiempo, setTiempo] = useState(120);
   const yaLlamóRef = useRef(false);
   const intervaloRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Reiniciar tiempo y la bandera cuando resetKey cambia
   useEffect(() => {
-    setTiempo(60);
+    setTiempo(120);
     yaLlamóRef.current = false;
   }, [resetKey]);
 
-  // Manejo del intervalo
   useEffect(() => {
     if (!activo) {
       if (intervaloRef.current) {
@@ -56,13 +54,12 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
     };
   }, [activo, resetKey, onTiempoCompleto]);
 
-  // Render
   const minutos = Math.floor(tiempo / 60);
   const segundos = tiempo % 60;
   const colorTemporizador =
-    segundos > 20 || minutos > 0
+    segundos > 40 || minutos > 0
       ? "text-green-600"
-      : segundos > 10
+      : segundos > 20
         ? "text-yellow-400"
         : "text-red-500";
 

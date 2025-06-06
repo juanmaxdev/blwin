@@ -30,7 +30,6 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
       const maxCol = columnas - palabra.length;
       const colInicio = Math.floor(Math.random() * (maxCol + 1));
       let libre = true;
-
       for (let i = 0; i < palabra.length; i++) {
         if (matriz[fila][colInicio + i] !== "") {
           libre = false;
@@ -58,6 +57,7 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
 
   return matriz;
 };
+
 
 interface TableroProps {
   resetKey?: number;
@@ -152,8 +152,7 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
   };
 
   return (
-<div className="flex flex-col w-screen min-h-screen relative bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200">
-      {/* Contador en la parte superior centrado */}
+    <div className="flex flex-col w-screen min-h-screen relative bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200">
       <div className="py-10 flex justify-center items-center">
         <ContadorTiempo
           resetKey={resetKey}
@@ -162,9 +161,7 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
         />
       </div>
 
-      {/* Contenido principal: pistas + tablero */}
       <div className="flex flex-grow overflow-hidden mt-20">
-        {/* Pistas a la izquierda */}
         <div className="w-2/5 ml-20 pl-18">
           <h3 className="text-2xl font-bold text-indigo-700 mb-4">🔍 Pistas:</h3>
           <ul className="space-y-3 text-lg text-indigo-800">
@@ -184,7 +181,6 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
           </ul>
         </div>
 
-        {/* Cuadricula a la derecha */}
         <div className="w-3/5 mt-5">
           <div className={`flex-grow flex justify-center items-center ${gameOver ? "pointer-events-none opacity-50" : ""
             }`}>
@@ -200,7 +196,6 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
         </div>
       </div>
 
-      {/* Overlay de game over */}
       {gameOver && (
         <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center z-50">
           <h2 className="text-4xl font-bold text-red-600 mb-6">⏰ ¡Se acabó el tiempo!</h2>

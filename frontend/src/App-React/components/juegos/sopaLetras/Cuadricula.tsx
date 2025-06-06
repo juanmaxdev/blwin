@@ -28,11 +28,16 @@ const Cuadricula: React.FC<CuadriculaProps> = ({
             palabra.coords.some((c) => c.fila === fila && c.col === col)
         );
 
+    const numColumnas = matriz.length > 0 ? matriz[0].length : 0;
+
     return (
         <div
             className="cuadricula"
             onMouseUp={terminarSeleccion}
             onMouseLeave={terminarSeleccion}
+            style={{
+                gridTemplateColumns: `repeat(${numColumnas}, 30px)`
+            }}
         >
             {matriz.map((fila, i) => (
                 <div className="fila" key={i}>
@@ -42,8 +47,8 @@ const Cuadricula: React.FC<CuadriculaProps> = ({
                         return (
                             <span
                                 key={j}
-                                className={`celda ${seleccionada ? "seleccionada" : ""} ${encontrada ? "encontrada" : ""
-                                    }`}
+                                className={`celda ${seleccionada ? "seleccionada" : ""
+                                    } ${encontrada ? "encontrada" : ""}`}
                                 onMouseDown={() => iniciarSeleccion({ fila: i, col: j })}
                                 onMouseEnter={() => agregarACoordenadas({ fila: i, col: j })}
                             >
