@@ -12,6 +12,7 @@ import Nivel8 from './components/juegos/juego_selectores/nivel8/Nivel8';
 import Nivel6 from './components/juegos/juego_selectores/nivel6/nivel6';
 import Nivel9 from './components/juegos/juego_selectores/nivel9/Nivel9';
 import Nivel7 from './components/juegos/juego_selectores/nivel7/Nivel7';
+import NivelDetectiveFlexbox from './components/juegos/juego_selectores/nivel_bonus/nivelBonus';
 
 const App = () => (
   <Routes>
@@ -53,6 +54,9 @@ const App = () => (
 
     {/* Página-Nivel 9 de Juego Detective CSS */}
     <Route path="/juego/selectores/nivel-9" element={<Nivel9 />} />
+
+    {/* Página-Nivel 10 de Juego Detective CSS */}
+    <Route path="/juego/selectores/nivel-10" element={<NivelDetectiveFlexbox />} />
   </Routes>
 );
 
