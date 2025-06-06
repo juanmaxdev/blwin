@@ -5,13 +5,20 @@ import { Button } from "@mui/material";
 
 
 const personajes = [
-   {
+  {
     nombre: "Z-Wing",
     historia: "Las naves Z-Wing surcan el espacio en busca de conocimiento y descubrimientos. Hoy es tu primer día como piloto, y el universo entero se abre ante ti. ¡Veamos hasta dónde puedes llegar!",
     imagen: "/personajes/Z-Wing.png",
     fondo: "from-blue-200 to-blue-500",
     enlace: "/juego_esquivar"
-  }, 
+  },
+  {
+    nombre: "Sopa de letras",
+    historia: "Concentra tu ingenio, desliza tu mirada, encuentra la solución. Porque en esta sopa, cada segundo cuenta.",
+    imagen: "/SopaDeLetras.png",
+    fondo: "from-red-400 to-red-600",
+    enlace: "/juegos_sopa_de_letras"
+  },
 ];
 
 const PersonajeCarrusel = () => {

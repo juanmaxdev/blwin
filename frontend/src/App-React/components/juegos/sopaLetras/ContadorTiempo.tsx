@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface ContadorTiempoProps {
   resetKey: number;
   onTiempoCompleto: () => void;
-  activo: boolean
+  activo: boolean;
 }
 
 const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
@@ -11,36 +11,59 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
   activo,
   onTiempoCompleto,
 }) => {
-  const [tiempo, setTiempo] = useState(60); // ⏱️ inicia en 60 segundos
+  const [tiempo, setTiempo] = useState(60);
+  const yaLlamóRef = useRef(false);
+  const intervaloRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Reiniciar tiempo y la bandera cuando resetKey cambia
   useEffect(() => {
-    setTiempo(60); // reinicia a 60 cada vez que cambia resetKey
+    setTiempo(60);
+    yaLlamóRef.current = false;
   }, [resetKey]);
 
-   useEffect(() => {
-    if (!activo || tiempo <= 0) return;
+  // Manejo del intervalo
+  useEffect(() => {
+    if (!activo) {
+      if (intervaloRef.current) {
+        clearInterval(intervaloRef.current);
+        intervaloRef.current = null;
+      }
+      return;
+    }
 
-    const intervalo = setInterval(() => {
+    if (intervaloRef.current) {
+      clearInterval(intervaloRef.current);
+    }
+
+    intervaloRef.current = setInterval(() => {
       setTiempo((prev) => {
         if (prev <= 1) {
-          clearInterval(intervalo);
-          onTiempoCompleto();
+          if (!yaLlamóRef.current) {
+            yaLlamóRef.current = true;
+            onTiempoCompleto();
+          }
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
 
-    return () => clearInterval(intervalo);
-  }, [activo, tiempo, onTiempoCompleto]);
+    return () => {
+      if (intervaloRef.current) {
+        clearInterval(intervaloRef.current);
+        intervaloRef.current = null;
+      }
+    };
+  }, [activo, resetKey, onTiempoCompleto]);
 
-
+  // Render
   const minutos = Math.floor(tiempo / 60);
   const segundos = tiempo % 60;
-
   const colorTemporizador =
-    segundos > 20 || minutos > 0 ? "text-green-600"
-      : segundos > 10 ? "text-yellow-400"
+    segundos > 20 || minutos > 0
+      ? "text-green-600"
+      : segundos > 10
+        ? "text-yellow-400"
         : "text-red-500";
 
   return (

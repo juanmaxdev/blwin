@@ -1,32 +1,21 @@
-import React, { useState } from "react";
-import ContadorTiempo from "../../../components/juegos/sopaLetras/ContadorTiempo";
-import Tablero from "../../../components/juegos/sopaLetras/Tablero";
+import { useState } from "react";
+import Tablero from "../../components/juegos/sopaLetras/Tablero";
 import { motion } from "framer-motion";
-import BotonHome from "../../../components/juegos/sopaLetras/BotonHome";
+import BotonHome from "../../components/juegos/sopaLetras/BotonHome";
 
 const SopaLetras = () => {
   const [resetKey, setResetKey] = useState(0);
   const [contadorActivo, setContadorActivo] = useState(false);
 
-  const reiniciarJuego = () => {
-    setResetKey((prev) => prev + 1);
-    setContadorActivo(false);
-  };
-
   return (
-    <div className="h-screen w-screen flex flex-col bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200">
+    <div className="h-screen w-screen flex flex-col bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200 overflow-hidden">
       <header className="h-20 flex items-center justify-center bg-white/50 shadow-md">
-          <BotonHome />
-          <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-800 drop-shadow my-6">Juego de Sopa de Letras</h1>
+        <BotonHome />
+        <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-800 drop-shadow my-6">Juego de Sopa de Letras</h1>
       </header>
 
       {contadorActivo ? (
-        <main className="flex-1 flex flex-col items-center justify-center gap-4">
-          <ContadorTiempo
-            resetKey={resetKey}
-            activo={contadorActivo}
-            onTiempoCompleto={reiniciarJuego}
-          />
+        <main>
           <Tablero resetKey={resetKey} />
         </main>
       ) : (

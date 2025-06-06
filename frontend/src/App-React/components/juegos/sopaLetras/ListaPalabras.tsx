@@ -1,35 +1,36 @@
 import React from "react";
+import type { EntradaPalabra } from "./Palabras";
 
 interface ListaPalabrasProps {
-    palabras: string[];
-    palabrasEncontradas: string[];
+  entradas: EntradaPalabra[];
+  palabrasEncontradas: string[];
 }
 
 const ListaPalabras: React.FC<ListaPalabrasProps> = ({
-    palabras,
-    palabrasEncontradas,
+  entradas,
+  palabrasEncontradas,
 }) => {
-    return (
-        <div className="lista-palabras">
-            <ul>
-                {palabras.map((palabra, i) => {
-                    const encontrada = palabrasEncontradas.includes(palabra);
-                    return (
-                        <li
-                            key={i}
-                            style={{
-                                textDecoration: encontrada ? "line-through" : "none",
-                                color: encontrada ? "green" : "black",
-                                fontWeight: encontrada ? "bold" : "normal",
-                            }}
-                        >
-                            {palabra}
-                        </li>
-                    );
-                })}
-            </ul>
-        </div>
-    );
+  return (
+    <div className="lista-palabras">
+      <ul>
+        {entradas.map((entrada, i) => {
+          const encontrada = palabrasEncontradas.includes(entrada.palabra);
+          return (
+            <li
+              key={i}
+              style={{
+                textDecoration: encontrada ? "line-through" : "none",
+                color: encontrada ? "green" : "black",
+                fontWeight: encontrada ? "bold" : "normal",
+              }}
+            >
+              {entrada.pista}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
 
 export default ListaPalabras;
