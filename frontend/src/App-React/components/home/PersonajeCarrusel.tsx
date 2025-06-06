@@ -11,12 +11,18 @@ const personajes = [
     imagen: "/personajes/Z-Wing.png",
     fondo: "from-blue-200 to-blue-500",
     enlace: "/juego_esquivar"
+  },
+  {
+    nombre: "El juego del Ahorcado",
+    historia: "En los oscuros pasillos de una escuela abandonada, se rumorea que un juego prohibido aparece en la pizarra cada medianoche. Quien intente jugar al Ahorcado escuchará susurros que revelan letras...",
+    imagen: "/avatarJuegos/avatar_juego_ahorcado.png",
+    fondo: "from-gray-500 to-black",
+    enlace: "/ahorcado",
   }, 
 ];
 
 const PersonajeCarrusel = () => {
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState<null | typeof personajes[0]>(null);
-  const navigate = useNavigate();
 
   return (
     <section className="w-full pt-0 pb-24 px-4">

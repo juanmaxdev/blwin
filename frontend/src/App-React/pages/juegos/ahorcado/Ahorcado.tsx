@@ -1,5 +1,3 @@
-//import { useNavigate } from 'react-router-dom';
-//import Abecedario from '../../../components/juegos/ahorcado/Abecedario';
 import ModeloImagen from '../../../components/juegos/ahorcado/modelo/Modelo';
 import Boton from '../../../components/juegos/ahorcado/botonVolver/BotonVolver';
 import { imagenSeleccionada } from '../../../components/juegos/ahorcado/types/Types';
@@ -19,16 +17,7 @@ import ModalGameOver from '../../../components/juegos/ahorcado/modalFin/Modal';
 import ModalSubidaNivel from '../../../components/juegos/ahorcado/modalFin/modalSubirNivel/modalNivel';
 import { useNavigate } from 'react-router-dom';
 import '../../../assets/juegos/ahorcado/styles/Styles.css';
-
-function decodeToken(token: string) {
-  try {
-    const payload = token.split('.')[1];
-    const decoded = JSON.parse(atob(payload));
-    return decoded;
-  } catch {
-    return null;
-  }
-}
+import { mandarPuntuacion } from '../../../hooks/MandarPuntuacion';
 
 const imagenesAhorcado: imagenSeleccionada[] = [
   {
@@ -68,8 +57,6 @@ const Ahorcado = () => {
 
   const [mostrarModalNivel, setMostrarModalNivel] = useState(false);
   const [nivelSubido, setNivelSubido] = useState<number | null>(null);
-
-
 
   const navigate = useNavigate();
 
@@ -146,7 +133,6 @@ const Ahorcado = () => {
         if (nuevaPuntuacion >= 450) return 3;
         if (nuevaPuntuacion >= 100) return 2;
         return 1;
-
       })();
 
       setPuntuacion(nuevaPuntuacion);
@@ -163,6 +149,13 @@ const Ahorcado = () => {
       setLetrasSeleccionadas([]);
       setNumeroFallos(0);
     }
+
+    {
+      /* Mandar puntuación */
+    }
+    async () => {
+      await mandarPuntuacion('Ahorcado', puntuacion);
+    };
   };
 
   return (
@@ -176,8 +169,12 @@ const Ahorcado = () => {
 
       <main className="flex-1 flex overflow-hidden">
         <div className="w-1/2 h-full flex flex-col items-center justify-center p-4">
-          <p className="text-center text-lg font-semibold text-gray-800 puntuacion mt-8">Nivel: <span className="text-red-700">{nivelActual()}</span></p>
-          <p className="my-4 text-center text-lg font-semibold text-gray-800 puntuacion">Puntuación: <span className="text-red-700">{puntuacion}</span></p>
+          <p className="text-center text-lg font-semibold text-gray-800 puntuacion mt-8">
+            Nivel: <span className="text-red-700">{nivelActual()}</span>
+          </p>
+          <p className="my-4 text-center text-lg font-semibold text-gray-800 puntuacion">
+            Puntuación: <span className="text-red-700">{puntuacion}</span>
+          </p>
           <div className="max-w-full w-full h-[90%] flex items-center justify-center">
             <ModeloImagen rutaImagen={imgSegunFallo.imagen} descripImagen={imgSegunFallo.descripcion} />
           </div>
@@ -214,7 +211,7 @@ const Ahorcado = () => {
             <h3 className="text-center text-xxl font-bold titulo bg-gradient-to-br from-red-700 via-red-400 to-red-700 bg-clip-text text-transparent mb-12">
               Elige una letra
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {ALFABETO.map((letra) => {
                 const yaSeleccionada = letrasSeleccionadas.includes(letra);
                 return (
@@ -223,7 +220,7 @@ const Ahorcado = () => {
                     onClick={() => onClickLetra(letra)}
                     disabled={yaSeleccionada}
                     className={`
-                      flex-1 min-w-[40px] h-10 flex items-center justify-center text-lg font-semibold rounded-md
+                      flex-1 min-w-[5%] h-10 flex items-center justify-center text-lg font-semibold rounded-md
                       transition-colors duration-200 fuente
                       ${
                         yaSeleccionada
@@ -252,7 +249,6 @@ const Ahorcado = () => {
           nivel={nivelSubido ?? nivelActual()}
           onClose={() => setMostrarModalNivel(false)}
         />
-
       </main>
     </div>
   );
