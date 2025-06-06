@@ -28,7 +28,7 @@ function CssDetectivePanel() {
         }}
         className="bg-white text-indigo-700 text-lg font-semibold px-6 py-2 rounded-xl shadow-lg hover:bg-indigo-100 transition-all duration-300 hover:scale-105"
       >
-        Iniciar caso
+        Iniciar Juego
       </button>
     </div>
   );

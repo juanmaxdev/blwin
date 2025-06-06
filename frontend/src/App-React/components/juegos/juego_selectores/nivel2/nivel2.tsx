@@ -5,8 +5,8 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
-import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
-import BotonVolverInicio from '../botonInicio/botonInicio';
+import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
+import BotonVolverInicio from '../botonInicio/BotonInicio';
 
 //Datos que sale en el codigo HTML
 const elementosHTML = [
@@ -69,7 +69,7 @@ const Nivel2 = () => {
         setMensaje(
             <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
                 <CheckCircle className="w-5 h-5" />
-                <span>Correcto - Avanzando al Nivel 3</span>
+                <span>¡Perfecto! Estilo aplicado correctamente</span>
             </div>
         );
         setTimeout(() => navigate('/juego/selectores/nivel-3'), 2000);
@@ -90,7 +90,7 @@ const Nivel2 = () => {
             <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
                 <BotonSonido />
                 <BotonVolverInicio />
-                
+
                 <main className="flex flex-col items-center p-6 gap-6">
                     {/* Vista Información*/}
                     <h1 className="text-4xl font-bold text-indigo-800 text-center drop-shadow">

@@ -4,12 +4,12 @@ import Register from './pages/register/Register';
 import Home from './pages/home/Home';
 import PanelDetectiveJuego from './components/juegos/juego_selectores/detectiveJuegoPanel/DetectiveJuegoPanel';
 import MinijuegoCSS from './components/juegos/juego_selectores/nivel1/Nivel1';
-import Nivel3 from './components/juegos/juego_selectores/nivel3/nivel3';
-import Nivel2 from './components/juegos/juego_selectores/nivel2/nivel2';
+import Nivel3 from './components/juegos/juego_selectores/nivel3/Nivel3';
+import Nivel2 from './components/juegos/juego_selectores/nivel2/Nivel2';
 import Nivel4 from './components/juegos/juego_selectores/nivel4/Nivel4';
 import Nivel5 from './components/juegos/juego_selectores/nivel5/Nivel5';
 import Nivel8 from './components/juegos/juego_selectores/nivel8/Nivel8';
-import Nivel6 from './components/juegos/juego_selectores/nivel6/nivel6';
+import Nivel6 from './components/juegos/juego_selectores/nivel6/Nivel6';
 import Nivel9 from './components/juegos/juego_selectores/nivel9/Nivel9';
 import Nivel7 from './components/juegos/juego_selectores/nivel7/Nivel7';
 
