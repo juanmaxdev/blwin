@@ -2,7 +2,7 @@ import { Boton } from "./ui/Boton"
 import { Carta, CartaHeader, CartaTitle, CartaDescription, CartaContent } from "./ui/Carta"
 import { Progreso } from "./ui/Progreso"
 import { RotateCcw, Trophy, Play } from "lucide-react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 interface ResultadoJuegoProps {
@@ -15,8 +15,8 @@ export default function ResultadoJuego({ score, maxScore, onRestart }: Resultado
   const percentage = (score / maxScore) * 100;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
-      <Carta className="w-full max-w-3xl bg-white rounded-xl shadow-xl p-8 space-y-6 max-h-screen overflow-auto">
+    <div className="flex items-center min-h-screen justify-center bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
+      <Carta className="w-full max-w-xl mx-auto bg-white rounded-xl shadow-xl p-8 space-y-6">
         <CartaHeader className="text-center">
           <div className="flex justify-center mb-4">
             <Trophy className="h-16 w-16 text-yellow-500" />

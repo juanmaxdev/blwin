@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "./utils"
+import { cn } from "./Utils"
 
 const Carta = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("rounded-lg border bg-Carta text-Carta-foreground shadow-sm", className)} {...props} />

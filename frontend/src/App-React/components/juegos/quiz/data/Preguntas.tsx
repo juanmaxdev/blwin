@@ -15,7 +15,7 @@ export const Preguntas: Pregunta[] = [
 }
 console.log(fibonacci(10));`,
     respuestaCorrecta: "JavaScript",
-    opciones: ["JavaScript", "Python", "Java", "C++"],
+    opciones: ["Python", "JavaScript","Java", "C++"],
     explicacion: "Las funciones se declaran con 'function' y console.log es característico de JavaScript",
   },
   {
@@ -41,7 +41,7 @@ console.log(fibonacci(10));`,
     }
 }`,
     respuestaCorrecta: "Java",
-    opciones: ["Java", "C#", "C++", "Kotlin"],
+    opciones: ["C#", "C++", "Kotlin", "Java"],
     explicacion: "La estructura de clase pública, main method y System.out.println son típicos de Java",
   },
   {
@@ -58,7 +58,7 @@ int main() {
     return 0;
 }`,
     respuestaCorrecta: "C++",
-    opciones: ["C++", "C", "Rust", "Go"],
+    opciones: ["C", "Rust", "C++" ,"Go"],
     explicacion: "Los #include, using namespace std, y cout son característicos de C++",
   },
   {
@@ -74,7 +74,7 @@ int main() {
 </body>
 </html>`,
     respuestaCorrecta: "HTML",
-    opciones: ["HTML", "XML", "CSS", "JavaScript"],
+    opciones: ["XML","HTML", "CSS", "JavaScript"],
     explicacion: "La estructura DOCTYPE, etiquetas html, head y body son propias de HTML",
   },
   {
@@ -107,7 +107,7 @@ func main() {
     }
 }`,
     respuestaCorrecta: "Go",
-    opciones: ["Go", "Rust", "C", "Swift"],
+    opciones: ["Rust", "C", "Go", "Swift"],
     explicacion: "La declaración 'package main', 'func main()' y 'fmt.Println' son característicos de Go",
   },
   {
@@ -121,7 +121,7 @@ func main() {
     let result: Result<i32, &str> = Ok(42);
 }`,
     respuestaCorrecta: "Rust",
-    opciones: ["Rust", "Go", "C++", "Swift"],
+    opciones: ["Go", "Rust", "C++", "Swift"],
     explicacion: "La sintaxis 'fn main()', 'let', 'vec!', 'println!' y tipos como Result son de Rust",
   },
   {
@@ -144,7 +144,7 @@ namespace ConsoleApp
     }
 }`,
     respuestaCorrecta: "C#",
-    opciones: ["C#", "Java", "F#", "Visual Basic"],
+    opciones: ["Java", "F#", "C#", "Visual Basic"],
     explicacion: "El uso de 'using System', 'namespace', 'Console.WriteLine' y la sintaxis de clases son típicos de C#",
   },
   {
@@ -192,7 +192,7 @@ const newUser = createUser({
   isActive: false
 });`,
     respuestaCorrecta: "TypeScript",
-    opciones: ["TypeScript", "JavaScript", "Flow", "Dart"],
+    opciones: ["JavaScript", "Flow", "TypeScript", "Dart"],
     explicacion:
       "La definición de interfaces con tipos explícitos (number, string, boolean) y anotaciones de tipo en parámetros de funciones son características de TypeScript",
   },
@@ -212,7 +212,7 @@ const newUser = createUser({
 
 const userService = new UserService<User>(userRepository);`,
     respuestaCorrecta: "TypeScript",
-    opciones: ["TypeScript", "Java", "C#", "Kotlin"],
+    opciones: ["Java", "C#", "Kotlin", "TypeScript"],
     explicacion:
       "Los genéricos con restricciones (T extends BaseEntity), anotaciones de tipo y async/await con Promise<T> son características de TypeScript",
   },
@@ -283,7 +283,7 @@ export const ItemList: React.FC<Props> = ({
   );
 };`,
     respuestaCorrecta: "TypeScript",
-    opciones: ["TypeScript", "JavaScript", "JSX", "Flow"],
+    opciones: ["JavaScript", "JSX", "Flow", "TypeScript"],
     explicacion:
       "La definición de tipos con 'type Props', anotaciones de tipo para props de componentes React, y el tipado de funciones como '(id: number) => void' son características de TypeScript con React",
   },
@@ -314,7 +314,7 @@ class Program
     }
 }`,
     respuestaCorrecta: "C#",
-    opciones: ["C#", "Java", "C++", "TypeScript"],
+    opciones: ["Java", "C++", "TypeScript", "C#"],
     explicacion:
       "Las palabras clave 'virtual', 'override', la sintaxis de herencia con ':' y Console.WriteLine son características de C#",
   },
@@ -324,7 +324,7 @@ class Program
     nombre = input("¿Cuál es tu nombre? ")
     print(f"Hola, {nombre}!")`,
     respuestaCorrecta: "Python",
-    opciones: ["Python", "Ruby", "JavaScript", "Perl"],
+    opciones: ["Ruby", "Python", "JavaScript", "Perl"],
     explicacion: "La función print, input y el uso de f-strings son distintivos de Python",
   },
   {
@@ -334,7 +334,7 @@ class Program
     nombre = gets.chomp
     puts "Hola, #{nombre}"`,
     respuestaCorrecta: "Ruby",
-    opciones: ["Ruby", "Python", "JavaScript", "PHP"],
+    opciones: ["Python", "JavaScript", "PHP", "Ruby"],
     explicacion: "El uso de 'puts', 'gets.chomp' y la interpolación con #{...} son característicos de Ruby",
   },
   {
@@ -344,7 +344,7 @@ class Program
     echo "Hola, " . $name;
     ?>`,
     respuestaCorrecta: "PHP",
-    opciones: ["PHP", "Perl", "JavaScript", "HTML"],
+    opciones: ["Perl", "PHP", "JavaScript", "HTML"],
     explicacion: "El uso de etiquetas <?php ?> y 'echo' son propios de PHP",
   },
   {
@@ -364,7 +364,7 @@ class Program
     }
 }`,
     respuestaCorrecta: "Kotlin",
-    opciones: ["Kotlin", "Java", "Swift", "Scala"],
+    opciones: [ "Java", "Kotlin","Swift", "Scala"],
     explicacion: "La palabra clave 'fun', 'val', y el uso de listOf son característicos de Kotlin",
   },
   {
@@ -384,7 +384,7 @@ class Program
   }
 }`,
     respuestaCorrecta: "Dart",
-    opciones: ["Dart", "JavaScript", "Kotlin", "Swift"],
+    opciones: ["JavaScript", "Kotlin", "Dart", "Swift"],
     explicacion: "El uso de 'var', listas con corchetes y la sintaxis del main es típica de Dart",
   },
   {
@@ -407,7 +407,7 @@ fn main() {
   println("\$greeting mundo")
 }`,
     respuestaCorrecta: "Kotlin",
-    opciones: ["Kotlin", "Swift", "Scala", "Java"],
+    opciones: ["Swift", "Kotlin", "Scala", "Java"],
     explicacion: "El uso de 'val', 'fun' y la interpolación de strings con \$ es típico de Kotlin",
   },
   {
@@ -428,7 +428,7 @@ begin
    Put_Line ("Hello, world!");
 end Hello;`,
     respuestaCorrecta: "Ada",
-    opciones: ["Ada", "Pascal", "Modula-2", "Fortran"],
+    opciones: ["Pascal", "Ada", "Modula-2", "Fortran"],
     explicacion: "El uso de 'procedure', 'Put_Line', y la sintaxis estructurada es propia de Ada",
   },
   {
@@ -444,7 +444,7 @@ end Hello;`,
     id: 28,
     codigo: `SELECT name FROM users WHERE age > 30;`,
     respuestaCorrecta: "SQL",
-    opciones: ["SQL", "T-SQL", "PL/SQL", "LINQ"],
+    opciones: ["T-SQL", "SQL", "PL/SQL", "LINQ"],
     explicacion: "La sentencia SELECT-FROM-WHERE es básica de SQL estándar",
   },
   {
@@ -462,7 +462,7 @@ end Hello;`,
     $name = Read-Host "¿Cómo te llamas?"
     Write-Host "Hola $name"`,
     respuestaCorrecta: "PowerShell",
-    opciones: ["PowerShell", "Bash", "CMD", "Perl"],
+    opciones: ["Bash", "CMD", "Perl", "PowerShell"],
     explicacion: "Uso de Write-Host, Read-Host y variables con \$ es distintivo de PowerShell",
   }
 ]

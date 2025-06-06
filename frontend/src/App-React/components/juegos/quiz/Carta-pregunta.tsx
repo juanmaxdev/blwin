@@ -21,7 +21,7 @@ export default function PreguntaCarta({
   esUltimaPregunta,
 }: preguntaCartaProps) {
   return (
-    <Carta className="w-full">
+    <Carta className="w-w-full h-[500px] w-[700px] overflow-auto">
       <CartaHeader>
         <CartaTitle>¿Qué lenguaje de programación es este?</CartaTitle>
         <CartaDescription>Analiza el código y selecciona la respuesta correcta</CartaDescription>
