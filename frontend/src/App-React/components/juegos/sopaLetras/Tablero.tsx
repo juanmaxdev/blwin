@@ -26,7 +26,7 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
   palabras.forEach((palabra) => {
     let colocada = false;
     while (!colocada) {
-      const esVertical = Math.random() < 0.5; // 50% vertical, 50% horizontal
+      const esVertical = Math.random() < 0.5;
       if (esVertical) {
         const maxFila = filas - palabra.length;
         const filaInicio = Math.floor(Math.random() * (maxFila + 1));
@@ -69,7 +69,6 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
     }
   });
 
-  // Rellenar huecos vacíos
   const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (let f = 0; f < filas; f++) {
     for (let c = 0; c < columnas; c++) {
@@ -90,6 +89,7 @@ interface TableroProps {
 
 const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) => {
   const [resetKey, setResetKey] = useState(resetKeyFromParent);
+  const [puntos, setPuntos] = useState(0);
 
   useEffect(() => {
     setResetKey(resetKeyFromParent);
@@ -106,13 +106,14 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
 
   // Generar tablero
   useEffect(() => {
-    const entradas = obtenerPalabrasAleatorias(8);
+    const entradas = obtenerPalabrasAleatorias(6);
     setPalabrasObjetivo(entradas);
     setMatriz(generarMatriz(13, 24, entradas.map((e) => e.palabra)));
     setSeleccion([]);
     setPalabrasEncontradas([]);
     setTimerActivo(true);
     setGameOver(false);
+    setPuntos(0);
   }, [resetKey]);
 
   // Reiniciar cuando se encuentren todas las palabras
@@ -123,6 +124,7 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
       palabrasEncontradas.length === palabrasObjetivo.length
     ) {
       setTimerActivo(false);
+      setPuntos((prev) => prev + 20);
       setTimeout(() => {
         setResetKey((k) => k + 1);
         setTimerActivo(true);
@@ -160,6 +162,7 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
         ...prev,
         { texto: valida.palabra, coords: [...seleccion] },
       ]);
+      setPuntos((prev) => prev + 10);
     }
 
     setSeleccion([]);
@@ -178,18 +181,22 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
 
   return (
     <div className="flex flex-col w-screen min-h-screen relative bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200">
-      <div className="py-10 flex justify-center items-center">
+      <div className="py-10 flex justify-center items-center mb-10">
         <ContadorTiempo
           resetKey={resetKey}
           activo={timerActivo}
           onTiempoCompleto={handleTiempoCompleto}
         />
+        <div className="ml-5 text-2xl font-bold text-indigo-800">
+          ⭐ Puntos: {puntos}
+        </div>
+
       </div>
 
       <div className="flex flex-grow overflow-hidden mt-20">
         <div className="w-2/5 ml-20 pl-18">
-          <h3 className="text-2xl font-bold text-indigo-700 mb-4">🔍 Pistas:</h3>
-          <ul className="space-y-3 text-lg text-indigo-800">
+          <h3 className="text-2xl font-bold text-indigo-700 mb-6">🔍 Pistas:</h3>
+          <ul className="space-y-3 text-lg text-indigo-800 mb-3">
             {palabrasObjetivo.map((entrada, i) => {
               const encontrada = palabrasEncontradas.some(
                 (encontradaObj) => encontradaObj.texto === entrada.palabra
@@ -197,13 +204,17 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
               return (
                 <li
                   key={i}
-                  className={encontrada ? "line-through text-indigo-700" : ""}
+                  className={encontrada ? "line-through text-indigo-700 text-xl" : ""}
                 >
                   • {entrada.pista}
                 </li>
               );
             })}
           </ul>
+          <div className="mt-10 text-xl text-indigo-700 font-semibold">
+            <span className="mr-10">Palabras +10</span>
+            <span>Crucigrama +20</span>
+          </div>
         </div>
 
         <div className="w-3/5 mt-5">
@@ -220,7 +231,6 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
           </div>
         </div>
       </div>
-
       {gameOver && (
         <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center z-50">
           <h2 className="text-4xl font-bold text-red-600 mb-6">⏰ ¡Se acabó el tiempo!</h2>

@@ -36,7 +36,7 @@ const Cuadricula: React.FC<CuadriculaProps> = ({
             onMouseUp={terminarSeleccion}
             onMouseLeave={terminarSeleccion}
             style={{
-                gridTemplateColumns: `repeat(${numColumnas}, 30px)`
+                gridTemplateColumns: `repeat(${numColumnas}, 40px)`
             }}
         >
             {matriz.map((fila, i) => (

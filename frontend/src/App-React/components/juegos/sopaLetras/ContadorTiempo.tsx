@@ -64,7 +64,7 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
         : "text-red-500";
 
   return (
-    <div className={`text-2xl font-extrabold contador-tiempo ${colorTemporizador}`}>
+    <div className={`text-3xl font-extrabold contador-tiempo ${colorTemporizador}`}>
       ⏱ {minutos}:{segundos.toString().padStart(2, "0")}
     </div>
   );
