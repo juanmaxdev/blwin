@@ -26,26 +26,50 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
   palabras.forEach((palabra) => {
     let colocada = false;
     while (!colocada) {
-      const fila = Math.floor(Math.random() * filas);
-      const maxCol = columnas - palabra.length;
-      const colInicio = Math.floor(Math.random() * (maxCol + 1));
-      let libre = true;
-      for (let i = 0; i < palabra.length; i++) {
-        if (matriz[fila][colInicio + i] !== "") {
-          libre = false;
-          break;
-        }
-      }
+      const esVertical = Math.random() < 0.5; // 50% vertical, 50% horizontal
+      if (esVertical) {
+        const maxFila = filas - palabra.length;
+        const filaInicio = Math.floor(Math.random() * (maxFila + 1));
+        const col = Math.floor(Math.random() * columnas);
 
-      if (libre) {
+        let libre = true;
         for (let i = 0; i < palabra.length; i++) {
-          matriz[fila][colInicio + i] = palabra[i];
+          if (matriz[filaInicio + i][col] !== "") {
+            libre = false;
+            break;
+          }
         }
-        colocada = true;
+
+        if (libre) {
+          for (let i = 0; i < palabra.length; i++) {
+            matriz[filaInicio + i][col] = palabra[i];
+          }
+          colocada = true;
+        }
+      } else {
+        const fila = Math.floor(Math.random() * filas);
+        const maxCol = columnas - palabra.length;
+        const colInicio = Math.floor(Math.random() * (maxCol + 1));
+
+        let libre = true;
+        for (let i = 0; i < palabra.length; i++) {
+          if (matriz[fila][colInicio + i] !== "") {
+            libre = false;
+            break;
+          }
+        }
+
+        if (libre) {
+          for (let i = 0; i < palabra.length; i++) {
+            matriz[fila][colInicio + i] = palabra[i];
+          }
+          colocada = true;
+        }
       }
     }
   });
 
+  // Rellenar huecos vacíos
   const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (let f = 0; f < filas; f++) {
     for (let c = 0; c < columnas; c++) {
@@ -57,6 +81,7 @@ const generarMatriz = (filas: number, columnas: number, palabras: string[]) => {
 
   return matriz;
 };
+
 
 
 interface TableroProps {
@@ -81,9 +106,9 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
 
   // Generar tablero
   useEffect(() => {
-    const entradas = obtenerPalabrasAleatorias(5);
+    const entradas = obtenerPalabrasAleatorias(8);
     setPalabrasObjetivo(entradas);
-    setMatriz(generarMatriz(9, 24, entradas.map((e) => e.palabra)));
+    setMatriz(generarMatriz(13, 24, entradas.map((e) => e.palabra)));
     setSeleccion([]);
     setPalabrasEncontradas([]);
     setTimerActivo(true);

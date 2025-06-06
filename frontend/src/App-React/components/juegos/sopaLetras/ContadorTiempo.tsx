@@ -16,7 +16,7 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
   const intervaloRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    setTiempo(120);
+    setTiempo(180);
     yaLlamóRef.current = false;
   }, [resetKey]);
 
@@ -57,7 +57,7 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
   const minutos = Math.floor(tiempo / 60);
   const segundos = tiempo % 60;
   const colorTemporizador =
-    segundos > 40 || minutos > 0
+    segundos > 60 || minutos > 0
       ? "text-green-600"
       : segundos > 20
         ? "text-yellow-400"
