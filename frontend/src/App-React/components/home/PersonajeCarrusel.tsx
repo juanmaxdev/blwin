@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+
 
 const personajes = [
-  {
-    nombre: "El juego del Ahorcado",
-    historia: "En los oscuros pasillos de una escuela abandonada, se rumorea que un juego prohibido aparece en la pizarra cada medianoche. Quien intente jugar al Ahorcado escuchará susurros que revelan letras...",
-    imagen: "/avatarJuegos/avatar_juego_ahorcado.png",
-    fondo: "from-gray-800 to-black",
-    boton: {
-      nombre: "Atrevete...",
-      ruta: "/ahorcado",
-    }
-  },
+   {
+    nombre: "Z-Wing",
+    historia: "Las naves Z-Wing surcan el espacio en busca de conocimiento y descubrimientos. Hoy es tu primer día como piloto, y el universo entero se abre ante ti. ¡Veamos hasta dónde puedes llegar!",
+    imagen: "/personajes/Z-Wing.png",
+    fondo: "from-blue-200 to-blue-500",
+    enlace: "/juego_esquivar"
+  }, 
 ];
 
 const PersonajeCarrusel = () => {
@@ -62,14 +61,8 @@ const PersonajeCarrusel = () => {
                 <p className="text-gray-700 text-lg leading-relaxed">
                   {personajeSeleccionado.historia}
                 </p>
-                {personajeSeleccionado.boton && (
-                  <button
-                    className={`mt-4 px-6 py-2 rounded-full text-white bg-gradient-to-br ${personajeSeleccionado.fondo} hover:opacity-90 transition mx-auto`}
-                    onClick={() => navigate(personajeSeleccionado.boton!.ruta)}
-                  >
-                    {personajeSeleccionado.boton.nombre}
-                  </button>
-                )}
+                <br />
+                <Button variant="contained"><Link to={personajeSeleccionado.enlace}>¡A jugar!</Link></Button>
               </div>
             </motion.div>
           )}

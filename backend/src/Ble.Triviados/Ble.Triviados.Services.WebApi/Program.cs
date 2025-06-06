@@ -1,6 +1,5 @@
 ﻿using Ble.Triviados.Domain.Entity.Interfaces;
 using Ble.Triviados.Application.Services;
-using Ble.Triviados.Domain.Entity.Services;
 using Ble.Triviados.Infraestructure.Persistence;
 using Ble.Triviados.Infraestructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -9,28 +8,22 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Hosting;
-using Ble.Triviados.Infraestructure.Persistence.Seeders;
+using Ble.Triviados.Infrastructure.Data;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración de la base de datos
-builder.Services.AddDbContext<TriviadosDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
-// Configuración de CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", policy =>
-    {
-        policy.WithOrigins("http://localhost:3000") // Cambia si tu frontend usa otro puerto
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+    options.AddPolicy("AllowFrontend",
+        builder => builder.WithOrigins("http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
 });
 
-// Servicios de dominio / aplicación
-// Configuración de JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -46,54 +39,70 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//Servicios de dominio / aplicación
-builder.Services.AddScoped<IPartidaService, PartidaAppService>();
-builder.Services.AddScoped<IPartidaRepository, PartidaRepository>();
-
-// Servicios de usuario
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IJuegoService, JuegoService>();
+builder.Services.AddScoped<IJuegoRepository, JuegoRepository>();
+builder.Services.AddScoped<IUsuarioJuegoService, UsuarioJuegoService>();
+builder.Services.AddScoped<IUsuarioJuegoRepository, UsuarioJuegoRepository>();
 
-// Servicios de preguntas
-builder.Services.AddScoped<IPreguntaService, PreguntaService>();
-builder.Services.AddScoped<IPreguntaRepository, PreguntaRepository>();
-
-// Controladores
 builder.Services.AddControllers();
 
-// Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tu API", Version = "v1" });
+
+    // Configurar JWT como esquema de seguridad
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Ingresa 'Bearer {token}' en este campo. Ejemplo: Bearer abc123"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
-// Migraciones
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
     try
     {
-        var context = services.GetRequiredService<TriviadosDbContext>();
-        context.Database.Migrate(); // Aplica las migraciones pendientes
-        await SeederRunner.RunAsync(context); // Ejecuta todos los seeders
-
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.Migrate(); 
     }
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Error al aplicar migraciones o seeder en la base de datos.");
+        logger.LogError(ex, "Error al aplicar migraciones o ejecutar el seeder.");
     }
 }
 
-// Middleware de desarrollo
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Usa CORS antes de controllers
 app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();

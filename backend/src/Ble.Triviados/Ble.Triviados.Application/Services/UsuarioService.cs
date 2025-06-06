@@ -6,6 +6,7 @@ using Ble.Triviados.Application.Dtos;
 using Ble.Triviados.Application.Interfaces;
 using Ble.Triviados.Domain.Entity.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Ble.Triviados.Domain.Entity.Entities;
 
 namespace Ble.Triviados.Application.Services
 {
@@ -37,7 +38,6 @@ namespace Ble.Triviados.Application.Services
             {
                 Name = dto.Name,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                Rol = "User",
                 FechaRegistro = DateTime.Now
             };
 
@@ -55,10 +55,10 @@ namespace Ble.Triviados.Application.Services
             var usuario = await _usuarioRepository.ObtenerPorNombreAsync(dto.Name);
 
             if (usuario == null)
-                return "❌ Usuario no encontrado.";
+                return "Usuario no encontrado.";
 
             if (!BCrypt.Net.BCrypt.Verify(dto.Password, usuario.Password))
-                return "❌ Contraseña incorrecta.";
+                return "Contraseña incorrecta.";
 
             // Generar el token JWT
             var token = GenerarToken(usuario);
@@ -77,7 +77,6 @@ namespace Ble.Triviados.Application.Services
                 new Claim("id",usuario.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Name),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, usuario.Rol)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -92,5 +91,20 @@ namespace Ble.Triviados.Application.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
+        public async Task<PtosDto?> AgregarPuntosUsuarioAsync(int usuarioId, int puntos)
+        {
+            var usuario = await _usuarioRepository.AgregarPuntosAsync(usuarioId, puntos);
+            if (usuario == null)
+                return null;
+
+            return new PtosDto
+            {
+                UsuarioId = usuario.Id,
+                Puntos = usuario.Puntos
+            };
+        }
+
     }
 }

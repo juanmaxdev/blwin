@@ -3,12 +3,14 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Home from './pages/home/Home';
 import MiniJuegoAhorcado from './pages/juegos/ahorcado/Ahorcado'
+import PaginaJuegoEsquivar from './pages/juegos/PaginaJuegoEsquivar';
+
 
 const App = () => (
   <Routes>
     {/* Página de inicio */}
     <Route path="/" element={<Home />} />
-
+    
     {/* Página de registro */}
     <Route path="/register" element={<Register />} />
 
@@ -17,6 +19,8 @@ const App = () => (
 
     {/* Minijuego Ahorcado */}
     <Route path="/ahorcado" element={<MiniJuegoAhorcado />} />
+
+    <Route path="/juego_esquivar" element={<PaginaJuegoEsquivar />} />
 
   </Routes>
 );
