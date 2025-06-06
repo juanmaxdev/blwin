@@ -218,17 +218,17 @@ const Nivel10 = () => {
                         </div>
                     </section>
 
-                    <h1 className="text-3xl font-bold text-indigo-800 text-center drop-shadow">
-                        Nivel 10 - CSS Detective (PARTE 2)
-                    </h1>
-                    <p className="text-lg text-indigo-700 text-center max-w-2xl">
-                        Usa el selector <code>#ladron-corre</code> y <code>#piedra</code> para mover al ladron hacia la izquierda y hacer que se tropieze con la piedra que hay dentro de la caja. Para lograrlo debes
-                        <strong> sacar la piedra de la caja</strong> usando el índice del eje Z de la caja para que esté por delante de la caja <strong> y empujar al ladrón con un margen izquierdo del 30%</strong>
-                    </p>
-
                     {/* SEGUNDA PARTE */}
                     {mostrarSegundaParte && (
                         <>
+                            <h1 className="text-3xl font-bold text-indigo-800 text-center drop-shadow">
+                                Nivel 10 - CSS Detective (PARTE 2)
+                            </h1>
+                            <p className="text-lg text-indigo-700 text-center max-w-2xl">
+                                Usa el selector <code>#ladron-corre</code> y <code>#piedra</code> para mover al ladron hacia la izquierda y hacer que se tropieze con la piedra que hay dentro de la caja. Para lograrlo debes
+                                <strong> sacar la piedra de la caja</strong> usando el índice del eje Z de la caja para que esté por delante de la caja <strong> y empujar al ladrón con un margen izquierdo del 30%</strong>
+                            </p>
+
                             <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative min-h-[12rem]">
                                 <div className="flex-1 h-full flex flex-col relative">
                                     <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa (Parte 2):</h2>

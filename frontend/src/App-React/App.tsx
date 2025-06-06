@@ -12,7 +12,7 @@ import Nivel8 from './components/juegos/juego_selectores/nivel8/Nivel8';
 import Nivel6 from './components/juegos/juego_selectores/nivel6/Nivel6';
 import Nivel9 from './components/juegos/juego_selectores/nivel9/Nivel9';
 import Nivel7 from './components/juegos/juego_selectores/nivel7/Nivel7';
-import NivelDetectiveFlexbox from './components/juegos/juego_selectores/nivel_bonus/nivelBonus';
+import NivelDetectiveFlexbox from './components/juegos/juego_selectores/nivel_bonus/NivelBonus';
 
 const App = () => (
   <Routes>
