@@ -11,6 +11,13 @@ const personajes = [
     imagen: "/personajes/Z-Wing.png",
     fondo: "from-blue-200 to-blue-500",
     enlace: "/juego_esquivar"
+  },
+  {
+    nombre: "El juego del Ahorcado",
+    historia: "En los oscuros pasillos de una escuela abandonada, se rumorea que un juego prohibido aparece en la pizarra cada medianoche. Quien intente jugar al Ahorcado escuchará susurros que revelan letras...",
+    imagen: "/avatarJuegos/avatar_juego_ahorcado.png",
+    fondo: "from-gray-500 to-black",
+    enlace: "/ahorcado",
   }, 
 ];
 
@@ -53,7 +60,7 @@ const PersonajeCarrusel = () => {
                 whileHover={{ rotate: [0, -3, 3, 0] }}
                 transition={{ duration: 0.5 }}
               />
-              <div className="text-center md:text-left max-w-md">
+              <div className="flex flex-col items-center max-w-md space-y-4">
                 <h3 className="text-3xl font-bold text-indigo-800 mb-3">
                   {personajeSeleccionado.nombre}
                 </h3>
