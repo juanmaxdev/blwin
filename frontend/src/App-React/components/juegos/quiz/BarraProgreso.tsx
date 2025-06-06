@@ -1,4 +1,4 @@
-import { Progreso } from "../../../components/juegos/quiz/ui/Progreso"
+import { Progreso } from "./ui/Progreso"
 
 interface BarraProgesoProps {
   preguntaActual: number

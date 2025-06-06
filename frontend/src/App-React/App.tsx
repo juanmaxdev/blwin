@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Home from './pages/home/Home';
-import ProgrammingQuizGame from './pages/juegos/quiz/Juego-Quiz';
+import JuegoQuiz from './pages/juegos/quiz/JuegoQuiz';
 
 const App = () => (
   <Routes>
@@ -15,7 +15,7 @@ const App = () => (
     {/* Página de login */}
     <Route path="/login" element={<Login />} />
 
-    <Route path="/juego-quiz" element={<ProgrammingQuizGame />} />
+    <Route path="/juego-quiz" element={<JuegoQuiz />} />
 
   </Routes>
 );
