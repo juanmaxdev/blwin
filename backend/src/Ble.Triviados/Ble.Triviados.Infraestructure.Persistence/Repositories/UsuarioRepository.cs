@@ -37,6 +37,11 @@ namespace Ble.Triviados.Infraestructure.Persistence.Repositories
             return usuario;
         }
 
-
+        public async Task<List<Usuario>>ObtenerRankingUsuariosAsync()
+        {
+            return await _context.Usuarios
+                .OrderByDescending(u => u.Puntos)
+                .ToListAsync();
+        }
     }
 }
