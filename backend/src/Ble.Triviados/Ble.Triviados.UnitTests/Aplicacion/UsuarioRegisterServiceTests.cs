@@ -35,7 +35,6 @@ namespace Ble.Triviados.UnitTests.Aplicacion
             {
                 Name = dto.Name,
                 Password = dto.Password,
-                Rol = "User",
                 FechaRegistro = DateTime.Now
             };
 

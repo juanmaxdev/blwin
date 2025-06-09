@@ -6,5 +6,6 @@ namespace Ble.Triviados.Domain.Entity.Interfaces
     {
         Task<Usuario> RegistrarAsync(Usuario usuario);
         Task<Usuario?> ObtenerPorNombreAsync(string name);
+        Task<Usuario?> AgregarPuntosAsync(int id, int puntos);
     }
 }

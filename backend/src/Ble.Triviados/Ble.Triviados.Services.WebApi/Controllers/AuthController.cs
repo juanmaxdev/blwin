@@ -3,6 +3,7 @@ using Ble.Triviados.Domain.Entity.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Ble.Triviados.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Ble.Triviados.Services.WebApi.Controllers
 {
@@ -49,7 +50,5 @@ namespace Ble.Triviados.Services.WebApi.Controllers
 
             return Ok(new { Token = resultado });
         }
-
-
     }
 }
