@@ -23,6 +23,7 @@ const personajes = [
 
 const PersonajeCarrusel = () => {
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState<null | typeof personajes[0]>(null);
+  const sessionToken = localStorage.getItem("token");
 
   return (
     <section className="w-full pt-0 pb-24 px-4">
@@ -68,7 +69,13 @@ const PersonajeCarrusel = () => {
                   {personajeSeleccionado.historia}
                 </p>
                 <br />
-                <Button variant="contained"><Link to={personajeSeleccionado.enlace}>¡A jugar!</Link></Button>
+                {sessionToken && (
+                  <Button variant="contained">
+                    <Link to={personajeSeleccionado.enlace} style={{ color: 'inherit', textDecoration: 'none' }}>
+                      ¡A jugar!
+                    </Link>
+                  </Button>
+                )}
               </div>
             </motion.div>
           )}
