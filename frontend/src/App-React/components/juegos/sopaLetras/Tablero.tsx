@@ -185,58 +185,59 @@ const Tablero: React.FC<TableroProps> = ({ resetKey: resetKeyFromParent = 0 }) =
   };
 
   return (
-    <div className="flex flex-col w-screen min-h-screen relative bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200">
-      <div className="py-10 flex justify-center items-center mb-10">
-        <ContadorTiempo
-          resetKey={resetKey}
-          activo={timerActivo}
-          onTiempoCompleto={handleTiempoCompleto}
+<div className="flex flex-col w-full min-h-screen bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200 p-4 sm:p-6">
+  <div className="flex flex-col items-center sm:flex-row sm:justify-center py-6 sm:py-10 gap-4 sm:gap-10">
+    <ContadorTiempo
+      resetKey={resetKey}
+      activo={timerActivo}
+      onTiempoCompleto={handleTiempoCompleto}
+    />
+    <div className="text-xl sm:text-2xl font-bold text-indigo-800">
+      ⭐ Puntos: {puntos}
+    </div>
+  </div>
+
+  <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 overflow-hidden flex-grow">
+    <div className="lg:w-2/5 px-4 sm:px-10">
+      <h3 className="text-xl sm:text-2xl font-bold text-indigo-700 mb-4 sm:mb-6">🔍 Pistas:</h3>
+      <ul className="space-y-2 sm:space-y-3 text-base sm:text-lg text-indigo-800 mb-6">
+        {palabrasObjetivo.map((entrada, i) => {
+          const encontrada = palabrasEncontradas.some(
+            (encontradaObj) => encontradaObj.texto === entrada.palabra
+          );
+          return (
+            <li
+              key={i}
+              className={encontrada ? "line-through text-indigo-700" : ""}
+            >
+              • {entrada.pista}
+            </li>
+          );
+        })}
+      </ul>
+      <div className="text-base sm:text-xl text-indigo-700 font-semibold mt-6">
+        <span className="mr-6">Palabras +10</span>
+        <span>Sopa de letras +20</span>
+      </div>
+    </div>
+
+    <div className="lg:w-3/5 w-full flex justify-center mt-5 px-2">
+      <div
+        className={`max-w-full overflow-auto ${
+          gameOver ? "pointer-events-none opacity-50" : ""
+        }`}
+      >
+        <Cuadricula
+          matriz={matriz}
+          seleccion={seleccion}
+          palabrasEncontradas={palabrasEncontradas}
+          iniciarSeleccion={iniciarSeleccion}
+          agregarACoordenadas={agregarACoordenadas}
+          terminarSeleccion={terminarSeleccion}
         />
-        <div className="ml-5 text-2xl font-bold text-indigo-800">
-          ⭐ Puntos: {puntos}
-        </div>
       </div>
-
-      <div className="flex flex-grow overflow-hidden mt-20">
-        <div className="w-2/5 ml-20 pl-18">
-          <h3 className="text-2xl font-bold text-indigo-700 mb-6">🔍 Pistas:</h3>
-          <ul className="space-y-3 text-lg text-indigo-800 mb-3">
-            {palabrasObjetivo.map((entrada, i) => {
-              const encontrada = palabrasEncontradas.some(
-                (encontradaObj) => encontradaObj.texto === entrada.palabra
-              );
-              return (
-                <li
-                  key={i}
-                  className={encontrada ? "line-through text-indigo-700 text-xl" : ""}
-                >
-                  • {entrada.pista}
-                </li>
-              );
-            })}
-          </ul>
-          <div className="mt-10 text-xl text-indigo-700 font-semibold">
-            <span className="mr-10">Palabras +10</span>
-            <span>Crucigrama +20</span>
-          </div>
-        </div>
-
-        <div className="w-3/5 mt-5">
-          <div
-            className={`flex-grow flex justify-center items-center ${gameOver ? "pointer-events-none opacity-50" : ""
-              }`}
-          >
-            <Cuadricula
-              matriz={matriz}
-              seleccion={seleccion}
-              palabrasEncontradas={palabrasEncontradas}
-              iniciarSeleccion={iniciarSeleccion}
-              agregarACoordenadas={agregarACoordenadas}
-              terminarSeleccion={terminarSeleccion}
-            />
-          </div>
-        </div>
-      </div>
+    </div>
+  </div>
 
       {gameOver && (
         <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center z-50">

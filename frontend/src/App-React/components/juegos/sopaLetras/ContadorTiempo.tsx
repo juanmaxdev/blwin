@@ -11,7 +11,7 @@ const ContadorTiempo: React.FC<ContadorTiempoProps> = ({
   activo,
   onTiempoCompleto,
 }) => {
-  const [tiempo, setTiempo] = useState(120);
+  const [tiempo, setTiempo] = useState(180);
   const yaLlamóRef = useRef(false);
   const intervaloRef = useRef<NodeJS.Timeout | null>(null);
 

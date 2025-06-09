@@ -31,14 +31,14 @@ const Cuadricula: React.FC<CuadriculaProps> = ({
     const numColumnas = matriz.length > 0 ? matriz[0].length : 0;
 
     return (
-        <div
-            className="cuadricula"
-            onMouseUp={terminarSeleccion}
-            onMouseLeave={terminarSeleccion}
-            style={{
-                gridTemplateColumns: `repeat(${numColumnas}, 40px)`
-            }}
-        >
+         <div
+    className="cuadricula"
+    onMouseUp={terminarSeleccion}
+    onMouseLeave={terminarSeleccion}
+    style={{
+      gridTemplateColumns: `repeat(${numColumnas}, minmax(24px, 1fr))`
+    }}
+  >
             {matriz.map((fila, i) => (
                 <div className="fila" key={i}>
                     {fila.map((letra, j) => {
