@@ -4,8 +4,8 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
-import BotonVolverInicio from '../botonInicio/BotonInicio';
-import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
+import BotonVolverInicio from '../botonInicio/botonInicio';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 import ModalFelicitacion from './ModalFelicitacion';
 
 
@@ -17,9 +17,7 @@ import ladronCorriendo from '/public/foto-ladron-corriendo.png';
 import ladronCaido from '/public/foto-ladron-caido.png';
 import caja from '/public/foto-caja.png';
 import piedra from '/public/foto-piedra.png';
-
-
-
+import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
 
 
 const Nivel10 = () => {
@@ -154,6 +152,7 @@ const Nivel10 = () => {
             <style id="css-nivel-10" />
             <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
                 <BotonSonido />
+                <BotonFinalizarJuego />
                 <BotonVolverInicio />
 
                 <main className="flex flex-col items-center p-6 gap-6">

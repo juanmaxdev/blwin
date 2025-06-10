@@ -5,12 +5,14 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../../components/ui/ButtonSound';
-import BotonVolverInicio from '../botonInicio/BotonInicio';
-import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
+import BotonVolverInicio from '../botonInicio/botonInicio';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
 
 const Nivel9 = () => {
     const [css, setCss] = useState('');
     const [mensaje, setMensaje] = useState<React.ReactNode>(null);
+
     const navigate = useNavigate();
 
     const procesarCSS = (inputCSS: string) => inputCSS;
@@ -48,13 +50,13 @@ const Nivel9 = () => {
 
         confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
         sessionStorage.setItem('nivel9Superado', 'true');
+
         setMensaje(
             <div className="flex items-center justify-center gap-2 text-green-600 font-semibold">
                 <CheckCircle className="w-5 h-5" />
                 <span>¡Perfecto! Estilo aplicado correctamente</span>
             </div>
         );
-        setTimeout(() => navigate('/juego/selectores/nivel-9'), 2000);
     };
 
     useEffect(() => {
@@ -70,6 +72,7 @@ const Nivel9 = () => {
             <style id="css-nivel-9" />
             <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
                 <BotonSonido />
+                <BotonFinalizarJuego />
                 <BotonVolverInicio />
 
                 <main className="flex flex-col items-center p-6 gap-6">
@@ -127,7 +130,7 @@ const Nivel9 = () => {
                         <div className="w-full md:w-1/2 bg-white p-4 rounded-xl shadow-xl border border-indigo-300 flex flex-col">
                             <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Código HTML:</h2>
                             <pre className="flex-1 text-sm font-mono bg-gray-50 p-3 rounded-lg border border-gray-300 whitespace-pre-wrap overflow-x-auto w-full h-full min-h-[10rem]">
-{`<section>
+                                {`<section>
   <div>
     <p>Este debe estar en mayúsculas y con espaciado</p>
     <p>Este no cambia</p>

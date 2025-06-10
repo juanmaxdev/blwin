@@ -31,7 +31,7 @@ const personajes = [
         historia: "¿Alguna vez has soñado con ser detective? Pon a prueba tus habilidades resolviendo casos mientras aprendes selectores CSS en escenarios HTML interactivos",
         imagen: "/foto-detective-completa.png",
         fondo: "from-gray-200 to-gray-200",
-        enlace: "juego/selectores/"
+        enlace: "juego/selectores"
     },
 ];
 

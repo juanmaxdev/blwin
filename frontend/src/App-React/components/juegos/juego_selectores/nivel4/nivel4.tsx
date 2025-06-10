@@ -5,8 +5,9 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
-import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
-import BotonVolverInicio from '../botonInicio/BotonInicio';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/botonInicio';
+import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
 
 const elementosHTML = [
   { tag: 'h6', contenido: '¡¡¡' },
@@ -99,6 +100,7 @@ const Nivel4 = () => {
       <style id="css-nivel-4" />
       <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
         <BotonSonido />
+        <BotonFinalizarJuego />
         <BotonVolverInicio />
 
         <main className="flex flex-col items-center p-6 gap-6">
@@ -142,7 +144,7 @@ const Nivel4 = () => {
               <h2 className="font-mono text-lg mb-2">Escribe tu CSS aquí:</h2>
               <textarea
                 className="w-full h-40 bg-zinc-800 text-green-100 font-mono p-2 rounded resize-none"
-                placeholder={`h6 {\n  background-color: blue;\n}`}
+                placeholder={`selector {\n  propiedad: valor;\n}`}
                 value={css}
                 onChange={(e) => setCss(e.target.value)}
               />

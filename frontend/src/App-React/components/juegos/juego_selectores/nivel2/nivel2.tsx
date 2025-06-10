@@ -5,8 +5,9 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
-import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
-import BotonVolverInicio from '../botonInicio/BotonInicio';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/botonInicio';
+import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
 
 //Datos que sale en el codigo HTML
 const elementosHTML = [
@@ -89,6 +90,7 @@ const Nivel2 = () => {
             <style id="css-nivel-2" />
             <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
                 <BotonSonido />
+                <BotonFinalizarJuego />
                 <BotonVolverInicio />
 
                 <main className="flex flex-col items-center p-6 gap-6">
