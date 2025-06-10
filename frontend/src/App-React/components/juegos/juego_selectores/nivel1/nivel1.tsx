@@ -66,12 +66,9 @@ const Nivel1 = () => {
     //Si el contenido no es valido muestra debajo una alerta 
     if (!contieneValida) {
       setMensaje(
-        <div
-          role="status"
-          className="flex items-center justify-center gap-2 text-green-600 font-semibold"
-        >
-          <CheckCircle className="w-5 h-5" />
-          <span>¡Perfecto! Estilo aplicado correctamente</span>
+        <div className="flex items-center justify-center gap-2 text-red-600 font-semibold">
+          <XCircle className="w-5 h-5" />
+          <span>Pon la propiedad y el valor correcto</span>
         </div>
       );
       return;
