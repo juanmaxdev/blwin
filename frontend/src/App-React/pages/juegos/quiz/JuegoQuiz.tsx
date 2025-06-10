@@ -1,10 +1,10 @@
 
 import { useState, useEffect } from "react"
 import { Preguntas, type Pregunta } from "../../../components/juegos/quiz/data/Preguntas"
-import HeaderJuego from "../../../components/juegos/quiz/HeaderJuego"
-import BarraProgeso from "../../../components/juegos/quiz/BarraProgreso"
-import PreguntaCarta from "../../../components/juegos/quiz/CartaPregunta"
-import ResultadoJuego from "../../../components/juegos/quiz/ResultadoJuego"
+import HeaderJuego from "../../../components/juegos/quiz/HeaderJuego/HeaderJuego"
+import BarraProgeso from "../../../components/juegos/quiz/BarraProgeso/BarraProgreso"
+import PreguntaCarta from "../../../components/juegos/quiz/CartaPregunta/CartaPregunta"
+import ResultadoJuego from "../../../components/juegos/quiz/ResultadoJuego/ResultadoJuego"
 import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion"
 
 const QUESTIONS_PER_GAME = 8
