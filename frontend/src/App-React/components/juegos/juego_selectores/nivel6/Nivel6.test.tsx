@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, it, vi, expect, afterEach, beforeAll } from 'vitest';
 import '@testing-library/jest-dom';
 
-import Nivel6 from './Nivel6';
+import Nivel6 from './nivel6';
 
 // Mock confetti
 vi.mock('canvas-confetti', () => ({

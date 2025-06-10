@@ -5,8 +5,8 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
-import BotonVolverInicio from '../botonInicio/BotonInicio';
-import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
+import BotonVolverInicio from '../botonInicio/botonInicio';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
 
 const Nivel7 = () => {

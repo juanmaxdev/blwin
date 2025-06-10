@@ -2,7 +2,7 @@ import { render, screen, cleanup} from '@testing-library/react';
 import { describe, it, vi, expect, afterEach } from 'vitest';
 import '@testing-library/jest-dom';
 
-import Nivel2 from './Nivel2';
+import Nivel2 from './nivel2';
 
 // Mock parcial del módulo react-router-dom
 vi.mock('react-router-dom', async () => {

@@ -4,7 +4,7 @@ import { describe, it, expect, afterEach, vi } from 'vitest';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 import '@testing-library/jest-dom';
 
-import BotonVolverInicio from './BotonInicio';
+import BotonVolverInicio from './botonInicio';
 
 // Mock parcial del módulo react-router-dom
 vi.mock('react-router-dom', async () => {

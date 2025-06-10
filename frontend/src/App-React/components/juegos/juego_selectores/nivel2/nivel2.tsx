@@ -5,8 +5,8 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
-import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
-import BotonVolverInicio from '../botonInicio/BotonInicio';
+import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/botonInicio';
 import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
 
 //Datos que sale en el codigo HTML
