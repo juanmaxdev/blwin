@@ -3,42 +3,43 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
+
 const personajes = [
   {
     nombre: "Z-Wing",
-    historia: "Las naves Z-Wing surcan el espacio en busca de conocimiento y descubrimientos. Hoy es tu primer día como piloto, y el universo entero se abre ante ti. ¡Veamos hasta dónde puedes llegar!",
+    historia: "Las naves Z-Wing surcan el espacio en busca de conocimiento y descubrimientos. Hoy es tu primer dÃ­a como piloto, y el universo entero se abre ante ti. Â¡Veamos hasta dÃ³nde puedes llegar!",
     imagen: "/personajes/Z-Wing.png",
     fondo: "from-blue-200 to-blue-500",
     enlace: "/juego_esquivar"
   },
   {
     nombre: "Sopa de letras",
-    historia: "Concentra tu ingenio, desliza tu mirada, encuentra la solución. Porque en esta sopa, cada segundo cuenta.",
+    historia: "Concentra tu ingenio, desliza tu mirada, encuentra la soluciÃ³n. Porque en esta sopa, cada segundo cuenta.",
     imagen: "/SopaDeLetras.png",
     fondo: "from-red-400 to-red-600",
     enlace: "/juegos_sopa_de_letras"
   },
   {
     nombre: "El juego del Ahorcado",
-    historia: "En los oscuros pasillos de una escuela abandonada, se rumorea que un juego prohibido aparece en la pizarra cada medianoche. Quien intente jugar al Ahorcado escuchará susurros que revelan letras...",
+    historia: "En los oscuros pasillos de una escuela abandonada, se rumorea que un juego prohibido aparece en la pizarra cada medianoche. Quien intente jugar al Ahorcado escucharÃ¡ susurros que revelan letras...",
     imagen: "/avatarJuegos/avatar_juego_ahorcado.png",
     fondo: "from-gray-500 to-black",
-    enlace: "/ahorcado"
+    enlace: "/ahorcado",
   },
   {
     nombre: "Quiz",
-    historia: "Quiz es un juego de preguntas diseñado para poner a prueba tus conocimientos de lógica, sintaxis y funciones en distintos lenguajes de programación. ¿Tienes lo necesario para convertirte en un maestro de la programación? ¡El reto comienza ahora!",
+    historia: "Quiz es un juego de preguntas diseÃ±ado para poner a prueba tus conocimientos de lÃ³gica, sintaxis y funciones en distintos lenguajes de programaciÃ³n. Â¿Tienes lo necesario para convertirte en un maestro de la programaciÃ³n? Â¡El reto comienza ahora!",
     imagen: "/personajes/Quiz.png",
     fondo: "from-green-200 to-green-500",
     enlace: "/juego-quiz"
   },
   {
     nombre: "Css Detective",
-    historia: "¿Alguna vez has soñado con ser detective? Pon a prueba tus habilidades resolviendo casos mientras aprendes selectores CSS en escenarios HTML interactivos.",
+    historia: "Â¿Alguna vez has soÃ±ado con ser detective? Pon a prueba tus habilidades resolviendo casos mientras aprendes selectores CSS en escenarios HTML interactivos",
     imagen: "/foto-detective-completa.png",
     fondo: "from-gray-200 to-gray-200",
     enlace: "juego/selectores"
-  }
+  },
 ];
 
 const PersonajeCarrusel = () => {
@@ -91,11 +92,8 @@ const PersonajeCarrusel = () => {
                 <br />
                 {sessionToken && (
                   <Button variant="contained">
-                    <Link
-                      to={personajeSeleccionado.enlace}
-                      style={{ color: 'inherit', textDecoration: 'none' }}
-                    >
-                      ¡A jugar!
+                    <Link to={personajeSeleccionado.enlace} style={{ color: 'inherit', textDecoration: 'none' }}>
+                      Â¡A jugar!
                     </Link>
                   </Button>
                 )}
