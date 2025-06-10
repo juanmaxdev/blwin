@@ -19,6 +19,20 @@ const personajes = [
     fondo: "from-red-400 to-red-600",
     enlace: "/juegos_sopa_de_letras"
   },
+  {
+    nombre: "El juego del Ahorcado",
+    historia: "En los oscuros pasillos de una escuela abandonada, se rumorea que un juego prohibido aparece en la pizarra cada medianoche. Quien intente jugar al Ahorcado escuchará susurros que revelan letras...",
+    imagen: "/avatarJuegos/avatar_juego_ahorcado.png",
+    fondo: "from-gray-500 to-black",
+    enlace: "/ahorcado",
+  },
+  {
+    nombre: "Quiz",
+    historia: "Quiz es un juego de preguntas diseñado para poner a prueba tus conocimientos de lógica, sintaxis y funciones en distintos lenguajes de programación. ¿Tienes lo necesario para convertirte en un maestro de la programación? ¡El reto comienza ahora!",
+    imagen: "/personajes/Quiz.png",
+    fondo: "from-green-200 to-green-500",
+    enlace: "/juego-quiz"
+  },
 ];
 
 const PersonajeCarrusel = () => {
