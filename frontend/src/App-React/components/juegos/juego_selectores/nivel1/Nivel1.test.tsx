@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, it, vi, expect, afterEach } from 'vitest';
 import '@testing-library/jest-dom';
 
-import Nivel1 from './Nivel1';
+import Nivel1 from './nivel1';
 
 // Mock parcial del módulo react-router-dom
 vi.mock('react-router-dom', async () => {

@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Head } from '../../../../components/Head';
 import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../../components/ui/ButtonSound';
-import BotonVolverInicio from '../botonInicio/botonInicio';
-import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/BotonInicio';
+import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
 import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
 
 const Nivel9 = () => {
     const [css, setCss] = useState('');
     const [mensaje, setMensaje] = useState<React.ReactNode>(null);
-
-    const navigate = useNavigate();
 
     const procesarCSS = (inputCSS: string) => inputCSS;
 

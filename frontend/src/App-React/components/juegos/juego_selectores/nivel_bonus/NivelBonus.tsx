@@ -4,8 +4,8 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 import BotonSonido from '../../../ui/ButtonSound';
-import BotonVolverInicio from '../botonInicio/botonInicio';
-import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
+import BotonVolverInicio from '../botonInicio/BotonInicio';
+import ProgressBar from '../detectiveJuegoPanel/BarraProgreso';
 import ModalFelicitacion from './ModalFelicitacion';
 
 
@@ -29,7 +29,7 @@ const Nivel10 = () => {
     const [cssParte2, setCssParte2] = useState('');
     const [mensaje2, setMensaje2] = useState<React.ReactNode>(null);
     const [ladronDerrotado, setLadronDerrotado] = useState(false);
-    const [mostrarLadronArrestado, setMostrarLadronArrestado] = useState(false);
+    const setMostrarLadronArrestado = useState(false)[1];
     const [mostrarModalFinal, setMostrarModalFinal] = useState(false);
 
 
