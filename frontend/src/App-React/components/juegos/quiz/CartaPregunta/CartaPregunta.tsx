@@ -1,7 +1,7 @@
-import { Boton } from "./ui/Boton"
-import { Carta, CartaContent, CartaHeader, CartaTitle, CartaDescription } from "./ui/Carta"
+import { Boton } from "../ui/Boton"
+import { Carta, CartaContent, CartaHeader, CartaTitle, CartaDescription } from "../ui/Carta"
 import { CheckCircle, XCircle } from "lucide-react"
-import type { Pregunta } from "./data/Preguntas"
+import type { Pregunta } from "../data/Preguntas"
 
 interface preguntaCartaProps {
   pregunta: Pregunta
