@@ -93,7 +93,7 @@ namespace Ble.Triviados.Services.WebApi.Controllers
         /// <returns>Lista de usuarios ordenados con mayor puntuación general de BBDD</returns>
         [HttpGet("ranking")]
         [AllowAnonymous]
-        public async Task<IActionResult> ObtenerTop5Usuarios()
+        public async Task<IActionResult> ObtenerRankingUsuarios()
         {
             var ranking = await _usuarioService.ObtenerRankingUsuariosAsync();
 
