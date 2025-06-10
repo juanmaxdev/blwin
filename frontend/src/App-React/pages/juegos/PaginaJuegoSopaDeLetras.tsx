@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import BotonHome from "../../components/juegos/sopaLetras/BotonHome";
 
 const SopaLetras = () => {
-  const [resetKey, setResetKey] = useState(0);
+  const [resetKey] = useState(0);
   const [contadorActivo, setContadorActivo] = useState(false);
 
   return (
