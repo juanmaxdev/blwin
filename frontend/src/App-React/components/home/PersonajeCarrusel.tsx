@@ -5,20 +5,27 @@ import { Button } from "@mui/material";
 
 
 const personajes = [
-   {
+  {
     nombre: "Z-Wing",
     historia: "Las naves Z-Wing surcan el espacio en busca de conocimiento y descubrimientos. Hoy es tu primer día como piloto, y el universo entero se abre ante ti. ¡Veamos hasta dónde puedes llegar!",
     imagen: "/personajes/Z-Wing.png",
     fondo: "from-blue-200 to-blue-500",
     enlace: "/juego_esquivar"
   },
-    {
+  {
+    nombre: "Sopa de letras",
+    historia: "Concentra tu ingenio, desliza tu mirada, encuentra la solución. Porque en esta sopa, cada segundo cuenta.",
+    imagen: "/SopaDeLetras.png",
+    fondo: "from-red-400 to-red-600",
+    enlace: "/juegos_sopa_de_letras"
+  },
+  {
     nombre: "El juego del Ahorcado",
     historia: "En los oscuros pasillos de una escuela abandonada, se rumorea que un juego prohibido aparece en la pizarra cada medianoche. Quien intente jugar al Ahorcado escuchará susurros que revelan letras...",
     imagen: "/avatarJuegos/avatar_juego_ahorcado.png",
     fondo: "from-gray-500 to-black",
     enlace: "/ahorcado",
-  }, 
+  },
   {
     nombre: "Quiz",
     historia: "Quiz es un juego de preguntas diseñado para poner a prueba tus conocimientos de lógica, sintaxis y funciones en distintos lenguajes de programación. ¿Tienes lo necesario para convertirte en un maestro de la programación? ¡El reto comienza ahora!",
@@ -30,6 +37,7 @@ const personajes = [
 
 const PersonajeCarrusel = () => {
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState<null | typeof personajes[0]>(null);
+  const sessionToken = localStorage.getItem("token");
 
   return (
     <section className="w-full pt-0 pb-24 px-4">
@@ -75,7 +83,13 @@ const PersonajeCarrusel = () => {
                   {personajeSeleccionado.historia}
                 </p>
                 <br />
-                <Button variant="contained"><Link to={personajeSeleccionado.enlace}>¡A jugar!</Link></Button>
+                {sessionToken && (
+                  <Button variant="contained">
+                    <Link to={personajeSeleccionado.enlace} style={{ color: 'inherit', textDecoration: 'none' }}>
+                      ¡A jugar!
+                    </Link>
+                  </Button>
+                )}
               </div>
             </motion.div>
           )}
