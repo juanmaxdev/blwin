@@ -1,0 +1,70 @@
+"use client"
+
+import { Heart, Zap, Percent } from "lucide-react"
+
+interface ComodinProps {
+  vida: boolean
+  danyo: boolean
+  cincuentaPorCiento: boolean
+  onRecuperarVida: () => void
+  onDanyo: () => void
+  onCincuentaPorCiento: () => void
+}
+
+export default function Comodin({
+  vida,
+  danyo,
+  cincuentaPorCiento,
+  onRecuperarVida,
+  onDanyo,
+  onCincuentaPorCiento,
+}: ComodinProps) {
+  return (
+    <div className="bg-white bg-opacity-90 rounded-2xl shadow-lg p-4">
+      <h3 className="text-lg font-bold mb-3 text-center text-gray-800">Comodines</h3>
+      <div className="space-y-3">
+        <button
+          onClick={onRecuperarVida}
+          disabled={!vida}
+          className={`w-full flex items-center justify-center px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+            vida
+              ? "bg-red-100 hover:bg-red-200 text-red-700 border-2 border-red-300 hover:border-red-400 cursor-pointer transform hover:scale-105"
+              : "bg-gray-100 text-gray-400 border-2 border-gray-200 cursor-not-allowed opacity-50"
+          }`}
+          title="Recuperar 30 puntos de vida"
+        >
+          <Heart className="w-5 h-5 mr-2" />
+          Poción de Vida
+        </button>
+
+        <button
+          onClick={onDanyo}
+          disabled={!danyo}
+          className={`w-full flex items-center justify-center px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+            danyo
+              ? "bg-yellow-100 hover:bg-yellow-200 text-yellow-700 border-2 border-yellow-300 hover:border-yellow-400 cursor-pointer transform hover:scale-105"
+              : "bg-gray-100 text-gray-400 border-2 border-gray-200 cursor-not-allowed opacity-50"
+          }`}
+          title="Infligir 50 puntos de daño al jefe"
+        >
+          <Zap className="w-5 h-5 mr-2" />
+          Daño Elemental
+        </button>
+
+        <button
+          onClick={onCincuentaPorCiento}
+          disabled={!cincuentaPorCiento}
+          className={`w-full flex items-center justify-center px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+            cincuentaPorCiento
+              ? "bg-blue-100 hover:bg-blue-200 text-blue-700 border-2 border-blue-300 hover:border-blue-400 cursor-pointer transform hover:scale-105"
+              : "bg-gray-100 text-gray-400 border-2 border-gray-200 cursor-not-allowed opacity-50"
+          }`}
+          title="Eliminar dos opciones incorrectas"
+        >
+          <Percent className="w-5 h-5 mr-2" />
+          Sabiduría del 50%
+        </button>
+      </div>
+    </div>
+  )
+}

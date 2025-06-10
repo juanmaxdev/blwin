@@ -26,6 +26,13 @@ const personajes = [
     fondo: "from-green-200 to-green-500",
     enlace: "/juego-quiz"
   },
+  {
+    nombre: "CodeQuest",
+    historia: "CodeQuest es un juego de aventuras donde te enfrentarás a jefes programadores en emocionantes batallas de preguntas. Cada jefe tiene su propio estilo y desafíos únicos. ¿Estás listo para demostrar tu valía?",
+    imagen: "/avatarJuegos/avatar_juego_ahorcado.png",
+    fondo: "from-purple-200 to-purple-500",
+    enlace: "/codequest"
+  }
 ];
 
 const PersonajeCarrusel = () => {

@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'CodeQuest';
+  src: url('../fonts/arcade/Arcade.ttf') format('truetype');
+  font-weight: normal;
+}
+
+.tituloPrincipal {
+    font-family: 'CodeQuest', sans-serif;;
+    font-size: 4rem;
+    text-align: center;
+}

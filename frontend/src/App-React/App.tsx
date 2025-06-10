@@ -5,6 +5,7 @@ import Home from './pages/home/Home';
 import MiniJuegoAhorcado from './pages/juegos/ahorcado/Ahorcado'
 import PaginaJuegoEsquivar from './pages/juegos/PaginaJuegoEsquivar';
 import JuegoQuiz from './pages/juegos/quiz/JuegoQuiz';
+import CodeQuest from './pages/juegos/codequest/Codequest';
 
 const App = () => (
   <Routes>
@@ -25,6 +26,9 @@ const App = () => (
 
     {/* Juego Quiz */}
     <Route path="/juego-quiz" element={<JuegoQuiz />} />
+
+    {/* Juego CodeQuest */}
+    <Route path='/codequest' element={<CodeQuest/>} />
 
   </Routes>
 );
