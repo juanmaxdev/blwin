@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { ControlJuego } from './controlJuego'
+import { ControlJuego } from './ControlJuego'
 
 // Mock del botón si es un wrapper personalizado
 vi.mock('../../../ui/Button', () => ({
