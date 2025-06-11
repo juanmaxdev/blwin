@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ble.Triviados.Application.Dtos;
 using Ble.Triviados.Domain.Entity.Entities;
 
 namespace Ble.Triviados.Application.Interfaces
@@ -13,5 +14,6 @@ namespace Ble.Triviados.Application.Interfaces
         Task<UsuarioJuego?> ObtenerRelacionAsync(int usuarioId, int juegoId);
         Task<IEnumerable<UsuarioJuego>> ObtenerJuegosPorUsuarioAsync(int usuarioId);
         Task<UsuarioJuego?> ActualizarRelacionAsync(UsuarioJuego usuarioJuego);
+        Task<IEnumerable<UsuarioRankingDto>> ObtenerRankingDtoPorJuegoAsync(string nombreJuego);
     }
 }

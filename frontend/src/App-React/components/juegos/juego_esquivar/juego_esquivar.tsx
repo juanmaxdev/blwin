@@ -10,6 +10,7 @@ import Contador from "./contador/Contador";
 import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion";
 import ButtonSound from "../../ui/ButtonSound";
 import toast, { Toaster } from 'react-hot-toast';
+import Ranking from "../../ranking/Ranking";
 
 
 export default function JuegoEsquivar() {
@@ -205,6 +206,17 @@ export default function JuegoEsquivar() {
                         <Nave fila={2} columna={3} />
                         <Boton valor={"Volver al inicio"} funcion={handleRedirect} fila={4} columna={3} />
                         <Boton valor={"Comenzar juego"} funcion={handleStart} fila={3} columna={3} />
+                        <div
+                            style={{
+                                gridColumn: `4/6`,
+                                gridRow: `3/5`,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Ranking tituloRanking={"Top 5 Z-Wing"} nombreJuego={nombreJuego} />
+                        </div>
                     </>
                 }
             </Grid>

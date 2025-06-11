@@ -57,5 +57,21 @@ namespace Ble.Triviados.Infraestructure.Persistence.Repositories
 
             return existente;
         }
+
+        /// <summary>
+        /// Obtiene el ranking de puntuciones de todos los usuarios para un juego en específico, usando el nombre del propio juego
+        /// </summary>
+        /// <param name="nombreJuego">Nombre del juego que queremos listar</param>
+        /// <returns>Lista de relaciones UsuarioJuego ordenadas por puntuación (desc), incluyendo los datos del usuario.</returns>
+        public async Task<IEnumerable<UsuarioJuego>> ObtenerRankingPorJuegoAsync(string nombreJuego)
+        {
+            return await _context.UsuarioJuegos
+                .Include(u => u.Usuario)
+                .Include(u => u.Juego)
+                .Where(u => u.Juego.Nombre == nombreJuego)
+                .OrderByDescending(u => u.Puntuacion)
+                .ToListAsync();
+        }
+
     }
 }
