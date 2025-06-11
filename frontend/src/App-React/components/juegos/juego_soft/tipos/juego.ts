@@ -10,7 +10,7 @@ export interface Retos {
   plantillaCodigo?: string
   respuestaCorrecta: string
   explicacion: string
-  accion: "golpear" | "parar" | "nuevoJuego"
+  accion: "pedirCarta" | "plantarse" | "siguientePartida"
   dificultad: "fácil" | "medio" | "dificil"
   verEjecucion?: boolean 
   casosTest?: Array<{

@@ -15,21 +15,21 @@ export function GameControls({ estadoJuego, retoActivo, onInitiateRetos }: GameC
   return (
     <div className="flex justify-center space-x-4">
       <Button
-        onClick={() => onInitiateRetos("golpear")}
+        onClick={() => onInitiateRetos("pedirCarta")}
         disabled={!puedeJugar}
         className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3"
       >
         ☕ Pedir Carta
       </Button>
       <Button
-        onClick={() => onInitiateRetos("parar")}
+        onClick={() => onInitiateRetos("plantarse")}
         disabled={!puedeJugar}
         className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-3"
       >
         🔷 Plantarse
       </Button>
       <Button
-        onClick={() => onInitiateRetos("nuevoJuego")}
+        onClick={() => onInitiateRetos("siguientePartida")}
         disabled={!puedeNuevoJuego}
         className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3"
       >
