@@ -61,5 +61,5 @@ describe('ControlJuego', () => {
     fireEvent.click(screen.getByText('🔁 Siguiente Partida'))
     expect(onInitiateRetos).toHaveBeenCalledWith('siguientePartida')
   })
-  
+
 })
