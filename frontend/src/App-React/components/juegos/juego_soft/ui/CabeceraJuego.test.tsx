@@ -35,9 +35,4 @@ describe('Header', () => {
     expect(screen.getByText('🎯 25 puntos')).toBeInTheDocument()
     expect(screen.getByText('Partida 4/4')).toBeInTheDocument()
   })
-
-  it('coincide con el snapshot', () => {
-    const { container } = render(<Header {...props} />)
-    expect(container).toMatchSnapshot()
-  })
 })

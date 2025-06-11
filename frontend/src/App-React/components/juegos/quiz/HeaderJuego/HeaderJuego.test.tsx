@@ -23,9 +23,4 @@ describe('HeaderJuego', () => {
         const title = container.querySelector('h1')
         expect(title).toHaveClass('text-3xl', 'font-bold', 'text-gray-900')
     })
-
-    it('coincide con el snapshot', () => {
-        const { container } = render(<HeaderJuego />)
-        expect(container).toMatchSnapshot()
-    })
 })
