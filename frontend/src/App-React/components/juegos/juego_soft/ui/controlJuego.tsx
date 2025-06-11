@@ -1,14 +1,14 @@
 
 import  Button  from "../../../ui/Button"
-import type { Retos } from "../tipos/juego"
+import type { Retos } from "../types/Juego"
 
-interface GameControlsProps {
+interface ControlJuegoProps {
   estadoJuego: string
   retoActivo: boolean
   onInitiateRetos: (action: Retos["accion"]) => void
 }
 
-export function GameControls({ estadoJuego, retoActivo, onInitiateRetos }: GameControlsProps) {
+export function ControlJuego({ estadoJuego, retoActivo, onInitiateRetos }: ControlJuegoProps) {
   const puedeJugar = estadoJuego === "playing" && !retoActivo
   const puedeNuevoJuego = estadoJuego !== "playing" && !retoActivo
 
@@ -19,21 +19,21 @@ export function GameControls({ estadoJuego, retoActivo, onInitiateRetos }: GameC
         disabled={!puedeJugar}
         className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3"
       >
-        ☕ Pedir Carta
+        🎰 Pedir Carta
       </Button>
       <Button
         onClick={() => onInitiateRetos("plantarse")}
         disabled={!puedeJugar}
         className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-3"
       >
-        🔷 Plantarse
+        ✋ Plantarse
       </Button>
       <Button
         onClick={() => onInitiateRetos("siguientePartida")}
         disabled={!puedeNuevoJuego}
         className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3"
       >
-        📘 Siguiente Partida
+        🔁 Siguiente Partida
       </Button>
     </div>
   )

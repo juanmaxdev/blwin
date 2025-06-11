@@ -1,4 +1,4 @@
-import type { Retos } from "../tipos/juego"
+import type { Retos } from "../types/Juego"
 
 export const preguntasProgramacion: Retos[] = [
   {
