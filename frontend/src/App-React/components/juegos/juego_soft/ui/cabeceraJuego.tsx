@@ -3,10 +3,10 @@ interface CabeceraJuegoProps {
   juegosJugados: number
 }
 
-export function GameHeader({ puntos, juegosJugados }: CabeceraJuegoProps) {
+export function Header({ puntos, juegosJugados }: CabeceraJuegoProps) {
   return (
     <div className="text-center mb-8">
-      <h1 className="text-4xl font-bold text-white mb-2">🃏 Blackjack Educativo</h1>
+      <h1 className="text-4xl font-bold text-white mb-2">🃏 Jack & Code</h1>
       <div className="flex justify-center items-center gap-4">
         <div className="bg-white bg-opacity-20 rounded-full px-4 py-2">
           <span className="text-white font-semibold">🎯 {puntos} puntos</span>

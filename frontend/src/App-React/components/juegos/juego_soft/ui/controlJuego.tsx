@@ -8,7 +8,7 @@ interface GameControlsProps {
   onInitiateRetos: (action: Retos["accion"]) => void
 }
 
-export function GameControls({ estadoJuego, retoActivo, onInitiateRetos }: GameControlsProps) {
+export function ControlJuego({ estadoJuego, retoActivo, onInitiateRetos }: GameControlsProps) {
   const puedeJugar = estadoJuego === "playing" && !retoActivo
   const puedeNuevoJuego = estadoJuego !== "playing" && !retoActivo
 
