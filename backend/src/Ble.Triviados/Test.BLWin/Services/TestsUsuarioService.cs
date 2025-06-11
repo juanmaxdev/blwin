@@ -65,5 +65,49 @@ namespace Test.BLWin.Services
             // Assert: Comprobamos que el mensaje devuelto indique que los datos no son válidos
             Assert.AreEqual("Nombre o contraseña no válidos.", result);
         }
+
+        [TestMethod]
+        public async Task ObtenerRankingUsuariosAsync_HayUsuarios_ListaRanking()
+        {
+            // Arrange : Creamos varios usuarios de prueba en la página
+            var usuarios = new List<Usuario>
+            {
+                new Usuario { Id = 1, Name = "Juan", Puntos = 100 },
+                new Usuario { Id = 2, Name = "Maria", Puntos = 200 }
+            };
+
+            _usuarioRepositoryMock
+                .Setup(repo => repo.ObtenerRankingUsuariosAsync())
+                .ReturnsAsync(usuarios);
+
+            // Act
+            var resultado = await _usuarioService.ObtenerRankingUsuariosAsync();
+
+            // Assert : Comprobamos que se devuelve un listado de DTOs con el formato esperado
+            Assert.IsNotNull(resultado);
+            Assert.AreEqual(2, resultado.Count);
+            Assert.AreEqual(1, resultado[0].UsuarioId);
+            Assert.AreEqual("Juan", resultado[0].Nombre);
+            Assert.AreEqual(100, resultado[0].Puntos);
+            Assert.AreEqual(2, resultado[1].UsuarioId);
+            Assert.AreEqual("Maria", resultado[1].Nombre);
+            Assert.AreEqual(200, resultado[1].Puntos);
+        }
+
+        [TestMethod]
+        public async Task ObtenerRankingUsuariosAsync_NoHayUsuarios_ListaVacia()
+        {
+            // Arrange : Creamos el mock sin introducir usuarios
+            _usuarioRepositoryMock
+                .Setup(repo => repo.ObtenerRankingUsuariosAsync())
+                .ReturnsAsync(new List<Usuario>());
+
+            // Act : Ejecutamos ObtenerRankingUsuariosAsync
+            var resultado = await _usuarioService.ObtenerRankingUsuariosAsync();
+
+            // Assert : Comprobamos que se devuelve un listado vacio
+            Assert.IsNotNull(resultado);
+            Assert.AreEqual(0, resultado.Count);
+        }
     }
 }
