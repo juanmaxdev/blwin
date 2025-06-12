@@ -5,16 +5,20 @@ import { BarraLateral } from "./ui/BarraLateral"
 import { RetosModal } from "./modalReto/ModalReto"
 import { ResumenPartida } from "./ui/ResumenPartida"
 import { useGameLogic } from "./logicaJuego/LogicaJuego"
+import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion"
 
 export function JuegoBlackjack() {
+  const nombreJuego = "blackjack";
   const { estadoJuego, initializeGame, initiateRetos, handleRetosComplete, restartSession, closeRetosModal } =
     useGameLogic()
+    
 
   useEffect(() => {
     initializeGame()
   }, [initializeGame])
 
   if (estadoJuego.juegoFinalizado) {
+    mandarPuntuacion(nombreJuego, estadoJuego.puntuacion)
     return (
       <ResumenPartida
         puntosTotales={estadoJuego.puntuacion}
@@ -27,7 +31,7 @@ export function JuegoBlackjack() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-800 via-blue-900 to-purple-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
       <div className="max-w-6xl mx-auto">
         <Header puntos={estadoJuego.puntuacion} juegosJugados={estadoJuego.partidasJugador} />
 
@@ -60,7 +64,10 @@ export function JuegoBlackjack() {
             onClose={closeRetosModal}
           />
         )}
-      </div>
+
+        
+        
+      </div>      
     </div>
   )
 }

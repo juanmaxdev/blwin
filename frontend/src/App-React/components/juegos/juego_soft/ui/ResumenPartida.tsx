@@ -1,4 +1,7 @@
 import { Boton } from "../../quiz/ui/Boton" 
+import Ranking from "../../../ranking/Ranking"
+
+const juegoNombre = "blackjact";
 
 interface ResumenPartidaProps {
   puntosTotales: number
@@ -17,9 +20,10 @@ export function ResumenPartida({
 }: ResumenPartidaProps) {
   const accuracy = preguntasRespondidas > 0 ? Math.round((repuestasCorrectas / preguntasRespondidas) * 100) : 0
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-2xl w-full p-8">
+return (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="flex flex-col md:flex-row items-start justify-between w-full max-w-5xl">
+      <div className="bg-white rounded-lg w-full p-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2">🎉 ¡Sesión Completada!</h1>
           <p className="text-gray-600">Completaste {partidasJugadas} partidas</p>
@@ -43,13 +47,25 @@ export function ResumenPartida({
             <div className="text-sm">Correctas</div>
           </div>
         </div>
-
+      
         <div className="text-center">
           <Boton onClick={onRestart} className="bg-green-600 hover:bg-green-700 text-white px-8 py-3">
             🔄 Nueva Sesión
           </Boton>
         </div>
       </div>
+
+      <div className="w-[500px] bg-white p-6 rounded-xl shadow-lg mt-6 md:mt-0 md:ml-6">
+        <Ranking
+          tituloRanking={"Top 5 Juego-Blackjack"}
+          nombreJuego={juegoNombre}
+        />
+      </div>
     </div>
-  )
+  </div>
+);
+
+
+
+
 }

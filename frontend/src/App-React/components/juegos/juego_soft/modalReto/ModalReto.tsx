@@ -49,9 +49,6 @@ export function RetosModal({ retos, onComplete, onClose }: ModalRetosProps) {
                 <span className="text-sm text-gray-600">{retos.lenguaje}</span>
               </div>
             </div>
-            <Boton onClick={onClose}>
-              ✕
-            </Boton>
           </div>
 
           <div className="mb-6">
@@ -123,9 +120,7 @@ export function RetosModal({ retos, onComplete, onClose }: ModalRetosProps) {
           <div className="flex justify-end space-x-3">
             {!verResultado ? (
               <>
-                <Boton onClick={onClose}>
-                  Cancelar
-                </Boton>
+                
                 <Boton
                   onClick={handleSubmit}
                   disabled={

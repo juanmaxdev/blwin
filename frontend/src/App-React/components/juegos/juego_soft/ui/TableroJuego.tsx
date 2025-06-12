@@ -59,5 +59,7 @@ export function Tablero({
         onInitiateRetos={onInitiateChallenge}
       />
     </div>
+
+    
   )
 }

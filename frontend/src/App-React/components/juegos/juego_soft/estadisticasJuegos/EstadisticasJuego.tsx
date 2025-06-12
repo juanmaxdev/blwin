@@ -1,3 +1,4 @@
+
 interface EstadisticasJuegoProps {
   puntuacionJugador: number
   puntuacionDealer: number
@@ -47,7 +48,7 @@ export function EstadisticasJuego({
             <span className={`font-bold ${accuracy >= 70 ? "text-green-600" : "text-red-600"}`}>{accuracy}%</span>
           </div>
         </div>
-      </div>
+      </div>      
     </div>
   )
 }
