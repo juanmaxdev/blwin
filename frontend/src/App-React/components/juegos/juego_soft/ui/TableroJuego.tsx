@@ -26,9 +26,9 @@ export function Tablero({
 }: TableroProps) {
   const getStatusMessage = () => {
     switch (estadoJuego) {
-      case "playerWin":
+      case "jugadorGanador":
         return "🎉 ¡Ganaste!"
-      case "dealerWin":
+      case "dealerGanador":
         return "😔 Ganó el dealer"
       case "tie":
         return "🤝 Empate"

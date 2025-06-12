@@ -8,7 +8,7 @@ interface ModalRetosProps {
   onClose: () => void
 }
 
-export function retosModal({ retos, onComplete, onClose }: ModalRetosProps) {
+export function RetosModal({ retos, onComplete, onClose }: ModalRetosProps) {
   const [preguntaSeleccionada, setpreguntaSeleccionada] = useState("")
   const [preguntaCodigo, setpreguntaCodigo] = useState("")
   const [verResultado, setverResultado] = useState(false)
@@ -57,7 +57,6 @@ export function retosModal({ retos, onComplete, onClose }: ModalRetosProps) {
           <div className="mb-6">
             <h3 className="font-semibold text-lg mb-4">{retos.preguntas}</h3>
 
-            {/* Código base */}
             {(retos.codigo || retos.plantillaCodigo) && (
               <div className="mb-4">
                 <div className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
@@ -68,7 +67,6 @@ export function retosModal({ retos, onComplete, onClose }: ModalRetosProps) {
               </div>
             )}
 
-            {/* Input para código */}
             {retos.tipo === "codigo-completo" && (
               <div className="mb-4">
                 <input
@@ -82,7 +80,6 @@ export function retosModal({ retos, onComplete, onClose }: ModalRetosProps) {
               </div>
             )}
 
-            {/* Opciones múltiples */}
             {(retos.tipo === "teoría" || retos.tipo === "predecir-salida") && retos.opciones && (
               <div className="space-y-3">
                 {retos.opciones.map((option, index) => (

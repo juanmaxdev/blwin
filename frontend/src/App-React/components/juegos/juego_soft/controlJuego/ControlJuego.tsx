@@ -9,8 +9,8 @@ interface ControlJuegoProps {
 }
 
 export function ControlJuego({ estadoJuego, retoActivo, onInitiateRetos }: ControlJuegoProps) {
-  const puedeJugar = estadoJuego === "playing" && !retoActivo
-  const puedeNuevoJuego = estadoJuego !== "playing" && !retoActivo
+  const puedeJugar = estadoJuego === "jugando" && !retoActivo
+  const puedeNuevoJuego = estadoJuego !== "jugando" && !retoActivo
 
   return (
     <div className="flex justify-center space-x-4">
