@@ -36,7 +36,6 @@ export default function Ranking({ tituloRanking, nombreJuego }: Props) {
 
     cargarPuntuacion();
   }, [nombreJuego]);
-  console.log(ranking);
   if (ranking != undefined) {
     return (
       <div className="bg-white p-4 rounded-xl shadow-md max-w-sm w-full mt-0">

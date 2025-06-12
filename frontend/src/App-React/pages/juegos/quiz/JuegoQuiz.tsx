@@ -6,6 +6,7 @@ import BarraProgeso from "../../../components/juegos/quiz/BarraProgreso"
 import PreguntaCarta from "../../../components/juegos/quiz/CartaPregunta"
 import ResultadoJuego from "../../../components/juegos/quiz/ResultadoJuego"
 import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion"
+import BotonVolverInicio from "../../../components/juegos/juego_selectores/botonInicio/botonInicio"
 
 const QUESTIONS_PER_GAME = 8
 
@@ -79,6 +80,7 @@ export default function ProgrammingQuizGame() {
 
 return (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
+    <BotonVolverInicio />
     <div className="bg-white rounded-xl shadow-xl p-8 space-y-6">
       
       <HeaderJuego />
