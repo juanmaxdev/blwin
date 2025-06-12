@@ -3,7 +3,7 @@ import { ControlJuego } from "../controlJuego/ControlJuego"
 import type { Carta, Retos } from "../types/Juego"
 
 
-interface GameBoardProps {
+interface TableroProps {
   manoDealer: Carta[]
   manoJugador: Carta[]
   puntuacionDealer: number
@@ -14,7 +14,7 @@ interface GameBoardProps {
   onInitiateChallenge: (action: Retos["accion"]) => void
 }
 
-export function GameBoard({
+export function Tablero({
   manoDealer,
   manoJugador,
   puntuacionDealer,
@@ -23,7 +23,7 @@ export function GameBoard({
   estadoJuego,
   retoActivo,
   onInitiateChallenge,
-}: GameBoardProps) {
+}: TableroProps) {
   const getStatusMessage = () => {
     switch (estadoJuego) {
       case "playerWin":
