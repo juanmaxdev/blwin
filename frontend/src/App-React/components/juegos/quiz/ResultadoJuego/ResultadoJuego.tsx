@@ -2,7 +2,6 @@ import { Boton } from "../ui/Boton"
 import { Carta, CartaHeader, CartaTitle, CartaDescription, CartaContent } from "../ui/Carta"
 import { Progreso } from "../ui/Progreso"
 import { RotateCcw, Trophy, Play } from "lucide-react"
-import { Link } from "react-router-dom"
 import Ranking from "../../../ranking/Ranking"
 
 
