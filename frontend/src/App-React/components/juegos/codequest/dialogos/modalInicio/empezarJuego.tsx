@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 
 // listado de jefes
 import JefeReact from  "../../../../../assets/juegos/codequest/personaje/jefe_react.png"
@@ -22,11 +21,15 @@ import JefeScrumDerrotado from  "../../../../../assets/juegos/codequest/personaj
 // Campos de batalla
 
 import JefeReactCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_react.jpg"
-//import JefeJavaCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_java.jpg"
+import JefeJavaCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_java.jpg"
 import JefeNETCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_net.jpg"
-// import JefeMamonCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_mamon.jpg"
-// import JefeProgramadorCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_programador.jpg"
+import JefeMamonCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeMamon.jpg"
+import JefeProgramadorCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeProgramador.jpg"
 import JefeScrumCampoBatalla from "../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_scrum.jpg"
+
+// Fondo de la seleccion de personajes
+
+import FondoPersonajes from "../../../../../assets/juegos/codequest/imagenes/fondo_seleccion.jpg"
 
 
 interface EmpezarJuegoProps {
@@ -50,7 +53,6 @@ export default function EmpezarJuego({ onSeleccionarJefe,
  }: EmpezarJuegoProps) {
 
   const [jefeSeleccionado, setJefeSeleccionado] = useState<string | null>(null)
-  // const navigate = useNavigate();
 
   const jefes: JefeInfo[] = [
     {
@@ -66,7 +68,7 @@ export default function EmpezarJuego({ onSeleccionarJefe,
       nombre: "Jefe Java",
       imagen: JefeJava,
       imagenDerrotado: JefeJavaDerrotado,
-      fondo: JefeReactCampoBatalla,
+      fondo: JefeJavaCampoBatalla,
       descripcion: "Experto en POO y JVM. Sus preguntas pondrán a prueba tu conocimiento de Java.",
     },
     {
@@ -82,7 +84,7 @@ export default function EmpezarJuego({ onSeleccionarJefe,
       nombre: "Usuario Mamón",
       imagen: JefeMamon,
       imagenDerrotado: JefeMamonDerrotado,
-      fondo: JefeReactCampoBatalla,
+      fondo: JefeMamonCampoBatalla,
       descripcion: "El cliente imposible de satisfacer. Sus preguntas son impredecibles y caprichosas.",
     },
     {
@@ -90,7 +92,7 @@ export default function EmpezarJuego({ onSeleccionarJefe,
       nombre: "Jefe Programador",
       imagen: JefeProgramador,
       imagenDerrotado: JefeProgramadorDerrotado,
-      fondo: JefeReactCampoBatalla,
+      fondo: JefeProgramadorCampoBatalla,
       descripcion: "Conocedor de todos los lenguajes. Te desafiará con preguntas generales de programación.",
     },
     {
@@ -111,13 +113,16 @@ export default function EmpezarJuego({ onSeleccionarJefe,
 
   const jefesDisponibles = jefes.filter((jefe) => !jefesDerrotados.includes(jefe.id))
   const todosJefesDerrrotados = jefesDisponibles.length === 0
+  const fondoSeleccion = FondoPersonajes;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
-      <div className="bg-white rounded-2xl shadow-xl max-w-5xl w-full mx-4 p-6 relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 flex items-center justify-center ">
+      <div className="bg-white  bg-opacity-90  rounded-2xl shadow-xl max-w-5xl w-full mx-4 p-6 relative max-h-[90vh] overflow-y-auto" 
+       // style={{backgroundImage: `url(${fondoSeleccion})`}}
+      >
         {esSeleccionPostVictoria ? (
           <div className="text-center mb-6">
-            <h2 className="text-3xl font-bold text-green-600 mb-2">¡Victoria!</h2>
+            <h2 className="text-4xl font-bold text-green-600 mb-2">¡Victoria!</h2>
             <p className="text-lg text-gray-700">
               {todosJefesDerrrotados
                 ? "¡Felicidades! Has derrotado a todos los jefes. Eres el maestro supremo de CodeQuest!"
@@ -162,14 +167,7 @@ export default function EmpezarJuego({ onSeleccionarJefe,
                     }`}
                     onClick={() => !estaDerrotado && setJefeSeleccionado(jefe.id)}
                   >
-                    {estaDerrotado && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg z-10">
-                        <div className="text-center">
-                          <div className="text-4xl mb-2">✅</div>
-                          <span className="text-white font-bold text-lg">DERROTADO</span>
-                        </div>
-                      </div>
-                    )}
+                
 
                     <div className="flex flex-col items-center">
                       <div className="w-24 h-24 mb-3 relative">
@@ -210,6 +208,10 @@ export default function EmpezarJuego({ onSeleccionarJefe,
                   Reiniciar Juego
                 </button>
               )}
+              <button
+                onClick={() => window.location.href = "/"}
+                className="px-8 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors"
+                >Volver al inicio</button>       
             </div>
           </>
         )}

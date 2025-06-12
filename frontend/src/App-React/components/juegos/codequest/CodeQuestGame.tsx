@@ -35,10 +35,10 @@ import CampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoB
 // Campos de batalla
 
 import JefeReactCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_react.jpg';
-//import JefeJavaCampoBatalla from "../../..assets/juegos/codequest/campoDeBatalla/campoBatalla_java.jpg"
-import JefeNETCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_net.jpg';
-// import JefeMamonCampoBatalla from "../../..assets/juegos/codequest/campoDeBatalla/campoBatalla_mamon.jpg"
-// import JefeProgramadorCampoBatalla from "../../..assets/juegos/codequest/campoDeBatalla/campoBatalla_programador.jpg"
+import JefeJavaCampoBatalla from "../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_java.jpg";
+import JefeNETCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeMamon.jpg';
+import JefeMamonCampoBatalla from "../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeMamon.jpg"
+import JefeProgramadorCampoBatalla from "../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeProgramador.jpg"
 import JefeScrumCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_scrum.jpg';
 
 type EstadoJuego = 'seleccion-jefe' | 'dialogo-inicial' | 'pregunta' | 'respuesta' | 'victoria' | 'derrota';
@@ -98,7 +98,7 @@ export default function CodeQuest() {
       nombre: 'JEFE JAVA',
       imagen: JefeJava,
       imagenDerrotado: JefeJavaDerrotado,
-      fondo: JefeReactCampoBatalla,
+      fondo: JefeJavaCampoBatalla,
       preguntas: preguntasJava,
       vidaMaxima: 175,
       fraseInicial: '¡Java es el lenguaje supremo! Demuéstrame que conoces su poder orientado a objetos.',
@@ -120,7 +120,7 @@ export default function CodeQuest() {
       nombre: 'USUARIO MAMÓN',
       imagen: JefeMamon,
       imagenDerrotado: JefeMamonDerrotado,
-      fondo: JefeReactCampoBatalla,
+      fondo: JefeMamonCampoBatalla,
       preguntas: [...preguntasReact, ...preguntasJava, ...preguntasNet].sort(() => Math.random() - 0.5).slice(0, 15),
       vidaMaxima: 130,
       fraseInicial: '¡Esto debería ser trivial! ¿Por qué no está listo ya? ¡Responde mis preguntas ahora mismo!',
@@ -131,7 +131,7 @@ export default function CodeQuest() {
       nombre: 'JEFE PROGRAMADOR',
       imagen: JefeProgramador,
       imagenDerrotado: JefeProgramadorDerrotado,
-      fondo: JefeReactCampoBatalla,
+      fondo: JefeProgramadorCampoBatalla,
       preguntas: preguntasGeneral,
       vidaMaxima: 200,
       fraseInicial:
@@ -331,7 +331,8 @@ export default function CodeQuest() {
         setEstadoJuego('victoria');
         setDialogoActivo('jefe');
       }, 1000);
-      setPuntuacionJugador((prev) => prev + 100);
+      // Puntuacion por derrotar al jefe
+      setPuntuacionJugador((prev) => prev + 400);
     }
   };
 
@@ -471,6 +472,10 @@ export default function CodeQuest() {
             ) : (
               <PersonajeAnimado imagen={Jugador} className="w-96 h-96" animacion={animacionJugador} />
             )}
+             {/*Puntuación y barra de vida del jugador */}
+            <div className="absolute bottom-24 left-64">
+              <span className="text-lg font-bold text-white">Puntuación: {puntuacionJugador}</span>
+            </div>
             <div className="absolute bottom-10 left-64 w-80">
               <BarraDeVida actual={vidaJugador} max={100} />
             </div>
@@ -486,13 +491,6 @@ export default function CodeQuest() {
               onDanyo={usarComodinDanyo}
               onCincuentaPorCiento={usarComodin50PorCiento}
             />
-          </div>
-
-          {/* Puntuación */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="bg-white bg-opacity-90 rounded-lg px-4 py-2 shadow-md">
-              <span className="text-lg font-bold text-purple-800">Puntuación: {puntuacionJugador}</span>
-            </div>
           </div>
 
           {/* Botón para reiniciar (solo visible en derrota) */}

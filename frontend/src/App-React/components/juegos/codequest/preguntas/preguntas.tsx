@@ -183,7 +183,7 @@ function C() {
       c: '2',
       d: 'Error de contexto anidado',
     },
-    respuestaCorrecta: '2',
+    respuestaCorrecta: 'c',
   },
   {
     id: 9,
