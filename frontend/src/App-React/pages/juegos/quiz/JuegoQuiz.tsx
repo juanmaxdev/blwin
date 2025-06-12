@@ -7,6 +7,7 @@ import PreguntaCarta from "../../../components/juegos/quiz/CartaPregunta/CartaPr
 import ResultadoJuego from "../../../components/juegos/quiz/ResultadoJuego/ResultadoJuego"
 import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion"
 
+
 const QUESTIONS_PER_GAME = 8
 
 export default function ProgrammingQuizGame() {
@@ -89,7 +90,7 @@ return (
         progreso={progress}
         puntuacion={score}
       />
-
+      
       <PreguntaCarta
         pregunta={question}
         respuestaSeleccionada={selectedAnswer}
@@ -98,6 +99,7 @@ return (
         onSiguientePregunta={handleNextQuestion}
         esUltimaPregunta={currentQuestion === questions.length - 1}
       />
+
       
     </div>
   </div>

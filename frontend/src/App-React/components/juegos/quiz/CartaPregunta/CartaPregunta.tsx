@@ -19,6 +19,7 @@ export default function PreguntaCarta({
   onPreguntaSeleccionada,
   onSiguientePregunta,
   esUltimaPregunta,
+  
 }: preguntaCartaProps) {
   return (
     <Carta className="w-w-full h-[500px] w-[700px] overflow-auto">
@@ -95,6 +96,7 @@ export default function PreguntaCarta({
               {!esUltimaPregunta ? "Siguiente Pregunta" : "Ver Resultados"}
             </Boton>
           </div>
+          
         )}
       </CartaContent>
     </Carta>
