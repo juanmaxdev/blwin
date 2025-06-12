@@ -91,7 +91,7 @@ const Ahorcado = () => {
   const imgSegunFallo = imagenesAhorcado[numeroFallos];
 
   const handleIrInicio = () => {
-    navigate('/');
+    window.parent.location.reload();
   };
 
   const handleVolverAJugar = () => {
