@@ -42,7 +42,7 @@ const personajes = [
   },
    {
     nombre: "Atrapa un millón de puntos",
-    historia: "¿Alguna vez has soñado con ser detective? Pon a prueba tus habilidades resolviendo casos mientras aprendes selectores CSS en escenarios HTML interactivos",
+    historia: "Scrum, agilidad y programación al límite. Responde bien y duplica tus puntos.",
     imagen: "/AtrapaPuntos.png",
     fondo: "from-yellow-100 to-yellow-300",
     enlace: "/juego_atrapa_puntos"
