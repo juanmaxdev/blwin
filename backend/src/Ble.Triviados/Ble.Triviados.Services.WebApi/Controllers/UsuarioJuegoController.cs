@@ -75,5 +75,21 @@ namespace Ble.Triviados.Services.WebApi.Controllers
 
             return Ok(relacion);
         }
+
+        /// <summary>
+        /// GET: api/usuariojuego/ranking/{nombreJuego}
+        /// Devuelve el ranking completo de usuarios de un juego usando el nombre de este
+        /// </summary>
+        [HttpGet("ranking/{nombreJuego}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ObtenerRankingPorJuego(string nombreJuego)
+        {
+            var ranking = await _usuarioJuegoService.ObtenerRankingDtoPorJuegoAsync(nombreJuego);
+
+            if (ranking == null || !ranking.Any())
+                return NotFound(new { Message = "No se encontró ningún ranking para el juego especificado." });
+
+            return Ok(ranking);
+        }
     }
 }

@@ -1,13 +1,13 @@
 import { Head } from '../../components/Head';
 import LoginButton from '../../components/home/LoginButton';
 import Slogan from '../../components/home/Slogan';
-import RankingPreview, { RankingItem } from '../../components/home/RankingPreview';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import PersonajeCarrusel from '../../components/home/PersonajeCarrusel';
 import BotonSonido from '../../components/ui/ButtonSound';
+import Ranking from '../../components/ranking/Ranking';
 
 function decodeToken(token: string) {
   try {
@@ -21,7 +21,6 @@ function decodeToken(token: string) {
 
 const Home = () => {
   const navigate = useNavigate();
-  const [ranking, setRanking] = useState<RankingItem[]>([]);
   const [logueado, setLogueado] = useState(false);
 
   const handleJugar = async () => {
@@ -58,16 +57,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const fetchRanking = async () => {
-      try {
-        const res = await axios.get('/api/Partida/ranking/top5');
-        setRanking(res.data);
-      } catch (err) {
-        console.error('Error al obtener el ranking:', err);
-      }
-    };
-
-    fetchRanking();
 
     const token = localStorage.getItem('token');
     setLogueado(!!token);
@@ -120,7 +109,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 3 }}
             >
-              <RankingPreview ranking={ranking} />
+              <Ranking tituloRanking={'Top 5 global'}></Ranking>
             </motion.div>
           </div>
         </main>

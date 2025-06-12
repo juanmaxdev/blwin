@@ -1,0 +1,46 @@
+.contenedor-sopa {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  user-select: none;
+}
+
+.cuadricula {
+  display: grid;
+  gap: 4px;
+  margin: 20px auto;
+  cursor: pointer;
+  width: 100%;
+  max-width: 95vw;
+  overflow-x: auto;
+}
+
+.fila {
+  display: contents;
+}
+
+.celda {
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 40px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: clamp(14px, 2vw, 24px);
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.celda.seleccionada {
+  background-color: #3399ff;
+  color: white;
+}
+
+.celda.encontrada {
+  background-color: #4caf50;
+  color: white;
+}
