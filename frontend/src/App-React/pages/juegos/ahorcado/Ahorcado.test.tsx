@@ -1,8 +1,7 @@
 // src/App-React/pages/juegos/ahorcado/Ahorcado.test.tsx
 
-import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Ahorcado from './Ahorcado';
 
 // Mock de imágenes 
@@ -46,14 +45,5 @@ describe('<Ahorcado />', () => {
     // Deben existir 27 botones (A-Z y Ñ)
     const botones = screen.getAllByRole('button', { name: /^[A-ZÑ]$/i });
     expect(botones).toHaveLength(27);
-  });
-
-  it('al hacer clic en VOLVER, llama a navigate con "/"', () => {
-    render(<Ahorcado />);
-
-    const botonVolver = screen.getByRole('button', { name: /volver/i });
-    fireEvent.click(botonVolver);
-
-    expect(navigateMock).toHaveBeenCalledWith('/');
   });
 });

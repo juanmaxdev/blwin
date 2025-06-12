@@ -168,7 +168,7 @@ export default function JuegoEsquivar() {
     const handleRedirect = () => {
         const confirmado = window.confirm("¿Estás seguro de que quieres volver al inicio?");
         if (confirmado) {
-            window.location.href = "/";
+          window.parent.location.reload();
         }
     }
 
