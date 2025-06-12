@@ -31,7 +31,7 @@ describe('ControlJuego', () => {
   })
 
   it('habilita botones de juego solo cuando estado es "playing" y no hay reto', () => {
-    setup('playing', false)
+    setup('jugando', false)
     expect(screen.getByText('🎰 Pedir Carta')).toBeEnabled()
     expect(screen.getByText('✋ Plantarse')).toBeEnabled()
     expect(screen.getByText('🔁 Siguiente Partida')).toBeDisabled()
@@ -45,13 +45,13 @@ describe('ControlJuego', () => {
   })
 
   it('dispara la acción "pedirCarta" al hacer clic en "Pedir Carta"', () => {
-    const { onInitiateRetos } = setup('playing', false)
+    const { onInitiateRetos } = setup('jugando', false)
     fireEvent.click(screen.getByText('🎰 Pedir Carta'))
     expect(onInitiateRetos).toHaveBeenCalledWith('pedirCarta')
   })
 
   it('dispara la acción "plantarse" al hacer clic en "Plantarse"', () => {
-    const { onInitiateRetos } = setup('playing', false)
+    const { onInitiateRetos } = setup('jugando', false)
     fireEvent.click(screen.getByText('✋ Plantarse'))
     expect(onInitiateRetos).toHaveBeenCalledWith('plantarse')
   })

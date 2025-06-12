@@ -1,7 +1,7 @@
 export function ComoJugar() {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
-      <h4 className="font-bold mb-3">🎯 Cómo Jugar:</h4>
+      <h4 className="font-bold mb-3">📝​ Cómo Jugar:</h4>
       <ul className="text-sm space-y-2">
         <li className="flex items-start">
           <span className="mr-2">1️⃣</span>
