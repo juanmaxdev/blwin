@@ -3,6 +3,7 @@ import { Carta, CartaHeader, CartaTitle, CartaDescription, CartaContent } from "
 import { Progreso } from "../ui/Progreso"
 import { RotateCcw, Trophy, Play } from "lucide-react"
 import { Link } from "react-router-dom"
+import Ranking from "../../../ranking/Ranking"
 
 
 interface ResultadoJuegoProps {
@@ -13,16 +14,22 @@ interface ResultadoJuegoProps {
 
 export default function ResultadoJuego({ score, maxScore, onRestart }: ResultadoJuegoProps) {
   const percentage = (score / maxScore) * 100;
+  const juegoNombre = "Quiz";
 
   return (
-    <div className="flex items-center min-h-screen justify-center bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
-      <Carta className="w-full max-w-xl mx-auto bg-white rounded-xl shadow-xl p-8 space-y-6">
+  <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
+    <div className="flex flex-row gap-8 items-start">
+      
+      {/* Carta fija */}
+      <Carta className="w-[500px] bg-white rounded-xl shadow-xl p-8 space-y-6">
         <CartaHeader className="text-center">
           <div className="flex justify-center mb-4">
             <Trophy className="h-16 w-16 text-yellow-500" />
           </div>
           <CartaTitle className="text-3xl">¡Juego Completado!</CartaTitle>
-          <CartaDescription className="text-lg">Has terminado el quiz de lenguajes de programación</CartaDescription>
+          <CartaDescription className="text-lg">
+            Has terminado el quiz de lenguajes de programación
+          </CartaDescription>
         </CartaHeader>
         <CartaContent className="text-center space-y-6">
           <div className="space-y-2">
@@ -32,10 +39,10 @@ export default function ResultadoJuego({ score, maxScore, onRestart }: Resultado
               {percentage >= 80
                 ? "¡Excelente!"
                 : percentage >= 60
-                  ? "¡Bien hecho!"
-                  : percentage >= 40
-                    ? "Puedes mejorar"
-                    : "Sigue practicando"}
+                ? "¡Bien hecho!"
+                : percentage >= 40
+                ? "Puedes mejorar"
+                : "Sigue practicando"}
             </div>
           </div>
 
@@ -46,7 +53,6 @@ export default function ResultadoJuego({ score, maxScore, onRestart }: Resultado
           </div>
 
           <div className="flex gap-4">
-
             <Boton size="lg" className="w-full" asChild>
               <Link to="/" className="flex items-center justify-center gap-2">
                 <RotateCcw className="h-4 w-4" />
@@ -58,10 +64,21 @@ export default function ResultadoJuego({ score, maxScore, onRestart }: Resultado
               <Play className="mr-2 h-4 w-4" />
               Jugar de Nuevo
             </Boton>
-
           </div>
         </CartaContent>
       </Carta>
+
+      {/* Ranking fijo */}
+      <div className="w-[400px] bg-white p-6 rounded-xl shadow-lg w-full">
+        <Ranking
+          tituloRanking={"Top 5 Juego-Preguntas"}
+          nombreJuego={juegoNombre}
+        />
+      </div>
+
     </div>
-  );
+  </div>
+);
+
+
 }

@@ -2,7 +2,7 @@ const BotonHome = () => {
   return (
     <div className="absolute top-4 left-4 z-50 group">
       <button
-        onClick={() => window.location.href = "/"}
+        onClick={() => window.parent.location.reload()}
         className="p-3 bg-white bg-opacity-70 backdrop-blur-md rounded-full shadow-md hover:scale-110 transition-all"
       >
         <svg
