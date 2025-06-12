@@ -85,5 +85,23 @@ namespace Ble.Triviados.Services.WebApi.Controllers
                 return StatusCode(500, new { Message = "Ocurrió un error interno.", Error = ex.Message });
             }
         }
+
+        /// <summary>
+        /// GET: api/usuario/ranking
+        /// Muestra el listado de usuarios ordenados por puntos, a modo de raanking
+        /// </summary>
+        /// <returns>Lista de usuarios ordenados con mayor puntuación general de BBDD</returns>
+        [HttpGet("ranking")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ObtenerRankingUsuarios()
+        {
+            var ranking = await _usuarioService.ObtenerRankingUsuariosAsync();
+
+            if (ranking == null || !ranking.Any())
+                return NotFound(new { Message = "No se encontraron usuarios con puntuación." });
+
+            return Ok(ranking);
+        }
+
     }
 }

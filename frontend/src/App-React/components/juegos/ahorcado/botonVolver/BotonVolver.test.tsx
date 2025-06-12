@@ -1,18 +1,22 @@
-// src/components/juegos/ahorcado/botonVolver/BotonVolver.test.tsx
-
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Boton from './BotonVolver';
 
-// Mock de react-router-dom para interceptar useNavigate
-const navigateMock = vi.fn();
-vi.mock('react-router-dom', () => ({
-  useNavigate: () => navigateMock,
-}));
-
 describe('<Boton />', () => {
+  const reloadMock = vi.fn();
+
   beforeEach(() => {
-    navigateMock.mockClear();
+    // Simula window.parent.location.reload
+    Object.defineProperty(window, 'parent', {
+      value: {
+        location: {
+          reload: reloadMock,
+        },
+      },
+      writable: true,
+    });
+
+    reloadMock.mockClear();
   });
 
   it('renderiza el botón con el texto pasado por props', () => {
@@ -21,10 +25,10 @@ describe('<Boton />', () => {
     expect(boton).toBeInTheDocument();
   });
 
-  it('al hacer clic invoca navigate("/")', () => {
+  it('al hacer clic recarga la página (window.parent.location.reload)', () => {
     render(<Boton nombre="INICIO" />);
     const boton = screen.getByRole('button', { name: /inicio/i });
     fireEvent.click(boton);
-    expect(navigateMock).toHaveBeenCalledWith('/');
+    expect(reloadMock).toHaveBeenCalled();
   });
 });

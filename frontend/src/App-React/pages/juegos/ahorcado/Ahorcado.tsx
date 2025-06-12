@@ -15,7 +15,6 @@ import {
 } from '../../../components/juegos/ahorcado/preguntas/Preguntas';
 import ModalGameOver from '../../../components/juegos/ahorcado/modalFin/Modal';
 import ModalSubidaNivel from '../../../components/juegos/ahorcado/modalFin/modalSubirNivel/modalNivel';
-import { useNavigate } from 'react-router-dom';
 import '../../../assets/juegos/ahorcado/styles/Styles.css';
 import { mandarPuntuacion } from '../../../hooks/MandarPuntuacion';
 
@@ -58,8 +57,6 @@ const Ahorcado = () => {
   const [mostrarModalNivel, setMostrarModalNivel] = useState(false);
   const [nivelSubido, setNivelSubido] = useState<number | null>(null);
 
-  const navigate = useNavigate();
-
   const preguntasNivelActual = (() => {
     if (puntuacion >= 450) return preguntasProgramacionWebNivel3;
     if (puntuacion >= 100) return preguntasProgramacionWebNivel2;
@@ -91,7 +88,7 @@ const Ahorcado = () => {
   const imgSegunFallo = imagenesAhorcado[numeroFallos];
 
   const handleIrInicio = () => {
-    navigate('/');
+    window.parent.location.reload();
   };
 
   const handleVolverAJugar = () => {
@@ -106,6 +103,7 @@ const Ahorcado = () => {
   const handleGameEnd = (finalScore: number) => {
     setPuntuacion(finalScore);
     setIsGameOver(true);
+    mandarPuntuacion('Ahorcado', finalScore);
   };
 
   const onClickLetra = (letra: string) => {
@@ -149,13 +147,6 @@ const Ahorcado = () => {
       setLetrasSeleccionadas([]);
       setNumeroFallos(0);
     }
-
-    {
-      /* Mandar puntuación */
-    }
-    async () => {
-      await mandarPuntuacion('Ahorcado', puntuacion);
-    };
   };
 
   return (
