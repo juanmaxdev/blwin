@@ -106,6 +106,7 @@ const Ahorcado = () => {
   const handleGameEnd = (finalScore: number) => {
     setPuntuacion(finalScore);
     setIsGameOver(true);
+    mandarPuntuacion('Ahorcado', finalScore);
   };
 
   const onClickLetra = (letra: string) => {
@@ -149,13 +150,6 @@ const Ahorcado = () => {
       setLetrasSeleccionadas([]);
       setNumeroFallos(0);
     }
-
-    {
-      /* Mandar puntuación */
-    }
-    async () => {
-      await mandarPuntuacion('Ahorcado', puntuacion);
-    };
   };
 
   return (
