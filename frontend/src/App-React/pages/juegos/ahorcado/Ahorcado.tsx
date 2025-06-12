@@ -58,8 +58,6 @@ const Ahorcado = () => {
   const [mostrarModalNivel, setMostrarModalNivel] = useState(false);
   const [nivelSubido, setNivelSubido] = useState<number | null>(null);
 
-  const navigate = useNavigate();
-
   const preguntasNivelActual = (() => {
     if (puntuacion >= 450) return preguntasProgramacionWebNivel3;
     if (puntuacion >= 100) return preguntasProgramacionWebNivel2;
