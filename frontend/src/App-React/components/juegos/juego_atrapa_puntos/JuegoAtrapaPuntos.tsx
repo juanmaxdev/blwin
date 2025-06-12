@@ -4,6 +4,7 @@ import preguntas3 from './Preguntas3Opciones';
 import preguntas2 from './Preguntas2Opciones';
 import PreguntaActual from './PreguntaActual';
 import PantallaFinal from './PantallaFinal';
+import BotonHome from '../sopaLetras/BotonHome';
 
 export interface Pregunta {
   pregunta: string;
@@ -12,7 +13,7 @@ export interface Pregunta {
 }
 
 function JuegoAtrapaPuntos() {
-  const [puntos, setPuntos] = useState(100);
+  const [puntos, setPuntos] = useState(1000);
   const [restantes, setRestantes] = useState<Pregunta[]>([]);
   const [actual, setActual] = useState<Pregunta | null>(null);
   const [apuestas, setApuestas] = useState<number[]>([]);
@@ -28,8 +29,8 @@ function JuegoAtrapaPuntos() {
     iniciarJuego();
   }, []);
 
-  const iniciarJuego = () => {
-    setPuntos(100);
+ const iniciarJuego = () => {
+    setPuntos(1000);  
     setRachaCorrectas(0);
     setTotalCorrectas(0);
     setEtapa('4');
@@ -71,8 +72,8 @@ function JuegoAtrapaPuntos() {
   const totalApostadoActual = apuestas.reduce((a, b) => a + b, 0);
 
   const enviarRespuesta = () => {
-    if (totalApostadoActual <= 0 || totalApostadoActual > puntos) {
-      alert(`Debes apostar al menos en una opción y como máximo ${puntos} puntos.`);
+    if (totalApostadoActual !== puntos) {
+      alert(`Debes apostar exactamente todos tus puntos: ${puntos}.`);
       return;
     }
     if (!actual) return;
@@ -145,10 +146,13 @@ function JuegoAtrapaPuntos() {
   const puntajeFinal = todasCorrectas ? puntos * 2 : puntos;
 
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center">Juego de preguntas</h1>
+    <div className="h-screen w-screen flex flex-col bg-gradient-to-br from-blue-200 via-indigo-300 to-purple-200 overflow-hidden">
+      <header className="h-20 flex items-center justify-center bg-white/50 shadow-md">
+        <BotonHome />
+        <h1 className="text-4xl md:text-5xl font-extrabold text-indigo-800 drop-shadow my-6">Juego de Sopa de Letras</h1>
+      </header>
       <div className="mb-4 text-center">
-        Puntos actuales: <span className="font-semibold">{puntos}</span>
+        Tus puntos: <span className="font-semibold">{puntos}</span>
       </div>
 
       {actual ? (
