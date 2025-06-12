@@ -15,7 +15,6 @@ import {
 } from '../../../components/juegos/ahorcado/preguntas/Preguntas';
 import ModalGameOver from '../../../components/juegos/ahorcado/modalFin/Modal';
 import ModalSubidaNivel from '../../../components/juegos/ahorcado/modalFin/modalSubirNivel/modalNivel';
-import { useNavigate } from 'react-router-dom';
 import '../../../assets/juegos/ahorcado/styles/Styles.css';
 import { mandarPuntuacion } from '../../../hooks/MandarPuntuacion';
 
