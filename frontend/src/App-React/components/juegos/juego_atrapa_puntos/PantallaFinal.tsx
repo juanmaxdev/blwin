@@ -25,9 +25,6 @@ const PantallaFinal: React.FC<Props> = ({ etapa, finJuego, todasCorrectas, punta
     ) : (
       <p className="mb-4">No quedan más preguntas o el juego ha terminado.</p>
     )}
-    <button onClick={reiniciar} className="mt-4 bg-green-500 text-white px-4 py-2 rounded">
-      Reiniciar juego
-    </button>
   </div>
 );
 
