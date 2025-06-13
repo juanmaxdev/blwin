@@ -17,7 +17,7 @@ import Nivel6 from './components/juegos/juego_selectores/nivel6/nivel6';
 import Nivel9 from './components/juegos/juego_selectores/nivel9/Nivel9';
 import Nivel7 from './components/juegos/juego_selectores/nivel7/Nivel7';
 import NivelDetectiveFlexbox from './components/juegos/juego_selectores/nivel_bonus/NivelBonus';
-import { JuegoBlackjack } from './components/juegos/juego_soft/JuegoBlackjack';
+import { JuegoBlackjack } from './pages/juegos/jack&code/JuegoBlackjack';
 
 const App = () => (
     <Routes>
