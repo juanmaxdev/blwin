@@ -8,6 +8,7 @@ import BotonSonido from '../../../ui/ButtonSound';
 import BotonVolverInicio from '../botonInicio/botonInicio';
 import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
+import ContadorPuntuacion from '../puntuacion/contadorPuntuacion';
 
 const Nivel7 = () => {
   const [css, setCss] = useState('');
@@ -73,7 +74,12 @@ const Nivel7 = () => {
       <Head title="Nivel 7 - CSS Detective" />
       <style id="css-nivel-7" />
       <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
-        <BotonSonido />
+        <div className="absolute top-4 left-4 flex items-center gap-4 z-10">
+          <BotonSonido />
+          <div className="absolute top-2 left-24 flex items-center gap-4 z-10">
+            <ContadorPuntuacion />
+          </div>
+        </div>
         <BotonFinalizarJuego />
         <BotonVolverInicio />
 

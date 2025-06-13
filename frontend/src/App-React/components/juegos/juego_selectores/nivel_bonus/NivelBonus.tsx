@@ -7,18 +7,8 @@ import BotonSonido from '../../../ui/ButtonSound';
 import BotonVolverInicio from '../botonInicio/botonInicio';
 import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 import ModalFelicitacion from './ModalFelicitacion';
-
-
-import detectivePensativo from '/public/foto-detective-interrogacion.png';
-import detectiveIdea from '/public/foto-detective-idea.png';
-import pizarra from '/public/foto-pizarra.png';
-import detectiveCorriendo from '/public/foto-detective-corriendo.png';
-import ladronCorriendo from '/public/foto-ladron-corriendo.png';
-import ladronCaido from '/public/foto-ladron-caido.png';
-import caja from '/public/foto-caja.png';
-import piedra from '/public/foto-piedra.png';
 import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
-
+import ContadorPuntuacion from '../puntuacion/contadorPuntuacion';
 
 const Nivel10 = () => {
     const [cssParte1, setCssParte1] = useState('');
@@ -31,7 +21,6 @@ const Nivel10 = () => {
     const [ladronDerrotado, setLadronDerrotado] = useState(false);
     const setMostrarLadronArrestado = useState(false)[1];
     const [mostrarModalFinal, setMostrarModalFinal] = useState(false);
-
 
     const procesarCSS = (inputCSS: string) => inputCSS;
 
@@ -47,9 +36,7 @@ const Nivel10 = () => {
             return;
         }
 
-        const contenido = reglas[1]
-            .replace(/\s+/g, '')
-            .replace(/;+$/, '');
+        const contenido = reglas[1].replace(/\s+/g, '').replace(/;+$/, '');
 
         if (contenido !== 'position:absolute;left:0') {
             setMensaje1(
@@ -96,7 +83,7 @@ const Nivel10 = () => {
         const piedraCSS = reglasPiedra[1].replace(/\s+/g, '').replace(/;+$/, '');
 
         if (detectiveLadronCSS.includes('margin-left:30%')) {
-            setLadronDerrotado(true); // Cambia la imagen del ladrón
+            setLadronDerrotado(true);
         }
 
         if (detectiveLadronCSS !== 'margin-left:30%' || piedraCSS !== 'z-index:20') {
@@ -130,13 +117,7 @@ const Nivel10 = () => {
     const handleCSSChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const nuevoCSS = e.target.value;
         setCssParte2(nuevoCSS);
-
-        // Detectar si contiene "margin-left: 30%"
-        if (nuevoCSS.includes("margin-left: 30%")) {
-            setLadronDerrotado(true);
-        } else {
-            setLadronDerrotado(false);
-        }
+        setLadronDerrotado(nuevoCSS.includes("margin-left: 30%"));
     };
 
     useEffect(() => {
@@ -151,7 +132,12 @@ const Nivel10 = () => {
             <Head title="Nivel 10 - CSS Detective" />
             <style id="css-nivel-10" />
             <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
-                <BotonSonido />
+                <div className="absolute top-4 left-4 flex items-center gap-4 z-10">
+                    <BotonSonido />
+                    <div className="absolute top-2 left-24 flex items-center gap-4 z-10">
+                        <ContadorPuntuacion />
+                    </div>
+                </div>
                 <BotonFinalizarJuego />
                 <BotonVolverInicio />
 
@@ -166,7 +152,6 @@ const Nivel10 = () => {
 
                     <ProgressBar currentStep={10} />
 
-                    {/* PRIMERA PARTE */}
                     <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative min-h-[12rem]">
                         <div className="flex-1 h-full flex flex-col relative">
                             <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa:</h2>
@@ -174,12 +159,12 @@ const Nivel10 = () => {
                                 <section className="relative w-full h-60 flex items-center">
                                     <img
                                         id="detective"
-                                        src={detectiveEnIdea ? detectiveIdea : detectivePensativo}
+                                        src={detectiveEnIdea ? "/foto-detective-idea.png" : "/foto-detective-interrogacion.png"}
                                         alt="Detective"
                                         className="z-10 w-36 h-auto object-contain drop-shadow-[0_5px_15px_rgba(129,140,248,0.4)] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
                                     />
                                     <img
-                                        src={pizarra}
+                                        src="/foto-pizarra.png"
                                         alt="Pizarra"
                                         className="w-36 h-auto object-contain scale-x-[-1] absolute left-0 top-1/2 transform -translate-y-1/2"
                                     />
@@ -217,15 +202,13 @@ const Nivel10 = () => {
                         </div>
                     </section>
 
-                    {/* SEGUNDA PARTE */}
                     {mostrarSegundaParte && (
                         <>
                             <h1 className="text-3xl font-bold text-indigo-800 text-center drop-shadow">
                                 Nivel 10 - CSS Detective (PARTE 2)
                             </h1>
                             <p className="text-lg text-indigo-700 text-center max-w-2xl">
-                                Usa el selector <code>#ladron-corre</code> y <code>#piedra</code> para mover al ladron hacia la izquierda y hacer que se tropieze con la piedra que hay dentro de la caja. Para lograrlo debes
-                                <strong> sacar la piedra de la caja</strong> usando el índice del eje Z de la caja para que esté por delante de la caja <strong> y empujar al ladrón con un margen izquierdo del 30%</strong>
+                                Usa el selector <code>#ladron-corre</code> y <code>#piedra</code> para mover al ladron hacia la izquierda y hacer que se tropiece con la piedra. Para lograrlo, <strong>saca la piedra de la caja</strong> usando <code>z-index</code> y <strong>aplica <code>margin-left: 30%</code></strong>.
                             </p>
 
                             <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative min-h-[12rem]">
@@ -233,35 +216,27 @@ const Nivel10 = () => {
                                     <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa (Parte 2):</h2>
                                     <div className="vista-previa bg-gray-100 p-4 pl-[8%] rounded-lg border border-gray-300 relative text-base w-full flex-1 min-h-[12rem]">
                                         <section className="relative w-full h-60 flex items-center">
-                                            {/* Detective corriendo (izquierda) */}
                                             <img
                                                 id="detective-corre"
-                                                src={detectiveCorriendo}
+                                                src="/foto-detective-corriendo.png"
                                                 alt="Detective corriendo"
                                                 className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-24 h-auto scale-x-[-3] scale-y-[3]"
                                             />
-
-                                            {/* Ladrón corriendo o caído */}
                                             <img
                                                 id="ladron-corre"
-                                                src={ladronDerrotado ? ladronCaido : ladronCorriendo}
+                                                src={ladronDerrotado ? "/foto-ladron-caido.png" : "/foto-ladron-corriendo.png"}
                                                 alt="Ladrón"
-                                                className={`absolute left-1/4 top-1/2 transform -translate-y-1/2 z-20 w-24 h-auto ${ladronDerrotado ? "scale-x-[-2.5] scale-y-[2.5] translate-y-[55px]" : "scale-x-[1.5] scale-y-[1.5]"
-                                                    }`}
+                                                className={`absolute left-1/4 top-1/2 transform -translate-y-1/2 z-20 w-24 h-auto ${ladronDerrotado ? "scale-x-[-2.5] scale-y-[2.5] translate-y-[55px]" : "scale-x-[1.5] scale-y-[1.5]"}`}
                                             />
-
-                                            {/* Caja en el centro con z-10 */}
                                             <img
                                                 id="caja-centro"
-                                                src={caja}
+                                                src="/foto-caja.png"
                                                 alt="Caja en el centro"
                                                 className="absolute left-1/2 top-3/4 transform -translate-x-1/2 -translate-y-1/2 z-10 w-24 h-auto"
                                             />
-
-                                            {/* Piedra sin z-index (detrás de la caja) */}
                                             <img
                                                 id="piedra"
-                                                src={piedra}
+                                                src="/foto-piedra.png"
                                                 alt="Piedra"
                                                 className="absolute left-1/2 top-3/4 transform -translate-x-1/2 -translate-y-1/2 w-24 h-auto scale-x-[0.5] scale-y-[0.5]"
                                             />
@@ -279,7 +254,6 @@ const Nivel10 = () => {
                                         value={cssParte2}
                                         onChange={handleCSSChange}
                                     />
-
                                     <button
                                         onClick={verificarCSSParte2}
                                         className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -303,8 +277,6 @@ const Nivel10 = () => {
                             </section>
                         </>
                     )}
-
-
                 </main>
             </div>
             {mostrarModalFinal && <ModalFelicitacion onClose={() => setMostrarModalFinal(false)} />}

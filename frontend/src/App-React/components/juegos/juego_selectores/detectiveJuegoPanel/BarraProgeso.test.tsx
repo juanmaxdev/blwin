@@ -4,7 +4,7 @@ import { describe, it, afterEach, expect, vi } from 'vitest';
 import { useNavigate, MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 
-import ProgressBar from './barraProgreso';
+import ProgressBar from './BarraProgreso';
 
 //Mock parcial del módulo react-router-dom
 vi.mock('react-router-dom', async () => {
