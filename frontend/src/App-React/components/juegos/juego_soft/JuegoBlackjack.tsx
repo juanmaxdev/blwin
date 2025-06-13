@@ -17,8 +17,9 @@ export function JuegoBlackjack() {
     initializeGame()
   }, [initializeGame])
 
+   mandarPuntuacion(nombreJuego, estadoJuego.puntuacion);
   if (estadoJuego.juegoFinalizado) {
-    mandarPuntuacion(nombreJuego, estadoJuego.puntuacion);
+    //mandarPuntuacion(nombreJuego, estadoJuego.puntuacion);
     return (
       <ResumenPartida
         puntosTotales={estadoJuego.puntuacion}

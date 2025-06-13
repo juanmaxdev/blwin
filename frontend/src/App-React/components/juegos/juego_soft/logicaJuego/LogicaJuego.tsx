@@ -113,8 +113,8 @@ export function useGameLogic() {
   const executeNewGame = useCallback(() => {
     setEstadoJuego((prev) => {
       const newGamesPlayed = prev.partidasJugador + 1
-// cambiar
-      if (newGamesPlayed > 1) {
+
+      if (newGamesPlayed > 4) {
         return { ...prev, juegoFinalizado: true }
       }
 
