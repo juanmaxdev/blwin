@@ -136,7 +136,6 @@ const Home = () => {
 
         <PersonajeCarrusel />
 
-        <div className="absolute bottom-[-80px] right-[-80px] w-[300px] h-[300px] bg-blue-300 rounded-full blur-3xl opacity-50 animate-pulse"></div>
       </div>
     </>
   );
