@@ -1,7 +1,7 @@
 import { Boton } from "../../quiz/ui/Boton" 
 import Ranking from "../../../ranking/Ranking"
 
-const juegoNombre = "blackjact";
+const juegoNombre = "blackjack";
 
 interface ResumenPartidaProps {
   puntosTotales: number
