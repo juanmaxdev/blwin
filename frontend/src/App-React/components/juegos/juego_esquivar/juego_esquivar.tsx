@@ -48,6 +48,9 @@ export default function JuegoEsquivar() {
     // Sonido que se reproduce al realizar un impacto
     const impactoRef = useRef<HTMLAudioElement>(null);
 
+    // Permite recargar el ranking interno
+    const [reload, setReload] = useState(0);
+
 
     useEffect(() => {
         // Comprueba si ha comenzado la partida para lanzar las siguientes funciones
@@ -161,6 +164,7 @@ export default function JuegoEsquivar() {
         guardarPuntuacion();
         setJugando(false);
         setResetKey(prev => prev + 1);
+        setReload(prev => prev + 1)
     };
 
 
@@ -215,7 +219,7 @@ export default function JuegoEsquivar() {
                                 alignItems: "center",
                             }}
                         >
-                            <Ranking tituloRanking={"Top 5 Z-Wing"} nombreJuego={nombreJuego} />
+                            <Ranking key={reload} tituloRanking={"Top 5 Z-Wing"} nombreJuego={nombreJuego} />
                         </div>
                     </>
                 }
