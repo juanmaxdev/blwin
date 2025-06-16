@@ -8,6 +8,7 @@ import BarraDeVida from './personajes/barra_de_vida/Barra_de_vida';
 import VinetaDialogo from './dialogos/vineta/vineta-dialogo';
 import EmpezarJuego from './dialogos/modalInicio/empezarJuego';
 import Comodin from './preguntas/contenedor/contenedorComodines/comodin';
+import Puertas from './escenarios/puertas/puertas';
 import '../../../assets/juegos/codequest/styles/styles.css';
 
 // Imágenes de jefes normales
@@ -30,18 +31,21 @@ import JefeScrumDerrotado from '../../../assets/juegos/codequest/personaje/jefe_
 import Jugador from '../../../assets/juegos/codequest/personaje/personaje_principal_back.png';
 import JugadorSentado from '../../../assets/juegos/codequest/personaje/personaje_principal_sentado.png';
 import JugadorDerrotado from '../../../assets/juegos/codequest/personaje/personaje_principal_derrotado.png';
-import CampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_react.jpg';
+import CampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_java.jpg';
+
+//Imágenes de puertas
+import PuertaCerrada from '../../../assets/juegos/codequest/imagenes/puerta_entrecerrada.png';
+import PuertaAbierta from '../../../assets/juegos/codequest/imagenes/puerta_abierta.png';
 
 // Campos de batalla
-
 import JefeReactCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_react.jpg';
-import JefeJavaCampoBatalla from "../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_java.jpg";
+import JefeJavaCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_java.jpg';
 import JefeNETCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeMamon.jpg';
-import JefeMamonCampoBatalla from "../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeMamon.jpg"
-import JefeProgramadorCampoBatalla from "../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeProgramador.jpg"
+import JefeMamonCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeMamon.jpg';
+import JefeProgramadorCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeProgramador.jpg';
 import JefeScrumCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_scrum.jpg';
 
-type EstadoJuego = 'seleccion-jefe' | 'dialogo-inicial' | 'pregunta' | 'respuesta' | 'victoria' | 'derrota';
+type EstadoJuego = 'seleccion-jefe' | 'dialogo-inicial' | 'pregunta' | 'respuesta' | 'victoria' | 'derrota' | 'puertas';
 type TipoDialogo = 'jefe' | 'jugador' | null;
 type TipoJefe = 'react' | 'java' | 'net' | 'mamon' | 'programador' | 'scrum';
 
@@ -73,6 +77,7 @@ export default function CodeQuest() {
   const [jefeDerrotado, setJefeDerrotado] = useState(false);
   const [puntuacionJugador, setPuntuacionJugador] = useState(0);
   const [jefesDerrrotados, setJefesDerrrotados] = useState<string[]>([]);
+  const [dificultadActual, setDificultadActual] = useState<'facil' | 'media' | 'dificil' | null>(null);
 
   // Comodines
   const [comodin50porCiento, setComodin50PorCiento] = useState(true);
@@ -161,9 +166,12 @@ export default function CodeQuest() {
     const tipoJefeSeleccionado = jefe as TipoJefe;
     setTipoJefe(tipoJefeSeleccionado);
     setVidaJefe(jefesData[tipoJefeSeleccionado].vidaMaxima);
-    setEstadoJuego('dialogo-inicial');
+    setEstadoJuego(tipoJefeSeleccionado === 'programador' ? 'puertas' : 'dialogo-inicial');
     setJefeDerrotado(false);
-    setPreguntaActual(0);
+    // Iniciamos con una pregunta aleatoria segun el jefe seleccionado
+    const preguntasDelJefe = jefesData[tipoJefeSeleccionado].preguntas;
+    const preguntaAleatoria = Math.floor(Math.random() * preguntasDelJefe.length);
+    setPreguntaActual(preguntaAleatoria);
     setVidaJugador(100);
     setRespuestaSeleccionada(null);
     setMensajeRespuesta('');
@@ -172,6 +180,7 @@ export default function CodeQuest() {
     setComodinRecuperarVida(true);
     setComodin50DeDanyo(true);
     setMostrarPregunta(false);
+    setDificultadActual(null);
     iniciarDialogoInicial();
   };
 
@@ -216,8 +225,12 @@ export default function CodeQuest() {
         setDialogoActivo('jugador');
       } else {
         // Pasar a la siguiente pregunta
-        const siguientePregunta = preguntaActual + 1;
-        if (siguientePregunta < preguntasActuales.length) {
+        if (preguntasActuales.length > 1) {
+          // Seleccionar una pregunta diferente a la actual
+          let siguientePregunta;
+          do {
+            siguientePregunta = Math.floor(Math.random() * preguntasActuales.length);
+          } while (siguientePregunta === preguntaActual && preguntasActuales.length > 1);
           setPreguntaActual(siguientePregunta);
           setEstadoJuego('pregunta');
           setMostrarPregunta(true);
@@ -265,19 +278,42 @@ export default function CodeQuest() {
     setTimeout(() => {
       if (esCorrecta) {
         // Respuesta correcta: daño al jefe
+
+        let danyo = 25; // Daño base
+        let puntos = 50; // Puntos base
+
+        // Aplicar bonificaciones según dificultad (solo para jefe programador)
+        if (tipoJefe === 'programador' && dificultadActual) {
+          switch (dificultadActual) {
+            case 'facil':
+              danyo = 10;
+              puntos = 20;
+              break;
+            case 'media':
+              danyo = 25;
+              puntos = 35;
+              break;
+            case 'dificil':
+              danyo = 40;
+              puntos = 50;
+              break;
+          }
+        }
+
         setMensajeRespuesta('¡Respuesta correcta! Has infligido daño al jefe.');
         setDialogoActivo('jugador');
         setAnimacionJugador('attack');
-        setPuntuacionJugador((prev) => prev + 50);
+        setPuntuacionJugador((prev) => prev + puntos);
 
         setTimeout(() => {
-          setVidaJefe((prev) => Math.max(0, prev - 25));
+          setVidaJefe((prev) => Math.max(0, prev - danyo));
           setAnimacionJefe('damage');
         }, 1000);
       } else {
         // Respuesta incorrecta: daño al jugador
+        const respuestaCompleta = preguntaActualData.opcionesRespuesta[preguntaActualData.respuestaCorrecta];
         setMensajeRespuesta(
-          `¡Respuesta incorrecta! La respuesta correcta era: ${preguntaActualData.respuestaCorrecta.toUpperCase()}`
+          `¡Respuesta incorrecta! La respuesta correcta era: ${preguntaActualData.respuestaCorrecta.toUpperCase()} - ${respuestaCompleta}`
         );
         setDialogoActivo('jefe');
         setAnimacionJefe('attack');
@@ -288,6 +324,28 @@ export default function CodeQuest() {
         }, 1000);
       }
     }, 500);
+  };
+
+  // Función para manejar tiempo agotado
+  const manejarTiempoAgotado = () => {
+    if (estadoJuego === 'pregunta' && respuestaSeleccionada === null) {
+      // Simular respuesta incorrecta cuando se agota el tiempo
+      const preguntaActualData = preguntasActuales[preguntaActual];
+      const respuestaCompleta = preguntaActualData.opcionesRespuesta[preguntaActualData.respuestaCorrecta];
+
+      setRespuestaSeleccionada('timeout');
+      setEstadoJuego('respuesta');
+      setMensajeRespuesta(
+        `¡Tiempo agotado! La respuesta correcta era: ${preguntaActualData.respuestaCorrecta.toUpperCase()} - ${respuestaCompleta}`
+      );
+      setDialogoActivo('jefe');
+      setAnimacionJefe('attack');
+
+      setTimeout(() => {
+        setVidaJugador((prev) => Math.max(0, prev - 20));
+        setAnimacionJugador('damage');
+      }, 1000);
+    }
   };
 
   // Usar comodín 50%
@@ -356,6 +414,7 @@ export default function CodeQuest() {
     setComodinRecuperarVida(true);
     setComodin50DeDanyo(true);
     setOpcionesOcultas([]);
+    setDificultadActual(null);
   };
 
   // Obtener el mensaje de diálogo según el estado
@@ -366,7 +425,8 @@ export default function CodeQuest() {
       if (estadoJuego === 'dialogo-inicial') return jefeActual.fraseInicial;
       if (
         estadoJuego === 'respuesta' &&
-        respuestaSeleccionada !== jefeActual.preguntas[preguntaActual].respuestaCorrecta
+        (respuestaSeleccionada !== jefeActual.preguntas[preguntaActual].respuestaCorrecta ||
+          respuestaSeleccionada === 'timeout')
       ) {
         return mensajeRespuesta;
       }
@@ -398,6 +458,23 @@ export default function CodeQuest() {
     }
     return CampoBatalla;
   };
+  // Función para manejar la selección de una puerta
+  const manejarSeleccionPuerta = (dificultad: 'facil' | 'media' | 'dificil') => {
+    // Asignar la pregunta seleccionada y dificultad
+    setDificultadActual(dificultad);
+
+    // Seleccionar una pregunta aleatoria de las disponibles
+    const preguntaAleatoria = Math.floor(Math.random() * preguntasActuales.length);
+    setPreguntaActual(preguntaAleatoria);
+
+    // Cambiar al estado de pregunta
+    setEstadoJuego('pregunta');
+
+    // Mostrar la pregunta después de un breve delay
+    setTimeout(() => {
+      setMostrarPregunta(true);
+    }, 1000);
+  };
 
   return (
     <div
@@ -410,7 +487,12 @@ export default function CodeQuest() {
       }}
     >
       {/* Título del juego */}
-      <h1 className="tituloPrincipal font-bold text-center w-full text-purple-900 drop-shadow-md">CodeQuest</h1>
+      <h2
+        className="tituloPrincipal font-bold text-center w-full text-purple-400 drop-shadow-md"
+        style={{ fontSize: '5rem' }}
+      >
+        CodeQuest
+      </h2>
 
       {/* Contenedor principal del juego */}
       {tipoJefe && jefeActual && (
@@ -449,6 +531,20 @@ export default function CodeQuest() {
                 onSeleccionarRespuesta={seleccionarRespuesta}
                 opcionesOcultas={opcionesOcultas}
                 respuestaSeleccionada={respuestaSeleccionada}
+                dificultad={dificultadActual}
+                onTiempoAgotado={manejarTiempoAgotado}
+              />
+            </div>
+          )}
+
+          {/* Contenedor de puertas - centro */}
+          {estadoJuego === 'puertas' && tipoJefe === 'programador' && (
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <Puertas
+                onSeleccionPuerta={manejarSeleccionPuerta}
+                preguntas={preguntasActuales}
+                imagenPuertaCerrada={PuertaCerrada}
+                imagenPuertaAbierta={PuertaAbierta}
               />
             </div>
           )}
@@ -472,9 +568,9 @@ export default function CodeQuest() {
             ) : (
               <PersonajeAnimado imagen={Jugador} className="w-96 h-96" animacion={animacionJugador} />
             )}
-             {/*Puntuación y barra de vida del jugador */}
-            <div className="absolute bottom-24 left-64">
-              <span className="text-lg font-bold text-white">Puntuación: {puntuacionJugador}</span>
+            {/*Puntuación y barra de vida del jugador */}
+            <div className="absolute bottom-24 left-64 w-80">
+              <span className="textoTales text-2xl font-bold text-white ps-2">Puntuación: {puntuacionJugador}</span>
             </div>
             <div className="absolute bottom-10 left-64 w-80">
               <BarraDeVida actual={vidaJugador} max={100} />

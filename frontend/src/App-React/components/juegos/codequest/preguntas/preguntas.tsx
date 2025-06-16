@@ -840,7 +840,8 @@ const preguntasGeneral = [
       c: "O(n log n)",
       d: "O(1)"
     },
-    respuestaCorrecta: "b"
+    respuestaCorrecta: "b",
+    dificultad: "facil",
   },
   {
     id: 2,
@@ -851,7 +852,8 @@ const preguntasGeneral = [
       c: "Dijkstra",
       d: "Prim"
     },
-    respuestaCorrecta: "c"
+    respuestaCorrecta: "c",
+    dificultad: "media",
   },
   {
     id: 3,
@@ -862,7 +864,8 @@ const preguntasGeneral = [
       c: "Hash table",
       d: "Cola"
     },
-    respuestaCorrecta: "c"
+    respuestaCorrecta: "c",
+    dificultad: "facil",
   },
   {
     id: 4,
@@ -873,7 +876,8 @@ const preguntasGeneral = [
       c: "Observer",
       d: "Decorator"
     },
-    respuestaCorrecta: "b"
+    respuestaCorrecta: "b",
+    dificultad: "media",
   },
   {
     id: 5,
@@ -884,7 +888,8 @@ const preguntasGeneral = [
       c: "Starvation",
       d: "Memory leak"
     },
-    respuestaCorrecta: "a"
+    respuestaCorrecta: "a",
+    dificultad: "dificil",
   },
   {
     id: 6,
@@ -895,7 +900,8 @@ const preguntasGeneral = [
       c: "Aislamiento",
       d: "Durabilidad"
     },
-    respuestaCorrecta: "d"
+    respuestaCorrecta: "d",
+    dificultad: "media",
   },
   {
     id: 7,
@@ -906,7 +912,8 @@ const preguntasGeneral = [
       c: "JIT requiere optimización manual, AOT automática",
       d: "No hay diferencia"
     },
-    respuestaCorrecta: "b"
+    respuestaCorrecta: "b",
+    dificultad: "dificil"
   },
   {
     id: 8,
@@ -917,7 +924,8 @@ const preguntasGeneral = [
       c: "Garbage collection",
       d: "Stack allocation"
     },
-    respuestaCorrecta: "c"
+    respuestaCorrecta: "c",
+    dificultad: "facil"
   },
   {
     id: 9,
@@ -936,7 +944,8 @@ function inOrder(node) {
       c: "Izquierda‑Derecha‑Raíz",
       d: "Derecha‑Raíz‑Izquierda"
     },
-    respuestaCorrecta: "b"
+    respuestaCorrecta: "b",
+    dificultad: "media"
   },
   {
     id: 10,
@@ -947,7 +956,8 @@ function inOrder(node) {
       c: "Semaphore binario",
       d: "Spinlock"
     },
-    respuestaCorrecta: "b"
+    respuestaCorrecta: "b",
+    dificultad: "dificil"
   },
   {
     id: 11,
@@ -965,7 +975,8 @@ print(stack)
       c: "[2]",
       d: "[]"
     },
-    respuestaCorrecta: "b"
+    respuestaCorrecta: "b",
+    dificultad: "facil"
   },
   {
     id: 12,
@@ -976,7 +987,8 @@ print(stack)
       c: "Tercera forma normal (3NF)",
       d: "Boyce–Codd normal form (BCNF)"
     },
-    respuestaCorrecta: "c"
+    respuestaCorrecta: "c",
+    dificultad: "media"
   },
   {
     id: 13,
@@ -987,7 +999,8 @@ print(stack)
       c: "LFU",
       d: "Random"
     },
-    respuestaCorrecta: "b"
+    respuestaCorrecta: "b",
+    dificultad: "dificil"
   },
   {
     id: 14,
@@ -998,7 +1011,8 @@ print(stack)
       c: "Tipado fuerte",
       d: "Tipado débil"
     },
-    respuestaCorrecta: "d"
+    respuestaCorrecta: "d",
+    dificultad: "facil"
   },
   {
     id: 15,
@@ -1009,7 +1023,8 @@ print(stack)
       c: "Cobertura de líneas",
       d: "Cobertura de función"
     },
-    respuestaCorrecta: "c"
+    respuestaCorrecta: "c",
+    dificultad: "media"
   }
 ];
 

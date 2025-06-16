@@ -27,7 +27,7 @@ export default function BarraDeVida({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex justify-between text-xs font-bold px-1">
-        <span className={esJefe ? "text-white" : "text-white"}>{esJefe ? esJefe : "JUGADOR"}</span>
+        <span className={esJefe ? "text-white" : "text-white"}>{esJefe ? esJefe : ""}</span>
         <span className="text-white">{`${actual}/${max} HP`}</span>
       </div>
       <div
