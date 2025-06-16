@@ -227,15 +227,10 @@ fn main() {
 },
 {
   id: 21,
-  codigo: `¿Qué valor del Manifiesto Ágil enfatiza la colaboración directa con los clientes?`,
-  respuestaCorrecta: "Colaboración con el cliente sobre la negociación de contratos",
-  opciones: [
-    "Procesos y herramientas sobre individuos",
-    "Colaboración con el cliente sobre la negociación de contratos",
-    "Seguimiento de un plan sobre la respuesta al cambio",
-    "Documentación exhaustiva sobre software funcionando"
-  ],
-  explicacion: "Uno de los valores del Manifiesto Ágil es: 'Colaboración con el cliente sobre la negociación de contratos'.",
+  codigo: `¿Qué rol en Scrum facilita las reuniones y elimina impedimentos?`,
+  respuestaCorrecta: "Scrum Master",
+  opciones: ["Scrum Master", "Product Owner", "Team Lead", "Stakeholder"],
+  explicacion: "El Scrum Master ayuda al equipo a seguir Scrum y elimina obstáculos.",
 },
 {
   id: 22,
@@ -260,27 +255,17 @@ fn main() {
 },
 {
   id: 25,
-  codigo: `¿Cuál es el propósito de una retrospectiva en Scrum?`,
-  respuestaCorrecta: "Mejorar continuamente el proceso del equipo",
-  opciones: [
-    "Asignar tareas del siguiente Sprint",
-    "Revisar el progreso del producto con el cliente",
-    "Mejorar continuamente el proceso del equipo",
-    "Revisar las métricas del equipo"
-  ],
-  explicacion: "La retrospectiva busca que el equipo reflexione y mejore continuamente su forma de trabajar.",
+  codigo: `¿Qué evento Scrum permite al equipo reflexionar sobre cómo mejorar su proceso?`,
+  respuestaCorrecta: "Sprint Retrospective",
+  opciones: ["Sprint Planning", "Daily Scrum", "Sprint Retrospective", "Sprint Review"],
+  explicacion: "La retrospectiva busca la mejora continua del equipo.",
 },
 {
   id: 26,
-  codigo: `¿Qué principio ágil promueve la entrega continua de software funcionando?`,
-  respuestaCorrecta: "Entrega temprana y continua de software con valor",
-  opciones: [
-    "Satisfacción del cliente mediante la entrega continua de valor",
-    "Documentación detallada",
-    "Control estricto del alcance",
-    "Revisión trimestral de entregables"
-  ],
-  explicacion: "Uno de los principios del Manifiesto Ágil es: 'Nuestra mayor prioridad es satisfacer al cliente mediante la entrega temprana y continua de software con valor'.",
+  codigo: `¿Qué significa el término MVP en el contexto ágil?`,
+  respuestaCorrecta: "Producto mínimo viable",
+  opciones: ["Valor máximo posible", "Producto mínimo viable", "Progreso medido visible", "Versión preliminar mayor"],
+  explicacion: "Un MVP es una versión del producto con suficiente valor para aprendizaje temprano.",
 },
 {
   id: 27,
@@ -303,14 +288,16 @@ fn main() {
 },
 {
   id: 29,
-  codigo: `¿Qué significa "incremento" en Scrum?`,
-  respuestaCorrecta: "La suma de todos los elementos del Product Backlog completados durante un Sprint y anteriores",
-  opciones: [
-    "Una mejora del proceso",
-    "Una tarea completada",
-    "El plan para el próximo Sprint",
-    "La suma de todos los elementos del Product Backlog completados durante un Sprint y anteriores"
-  ],
-  explicacion: "El incremento es la versión utilizable y potencialmente desplegable del producto al final de un Sprint.",
-}
+  codigo: `¿Qué herramienta se usa comúnmente para visualizar el trabajo en Kanban?`,
+  respuestaCorrecta: "Tablero Kanban",
+  opciones: ["Gantt", "Tablero Kanban", "Diagrama de flujo", "Mapa mental"],
+  explicacion: "El tablero Kanban muestra visualmente el flujo de trabajo y los límites WIP.",
+},
+{
+  id: 30,
+  codigo: `¿Cuál es el enfoque ágil que se centra en la entrega continua y la integración frecuente?`,
+  respuestaCorrecta: "Extreme Programming",
+  opciones: ["Scrum", "Lean", "Extreme Programming", "Waterfall"],
+  explicacion: "XP se enfoca en buenas prácticas técnicas como integración continua y pruebas automatizadas.",
+},
 ]

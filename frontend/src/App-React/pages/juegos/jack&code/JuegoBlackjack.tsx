@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { Header } from "../../../components/juegos/juego_soft/ui/cabeceraJuego"
-import { Tablero } from "../../../components/juegos/juego_soft/ui/TableroJuego" 
+import { Tablero } from "../../../components/juegos/juego_soft/ui/TableroJuego"
 import { BarraLateral } from "../../../components/juegos/juego_soft/ui/BarraLateral"
 import { RetosModal } from "../../../components/juegos/juego_soft/modalReto/ModalReto"
 import { ResumenPartida } from "../../../components/juegos/juego_soft/ui/ResumenPartida"
@@ -11,14 +11,19 @@ export function JuegoBlackjack() {
   const nombreJuego = "blackjack";
   const { estadoJuego, initializeGame, initiateRetos, handleRetosComplete, restartSession, closeRetosModal } =
     useGameLogic()
-    
+
 
   useEffect(() => {
     initializeGame()
   }, [initializeGame])
 
+  useEffect(() => {
+    if (estadoJuego.juegoFinalizado) {
+      mandarPuntuacion(nombreJuego, estadoJuego.puntuacion);
+    }
+  }, [estadoJuego.juegoFinalizado, estadoJuego.puntuacion])
+
   if (estadoJuego.juegoFinalizado) {
-    mandarPuntuacion(nombreJuego, estadoJuego.puntuacion);
     return (
       <ResumenPartida
         puntosTotales={estadoJuego.puntuacion}
@@ -65,9 +70,9 @@ export function JuegoBlackjack() {
           />
         )}
 
-        
-        
-      </div>      
+
+
+      </div>
     </div>
   )
 }
