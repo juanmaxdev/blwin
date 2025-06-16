@@ -6,6 +6,7 @@ import { RetosModal } from "../../../components/juegos/juego_soft/modalReto/Moda
 import { ResumenPartida } from "../../../components/juegos/juego_soft/ui/ResumenPartida"
 import { useGameLogic } from "../../../components/juegos/juego_soft/logicaJuego/LogicaJuego"
 import { mandarPuntuacion } from "../../../hooks/MandarPuntuacion"
+import BotonVolverInicio from "../../../components/juegos/juego_selectores/botonInicio/botonInicio"
 
 export function JuegoBlackjack() {
   const nombreJuego = "blackjack";
@@ -38,6 +39,8 @@ export function JuegoBlackjack() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 px-4">
       <div className="max-w-6xl mx-auto">
+        <BotonVolverInicio />
+    
         <Header puntos={estadoJuego.puntuacion} juegosJugados={estadoJuego.partidasJugador} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
