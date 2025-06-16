@@ -141,7 +141,7 @@ const PersonajeCarrusel = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-[90vw] mx-auto h-[90vh] mt-8 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.2)] overflow-hidden"
+          className="w-[90vw] mx-auto h-[90vh] mt-8 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl  overflow-hidden"
         >
           <iframe
             src={juegoSeleccionado}

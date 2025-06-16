@@ -2,7 +2,6 @@ import { Boton } from "../ui/Boton"
 import { Carta, CartaHeader, CartaTitle, CartaDescription, CartaContent } from "../ui/Carta"
 import { Progreso } from "../ui/Progreso"
 import { RotateCcw, Trophy, Play } from "lucide-react"
-import { Link } from "react-router-dom"
 import Ranking from "../../../ranking/Ranking"
 
 
@@ -53,11 +52,11 @@ export default function ResultadoJuego({ score, maxScore, onRestart }: Resultado
           </div>
 
           <div className="flex gap-4">
-            <Boton size="lg" className="w-full" asChild>
-              <Link to="/" className="flex items-center justify-center gap-2">
+            <Boton size="lg" className="w-full" asChild onClick={() => window.parent.location.reload()}>
+              <div className="flex items-center justify-center gap-2">
                 <RotateCcw className="h-4 w-4" />
                 Volver al Inicio
-              </Link>
+              </div>
             </Boton>
 
             <Boton onClick={onRestart} size="lg" className="w-full">
