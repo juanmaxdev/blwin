@@ -1,5 +1,6 @@
 import { Boton } from "../../quiz/ui/Boton" 
 import Ranking from "../../../ranking/Ranking"
+import BotonVolverInicio from "../../juego_selectores/botonInicio/botonInicio";
 
 const juegoNombre = "blackjack";
 
@@ -23,6 +24,7 @@ export function ResumenPartida({
 return (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
     <div className="flex flex-col md:flex-row items-start justify-between w-full max-w-5xl">
+      <BotonVolverInicio />
       <div className="bg-white rounded-lg w-full p-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2">🎉 ¡Sesión Completada!</h1>
