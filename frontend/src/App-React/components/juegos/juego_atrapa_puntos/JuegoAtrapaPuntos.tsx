@@ -7,7 +7,7 @@ import PantallaFinal from './PantallaFinal';
 import BotonHome from '../sopaLetras/BotonHome';
 import { obtenerPuntuacionUsuario } from '../../../hooks/ObtenerPuntuacionUsuario';
 import { restarPuntuacion } from '../../../hooks/RestarPuntuacion';
-import { mandarPuntuacion } from '../../../hooks/MandarPuntuacion'; // NUEVO
+import { mandarPuntuacion } from '../../../hooks/MandarPuntuacion';
 
 export interface Pregunta {
   pregunta: string;
@@ -17,6 +17,7 @@ export interface Pregunta {
 
 function JuegoAtrapaPuntos() {
   const [puntos, setPuntos] = useState<number>(0);
+  const [puntosFinales, setPuntosFinales] = useState<number | null>(null);
   const [restantes, setRestantes] = useState<Pregunta[]>([]);
   const [actual, setActual] = useState<Pregunta | null>(null);
   const [apuestas, setApuestas] = useState<number[]>([]);
@@ -42,7 +43,6 @@ function JuegoAtrapaPuntos() {
         const data = await response.json();
         if (typeof data.puntos === 'number') {
           initialPoints = data.puntos;
-          console.log(data.puntos);
         }
       } else {
         console.warn('Error al obtener puntuación del usuario:', response.status);
@@ -52,6 +52,7 @@ function JuegoAtrapaPuntos() {
     }
 
     setPuntos(initialPoints);
+    setPuntosFinales(null);
     setRachaCorrectas(0);
     setTotalCorrectas(0);
     setEtapa('4');
@@ -155,18 +156,20 @@ function JuegoAtrapaPuntos() {
         return;
       }
       if (etapa === '2' && nuevaRacha === 4) {
-        const puntosFinales = puntos + totalApostado + 1000;
-        setPuntos(puntosFinales);
+        let nuevosPuntos = puntos;
+        if (totalCorrectas === 13) {
+          nuevosPuntos = puntos > 0 ? puntos : 1000;
+        }
+        setPuntos(nuevosPuntos);
+        setPuntosFinales(nuevosPuntos);
         setEtapa('final');
         setActual(null);
 
-        // Enviar puntuación extra
         try {
-          await mandarPuntuacion('AtrapaPuntos', 1000);
+          await mandarPuntuacion('AtrapaPuntos', nuevosPuntos);
         } catch (err) {
           console.error('Error al enviar puntuación final:', err);
         }
-
         return;
       }
       if (puntos <= 0 || restantes.length === 0) {
@@ -189,7 +192,7 @@ function JuegoAtrapaPuntos() {
   };
 
   const todasCorrectas = totalCorrectas === 13;
-  const puntajeFinal = todasCorrectas ? puntos * 2 : puntos;
+  const puntajeFinal = puntosFinales !== null ? puntosFinales : puntos;
 
   if (loading) {
     return (

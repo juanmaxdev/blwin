@@ -20,7 +20,7 @@ const PantallaFinal: React.FC<Props> = ({ etapa, finJuego, todasCorrectas, punta
             ¡Respondiste todas las preguntas correctamente! Tus puntos se duplican.
           </p>
         )}
-        <p className="text-lg">Puntaje final: <strong>{puntajeFinal}</strong></p>
+        <p className="text-lg">Has ganado <strong>{puntajeFinal}</strong> puntos</p>
       </>
     ) : (
       <p className="mb-4">No quedan más preguntas o el juego ha terminado.</p>

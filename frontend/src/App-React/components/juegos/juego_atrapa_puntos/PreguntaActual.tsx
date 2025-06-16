@@ -27,8 +27,8 @@ const PreguntaActual: React.FC<Props> = ({
     const totalApostado = apuestas.reduce((a, b) => a + b, 0);
 
     return (
-        <div className="bg-white shadow rounded-lg p-6">
-            <p className="mb-4 font-medium">{pregunta.pregunta}</p>
+        <div className="bg-white shadow rounded-lg p-6 items-center text-center justify-center">
+                    <h1 className="text-2xl md:text-2xl font-extrabold text-indigo-800 drop-shadow my-6">{pregunta.pregunta}</h1>
             <p className="mb-4">Apuesta total (máx {puntos}): {totalApostado}</p>
             <div className="grid grid-cols-1 gap-2">
                 {pregunta.opciones.map((opcion, idx) => (
