@@ -114,7 +114,7 @@ export function useGameLogic() {
     setEstadoJuego((prev) => {
       const newGamesPlayed = prev.partidasJugador + 1
 
-      if (newGamesPlayed > 4) {
+      if (newGamesPlayed > 1) {
         return { ...prev, juegoFinalizado: true }
       }
 
