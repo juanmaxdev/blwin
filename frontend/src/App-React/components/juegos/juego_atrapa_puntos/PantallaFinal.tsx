@@ -26,23 +26,23 @@ const PantallaFinal: React.FC<Props> = ({
       </p>
     ) : etapa === 'final' ? (
       // Si se completaron todas las etapas correctamente
-      <>
+<div className="min-h-screen mt-50 items-center justify-center">
         <p className="text-green-700 text-lg font-semibold mb-4">
           ¡Completaste todas las etapas!
         </p>
 
         {/* Si además se respondieron todas las preguntas bien */}
         {todasCorrectas && (
-          <p className="text-blue-600 font-lg font-semibold mb-4">
+          <p className="text-blue-600 mt-10 font-lg font-semibold mb-4">
             ¡Respondiste todas las preguntas correctamente! Tus puntos se duplican.
           </p>
         )}
 
         {/* Mostrar la puntuación final */}
-        <p className="text-lg font-semibold">
-          Has ganado <strong>{puntajeFinal}</strong> puntos
+        <p className="text-lg mt-10 font-semibold text-indigo-800">
+          Has ganado <strong className='text-indigo-600'>{puntajeFinal}</strong> puntos
         </p>
-      </>
+      </div>
     ) : (
       // Si no quedan preguntas o por alguna razón terminó el juego sin llegar al final
       <p className="mb-4 text-lg font-semibold text-red-600">
