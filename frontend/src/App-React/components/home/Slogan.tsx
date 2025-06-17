@@ -2,7 +2,7 @@ const Slogan = () => {
     return (
       <div className="text-center md:text-left max-w-lg">
         <h1 className="text-4xl font-extrabold text-indigo-700 mb-4 leading-tight">
-          ¡Pon a prueba tus conocimientos con los <br /> minijuegos más divertido de programación!
+          ¡Pon a prueba tus conocimientos con los <br /> minijuegos más divertidos de programación!
         </h1>
         <p className="text-lg text-indigo-800">
           Juega, aprende y desafía a tus amigos con BLWin 🎉

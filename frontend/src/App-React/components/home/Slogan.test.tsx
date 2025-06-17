@@ -19,7 +19,7 @@ describe('Slogan', () => {
     const heading = screen.getByRole('heading', { level: 1 });
 
     expect(heading).toHaveTextContent(
-      '¡Pon a prueba tus conocimientos con los minijuegos más divertido de programación!'
+      '¡Pon a prueba tus conocimientos con los minijuegos más divertidos de programación!'
     );
   });
 
