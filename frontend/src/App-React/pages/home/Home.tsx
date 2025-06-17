@@ -92,15 +92,6 @@ const Home = () => {
               transition={{ duration: 1 }}
             >
               <Slogan />
-
-              {logueado && (
-                <button
-                  onClick={handleJugar}
-                  className="mt-4 px-8 py-4 text-lg font-bold bg-indigo-600 text-white rounded-xl shadow-lg hover:bg-indigo-700 transition-all duration-300 hover:scale-105"
-                >
-                  Minijuego aleatorio
-                </button>
-              )}
             </motion.div>
 
 
