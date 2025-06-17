@@ -1,6 +1,7 @@
 import BotonSonido from '../../../../components/ui/ButtonSound';
 
-function CssDetectivePanel() {
+
+export const DetectiveJuegoPanel = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-200 via-indigo-300 to-blue-200 flex flex-col items-center justify-center p-8 font-sans">
       <BotonSonido />
@@ -35,5 +36,3 @@ function CssDetectivePanel() {
     </div>
   );
 }
-
-export default CssDetectivePanel;

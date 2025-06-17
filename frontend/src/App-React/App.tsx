@@ -6,7 +6,7 @@ import MiniJuegoAhorcado from './pages/juegos/ahorcado/Ahorcado'
 import PaginaJuegoEsquivar from './pages/juegos/PaginaJuegoEsquivar';
 import SopaLetras from './pages/juegos/PaginaJuegoSopaDeLetras';
 import JuegoQuiz from './pages/juegos/quiz/JuegoQuiz';
-import PanelDetectiveJuego from './components/juegos/juego_selectores/detectiveJuegoPanel/DetectiveJuegoPanel';
+import { DetectiveJuegoPanel } from './components/juegos/juego_selectores/detectiveJuegoPanel/DetectiveJuegoPanel';
 import MinijuegoCSS from './components/juegos/juego_selectores/nivel1/nivel1';
 import Nivel3 from './components/juegos/juego_selectores/nivel3/nivel3';
 import Nivel2 from './components/juegos/juego_selectores/nivel2/nivel2';
@@ -17,6 +17,7 @@ import Nivel6 from './components/juegos/juego_selectores/nivel6/nivel6';
 import Nivel9 from './components/juegos/juego_selectores/nivel9/Nivel9';
 import Nivel7 from './components/juegos/juego_selectores/nivel7/Nivel7';
 import NivelDetectiveFlexbox from './components/juegos/juego_selectores/nivel_bonus/NivelBonus';
+import { JuegoBlackjack } from './pages/juegos/jack&code/JuegoBlackjack';
 import PaginaAtrapaPuntos from './pages/juegos/PaginaJuegoAtrapaPuntos';
 
 const App = () => (
@@ -29,7 +30,10 @@ const App = () => (
 
         {/* Página de login */}
         <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
 
+        <Route path="/juego_esquivar" element={<PaginaJuegoEsquivar />} />
+        <Route path="/juegos_sopa_de_letras" element={<SopaLetras />} />
         <Route path="/juego_esquivar" element={<PaginaJuegoEsquivar />} />
         <Route path="/juegos_sopa_de_letras" element={<SopaLetras />} />
 
@@ -43,7 +47,7 @@ const App = () => (
         <Route path="/juego-quiz" element={<JuegoQuiz />} />
 
         {/* Página de Principal de Juego Detective CSS */}
-        <Route path="/juego/selectores" element={<PanelDetectiveJuego />} />
+        <Route path="/juego/selectores" element={<DetectiveJuegoPanel />} />
 
         {/* Página-Nivel 1 de Juego Detective CSS */}
         <Route path="/juego/selectores/nivel-1" element={<MinijuegoCSS />} />
@@ -77,6 +81,8 @@ const App = () => (
 
 
         <Route path="/juego_atrapa_puntos" element={<PaginaAtrapaPuntos />} />
+
+        <Route path='/juego/blackjack' element={<JuegoBlackjack />} />
 
     </Routes>
 

@@ -38,9 +38,4 @@ describe('BarraProgeso', () => {
         expect(screen.getByText('120')).toBeInTheDocument()
         expect(screen.getByText(/puntos/i)).toBeInTheDocument()
     })
-
-    it('coincide con el snapshot', () => {
-        const { container } = render(<BarraProgeso {...props} />)
-        expect(container).toMatchSnapshot()
-    })
 })

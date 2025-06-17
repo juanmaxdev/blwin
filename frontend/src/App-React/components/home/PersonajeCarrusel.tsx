@@ -32,6 +32,13 @@ const personajes = [
     enlace: "/juego-quiz"
   },
   {
+    nombre: "Jack&Code",
+    historia: "Jack&Code es un juego de cartas donde la suerte no lo es todo. Aquí jugarás al blackjack mientras aplicas conceptos de programación como condicionales, lógica booleana y estructuras de control. ¿Podrás vencer a la banca y al mismo tiempo dominar el código? La partida ha comenzado, ¡haz tu jugada!",
+    imagen: "/personajes/Jack&Code.png",
+    fondo: "bg-[repeating-conic-gradient(red_0deg_15deg,black_15deg_30deg)]",
+    enlace: "/juego/blackjack"
+  },
+  {
     nombre: "Css Detective",
     historia: "¿Alguna vez has soñado con ser detective? Pon a prueba tus habilidades resolviendo casos mientras aprendes selectores CSS en escenarios HTML interactivos",
     imagen: "/foto-detective-completa.png",
@@ -141,7 +148,7 @@ const PersonajeCarrusel = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-[90vw] mx-auto h-[90vh] mt-8 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.2)] overflow-hidden"
+          className="w-[90vw] mx-auto h-[90vh] mt-8 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl  overflow-hidden"
         >
           <iframe
             src={juegoSeleccionado}

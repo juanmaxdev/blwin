@@ -8,6 +8,7 @@ import BotonSonido from '../../../ui/ButtonSound';
 import ProgressBar from '../detectiveJuegoPanel/barraProgreso';
 import BotonVolverInicio from '../botonInicio/botonInicio';
 import BotonFinalizarJuego from '../botonFin/BotonFinalizarJuego';
+import ContadorPuntuacion from '../puntuacion/contadorPuntuacion';
 
 //Datos que sale en el codigo HTML
 const elementosHTML = [
@@ -101,7 +102,12 @@ const Nivel1 = () => {
 
 
       <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-purple-100 via-indigo-200 to-blue-100">
-        <BotonSonido />
+        <div className="absolute top-4 left-4 flex items-center gap-4 z-10">
+          <BotonSonido />
+          <div className="absolute top-2 left-24 flex items-center gap-4 z-10">
+            <ContadorPuntuacion />
+          </div>
+        </div>
         <BotonFinalizarJuego />
         <BotonVolverInicio />
 
