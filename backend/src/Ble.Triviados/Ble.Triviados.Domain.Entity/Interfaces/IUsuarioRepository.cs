@@ -8,5 +8,9 @@ namespace Ble.Triviados.Domain.Entity.Interfaces
         Task<Usuario?> ObtenerPorNombreAsync(string name);
         Task<Usuario?> AgregarPuntosAsync(int id, int puntos);
         Task<List<Usuario>> ObtenerRankingUsuariosAsync();
+
+        Task<int?> ObtenerPuntosPorIdAsync(string userId);
+
+
     }
 }

@@ -8,5 +8,7 @@ namespace Ble.Triviados.Application.Interfaces
         Task<string> LoginUsuarioAsync(LoginUsuarioDto dto);
         Task<PtosDto?> AgregarPuntosUsuarioAsync(int usuarioId, int puntos);
         Task<List<UsuarioRankingDto>> ObtenerRankingUsuariosAsync();
+
+        Task<int?> ObtenerPuntosUsuarioAsync(string userId);
     }
 }

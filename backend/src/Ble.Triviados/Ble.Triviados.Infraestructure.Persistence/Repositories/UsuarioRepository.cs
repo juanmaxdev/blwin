@@ -43,5 +43,14 @@ namespace Ble.Triviados.Infraestructure.Persistence.Repositories
                 .OrderByDescending(u => u.Puntos)
                 .ToListAsync();
         }
+
+
+        public async Task<int?> ObtenerPuntosPorIdAsync(string userId)
+        {
+            return await _context.Usuarios
+                .Where(u => u.Id.ToString() == userId)
+                .Select(u => (int?)u.Puntos)
+                .FirstOrDefaultAsync();
+        }
     }
 }

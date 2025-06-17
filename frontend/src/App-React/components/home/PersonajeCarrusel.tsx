@@ -45,6 +45,13 @@ const personajes = [
     fondo: "from-gray-200 to-gray-200",
     enlace: "juego/selectores"
   },
+   {
+    nombre: "Atrapa un millón de puntos",
+    historia: "Scrum, agilidad y programación al límite. Responde bien y duplica tus puntos.",
+    imagen: "/AtrapaPuntos.png",
+    fondo: "from-yellow-100 to-yellow-300",
+    enlace: "/juego_atrapa_puntos"
+  },
 ];
 
 const PersonajeCarrusel = () => {

@@ -18,6 +18,7 @@ import Nivel9 from './components/juegos/juego_selectores/nivel9/Nivel9';
 import Nivel7 from './components/juegos/juego_selectores/nivel7/Nivel7';
 import NivelDetectiveFlexbox from './components/juegos/juego_selectores/nivel_bonus/NivelBonus';
 import { JuegoBlackjack } from './pages/juegos/jack&code/JuegoBlackjack';
+import PaginaAtrapaPuntos from './pages/juegos/PaginaJuegoAtrapaPuntos';
 
 const App = () => (
     <Routes>
@@ -29,7 +30,10 @@ const App = () => (
 
         {/* Página de login */}
         <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
 
+        <Route path="/juego_esquivar" element={<PaginaJuegoEsquivar />} />
+        <Route path="/juegos_sopa_de_letras" element={<SopaLetras />} />
         <Route path="/juego_esquivar" element={<PaginaJuegoEsquivar />} />
         <Route path="/juegos_sopa_de_letras" element={<SopaLetras />} />
 
@@ -74,6 +78,9 @@ const App = () => (
 
         {/* Página-Nivel 10 de Juego Detective CSS */}
         <Route path="/juego/selectores/nivel-10" element={<NivelDetectiveFlexbox />} />
+
+
+        <Route path="/juego_atrapa_puntos" element={<PaginaAtrapaPuntos />} />
 
         <Route path='/juego/blackjack' element={<JuegoBlackjack />} />
 

@@ -118,5 +118,11 @@ namespace Ble.Triviados.Application.Services
             }).ToList();
         }
 
+
+        public async Task<int?> ObtenerPuntosUsuarioAsync(string userId)
+        {
+            return await _usuarioRepository.ObtenerPuntosPorIdAsync(userId);
+        }
+
     }
 }
