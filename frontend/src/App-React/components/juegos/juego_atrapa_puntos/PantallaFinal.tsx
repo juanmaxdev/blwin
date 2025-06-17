@@ -8,7 +8,7 @@ interface Props {
   reiniciar: () => void;
 }
 
-const PantallaFinal: React.FC<Props> = ({ etapa, finJuego, todasCorrectas, puntajeFinal, reiniciar }) => (
+const PantallaFinal: React.FC<Props> = ({ etapa, finJuego, todasCorrectas, puntajeFinal}) => (
   <div className="text-center mt-6">
     {finJuego ? (
       <p className="text-red-600 mb-4">Respuesta incorrecta. Fin del juego.</p>
