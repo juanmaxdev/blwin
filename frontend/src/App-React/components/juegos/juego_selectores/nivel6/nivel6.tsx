@@ -32,10 +32,12 @@ const Nivel6 = () => {
   const navigate = useNavigate();
 
   const procesarCSS = (inputCSS: string) => {
+    // Ajusta el selector para que solo afecte los li:first-child dentro de .vista-previa
     return inputCSS.replace(/(^|\s)(li:first-child\s*\{)/g, '.vista-previa $2');
   };
 
   const verificarCSS = () => {
+    // Valida que el selector li:first-child esté correctamente usado
     const regex = /^\s*li:first-child\s*\{[^}]*\}/m;
     if (!regex.test(css)) {
       setMensaje(
@@ -47,6 +49,7 @@ const Nivel6 = () => {
       return;
     }
 
+    // Extrae las reglas CSS dentro del selector li:first-child
     const reglas = css.match(/li:first-child\s*\{([^}]*)\}/);
     if (!reglas) return;
 
@@ -55,6 +58,7 @@ const Nivel6 = () => {
       .map(linea => linea.trim())
       .filter(Boolean);
 
+    // Valida que al menos una propiedad/valor sea válida
     const contieneValida = declaraciones.some(decl => {
       const [prop, valor] = decl.split(':').map(str => str?.trim());
       return prop && valor && CSS.supports(`${prop}: ${valor}`);

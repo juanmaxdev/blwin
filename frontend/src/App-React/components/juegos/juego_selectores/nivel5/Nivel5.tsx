@@ -17,14 +17,14 @@ const elementosHTML = [
     { tag: 'div', contenido: '}' },
 ];
 
-
 const Nivel5 = () => {
     const [css, setCss] = useState('');
     const [mensaje, setMensaje] = useState<React.ReactNode>(null);
     const navigate = useNavigate();
 
     const procesarCSS = (inputCSS: string) => {
-        return inputCSS.replace(/(^|\s)(#estilo\s*\{)/g, '.vista-previa $2');
+        // Aquí no modificamos el selector porque usamos id directo en el div padre
+        return inputCSS;
     };
 
     const verificarCSS = () => {
@@ -55,7 +55,12 @@ const Nivel5 = () => {
         }
 
         // Normaliza espacios, quita punto y coma, y pasa a minúsculas
-        const propiedadNormalizada = declaraciones[0].replace(/\s*:\s*/, ':').replace(/\s+/g, ' ').trim().replace(/;$/, '').toLowerCase();
+        const propiedadNormalizada = declaraciones[0]
+            .replace(/\s*:\s*/, ':')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .replace(/;$/, '')
+            .toLowerCase();
 
         const correcto = propiedadNormalizada === 'text-align:center';
 
@@ -112,16 +117,19 @@ const Nivel5 = () => {
                         Aplica una <strong>alineación de centro</strong> a todos los elementos con el id <strong><code>estilo</code></strong>
                     </p>
 
-                    {/* Barra de Progeso */}
+                    {/* Barra de Progreso */}
                     <ProgressBar currentStep={5} />
 
                     {/* Vista previa */}
                     <section className="w-full max-w-6xl bg-white border border-indigo-300 rounded-xl shadow-inner p-4 flex flex-col md:flex-row items-start gap-6 relative min-h-[10rem]">
                         <div className="flex-1 h-full flex flex-col">
                             <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Vista previa:</h2>
-                            <div className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base w-full flex-1 min-h-[10rem]">
+                            <div
+                                id="estilo"
+                                className="vista-previa bg-gray-100 p-4 rounded-lg border border-gray-300 space-y-2 text-base w-full flex-1 min-h-[10rem]"
+                            >
                                 {elementosHTML.map((el, i) => (
-                                    <div key={i} id="estilo">{el.contenido}</div>
+                                    <div key={i}>{el.contenido}</div>
                                 ))}
                             </div>
                         </div>
@@ -156,11 +164,13 @@ const Nivel5 = () => {
                             {mensaje && <div className="mt-3 text-center">{mensaje}</div>}
                         </div>
 
-                        {/* HTML visible */}
+                        {/* Código HTML visible */}
                         <div className="w-full md:w-1/2 bg-white p-4 rounded-xl shadow-xl border border-indigo-300 flex flex-col">
                             <h2 className="font-mono text-lg font-semibold text-indigo-800 mb-3">Código HTML:</h2>
                             <pre className="flex-1 text-sm font-mono bg-gray-50 p-3 rounded-lg border border-gray-300 whitespace-pre-wrap overflow-x-auto w-full h-full min-h-[10rem]">
-                                {elementosHTML.map(el => `<${el.tag} id="estilo">${el.contenido}</${el.tag}>`).join('\n')}
+                                {`<div id="estilo">
+${elementosHTML.map(el => `  <div>${el.contenido}</div>`).join('\n')}
+</div>`}
                             </pre>
                         </div>
                     </section>
