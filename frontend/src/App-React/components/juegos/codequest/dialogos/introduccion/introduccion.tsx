@@ -21,19 +21,19 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
       id: 'introduccion',
       titulo: 'Bienvenido a CodeQuest',
       texto:
-        '¡Bienvenido a CodeQuest! En este juego, aprenderás a programar mientras exploras un mundo lleno de aventuras. Tu misión es ayudar a los habitantes del planeta CodeLand ya que han sido invadidos por criaturas, debes utilizar tus habilidades de programación.',
+        '¡Bienvenido a CodeQuest! En este juego, aprenderás a programar mientras exploras un mundo lleno de aventuras.\nTu misión es ayudar a los habitantes del planeta CodeLand ya que han sido invadidos por criaturas, debes utilizar tus habilidades de programación.',
     },
     {
       id: 'misionInicial',
       titulo: 'Tu mision principal',
       texto:
-        'Tu tarea principal es derrotar a todos los jefes para absorver sus conocimientos y poder ser un programador Full Stack. Para hacerlo, necesitarás usar comandos de programación y utilizar la lógica.',
+        'Tu tarea principal es derrotar a todos los jefes para absorver sus conocimientos y poder ser un programador Full Stack.\nPara hacerlo, necesitarás usar comandos de programación y utilizar la lógica.',
     },
     {
       id: 'comodines',
       titulo: 'Comodines y habilidades especiales',
       texto:
-        'A lo largo del juego, encontrarás comodines que te ayudarán en tu misión. Estos comodines te permitirán realizar acciones especiales, como curarte, usar la sabiduría del 50%, habilidades u otras sorpresas. Aprende a usarlos sabiamente.',
+        'A lo largo del juego, encontrarás comodines que te ayudarán en tu misión.\nEstos comodines te permitirán realizar acciones especiales, como curarte, usar la sabiduría del 50%, habilidades u otras sorpresas.\nAprende a usarlos sabiamente.',
     },
   ];
 

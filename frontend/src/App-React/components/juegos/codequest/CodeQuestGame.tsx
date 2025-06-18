@@ -7,8 +7,10 @@ import PersonajeAnimado from './personajes/personaje-animado';
 import BarraDeVida from './personajes/barra_de_vida/Barra_de_vida';
 import VinetaDialogo from './dialogos/vineta/vineta-dialogo';
 import EmpezarJuego from './dialogos/modalInicio/empezarJuego';
-import Comodin from './preguntas/contenedor/contenedorComodines/comodin';
+import Comodin, { ComodinScrum} from './preguntas/contenedor/contenedorComodines/comodin';
 import Puertas from './escenarios/puertas/puertas';
+import EscenarioScrum from './escenarios/scrum/EscenarioScrum';
+import FrasesJugador from './personajes/frases/FrasesJugador';
 import '../../../assets/juegos/codequest/styles/styles.css';
 
 // Imágenes de jefes normales
@@ -66,6 +68,7 @@ export default function CodeQuest() {
   const [estadoJuego, setEstadoJuego] = useState<EstadoJuego>('seleccion-jefe');
   const [tipoJefe, setTipoJefe] = useState<TipoJefe | null>(null);
   const [preguntaActual, setPreguntaActual] = useState(0);
+  const [preguntasUsadas, setPreguntasUsadas] = useState<number[]>([]);
   const [vidaJugador, setVidaJugador] = useState(100);
   const [vidaJefe, setVidaJefe] = useState(0);
   const [dialogoActivo, setDialogoActivo] = useState<TipoDialogo>(null);
@@ -78,6 +81,7 @@ export default function CodeQuest() {
   const [puntuacionJugador, setPuntuacionJugador] = useState(0);
   const [jefesDerrrotados, setJefesDerrrotados] = useState<string[]>([]);
   const [dificultadActual, setDificultadActual] = useState<'facil' | 'media' | 'dificil' | null>(null);
+  const [fallosConsecutivos, setFallosConsecutivos] = useState(0);
 
   // Comodines
   const [comodin50porCiento, setComodin50PorCiento] = useState(true);
@@ -85,6 +89,10 @@ export default function CodeQuest() {
   const [comodin50deDanyo, setComodin50DeDanyo] = useState(true);
   const [opcionesOcultas, setOpcionesOcultas] = useState<string[]>([]);
 
+   // Comodines específicos para Scrum
+  const [comodinScrumVida, setComodinScrumVida] = useState(true)
+  const [comodinScrumRetro, setComodinScrumRetro] = useState(true) 
+  const [comodinScrumDaily, setComodinScrumDaily] = useState(true)
   // Datos de los jefes
   const jefesData: Record<TipoJefe, JefeData> = {
     react: {
@@ -153,13 +161,28 @@ export default function CodeQuest() {
       vidaMaxima: 140,
       fraseInicial: '¡Bienvenido a nuestro Daily Scrum! Veamos si entiendes los principios ágiles.',
       fraseVictoria: '¡Increíble! Has demostrado ser un verdadero Scrum Master.',
-      fraseDerrota: 'Parece que necesitas más sprints de aprendizaje. ¡La retrospectiva no será agradable!',
+      fraseDerrota: 'Parece que necesitas más sprints de aprendizaje. ¡La retrospectiva no será agradable, prepárate!',
     },
   };
 
   // Obtener datos del jefe actual
   const jefeActual = tipoJefe ? jefesData[tipoJefe] : null;
   const preguntasActuales = jefeActual?.preguntas || [];
+
+  const obtenerPreguntaNoUsada = () => {
+    const preguntasDisponibles = preguntasActuales
+      .map((_, index) => index)
+      .filter((index) => !preguntasUsadas.includes(index));
+
+    if (preguntasDisponibles.length === 0) {
+      // Si se acabaron las preguntas, reiniciar el pool
+      setPreguntasUsadas([]);
+      return Math.floor(Math.random() * preguntasActuales.length);
+    }
+
+    const indiceAleatorio = Math.floor(Math.random() * preguntasDisponibles.length);
+    return preguntasDisponibles[indiceAleatorio];
+  };
 
   // Función para seleccionar jefe
   const seleccionarJefe = (jefe: string) => {
@@ -168,10 +191,10 @@ export default function CodeQuest() {
     setVidaJefe(jefesData[tipoJefeSeleccionado].vidaMaxima);
     setEstadoJuego(tipoJefeSeleccionado === 'programador' ? 'puertas' : 'dialogo-inicial');
     setJefeDerrotado(false);
-    // Iniciamos con una pregunta aleatoria segun el jefe seleccionado
-    const preguntasDelJefe = jefesData[tipoJefeSeleccionado].preguntas;
-    const preguntaAleatoria = Math.floor(Math.random() * preguntasDelJefe.length);
-    setPreguntaActual(preguntaAleatoria);
+    setPreguntasUsadas([]);
+    const primeraPregunta = Math.floor(Math.random() * jefesData[tipoJefeSeleccionado].preguntas.length);
+    setPreguntaActual(primeraPregunta);
+    setPreguntasUsadas([primeraPregunta]);
     setVidaJugador(100);
     setRespuestaSeleccionada(null);
     setMensajeRespuesta('');
@@ -179,8 +202,13 @@ export default function CodeQuest() {
     setComodin50PorCiento(true);
     setComodinRecuperarVida(true);
     setComodin50DeDanyo(true);
+    // Reiniciar comodines de Scrum
+    setComodinScrumVida(true)
+    setComodinScrumRetro(true)
+    setComodinScrumDaily(true)
     setMostrarPregunta(false);
     setDificultadActual(null);
+    setFallosConsecutivos(0);
     iniciarDialogoInicial();
   };
 
@@ -224,27 +252,15 @@ export default function CodeQuest() {
         setEstadoJuego('derrota');
         setDialogoActivo('jugador');
       } else {
-        // Pasar a la siguiente pregunta
-        if (preguntasActuales.length > 1) {
-          // Seleccionar una pregunta diferente a la actual
-          let siguientePregunta;
-          do {
-            siguientePregunta = Math.floor(Math.random() * preguntasActuales.length);
-          } while (siguientePregunta === preguntaActual && preguntasActuales.length > 1);
-          setPreguntaActual(siguientePregunta);
-          setEstadoJuego('pregunta');
-          setMostrarPregunta(true);
-          setRespuestaSeleccionada(null);
-          setOpcionesOcultas([]); // Resetear opciones ocultas para la nueva pregunta
-        } else {
-          // Si se acabaron las preguntas, victoria por defecto
-          setJefeDerrotado(true);
-          if (tipoJefe && !jefesDerrrotados.includes(tipoJefe)) {
-            setJefesDerrrotados((prev) => [...prev, tipoJefe]);
-          }
-          setEstadoJuego('victoria');
-          setDialogoActivo('jefe');
-        }
+        // Obtener siguiente pregunta no usada
+        const siguientePregunta = obtenerPreguntaNoUsada();
+        setPreguntaActual(siguientePregunta);
+        setPreguntasUsadas((prev) => [...prev, siguientePregunta]);
+        setPreguntaActual(siguientePregunta);
+        setEstadoJuego('pregunta');
+        setMostrarPregunta(true);
+        setRespuestaSeleccionada(null);
+        setOpcionesOcultas([]);
       }
     } else if (estadoJuego === 'victoria') {
       // Después del diálogo de victoria, mostrar selección de jefes
@@ -263,6 +279,7 @@ export default function CodeQuest() {
     vidaJugador,
     tipoJefe,
     jefesDerrrotados,
+    preguntasUsadas,
   ]);
 
   // Función para manejar la selección de respuesta
@@ -317,6 +334,7 @@ export default function CodeQuest() {
         );
         setDialogoActivo('jefe');
         setAnimacionJefe('attack');
+        setFallosConsecutivos((prev) => prev + 1);
 
         setTimeout(() => {
           setVidaJugador((prev) => Math.max(0, prev - 20));
@@ -340,6 +358,7 @@ export default function CodeQuest() {
       );
       setDialogoActivo('jefe');
       setAnimacionJefe('attack');
+      setFallosConsecutivos((prev) => prev + 1);
 
       setTimeout(() => {
         setVidaJugador((prev) => Math.max(0, prev - 20));
@@ -394,11 +413,48 @@ export default function CodeQuest() {
     }
   };
 
+  // Comodines específicos para Scrum
+  const usarComodinScrumVida = () => {
+    if (!comodinScrumVida) return
+    setComodinScrumVida(false)
+    setVidaJugador((prev) => Math.min(100, prev + 30))
+  }
+
+  const usarComodinScrumRetro = () => {
+    if (!comodinScrumRetro || estadoJuego !== "pregunta" || !jefeActual) return
+
+    setComodinScrumRetro(false)
+
+    const preguntaActualData = preguntasActuales[preguntaActual]
+    const respuestaCorrecta = preguntaActualData.respuestaCorrecta
+    const todasLasOpciones = Object.keys(preguntaActualData.opcionesRespuesta)
+    const opcionesIncorrectas = todasLasOpciones.filter((opcion) => opcion !== respuestaCorrecta)
+
+    const opcionesAOcultar = opcionesIncorrectas.sort(() => Math.random() - 0.5).slice(0, 2)
+    setOpcionesOcultas(opcionesAOcultar)
+  }
+
+  const usarComodinScrumDaily = () => {
+    if (!comodinScrumDaily || estadoJuego !== "pregunta") return
+
+    setComodinScrumDaily(false)
+
+    // Reiniciar la pregunta actual - limpiar respuesta seleccionada y opciones ocultas
+    setRespuestaSeleccionada(null)
+    setOpcionesOcultas([])
+
+    // Obtener una nueva pregunta no usada
+    const nuevaPregunta = obtenerPreguntaNoUsada()
+    setPreguntaActual(nuevaPregunta)
+    setPreguntasUsadas((prev) => [...prev, nuevaPregunta])
+  }
+
   // Reiniciar juego
   const reiniciarJuegoCompleto = () => {
     setEstadoJuego('seleccion-jefe');
     setTipoJefe(null);
     setPreguntaActual(0);
+    setPreguntasUsadas([]);
     setVidaJugador(100);
     setVidaJefe(0);
     setDialogoActivo(null);
@@ -413,8 +469,12 @@ export default function CodeQuest() {
     setComodin50PorCiento(true);
     setComodinRecuperarVida(true);
     setComodin50DeDanyo(true);
+    setComodinScrumVida(true)
+    setComodinScrumRetro(true)
+    setComodinScrumDaily(true)
     setOpcionesOcultas([]);
     setDificultadActual(null);
+    setFallosConsecutivos(0);
   };
 
   // Obtener el mensaje de diálogo según el estado
@@ -463,9 +523,10 @@ export default function CodeQuest() {
     // Asignar la pregunta seleccionada y dificultad
     setDificultadActual(dificultad);
 
-    // Seleccionar una pregunta aleatoria de las disponibles
-    const preguntaAleatoria = Math.floor(Math.random() * preguntasActuales.length);
-    setPreguntaActual(preguntaAleatoria);
+    // Obtener una pregunta no usada
+    const nuevaPregunta = obtenerPreguntaNoUsada();
+    setPreguntaActual(nuevaPregunta);
+    setPreguntasUsadas((prev) => [...prev, nuevaPregunta]);
 
     // Cambiar al estado de pregunta
     setEstadoJuego('pregunta');
@@ -520,23 +581,52 @@ export default function CodeQuest() {
             />
           </div>
 
-          {/* Contenedor de preguntas - centro */}
-          {mostrarPregunta && estadoJuego === 'pregunta' && preguntaActual < preguntasActuales.length && (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl z-10">
-              <ContenedorPreguntas
-                pregunta={preguntasActuales[preguntaActual].pregunta}
-                codigo={preguntasActuales[preguntaActual].codigo}
-                opcionesRespuesta={preguntasActuales[preguntaActual].opcionesRespuesta}
-                respuestaCorrecta={preguntasActuales[preguntaActual].respuestaCorrecta}
-                onSeleccionarRespuesta={seleccionarRespuesta}
-                opcionesOcultas={opcionesOcultas}
-                respuestaSeleccionada={respuestaSeleccionada}
-                dificultad={dificultadActual}
-                onTiempoAgotado={manejarTiempoAgotado}
-              />
+           {/* Layout específico para Scrum */}
+          {tipoJefe === "scrum" && mostrarPregunta && estadoJuego === "pregunta" && (
+            <div className="flex-1 flex gap-12">
+              {/* Escenario Scrum - lado izquierdo */}
+              <div className="w-1/2 flex items-center justify-end ms-8">
+                <EscenarioScrum fallosConsecutivos={fallosConsecutivos} preguntaActual={preguntaActual} />
+              </div>
+
+              {/* Preguntas - lado derecho */}
+              <div className="w-3/4 flex items-center justify-start pr-8">
+                <div className="w-full max-w-2xl">
+                  <ContenedorPreguntas
+                    pregunta={preguntasActuales[preguntaActual].pregunta}
+                    codigo={preguntasActuales[preguntaActual].codigo}
+                    opcionesRespuesta={preguntasActuales[preguntaActual].opcionesRespuesta}
+                    respuestaCorrecta={preguntasActuales[preguntaActual].respuestaCorrecta}
+                    onSeleccionarRespuesta={seleccionarRespuesta}
+                    opcionesOcultas={opcionesOcultas}
+                    respuestaSeleccionada={respuestaSeleccionada}
+                    dificultad={dificultadActual}
+                    onTiempoAgotado={manejarTiempoAgotado}
+                  />
+                </div>
+              </div>
             </div>
           )}
 
+          {/* Contenedor de preguntas - centro (para otros jefes) */}
+          {tipoJefe !== "scrum" &&
+            mostrarPregunta &&
+            estadoJuego === "pregunta" &&
+            preguntaActual < preguntasActuales.length && (
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl z-10">
+                <ContenedorPreguntas
+                  pregunta={preguntasActuales[preguntaActual].pregunta}
+                  codigo={preguntasActuales[preguntaActual].codigo}
+                  opcionesRespuesta={preguntasActuales[preguntaActual].opcionesRespuesta}
+                  respuestaCorrecta={preguntasActuales[preguntaActual].respuestaCorrecta}
+                  onSeleccionarRespuesta={seleccionarRespuesta}
+                  opcionesOcultas={opcionesOcultas}
+                  respuestaSeleccionada={respuestaSeleccionada}
+                  dificultad={dificultadActual}
+                  onTiempoAgotado={manejarTiempoAgotado}
+                />
+              </div>
+            )}
           {/* Contenedor de puertas - centro */}
           {estadoJuego === 'puertas' && tipoJefe === 'programador' && (
             <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -560,6 +650,13 @@ export default function CodeQuest() {
                 />
               </div>
             )}
+            {/* Frases personalizadas del jugador */}
+            <FrasesJugador
+              tipoJefe={tipoJefe}
+              vidaJugador={vidaJugador}
+              estadoJuego={estadoJuego}
+              fallosConsecutivos={fallosConsecutivos}
+            />
             {/* Mostrar solo una imagen del jugador según la vida */}
             {vidaJugador <= 0 ? (
               <PersonajeAnimado imagen={JugadorDerrotado} className="w-96 h-96" animacion={animacionJugador} />
@@ -579,6 +676,16 @@ export default function CodeQuest() {
 
           {/* Comodines */}
           <div className="absolute top-4 left-4 z-20">
+             {tipoJefe === "scrum" ? (
+              <ComodinScrum
+                vida={comodinScrumVida}
+                retro={comodinScrumRetro}
+                daily={comodinScrumDaily}
+                onRecuperarVida={usarComodinScrumVida}
+                onRetro={usarComodinScrumRetro}
+                onDaily={usarComodinScrumDaily}
+              />
+            ) : (
             <Comodin
               vida={comodinRecuperarVida}
               danyo={comodin50deDanyo}
@@ -587,6 +694,7 @@ export default function CodeQuest() {
               onDanyo={usarComodinDanyo}
               onCincuentaPorCiento={usarComodin50PorCiento}
             />
+            )}
           </div>
 
           {/* Botón para reiniciar (solo visible en derrota) */}
