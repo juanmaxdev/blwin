@@ -24,12 +24,16 @@
 
 
 @font-face {
-  font-family: 'CodeHack';
-  src: url('../fonts/nightmare-codehack/nightmare-codehack/Nightmare_Codehack.otf') format('truetype');
+  font-family: 'Arcade';
+  src: url('../fonts/arcade/Arcade.ttf') format('truetype');
   font-weight: normal;
 }
 
-
+@font-face {
+  font-family: 'LogWizard';
+  src: url('../fonts/log-wizard/log-Wizard.ttf') format('truetype');
+  font-weight: normal;
+}
 
 .tituloPrincipal {
     font-family: 'CodeQuest', sans-serif;;
@@ -48,10 +52,14 @@
 }
 
 .textoFuente {
-    font-family: 'CodeHack', sans-serif;
+    font-family:  sans-serif;
 }
 
 .textoTales{
     font-family: 'Tales', sans-serif;
     letter-spacing: 0.2rem;
+}
+
+.textoArcade {
+  font-family: 'Arcade', 'Tales', sans-serif;
 }

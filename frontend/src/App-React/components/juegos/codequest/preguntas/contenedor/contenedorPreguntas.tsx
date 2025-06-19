@@ -62,11 +62,11 @@ export default function ContenedorPreguntas({
 
     // Estado normal (antes de seleccionar)
     if (isSelected) {
-      return 'bg-blue-100 border-blue-500 transform scale-105';
+      return 'bg-blue-100 border-purple-500 transform scale-105';
     } else if (isHovered) {
-      return 'bg-blue-50 border-blue-300 transform scale-102 cursor-pointer';
+      return 'bg-blue-50 border-purple-500 transform scale-102 cursor-pointer';
     } else {
-      return 'bg-white border-gray-300 hover:border-blue-200 cursor-pointer';
+      return 'bg-white border-gray-300 hover:border-purple-200 cursor-pointer';
     }
   };
 
@@ -124,9 +124,7 @@ export default function ContenedorPreguntas({
         </div>
       )}
 
-      <div className="relative bg-white rounded-2xl shadow-lg p-6">
-        <div className="absolute -bottom-4 left-10 w-0 h-0 border-t-8 border-t-white border-x-8 border-x-transparent" />
-
+      <div className="relative bg-white bg-opacity-80 rounded-2xl shadow-lg p-6">
         <h2 className="text-2xl font-semibold mb-4 text-gray-800">{pregunta}</h2>
 
         {codigo && (

@@ -78,21 +78,21 @@ export default function FrasesJugador({ tipoJefe, vidaJugador, estadoJuego, fall
     },
     scrum: {
       alta: [
-        "¡Soy un verdadero Scrum Master!",
+        "¡Soy un verdadero Scrum Master chaval!",
         "Mi velocity es impresionante.",
-        "¡Voy a sprintear hacia la victoria!",
-        "Mi backlog está perfectamente priorizado.",
+        "¡Este sprint será épico!",
+        "Mi backlog siempre está perfectamente actualizado jaj.",
       ],
       media: [
         "¿Era daily scrum o standup meeting?",
         "Necesito mejorar mis estimaciones...",
         "¿Cuánto duraba un sprint otra vez?",
-        "Mi retrospectiva necesita mejoras.",
+        "Mi retrospectiva esta vez necesitara mejoras.",
       ],
       baja: [
-        "¡Mi sprint está completamente descarrilado!",
-        "¿Qué diferencia hay entre épica e historia?",
-        "¡Necesito un Scrum Master urgentemente!",
+        "¡Mi sprint está completamente k.o!",
+        "Voy a necesitar una retrospectiva urgente.",
+        "¡Necesito un Scrum Master urgentemente, ¿Mario?!",
         "Mi equipo está en completo caos.",
       ],
     },

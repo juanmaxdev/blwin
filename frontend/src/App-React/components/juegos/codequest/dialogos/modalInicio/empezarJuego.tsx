@@ -13,10 +13,10 @@ import JefeScrum from '../../../../../assets/juegos/codequest/personaje/jefe_scr
 
 // listado de jefes derrotados
 import JefeReactDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_react_derrotado.png';
-import JefeJavaDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_java.png';
+import JefeJavaDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_java_derrotado.png';
 import JefeNETDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_net_derrotado.png';
-import JefeMamonDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_usuario_cabron.png';
-import JefeProgramadorDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_programador.png';
+import JefeMamonDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_usuario_cabron_derrotado.png';
+import JefeProgramadorDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_programador_derrotado.png';
 import JefeScrumDerrotado from '../../../../../assets/juegos/codequest/personaje/jefe_scrum_derrotado.png';
 
 // Campos de batalla
@@ -146,7 +146,6 @@ export default function EmpezarJuego({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               {jefes.map((jefe) => {
                 const estaDerrotado = jefesDerrotados.includes(jefe.id);
-                const puedeSeleccionar = !estaDerrotado && jefeSeleccionado !== jefe.id;
 
                 return (
                   <div

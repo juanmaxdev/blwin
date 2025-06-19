@@ -5,9 +5,10 @@ import ContenedorPreguntas from './preguntas/contenedor/contenedorPreguntas';
 import { preguntasReact, preguntasJava, preguntasNet, preguntasGeneral, preguntasScrum } from './preguntas/preguntas';
 import PersonajeAnimado from './personajes/personaje-animado';
 import BarraDeVida from './personajes/barra_de_vida/Barra_de_vida';
+import { mandarPuntuacion } from '../../../hooks/MandarPuntuacion';
 import VinetaDialogo from './dialogos/vineta/vineta-dialogo';
 import EmpezarJuego from './dialogos/modalInicio/empezarJuego';
-import Comodin, { ComodinScrum} from './preguntas/contenedor/contenedorComodines/comodin';
+import Comodin, { ComodinScrum, ComodinJefeMamon } from './preguntas/contenedor/contenedorComodines/comodin';
 import Puertas from './escenarios/puertas/puertas';
 import EscenarioScrum from './escenarios/scrum/EscenarioScrum';
 import FrasesJugador from './personajes/frases/FrasesJugador';
@@ -23,10 +24,10 @@ import JefeScrum from '../../../assets/juegos/codequest/personaje/jefe_scrum.png
 
 // Imágenes de jefes derrotados
 import JefeReactDerrotado from '../../../assets/juegos/codequest/personaje/jefe_react_derrotado.png';
-import JefeJavaDerrotado from '../../../assets/juegos/codequest/personaje/jefe_java.png';
+import JefeJavaDerrotado from '../../../assets/juegos/codequest/personaje/jefe_java_derrotado.png';
 import JefeNetDerrotado from '../../../assets/juegos/codequest/personaje/jefe_net_derrotado.png';
-import JefeMamonDerrotado from '../../../assets/juegos/codequest/personaje/jefe_usuario_cabron.png';
-import JefeProgramadorDerrotado from '../../../assets/juegos/codequest/personaje/jefe_programador.png';
+import JefeMamonDerrotado from '../../../assets/juegos/codequest/personaje/jefe_usuario_cabron_derrotado.png';
+import JefeProgramadorDerrotado from '../../../assets/juegos/codequest/personaje/jefe_programador_derrotado.png';
 import JefeScrumDerrotado from '../../../assets/juegos/codequest/personaje/jefe_scrum_derrotado.png';
 
 // Imágenes del jugador
@@ -89,10 +90,19 @@ export default function CodeQuest() {
   const [comodin50deDanyo, setComodin50DeDanyo] = useState(true);
   const [opcionesOcultas, setOpcionesOcultas] = useState<string[]>([]);
 
-   // Comodines específicos para Scrum
-  const [comodinScrumVida, setComodinScrumVida] = useState(true)
-  const [comodinScrumRetro, setComodinScrumRetro] = useState(true) 
-  const [comodinScrumDaily, setComodinScrumDaily] = useState(true)
+  // Comodines específicos para Scrum
+  const [comodinScrumVida, setComodinScrumVida] = useState(true);
+  const [comodinScrumRetro, setComodinScrumRetro] = useState(true);
+  const [comodinScrumDaily, setComodinScrumDaily] = useState(true);
+
+  // Comodines específicos para Jefe Mamon
+  const [comodinMamonVida, setComodinMamonVida] = useState(true);
+  const [comodinMamonChatGpt, setComodinMamonChatGpt] = useState(true);
+  const [comodinMamonEscape, setComodinMamonEscape] = useState(true);
+
+  // Estado para mostrar la viñeta del comodín Escapar
+  const [mostrarVinetaComodinEscape, setMostrarVinetaComodinEscape] = useState(false);
+
   // Datos de los jefes
   const jefesData: Record<TipoJefe, JefeData> = {
     react: {
@@ -134,11 +144,11 @@ export default function CodeQuest() {
       imagen: JefeMamon,
       imagenDerrotado: JefeMamonDerrotado,
       fondo: JefeMamonCampoBatalla,
-      preguntas: [...preguntasReact, ...preguntasJava, ...preguntasNet].sort(() => Math.random() - 0.5).slice(0, 15),
+      preguntas: [...preguntasReact, ...preguntasJava, ...preguntasNet],
       vidaMaxima: 130,
-      fraseInicial: '¡Esto debería ser trivial! ¿Por qué no está listo ya? ¡Responde mis preguntas ahora mismo!',
+      fraseInicial: '¡Tendré puestos mis ojos robóticos para poder ver donde encontrar fallos JAJAJA!',
       fraseVictoria: '¡Hmph! Supongo que no eres tan incompetente como pensaba...',
-      fraseDerrota: '¡Lo sabía! Debería haber contratado a mi sobrino que sabe de computadoras.',
+      fraseDerrota: '¡Lo sabía! Debería haber contratado a mi sobrino que sabe de ordenadores.',
     },
     programador: {
       nombre: 'JEFE PROGRAMADOR',
@@ -203,9 +213,9 @@ export default function CodeQuest() {
     setComodinRecuperarVida(true);
     setComodin50DeDanyo(true);
     // Reiniciar comodines de Scrum
-    setComodinScrumVida(true)
-    setComodinScrumRetro(true)
-    setComodinScrumDaily(true)
+    setComodinScrumVida(true);
+    setComodinScrumRetro(true);
+    setComodinScrumDaily(true);
     setMostrarPregunta(false);
     setDificultadActual(null);
     setFallosConsecutivos(0);
@@ -415,39 +425,75 @@ export default function CodeQuest() {
 
   // Comodines específicos para Scrum
   const usarComodinScrumVida = () => {
-    if (!comodinScrumVida) return
-    setComodinScrumVida(false)
-    setVidaJugador((prev) => Math.min(100, prev + 30))
-  }
+    if (!comodinScrumVida) return;
+    setComodinScrumVida(false);
+    setVidaJugador((prev) => Math.min(100, prev + 30));
+  };
 
   const usarComodinScrumRetro = () => {
-    if (!comodinScrumRetro || estadoJuego !== "pregunta" || !jefeActual) return
+    if (!comodinScrumRetro || estadoJuego !== 'pregunta' || !jefeActual) return;
 
-    setComodinScrumRetro(false)
+    setComodinScrumRetro(false);
 
-    const preguntaActualData = preguntasActuales[preguntaActual]
-    const respuestaCorrecta = preguntaActualData.respuestaCorrecta
-    const todasLasOpciones = Object.keys(preguntaActualData.opcionesRespuesta)
-    const opcionesIncorrectas = todasLasOpciones.filter((opcion) => opcion !== respuestaCorrecta)
+    const preguntaActualData = preguntasActuales[preguntaActual];
+    const respuestaCorrecta = preguntaActualData.respuestaCorrecta;
+    const todasLasOpciones = Object.keys(preguntaActualData.opcionesRespuesta);
+    const opcionesIncorrectas = todasLasOpciones.filter((opcion) => opcion !== respuestaCorrecta);
 
-    const opcionesAOcultar = opcionesIncorrectas.sort(() => Math.random() - 0.5).slice(0, 2)
-    setOpcionesOcultas(opcionesAOcultar)
-  }
+    const opcionesAOcultar = opcionesIncorrectas.sort(() => Math.random() - 0.5).slice(0, 2);
+    setOpcionesOcultas(opcionesAOcultar);
+  };
 
   const usarComodinScrumDaily = () => {
-    if (!comodinScrumDaily || estadoJuego !== "pregunta") return
+    if (!comodinScrumDaily || estadoJuego !== 'pregunta') return;
 
-    setComodinScrumDaily(false)
+    setComodinScrumDaily(false);
 
     // Reiniciar la pregunta actual - limpiar respuesta seleccionada y opciones ocultas
-    setRespuestaSeleccionada(null)
-    setOpcionesOcultas([])
+    setRespuestaSeleccionada(null);
+    setOpcionesOcultas([]);
 
     // Obtener una nueva pregunta no usada
-    const nuevaPregunta = obtenerPreguntaNoUsada()
-    setPreguntaActual(nuevaPregunta)
-    setPreguntasUsadas((prev) => [...prev, nuevaPregunta])
-  }
+    const nuevaPregunta = obtenerPreguntaNoUsada();
+    setPreguntaActual(nuevaPregunta);
+    setPreguntasUsadas((prev) => [...prev, nuevaPregunta]);
+  };
+
+  // Comodines específicos para Jefe Mamon
+  const usarComodinMamonVida = () => {
+    if (!comodinMamonVida) return;
+    setComodinMamonVida(false);
+    setVidaJugador((prev) => Math.min(100, prev + 30));
+  };
+
+  // Usar comodín ChatGpt
+  const usarComodinMamonBuscarInternet = () => {
+    if (!comodinMamonChatGpt || estadoJuego !== 'pregunta' || !jefeActual) return;
+
+    setComodinMamonChatGpt(false);
+
+    const preguntaActualData = preguntasActuales[preguntaActual];
+    const respuestaCorrecta = preguntaActualData.respuestaCorrecta;
+    const todasLasOpciones = Object.keys(preguntaActualData.opcionesRespuesta);
+    const opcionesIncorrectas = todasLasOpciones.filter((opcion) => opcion !== respuestaCorrecta);
+
+    const opcionesAOcultar = opcionesIncorrectas.sort(() => Math.random() - 0.5).slice(0, 3);
+    setOpcionesOcultas(opcionesAOcultar);
+  };
+
+  // Usar comodín Escapar
+  const usarComodinMamonEscapar = () => {
+    if (!comodinMamonEscape) return;
+    setMostrarVinetaComodinEscape(true);
+  };
+
+  // Callback cuando desaparece la viñeta del comodín Escapar
+  const manejarDesaparicionVinetaComodinEscape = () => {
+    setComodinMamonEscape(false);
+    setMostrarVinetaComodinEscape(false);
+    setTipoJefe(null);
+    setEstadoJuego('seleccion-jefe');
+  };
 
   // Reiniciar juego
   const reiniciarJuegoCompleto = () => {
@@ -469,9 +515,9 @@ export default function CodeQuest() {
     setComodin50PorCiento(true);
     setComodinRecuperarVida(true);
     setComodin50DeDanyo(true);
-    setComodinScrumVida(true)
-    setComodinScrumRetro(true)
-    setComodinScrumDaily(true)
+    setComodinScrumVida(true);
+    setComodinScrumRetro(true);
+    setComodinScrumDaily(true);
     setOpcionesOcultas([]);
     setDificultadActual(null);
     setFallosConsecutivos(0);
@@ -496,15 +542,15 @@ export default function CodeQuest() {
     }
 
     if (dialogoActivo === 'jugador') {
-      if (estadoJuego === 'dialogo-inicial') return '¡Acepto tu desafío! Mi conocimiento me llevará a la victoria.';
+      if (estadoJuego === 'dialogo-inicial') return '¡Acepto tu desafío! Deberia ser suficiente con lo que aprendí.';
       if (
         estadoJuego === 'respuesta' &&
         respuestaSeleccionada === jefeActual.preguntas[preguntaActual].respuestaCorrecta
       ) {
         return mensajeRespuesta;
       }
-      if (estadoJuego === 'victoria') return '¡Lo logré! He demostrado mi dominio del conocimiento.';
-      if (estadoJuego === 'derrota') return 'He fallado... pero volveré más preparado.';
+      if (estadoJuego === 'victoria') return '¡Lo logré! He demostrado que tengo más conocimiento que tú.';
+      if (estadoJuego === 'derrota') return 'No ha salido como esperaba... pero volveré más preparado.';
       return '¡Creo que sé la respuesta!';
     }
 
@@ -564,13 +610,23 @@ export default function CodeQuest() {
           </div>
 
           {/* Jefe con posible viñeta de diálogo - arriba a la derecha */}
-          <div className="absolute top-16 right-4 flex flex-col items-end">
+          <div className="absolute top-16 right-4 flex flex-col items-end mt-5">
             {dialogoActivo === 'jefe' && (
               <div className="mb-4 mr-16 z-20">
                 <VinetaDialogo
                   texto={obtenerMensajeDialogo()}
                   posicion="derecha"
                   onDesaparecer={manejarDesaparicionDialogo}
+                />
+              </div>
+            )}
+            {/* Viñeta especial para el comodín Escapar */}
+            {mostrarVinetaComodinEscape && (
+              <div className="mb-4 mr-16 z-20">
+                <VinetaDialogo
+                  texto="Veo que te hiciste un poco de Pó Pó. ¡Eso es de primero de UI!"
+                  posicion="derecha"
+                  onDesaparecer={manejarDesaparicionVinetaComodinEscape}
                 />
               </div>
             )}
@@ -581,16 +637,16 @@ export default function CodeQuest() {
             />
           </div>
 
-           {/* Layout específico para Scrum */}
-          {tipoJefe === "scrum" && mostrarPregunta && estadoJuego === "pregunta" && (
-            <div className="flex-1 flex gap-12">
-              {/* Escenario Scrum - lado izquierdo */}
-              <div className="w-1/2 flex items-center justify-end ms-8">
+          {/* Layout específico para Scrum */}
+          {tipoJefe === 'scrum' && mostrarPregunta && estadoJuego === 'pregunta' && (
+            <div className="flex flex-row items-center justify-center  ">
+              {/* Escenario Scrum  */}
+              <div className="w-[30%] absolute -top-12 flex items-center justify-end">
                 <EscenarioScrum fallosConsecutivos={fallosConsecutivos} preguntaActual={preguntaActual} />
               </div>
 
-              {/* Preguntas - lado derecho */}
-              <div className="w-3/4 flex items-center justify-start pr-8">
+              {/* Preguntas */}
+              <div className="flex absolute bottom-1">
                 <div className="w-full max-w-2xl">
                   <ContenedorPreguntas
                     pregunta={preguntasActuales[preguntaActual].pregunta}
@@ -609,9 +665,9 @@ export default function CodeQuest() {
           )}
 
           {/* Contenedor de preguntas - centro (para otros jefes) */}
-          {tipoJefe !== "scrum" &&
+          {tipoJefe !== 'scrum' &&
             mostrarPregunta &&
-            estadoJuego === "pregunta" &&
+            estadoJuego === 'pregunta' &&
             preguntaActual < preguntasActuales.length && (
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl z-10">
                 <ContenedorPreguntas
@@ -676,7 +732,7 @@ export default function CodeQuest() {
 
           {/* Comodines */}
           <div className="absolute top-4 left-4 z-20">
-             {tipoJefe === "scrum" ? (
+            {tipoJefe === 'scrum' ? (
               <ComodinScrum
                 vida={comodinScrumVida}
                 retro={comodinScrumRetro}
@@ -685,41 +741,61 @@ export default function CodeQuest() {
                 onRetro={usarComodinScrumRetro}
                 onDaily={usarComodinScrumDaily}
               />
+            ) : tipoJefe === 'mamon' ? (
+              <ComodinJefeMamon
+                vida={comodinMamonVida}
+                buscarInternet={comodinMamonChatGpt}
+                escapar={comodinMamonEscape}
+                onRecuperarVida={usarComodinMamonVida}
+                onBuscarInternet={usarComodinMamonBuscarInternet}
+                onEscapar={usarComodinMamonEscapar}
+              />
             ) : (
-            <Comodin
-              vida={comodinRecuperarVida}
-              danyo={comodin50deDanyo}
-              cincuentaPorCiento={comodin50porCiento}
-              onRecuperarVida={usarComodinRecuperarVida}
-              onDanyo={usarComodinDanyo}
-              onCincuentaPorCiento={usarComodin50PorCiento}
-            />
+              <Comodin
+                vida={comodinRecuperarVida}
+                danyo={comodin50deDanyo}
+                cincuentaPorCiento={comodin50porCiento}
+                onRecuperarVida={usarComodinRecuperarVida}
+                onDanyo={usarComodinDanyo}
+                onCincuentaPorCiento={usarComodin50PorCiento}
+              />
             )}
           </div>
 
           {/* Botón para reiniciar (solo visible en derrota) */}
-          {estadoJuego === 'derrota' && !dialogoActivo && (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
-              <div className="text-center bg-white bg-opacity-90 rounded-2xl p-6 shadow-xl">
-                <h3 className="text-2xl font-bold text-red-600 mb-4">¡Derrota!</h3>
-                <p className="text-gray-700 mb-4">No te rindas, inténtalo de nuevo.</p>
-                <div className="flex gap-4 justify-center">
-                  <button
-                    onClick={() => seleccionarJefe(tipoJefe!)}
-                    className="px-6 py-3 bg-purple-600 text-white font-bold rounded-lg shadow-lg hover:bg-purple-700 transition-colors"
-                  >
-                    Reintentar
-                  </button>
-                  <button
-                    onClick={reiniciarJuegoCompleto}
-                    className="px-6 py-3 bg-gray-600 text-white font-bold rounded-lg shadow-lg hover:bg-gray-700 transition-colors"
-                  >
-                    Cambiar Jefe
-                  </button>
+          {estadoJuego === 'derrota' &&
+            !dialogoActivo &&
+            // Mandamos la puntuacion al backend
+            (mandarPuntuacion('CodeQuest', puntuacionJugador),
+            (
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+                <div className="text-center bg-white bg-opacity-80 rounded-2xl p-6 shadow-xl">
+                  <h3 className="text-4xl font-bold mb-4 tituloFuenteSecundario bg-gradient-to-r from-purple-700 to-red-700 bg-clip-text text-transparent">
+                    ¡Fuiste derrotado!
+                  </h3>
+                  <p className="text-gray-700 textoArcade text-2xl">
+                    No te rindas tan facilmente,
+                    <br />
+                    intentalo de nuevo.
+                  </p>
+                  <p className="text-gray my-5 font-semibold">
+                    Tu puntuación total ha sido de:
+                    <span className="text-2xl font-bold text-violet-700"> {puntuacionJugador}</span>
+                  </p>
+                  <div className="flex gap-4 justify-center">
+                    <button
+                      onClick={() => {
+                        seleccionarJefe(tipoJefe!);
+                        reiniciarJuegoCompleto();
+                      }}
+                      className="px-6 py-3 bg-gradient-to-tr from-purple-700 to-red-700 text-white font-bold rounded-lg shadow-lg transition-colors duration-1000 hover:from-red-800 hover:to-red-800"
+                    >
+                      Reintentar
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            ))}
         </div>
       )}
 

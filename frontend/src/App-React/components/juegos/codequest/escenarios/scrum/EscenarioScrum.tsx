@@ -21,10 +21,10 @@ export default function EscenarioScrum({ fallosConsecutivos, preguntaActual }: E
   const imagenesDaily = [EscenarioDaily1, EscenarioDaily2, EscenarioDaily3, EscenarioDaily4];
 
   const textosEstado = [
-    'El equipo está concentrado y colaborativo. ¡Buen ambiente de trabajo!',
-    'Hay algo de tensión en el aire. El Scrum Master parece preocupado...',
-    '¡La reunión se está volviendo caótica! Algunos miembros del equipo están frustrados.',
-    '¡Completo desastre! El equipo está en pánico y el proyecto en peligro.',
+    'El equipo está concentrado y colaborativo. ¡Actualmente hay buen ambiente de trabajo!',
+    'Hay algo de tensión en el aire. El Scrum Master parece estar preocupado...',
+    '¡La reunión se está volviendo caótica! Algunos miembros del equipo están frustrados y en desacuerdo.',
+    '¡Esto es un completo desastre! El Scrum Master te aisló y el proyecto está en peligro.',
   ];
 
   // Cambiar imagen según fallos consecutivos
@@ -42,14 +42,14 @@ export default function EscenarioScrum({ fallosConsecutivos, preguntaActual }: E
 
   return (
     <motion.div
-      className="bg-white bg-opacity-85 rounded-2xl shadow-2xl p-4 w-full"
+      className=" rounded-2xl w-full"
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
-      key={`${preguntaActual}-${fallosConsecutivos}`} // Re-animar cuando cambie la pregunta o fallos
+      key={`${preguntaActual}-${fallosConsecutivos}`} 
     >
       {/* Título de la reunión */}
-      <div className="text-center mb-3">
+      {/*<div className="text-center mb-3">
         <h3 className="text-xl font-bold text-blue-800 mb-1">📅 Daily Scrum</h3>
         <div className="flex justify-center items-center gap-2 text-xs text-gray-600">
           <span>Sprint 3 - Día {Math.floor(preguntaActual / 3) + 1}</span>
@@ -58,7 +58,7 @@ export default function EscenarioScrum({ fallosConsecutivos, preguntaActual }: E
             Fallos: {fallosConsecutivos}
           </span>
         </div>
-      </div>
+      </div>^*/}
 
       {/* Imagen de la reunión */}
       <motion.div
@@ -73,23 +73,10 @@ export default function EscenarioScrum({ fallosConsecutivos, preguntaActual }: E
         }}
       >
         <img
-          src={imagenesDaily[imagenActual] || "/placeholder.svg"}
+          src={imagenesDaily[imagenActual]}
           alt="Daily Meeting"
-          className="w-full h-96 object-cover rounded-xl shadow-lg"
+          className="w-full h-80 object-contain rounded-xl"
         />
-
-        {/* Overlay con efectos según el estado */}
-        {fallosConsecutivos > 0 && (
-          <div
-            className={`absolute inset-0 rounded-xl ${
-              fallosConsecutivos >= 3
-                ? "bg-red-500 bg-opacity-20"
-                : fallosConsecutivos >= 2
-                  ? "bg-orange-500 bg-opacity-15"
-                  : "bg-yellow-500 bg-opacity-10"
-            }`}
-          />
-        )}
 
         {/* Indicadores de estado */}
         <div className="absolute top-2 right-2 flex gap-1">
@@ -120,7 +107,7 @@ export default function EscenarioScrum({ fallosConsecutivos, preguntaActual }: E
       </div>
 
       {/* Métricas del sprint */}
-      <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+      {/*<div className="mt-3 grid grid-cols-3 gap-2 text-center">
         <div className="bg-blue-50 p-2 rounded-lg">
           <div className="text-lg font-bold text-blue-600">{Math.max(0, 10 - fallosConsecutivos * 2)}</div>
           <div className="text-xs text-blue-800">Moral</div>
@@ -133,12 +120,12 @@ export default function EscenarioScrum({ fallosConsecutivos, preguntaActual }: E
           <div className="text-lg font-bold text-green-600">{Math.max(0, 100 - fallosConsecutivos * 15)}%</div>
           <div className="text-xs text-green-800">Progress</div>
         </div>
-      </div>
+      </div>*/}
 
       {/* Mensaje motivacional o de alerta */}
       {fallosConsecutivos === 0 ? (
         <motion.div
-          className="mt-3 text-center text-green-600 font-medium text-sm"
+          className="text-center text-violet-700 font-bold text-2xl"
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
         >
