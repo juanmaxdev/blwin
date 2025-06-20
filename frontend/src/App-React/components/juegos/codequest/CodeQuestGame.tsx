@@ -92,6 +92,7 @@ export default function CodeQuest() {
   const [jefesDerrrotados, setJefesDerrrotados] = useState<string[]>([]);
   const [dificultadActual, setDificultadActual] = useState<'facil' | 'media' | 'dificil' | null>(null);
   const [fallosConsecutivos, setFallosConsecutivos] = useState(0);
+  const [comodinesActivos, setComodinesActivos] = useState(true);
 
   // Comodines
   const [comodin50porCiento, setComodin50PorCiento] = useState(true);
@@ -231,10 +232,15 @@ export default function CodeQuest() {
     setComodinScrumVida(true);
     setComodinScrumRetro(true);
     setComodinScrumDaily(true);
+    // Reiniciar comodines de Mamon
+    setComodinMamonVida(true);
+    setComodinMamonChatGpt(true);
+    setComodinMamonEscape(true);
     setMostrarPregunta(false);
     setDificultadActual(null);
     setFallosConsecutivos(0);
     iniciarDialogoInicial();
+    setComodinesActivos(true);
 
     if (tipoJefeSeleccionado !== 'mamon' && tipoJefeSeleccionado !== 'programador') {
       iniciarDialogoInicial();
@@ -521,6 +527,8 @@ export default function CodeQuest() {
     setVidaJefe((prev) => Math.max(0, prev - 70));
     setAnimacionJefe('damage');
 
+    setComodinesActivos(true);
+
     // Mostrar diálogo del jefe después del daño
     setTimeout(() => {
       setDialogoActivo('jefe');
@@ -533,6 +541,7 @@ export default function CodeQuest() {
   const manejarPruebaFallada = () => {
     setVidaJugador((prev) => Math.max(0, prev - 30));
     setAnimacionJugador('damage');
+    setComodinesActivos(true);
 
     // Mostrar diálogo del jefe
     setTimeout(() => {
@@ -540,6 +549,16 @@ export default function CodeQuest() {
       setMensajeRespuesta('¡Ja! Como esperaba, no tienes lo necesario para superar mis pruebas especiales.');
       setEstadoJuego('respuesta');
     }, 1000);
+  };
+
+  // Callback para cuando inicia el minijuego de memoria (desactivar comodines)
+  const manejarInicioMinijuego = () => {
+    setComodinesActivos(false);
+  };
+
+  // Callback para cuando termina el minijuego de memoria (reactivar comodines)
+  const manejarFinMinijuego = () => {
+    setComodinesActivos(true);
   };
 
   // Reiniciar juego
@@ -565,9 +584,13 @@ export default function CodeQuest() {
     setComodinScrumVida(true);
     setComodinScrumRetro(true);
     setComodinScrumDaily(true);
+    setComodinMamonVida(true);
+    setComodinMamonChatGpt(true);
+    setComodinMamonEscape(true);
     setOpcionesOcultas([]);
     setDificultadActual(null);
     setFallosConsecutivos(0);
+    setComodinesActivos(true);
   };
 
   // Obtener el mensaje de diálogo según el estado
@@ -638,7 +661,7 @@ export default function CodeQuest() {
     >
       {/* Título del juego */}
       <h2
-        className="tituloPrincipal font-bold text-center w-full text-purple-400 drop-shadow-md h-14"
+        className="tituloPrincipal font-bold text-center w-full text-purple-400 drop-shadow-md h-8 sm:h-10 md:h-14 text-2xl sm:text-4xl md:text-6xl lg:text-8xl"
         style={{ fontSize: '5rem' }}
       >
         CodeQuest
@@ -648,14 +671,14 @@ export default function CodeQuest() {
       {tipoJefe && jefeActual && (
         <div className="flex-1 flex flex-col relative">
           {/* Barra de vida del jefe - arriba a la derecha */}
-          <div className="absolute top-4 right-4 w-96 z-10">
+          <div className="absolute top-2 sm:top-4 right-2 sm:right-4 w-48 sm:w-64 md:w-80 lg:w-96 z-10">
             <BarraDeVida actual={vidaJefe} max={jefeActual.vidaMaxima} esJefe={jefeActual.nombre} />
           </div>
 
           {/* Jefe con posible viñeta de diálogo - arriba a la derecha */}
-          <div className="absolute top-16 right-4 flex flex-col items-end mt-5">
+          <div className="absolute top-8 sm:top-12 md:top-16 right-2 sm:right-4 flex flex-col items-end mt-2 sm:mt-5">
             {dialogoActivo === 'jefe' && (
-              <div className="mb-4 mr-16 z-20">
+              <div className="mb-2 sm:mb-4 mr-8 sm:mr-16 z-20">
                 <VinetaDialogo
                   texto={obtenerMensajeDialogo()}
                   posicion="derecha"
@@ -665,7 +688,7 @@ export default function CodeQuest() {
             )}
             {/* Viñeta especial para el comodín Escapar */}
             {mostrarVinetaComodinEscape && (
-              <div className="mb-4 mr-16 z-20">
+              <div className="mb-2 sm:mb-4 mr-8 sm:mr-16 z-20">
                 <VinetaDialogo
                   texto="Veo que te hiciste un poco de Pó Pó. ¡Eso es de primero de UI!"
                   posicion="derecha"
@@ -675,22 +698,22 @@ export default function CodeQuest() {
             )}
             <PersonajeAnimado
               imagen={jefeDerrotado ? jefeActual.imagenDerrotado : jefeActual.imagen}
-              className="w-96 h-96"
+              className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-96 lg:h-96"
               animacion={animacionJefe}
             />
           </div>
 
           {/* Layout específico para Scrum */}
           {tipoJefe === 'scrum' && mostrarPregunta && estadoJuego === 'pregunta' && (
-            <div className="flex flex-row items-center justify-center  ">
+            <div className="flex flex-col lg:flex-row items-center justify-center px-2 sm:px-4">
               {/* Escenario Scrum  */}
-              <div className="w-[30%] absolute -top-4 flex items-center justify-end">
+              <div className="w-full lg:w-[30%] mb-4 lg:mb-0 lg:absolute lg:-top-4 flex items-center justify-center lg:justify-end">
                 <EscenarioScrum fallosConsecutivos={fallosConsecutivos} preguntaActual={preguntaActual} />
               </div>
 
               {/* Preguntas */}
-              <div className="flex absolute bottom-1">
-                <div className="w-full max-w-2xl">
+              <div className="flex w-full lg:absolute lg:bottom-1 justify-center">
+                <div className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl">
                   <ContenedorPreguntas
                     pregunta={preguntasActuales[preguntaActual].pregunta}
                     codigo={preguntasActuales[preguntaActual].codigo}
@@ -710,14 +733,19 @@ export default function CodeQuest() {
           {/* Contenedor de Usuario_mamon */}
 
           {tipoJefe === 'mamon' && estadoJuego === 'prueba-especial' && (
-            <UsuarioMamon onPruebaCompletada={manejarPruebaCompletada} onPruebaFallada={manejarPruebaFallada} />
+            <UsuarioMamon
+              onPruebaCompletada={manejarPruebaCompletada}
+              onPruebaFallada={manejarPruebaFallada}
+              onInicioMinijuego={manejarInicioMinijuego}
+              onFinMinijuego={manejarFinMinijuego}
+            />
           )}
 
           {/* Contenedor de preguntas - centro (para jefe mamón después de pruebas y otros jefes) */}
           {((tipoJefe === 'mamon' && mostrarPregunta && estadoJuego === 'pregunta') ||
             (tipoJefe !== 'scrum' && tipoJefe !== 'mamon' && mostrarPregunta && estadoJuego === 'pregunta')) &&
             preguntaActual < preguntasActuales.length && (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl z-10">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-3xl z-10 px-2 sm:px-4">
                 <ContenedorPreguntas
                   pregunta={preguntasActuales[preguntaActual].pregunta}
                   codigo={preguntasActuales[preguntaActual].codigo}
@@ -733,7 +761,7 @@ export default function CodeQuest() {
             )}
           {/* Contenedor de puertas - centro */}
           {estadoJuego === 'puertas' && tipoJefe === 'programador' && (
-            <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div className="absolute inset-0 flex items-center justify-center z-10 px-2 sm:px-4">
               <Puertas
                 onSeleccionPuerta={manejarSeleccionPuerta}
                 preguntas={preguntasActuales}
@@ -744,9 +772,9 @@ export default function CodeQuest() {
           )}
 
           {/* Personaje del jugador - abajo a la izquierda */}
-          <div className="absolute bottom-4 left-4">
+          <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4">
             {dialogoActivo === 'jugador' && (
-              <div className="mb-4 ml-16 z-20">
+              <div className="mb-2 sm:mb-4 ml-8 sm:ml-16 z-20">
                 <VinetaDialogo
                   texto={obtenerMensajeDialogo()}
                   posicion="izquierda"
@@ -763,23 +791,24 @@ export default function CodeQuest() {
             />
             {/* Mostrar solo una imagen del jugador según la vida */}
             {vidaJugador <= 0 ? (
-              <PersonajeAnimado imagen={JugadorDerrotado} className="w-96 h-96" animacion={animacionJugador} />
+              <PersonajeAnimado imagen={JugadorDerrotado} className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-96 lg:h-96" animacion={animacionJugador} />
             ) : vidaJugador <= 50 ? (
-              <PersonajeAnimado imagen={JugadorSentado} className="w-96 h-96" animacion={animacionJugador} />
+              <PersonajeAnimado imagen={JugadorSentado} className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-96 lg:h-96" animacion={animacionJugador} />
             ) : (
-              <PersonajeAnimado imagen={Jugador} className="w-96 h-96" animacion={animacionJugador} />
+              <PersonajeAnimado imagen={Jugador} className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 lg:w-96 lg:h-96" animacion={animacionJugador} />
             )}
             {/*Puntuación y barra de vida del jugador */}
-            <div className="absolute bottom-24 left-64 w-80">
-              <span className="textoTales text-2xl font-bold text-white ps-2">Puntuación: {puntuacionJugador}</span>
+            <div className="absolute bottom-16 sm:bottom-20 md:bottom-24 left-32 sm:left-48 md:left-64 w-40 sm:w-60 md:w-80">
+              <span className="textoTales text-sm sm:text-lg md:text-2xl font-bold text-white ps-2">Puntuación: {puntuacionJugador}</span>
             </div>
-            <div className="absolute bottom-10 left-64 w-80">
+            <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-32 sm:left-48 md:left-64 w-40 sm:w-60 md:w-80">
               <BarraDeVida actual={vidaJugador} max={100} />
             </div>
           </div>
 
           {/* Comodines */}
-          <div className="absolute top-20 left-4 z-20">
+          {comodinesActivos && (
+          <div className="absolute top-12 sm:top-16 md:top-20 left-2 sm:left-4 z-20">
             {tipoJefe === 'scrum' ? (
               <ComodinScrum
                 vida={comodinScrumVida}
@@ -809,6 +838,7 @@ export default function CodeQuest() {
               />
             )}
           </div>
+          )}
 
           {/* Botón para reiniciar (solo visible en derrota) */}
           {estadoJuego === 'derrota' &&
@@ -816,19 +846,19 @@ export default function CodeQuest() {
             // Mandamos la puntuacion al backend
             (mandarPuntuacion('CodeQuest', puntuacionJugador),
             (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
-                <div className="text-center bg-white bg-opacity-80 rounded-2xl p-6 shadow-xl">
-                  <h3 className="text-4xl font-bold mb-4 tituloFuenteSecundario bg-gradient-to-r from-purple-700 to-red-700 bg-clip-text text-transparent">
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 px-4">
+                <div className="text-center bg-white bg-opacity-80 rounded-2xl p-4 sm:p-6 shadow-xl max-w-xs sm:max-w-md">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 tituloFuenteSecundario bg-gradient-to-r from-purple-700 to-red-700 bg-clip-text text-transparent">
                     ¡Fuiste derrotado!
                   </h3>
-                  <p className="text-gray-700 textoArcade text-2xl">
+                  <p className="text-gray-700 textoArcade text-lg sm:text-xl md:text-2xl">
                     No te rindas tan facilmente,
                     <br />
                     intentalo de nuevo.
                   </p>
-                  <p className="text-gray my-5 font-semibold">
+                  <p className="text-gray my-3 sm:my-5 font-semibold text-sm sm:text-base">
                     Tu puntuación total ha sido de:
-                    <span className="text-2xl font-bold text-violet-700"> {puntuacionJugador}</span>
+                    <span className="text-xl sm:text-2xl font-bold text-violet-700"> {puntuacionJugador}</span>
                   </p>
                   <div className="flex gap-4 justify-center">
                     <button
@@ -836,7 +866,7 @@ export default function CodeQuest() {
                         seleccionarJefe(tipoJefe!);
                         reiniciarJuegoCompleto();
                       }}
-                      className="px-6 py-3 bg-gradient-to-tr from-purple-700 to-red-700 text-white font-bold rounded-lg shadow-lg transition-colors duration-1000 hover:from-red-800 hover:to-red-800"
+                      className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-tr from-purple-700 to-red-700 text-white font-bold rounded-lg shadow-lg transition-colors duration-1000 hover:from-red-800 hover:to-red-800 text-sm sm:text-base"
                     >
                       Reintentar
                     </button>

@@ -95,12 +95,12 @@ export default function Temporizador({
     return `${minutos.toString().padStart(2, "0")}:${segs.toString().padStart(2, "0")}`
   }
 
-  return (
-    <div className={`bg-white bg-opacity-90 rounded-xl shadow-lg p-4 ${className}`}>
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-medium text-gray-700">Tiempo restante</span>
+ return (
+    <div className={`bg-white bg-opacity-90 rounded-xl shadow-lg p-2 sm:p-3 md:p-4 ${className}`}>
+      <div className="flex items-center justify-between mb-1 sm:mb-2">
+        <span className="text-xs sm:text-sm font-medium text-gray-700">Tiempo restante</span>
         <motion.span
-          className={`text-xl font-bold ${getColor()}`}
+          className={`text-base sm:text-lg md:text-xl font-bold ${getColor()}`}
           animate={tiempoRestante <= 10 ? { scale: [1, 1.1, 1] } : {}}
           transition={{ duration: 0.5, repeat: tiempoRestante <= 10 ? Number.POSITIVE_INFINITY : 0 }}
         >
@@ -109,7 +109,7 @@ export default function Temporizador({
       </div>
 
       {/* Barra de progreso */}
-      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+      <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3 overflow-hidden">
         <motion.div
           className={`h-full ${getBarColor()} transition-all duration-1000 ease-linear`}
           style={{ width: `${Math.max(0, progreso)}%` }}
@@ -121,7 +121,7 @@ export default function Temporizador({
       {/* Indicador de urgencia */}
       {tiempoRestante <= 10 && (
         <motion.div
-          className="mt-2 text-center text-xs font-medium text-red-600"
+          className="mt-1 sm:mt-2 text-center text-xs font-medium text-red-600"
           animate={{ opacity: [1, 0.5, 1] }}
           transition={{ duration: 0.5, repeat: Number.POSITIVE_INFINITY }}
         >
@@ -135,10 +135,10 @@ export default function Temporizador({
 // Hook personalizado para manejar diferentes dificultades
 export const useTiempoPorDificultad = (dificultad: "facil" | "media" | "dificil" | null) => {
   const tiempos = {
-    facil: 45, // 45 segundos
-    media: 35, // 35 segundos
-    dificil: 25, // 25 segundos
+    facil: 45, 
+    media: 35, 
+    dificil: 25,
   }
 
-  return dificultad ? tiempos[dificultad] : 30 // 30 segundos por defecto
+  return dificultad ? tiempos[dificultad] : 30 // 
 }

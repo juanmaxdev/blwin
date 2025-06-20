@@ -245,29 +245,29 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
         <div className="absolute inset-0 bg-black bg-opacity-30 z-0"></div>
 
         {/* Botones de control superiores */}
-        <div className="absolute top-6 right-6 z-50 flex gap-4">
+        <div className="absolute top-3 sm:top-4 md:top-6 right-3 sm:right-4 md:right-6 z-50 flex gap-2 sm:gap-3 md:gap-4">
           {/* Botón de sonido */}
           <button
             onClick={toggleSonido}
-            className="p-3 bg-white bg-opacity-20 backdrop-blur-md rounded-full shadow-lg hover:bg-opacity-30 transition-all duration-300 hover:scale-110"
+            className="p-2 sm:p-3 bg-white bg-opacity-20 backdrop-blur-md rounded-full shadow-lg hover:bg-opacity-30 transition-all duration-300 hover:scale-110"
             title={sonidoActivo ? 'Silenciar música' : 'Activar música'}
           >
-            <span className="text-2xl">{sonidoActivo ? '🔊' : '🔇'}</span>
+            <span className="text-lg sm:text-xl md:text-2xl">{sonidoActivo ? '🔊' : '🔇'}</span>
           </button>
 
           {/* Botón de ayuda */}
           <button
             onClick={mostrarInformacionAyuda}
-            className="p-3 bg-white bg-opacity-20 backdrop-blur-md rounded-full shadow-lg hover:bg-opacity-30 transition-all duration-300 hover:scale-110"
+            className="p-2 sm:p-3 bg-white bg-opacity-20 backdrop-blur-md rounded-full shadow-lg hover:bg-opacity-30 transition-all duration-300 hover:scale-110"
             title="Ayuda"
           >
-            <span className="text-2xl">❓</span>
+            <span className="text-lg sm:text-xl md:text-2xl">❓</span>
           </button>
 
           {/* Botón de saltar */}
           <button
             onClick={saltarIntroduccion}
-            className="px-4 py-2 bg-white bg-opacity-20 backdrop-blur-md rounded-full shadow-lg hover:bg-opacity-30 transition-all duration-300 hover:scale-105 text-white font-semibold"
+            className="px-2 sm:px-3 md:px-4 py-1 sm:py-2 bg-white bg-opacity-20 backdrop-blur-md rounded-full shadow-lg hover:bg-opacity-30 transition-all duration-300 hover:scale-105 text-white font-semibold text-xs sm:text-sm md:text-base"
             title="Saltar introducción"
           >
             Saltar ⏭️
@@ -277,9 +277,8 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
         {/* Título animado */}
         <div
           ref={tituloRef}
-          className="tituloPrincipal font-bold text-center w-full text-purple-900 drop-shadow-md mt-8 z-10 relative"
+          className="tituloPrincipal font-bold text-center w-full text-purple-900 drop-shadow-md mt-4 sm:mt-6 md:mt-8 z-10 relative text-4xl sm:text-6xl md:text-7xl lg:text-8xl"
           style={{
-            fontSize: '8rem',
             fontFamily: 'Arial Black, sans-serif',
             letterSpacing: '0.1em',
           }}
@@ -290,7 +289,7 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
           {Array.from({ length: 20 }).map((_, i) => (
             <div
               key={i}
-              className="absolute w-2 h-2 bg-purple-400 rounded-full opacity-60 animate-pulse"
+              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-purple-400 rounded-full opacity-60 animate-pulse"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -307,27 +306,30 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
         )}
 
         {/* Personaje */}
-        <div className="absolute bottom-4 left-56 z-10">
+        <div className="absolute bottom-2 sm:bottom-4 left-32 sm:left-40 md:left-56 z-10">
           <img
             ref={personajeRef}
-            src={ImagenPersonaje || '/placeholder.svg'}
+            src={ImagenPersonaje}
             alt="Personaje Principal"
-            className="w-96 h-auto filter drop-shadow-2xl"
+            className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-96 lg:h-3/4 filter drop-shadow-2xl"
           />
         </div>
 
         {/* Botones inferiores */}
-        <div ref={botonesRef} className="absolute bottom-8 right-8 z-10 flex flex-col gap-4">
+        <div
+          ref={botonesRef}
+          className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8 z-10 flex flex-col gap-2 sm:gap-3 md:gap-4"
+        >
           <button
             onClick={handleClose}
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-full shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+            className="px-3 sm:px-4 md:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-full shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 hover:scale-105 backdrop-blur-sm text-xs sm:text-sm md:text-base"
           >
             Futura implementacion 🚀
           </button>
 
           <button
             onClick={() => setIndexActual((prev) => Math.min(prev + 1, historiaInicial.length))}
-            className="px-4 py-2 bg-white bg-opacity-20 backdrop-blur-md text-white font-semibold rounded-full shadow-lg hover:bg-opacity-30 transition-all duration-300 hover:scale-105"
+            className="px-2 sm:px-3 md:px-4 py-1 sm:py-2 bg-white bg-opacity-20 backdrop-blur-md text-white font-semibold rounded-full shadow-lg hover:bg-opacity-30 transition-all duration-300 hover:scale-105 text-xs sm:text-sm md:text-base"
           >
             Futura implementacion ➡️
           </button>
@@ -336,43 +338,54 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
 
       {/* Modal de Ayuda */}
       {mostrarAyuda && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 p-8 relative">
-            <button onClick={cerrarAyuda} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-2 sm:px-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-xs sm:max-w-lg md:max-w-2xl w-full mx-2 sm:mx-4 p-4 sm:p-6 md:p-8 relative">
+            <button
+              onClick={cerrarAyuda}
+              className="absolute top-2 sm:top-4 right-2 sm:right-4 text-gray-500 hover:text-gray-700 text-xl sm:text-2xl"
+            >
               ✕
             </button>
 
-            <h2 className="textoTales text-3xl font-bold text-purple-800 mb-6 text-center">🎮 Guía de CodeQuest</h2>
+            <h2 className="textoTales text-xl sm:text-2xl md:text-3xl font-bold text-purple-800 mb-3 sm:mb-4 md:mb-6 text-center">
+              🎮 Guía de CodeQuest
+            </h2>
 
-            <div className="space-y-4 text-gray-700">
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <h3 className="font-bold text-purple-800 mb-2">🎯 Objetivo del Juego</h3>
-                <p>Derrota a todos los jefes programadores para convertirte en un Full Stack Developer.</p>
+            <div className="space-y-2 sm:space-y-3 md:space-y-4 text-gray-700">
+              <div className="bg-purple-50 p-2 sm:p-3 md:p-4 rounded-lg">
+                <h3 className="font-bold text-purple-800 mb-1 sm:mb-2 text-sm sm:text-base">🎯 Objetivo del Juego</h3>
+                <p className="text-xs sm:text-sm md:text-base">
+                  Derrota a todos los jefes programadores para convertirte en un Full Stack Developer.
+                </p>
               </div>
 
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="font-bold text-blue-800 mb-2">⚔️ Combate</h3>
-                <p>
+              <div className="bg-blue-50 p-2 sm:p-3 md:p-4 rounded-lg">
+                <h3 className="font-bold text-blue-800 mb-1 sm:mb-2 text-sm sm:text-base">⚔️ Combate</h3>
+                <p className="text-xs sm:text-sm md:text-base">
                   Responde preguntas correctamente para dañar a los jefes. Las respuestas incorrectas te harán perder
                   vida.
                 </p>
               </div>
 
-              <div className="bg-green-50 p-4 rounded-lg">
-                <h3 className="font-bold text-green-800 mb-2">🎁 Comodines</h3>
-                <p>Usa comodines estratégicamente: Poción de Vida, Daño Elemental y Sabiduría del 50%.</p>
+              <div className="bg-green-50 p-2 sm:p-3 md:p-4 rounded-lg">
+                <h3 className="font-bold text-green-800 mb-1 sm:mb-2 text-sm sm:text-base">🎁 Comodines</h3>
+                <p className="text-xs sm:text-sm md:text-base">
+                  Usa comodines estratégicamente: Poción de Vida, Daño Elemental y Sabiduría del 50%.
+                </p>
               </div>
 
-              <div className="bg-yellow-50 p-4 rounded-lg">
-                <h3 className="font-bold text-yellow-800 mb-2">⏱️ Tiempo</h3>
-                <p>Cada pregunta tiene un límite de tiempo según su dificultad. ¡Piensa rápido!</p>
+              <div className="bg-yellow-50 p-2 sm:p-3 md:p-4 rounded-lg">
+                <h3 className="font-bold text-yellow-800 mb-1 sm:mb-2 text-sm sm:text-base">⏱️ Tiempo</h3>
+                <p className="text-xs sm:text-sm md:text-base">
+                  Cada pregunta tiene un límite de tiempo según su dificultad. ¡Piensa rápido!
+                </p>
               </div>
             </div>
 
-            <div className="mt-6 text-center">
+            <div className="mt-4 sm:mt-6 text-center">
               <button
                 onClick={cerrarAyuda}
-                className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-full shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-full shadow-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 text-sm sm:text-base"
               >
                 ¡Entendido! 👍
               </button>

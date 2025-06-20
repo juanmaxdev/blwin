@@ -111,46 +111,57 @@ export default function EmpezarJuego({
   const todosJefesDerrrotados = jefesDisponibles.length === 0;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center ">
-      <div className="bg-gradient-to-tr from-purple-200 via-orange-100 to-blue-100 rounded-2xl shadow-xl max-w-5xl w-full mx-4 p-6 relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 flex items-center justify-center px-2 sm:px-4">
+      <div className="bg-gradient-to-tr from-purple-200 via-orange-100 to-blue-100 rounded-2xl shadow-xl max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl w-full mx-2 sm:mx-4 p-3 sm:p-4 md:p-6 relative max-h-[90vh] overflow-y-auto">
         {esSeleccionPostVictoria ? (
-          <div className="text-center mb-6">
-            <h2 className="tituloFuenteSecundario text-4xl font-bold text-green-600 mb-2">¡Victoria!</h2>
-            <p className="textoFuente text-lg text-gray-700">
+          <div className="text-center mb-3 sm:mb-4 md:mb-6">
+            <h2 className="tituloFuenteSecundario text-2xl sm:text-3xl md:text-4xl font-bold text-green-600 mb-1 sm:mb-2">
+              ¡Victoria!
+            </h2>
+            <p className="textoFuente text-sm sm:text-base md:text-lg text-gray-700">
               {todosJefesDerrrotados
                 ? '¡Felicidades! Has derrotado a todos los jefes. Eres el maestro supremo de CodeQuest!'
                 : '¡Excelente! ¿Quieres enfrentarte a otro jefe?'}
             </p>
           </div>
         ) : (
-          <div className="text-center mb-6">
-            <h2 className="tituloFuenteSecundario text-3xl font-bold text-purple-800 mb-2">¡Bienvenido a CodeQuest!</h2>
-            <p className="textoFuente font-semibold text-lg text-gray-700">Selecciona al jefe contra el que quieres enfrentarte:</p>
+          <div className="text-center mb-3 sm:mb-4 md:mb-6">
+            <h2 className="tituloFuenteSecundario text-xl sm:text-2xl md:text-3xl font-bold text-purple-800 mb-1 sm:mb-2">
+              ¡Bienvenido a CodeQuest!
+            </h2>
+            <p className="textoFuente font-semibold text-sm sm:text-base md:text-lg text-gray-700">
+              Selecciona al jefe contra el que quieres enfrentarte:
+            </p>
           </div>
         )}
 
         {todosJefesDerrrotados ? (
           <div className="text-center">
-            <div className="text-6xl mb-4">🏆</div>
-            <h3 className="tituloFuenteSecundario text-2xl font-bold text-gold-600 mb-4">¡Eres el Campeón de CodeQuest!</h3>
-            <p className="textoFuente text-semibold text-gray-700 mb-6">Has demostrado tu dominio en todas las tecnologías.</p>
+            <div className="text-4xl sm:text-5xl md:text-6xl mb-2 sm:mb-4">🏆</div>
+            <h3 className="tituloFuenteSecundario text-lg sm:text-xl md:text-2xl font-bold text-gold-600 mb-2 sm:mb-4">
+              ¡Eres el Campeón de CodeQuest!
+            </h3>
+            <p className="textoFuente text-semibold text-gray-700 mb-3 sm:mb-6 text-sm sm:text-base">
+              Has demostrado tu dominio en todas las tecnologías.
+            </p>
             <button
               onClick={() => window.location.reload()}
-              className="px-8 py-3 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition-colors"
+              className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition-colors text-sm sm:text-base"
             >
               Jugar de Nuevo
             </button>
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
               {jefes.map((jefe) => {
                 const estaDerrotado = jefesDerrotados.includes(jefe.id);
+                const puedeSeleccionar = !estaDerrotado && jefeSeleccionado !== jefe.id;
 
                 return (
                   <div
                     key={jefe.id}
-                    className={`border-2 rounded-lg p-4 transition-all relative ${
+                    className={`border-2 rounded-lg p-2 sm:p-3 md:p-4 transition-all relative ${
                       estaDerrotado
                         ? 'border-gray-300 bg-gray-100 opacity-60 cursor-not-allowed'
                         : jefeSeleccionado === jefe.id
@@ -160,17 +171,25 @@ export default function EmpezarJuego({
                     onClick={() => !estaDerrotado && setJefeSeleccionado(jefe.id)}
                   >
                     <div className="flex flex-col items-center">
-                      <div className="w-24 h-24 mb-3 relative">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mb-2 sm:mb-3 relative">
                         <img
                           src={estaDerrotado ? jefe.imagenDerrotado : jefe.imagen}
                           alt={jefe.nombre}
                           className={`w-full h-full object-contain ${estaDerrotado ? 'grayscale' : ''}`}
                         />
                       </div>
-                      <h3 className={`tituloFuenteSecundario text-xl font-semibold mb-2 ${estaDerrotado ? 'text-gray-500' : 'text-gray-800'}`}>
+                      <h3
+                        className={`tituloFuenteSecundario text-sm sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2 ${
+                          estaDerrotado ? 'text-gray-500' : 'text-gray-800'
+                        }`}
+                      >
                         {jefe.nombre}
                       </h3>
-                      <p className={`textoFuente text-center ${estaDerrotado ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <p
+                        className={`textoFuente text-center text-xs sm:text-sm ${
+                          estaDerrotado ? 'text-gray-400' : 'text-gray-600'
+                        }`}
+                      >
                         {estaDerrotado ? 'Ya has demostrado tu superioridad ante este jefe.' : jefe.descripcion}
                       </p>
                     </div>
@@ -179,11 +198,11 @@ export default function EmpezarJuego({
               })}
             </div>
 
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4">
               <button
                 onClick={handleSeleccionarJefe}
                 disabled={!jefeSeleccionado}
-                className={`px-8 py-3 rounded-lg font-bold text-white transition-colors ${
+                className={`px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg font-bold text-white transition-colors text-sm sm:text-base ${
                   jefeSeleccionado ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-400 cursor-not-allowed'
                 }`}
               >
@@ -193,7 +212,7 @@ export default function EmpezarJuego({
               {esSeleccionPostVictoria && (
                 <button
                   onClick={() => window.location.reload()}
-                  className="px-8 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors"
+                  className="px-4 sm:px-6 md:px-8 py-2 sm:py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors text-sm sm:text-base"
                 >
                   Reiniciar Juego
                 </button>
