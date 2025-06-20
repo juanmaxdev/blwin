@@ -1196,6 +1196,174 @@ const preguntasScrum = [
   }
 ];
 
+const preguntasMamon = [
+  {
+    id: 1,
+    pregunta: "¿Cuál es la diferencia principal entre Flexbox y CSS Grid en diseño de interfaces?",
+    opcionesRespuesta: {
+      a: "Flexbox está pensado para diseños bidimensionales; Grid para diseños unidimensionales",
+      b: "Flexbox gestiona contenido estático; Grid gestiona contenido dinámico",
+      c: "Flexbox es para modelos de cajas; Grid sólo para posicionamiento absoluto",
+      d: "Flexbox maneja una dimensión a la vez; Grid puede manejar dos dimensiones simultáneamente"
+    },
+    respuestaCorrecta: "d"
+  },
+  {
+    id: 2,
+    pregunta: "En el patrón MVC, ¿qué componente se encarga de la lógica de negocio y toma de decisiones?",
+    opcionesRespuesta: {
+      a: "Modelo",
+      b: "Vista",
+      c: "Controlador",
+      d: "Router"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 3,
+    pregunta: "¿Qué método HTTP es idempotente y se utiliza para actualizar recursos existentes?",
+    opcionesRespuesta: {
+      a: "POST",
+      b: "PATCH",
+      c: "PUT",
+      d: "DELETE"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 4,
+    pregunta: "En diseño responsivo, ¿qué unidad CSS se basa en el ancho de la ventana gráfica?",
+    opcionesRespuesta: {
+      a: "em",
+      b: "rem",
+      c: "vw",
+      d: "%"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 5,
+    pregunta: "¿Qué protocolo asegura la comunicación cifrada en conexiones web?",
+    opcionesRespuesta: {
+      a: "HTTP",
+      b: "FTP",
+      c: "SSL/TLS",
+      d: "SMTP"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 6,
+    pregunta: "¿Cuál de estos patrones se utiliza para evitar el callback hell en JavaScript?",
+    opcionesRespuesta: {
+      a: "Singleton",
+      b: "Promise",
+      c: "Factory",
+      d: "Observer"
+    },
+    respuestaCorrecta: "b"
+  },
+  {
+    id: 7,
+    pregunta: "En control de versiones Git, ¿qué comando crea una nueva rama y se cambia a ella al mismo tiempo?",
+    opcionesRespuesta: {
+      a: "git branch -c nombre",
+      b: "git checkout nombre",
+      c: "git checkout -b nombre",
+      d: "git switch nome"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 8,
+    pregunta: "¿Cuál es el propósito principal de WebSockets en aplicaciones web?",
+    opcionesRespuesta: {
+      a: "Enviar formularios HTTP",
+      b: "Mantener una conexión persistente bidireccional",
+      c: "Autenticación de usuarios",
+      d: "Almacenamiento local"
+    },
+    respuestaCorrecta: "b"
+  },
+  {
+    id: 9,
+    pregunta: "¿Qué arquitectura de software promueve servicios pequeños e independientes comunicándose por APIs?",
+      opcionesRespuesta: {
+      a: "Monolítica",
+      b: "Cliente-Servidor",
+      c: "Microservicios",
+      d: "MVC"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 10,
+    pregunta: "En bases de datos SQL, ¿qué cláusula se utiliza para agrupar resultados?",
+    opcionesRespuesta: {
+      a: "ORDER BY",
+      b: "GROUP BY",
+      c: "HAVING",
+      d: "WHERE"
+    },
+    respuestaCorrecta: "b"
+  },
+  {
+    id: 11,
+    pregunta: "¿Qué característica de React permite dividir la UI en componentes reutilizables?",
+    opcionesRespuesta: {
+      a: "Stateful classes",
+      b: "JSX",
+      c: "Hooks",
+      d: "Componentes funcionales"
+    },
+    respuestaCorrecta: "d"
+  },
+  {
+    id: 12,
+    pregunta: "¿Cuál es la ventaja de usar GraphQL sobre REST para consumir APIs?",
+    opcionesRespuesta: {
+      a: "Menos seguridad",
+      b: "Endpoints múltiples",
+      c: "Solicitar solo los datos necesarios en una sola petición",
+      d: "Usa sólo JSON"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 13,
+    pregunta: "En autentificación, ¿qué se basa en un token corto que expira rápido?",
+    opcionesRespuesta: {
+      a: "Session ID en cookies",
+      b: "JWT (JSON Web Token)",
+      c: "OAuth 2.0 Bearer Token",
+      d: "Basic Auth"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 14,
+    pregunta: "¿Qué propiedad CSS controla la superposición de elementos?",
+    opcionesRespuesta: {
+      a: "visibility",
+      b: "display",
+      c: "z-index",
+      d: "opacity"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    id: 15,
+    pregunta: "¿Qué comando de Docker se utiliza para crear y ejecutar un contenedor a partir de una imagen?",
+    opcionesRespuesta: {
+      a: "docker build",
+      b: "docker run",
+      c: "docker start",
+      d: "docker compose"
+    },
+    respuestaCorrecta: "b"
+  }
+];
 
 
-export { preguntasReact, preguntasNet, preguntasJava, preguntasGeneral, preguntasScrum };
+
+export { preguntasReact, preguntasNet, preguntasJava, preguntasGeneral, preguntasScrum, preguntasMamon };

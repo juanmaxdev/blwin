@@ -35,6 +35,12 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: 'Blox';
+  src: url('../fonts/blox/Blox2.ttf') format('truetype');
+  font-weight: normal;
+}
+
 .tituloPrincipal {
     font-family: 'CodeQuest', sans-serif;;
     font-size: 10rem;
@@ -62,4 +68,9 @@
 
 .textoArcade {
   font-family: 'Arcade', 'Tales', sans-serif;
+}
+
+.blox {
+  font-family: 'Blox', sans-serif;
+  letter-spacing: 5px;
 }

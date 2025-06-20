@@ -12,6 +12,7 @@ import Comodin, { ComodinScrum, ComodinJefeMamon } from './preguntas/contenedor/
 import Puertas from './escenarios/puertas/puertas';
 import EscenarioScrum from './escenarios/scrum/EscenarioScrum';
 import FrasesJugador from './personajes/frases/FrasesJugador';
+import UsuarioMamon from './escenarios/usuario_mamon/Usuario_mamon';
 import '../../../assets/juegos/codequest/styles/styles.css';
 
 // Imágenes de jefes normales
@@ -48,7 +49,15 @@ import JefeMamonCampoBatalla from '../../../assets/juegos/codequest/campoDeBatal
 import JefeProgramadorCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_jefeProgramador.jpg';
 import JefeScrumCampoBatalla from '../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_scrum.jpg';
 
-type EstadoJuego = 'seleccion-jefe' | 'dialogo-inicial' | 'pregunta' | 'respuesta' | 'victoria' | 'derrota' | 'puertas';
+type EstadoJuego =
+  | 'seleccion-jefe'
+  | 'dialogo-inicial'
+  | 'pregunta'
+  | 'respuesta'
+  | 'victoria'
+  | 'derrota'
+  | 'puertas'
+  | 'prueba-especial';
 type TipoDialogo = 'jefe' | 'jugador' | null;
 type TipoJefe = 'react' | 'java' | 'net' | 'mamon' | 'programador' | 'scrum';
 
@@ -145,7 +154,7 @@ export default function CodeQuest() {
       imagenDerrotado: JefeMamonDerrotado,
       fondo: JefeMamonCampoBatalla,
       preguntas: [...preguntasReact, ...preguntasJava, ...preguntasNet],
-      vidaMaxima: 130,
+      vidaMaxima: 170,
       fraseInicial: '¡Tendré puestos mis ojos robóticos para poder ver donde encontrar fallos JAJAJA!',
       fraseVictoria: '¡Hmph! Supongo que no eres tan incompetente como pensaba...',
       fraseDerrota: '¡Lo sabía! Debería haber contratado a mi sobrino que sabe de ordenadores.',
@@ -168,7 +177,7 @@ export default function CodeQuest() {
       imagenDerrotado: JefeScrumDerrotado,
       fondo: JefeScrumCampoBatalla,
       preguntas: preguntasScrum,
-      vidaMaxima: 140,
+      vidaMaxima: 150,
       fraseInicial: '¡Bienvenido a nuestro Daily Scrum! Veamos si entiendes los principios ágiles.',
       fraseVictoria: '¡Increíble! Has demostrado ser un verdadero Scrum Master.',
       fraseDerrota: 'Parece que necesitas más sprints de aprendizaje. ¡La retrospectiva no será agradable, prepárate!',
@@ -199,13 +208,19 @@ export default function CodeQuest() {
     const tipoJefeSeleccionado = jefe as TipoJefe;
     setTipoJefe(tipoJefeSeleccionado);
     setVidaJefe(jefesData[tipoJefeSeleccionado].vidaMaxima);
-    setEstadoJuego(tipoJefeSeleccionado === 'programador' ? 'puertas' : 'dialogo-inicial');
+    if (tipoJefeSeleccionado === 'programador') {
+      setEstadoJuego('puertas');
+    } else if (tipoJefeSeleccionado === 'mamon') {
+      setEstadoJuego('prueba-especial');
+    } else {
+      setEstadoJuego('dialogo-inicial');
+    }
     setJefeDerrotado(false);
     setPreguntasUsadas([]);
     const primeraPregunta = Math.floor(Math.random() * jefesData[tipoJefeSeleccionado].preguntas.length);
     setPreguntaActual(primeraPregunta);
     setPreguntasUsadas([primeraPregunta]);
-    setVidaJugador(100);
+    setVidaJugador(vidaJugador);
     setRespuestaSeleccionada(null);
     setMensajeRespuesta('');
     setOpcionesOcultas([]);
@@ -220,6 +235,10 @@ export default function CodeQuest() {
     setDificultadActual(null);
     setFallosConsecutivos(0);
     iniciarDialogoInicial();
+
+    if (tipoJefeSeleccionado !== 'mamon' && tipoJefeSeleccionado !== 'programador') {
+      iniciarDialogoInicial();
+    }
   };
 
   // Iniciar diálogo inicial
@@ -405,7 +424,7 @@ export default function CodeQuest() {
     if (!comodin50deDanyo || !jefeActual) return;
 
     setComodin50DeDanyo(false);
-    setVidaJefe((prev) => Math.max(0, prev - 50));
+    setVidaJefe((prev) => Math.max(0, prev - 30));
     setAnimacionJefe('damage');
 
     // Verificar si el jefe ha sido derrotado
@@ -495,6 +514,34 @@ export default function CodeQuest() {
     setEstadoJuego('seleccion-jefe');
   };
 
+  // Manejar prueba completada del jefe mamón
+  const manejarPruebaCompletada = (puntos: number) => {
+    setPuntuacionJugador((prev) => prev + puntos);
+    // Hacer daño al jefe
+    setVidaJefe((prev) => Math.max(0, prev - 70));
+    setAnimacionJefe('damage');
+
+    // Mostrar diálogo del jefe después del daño
+    setTimeout(() => {
+      setDialogoActivo('jefe');
+      setMensajeRespuesta('¡Maldición! No esperaba que pudieras superar esa prueba... Pero esto no ha terminado.');
+      setEstadoJuego('respuesta');
+    }, 1000);
+  };
+
+  // Manejar prueba fallada del jefe mamón
+  const manejarPruebaFallada = () => {
+    setVidaJugador((prev) => Math.max(0, prev - 30));
+    setAnimacionJugador('damage');
+
+    // Mostrar diálogo del jefe
+    setTimeout(() => {
+      setDialogoActivo('jefe');
+      setMensajeRespuesta('¡Ja! Como esperaba, no tienes lo necesario para superar mis pruebas especiales.');
+      setEstadoJuego('respuesta');
+    }, 1000);
+  };
+
   // Reiniciar juego
   const reiniciarJuegoCompleto = () => {
     setEstadoJuego('seleccion-jefe');
@@ -529,16 +576,12 @@ export default function CodeQuest() {
 
     if (dialogoActivo === 'jefe') {
       if (estadoJuego === 'dialogo-inicial') return jefeActual.fraseInicial;
-      if (
-        estadoJuego === 'respuesta' &&
-        (respuestaSeleccionada !== jefeActual.preguntas[preguntaActual].respuestaCorrecta ||
-          respuestaSeleccionada === 'timeout')
-      ) {
+      if (estadoJuego === 'respuesta' && mensajeRespuesta) {
         return mensajeRespuesta;
       }
       if (estadoJuego === 'victoria') return jefeActual.fraseVictoria;
       if (estadoJuego === 'derrota') return jefeActual.fraseDerrota;
-      return '¡Prepárate para mi siguiente pregunta!';
+      return '¡Prepárate para mi siguiente prueba!';
     }
 
     if (dialogoActivo === 'jugador') {
@@ -595,7 +638,7 @@ export default function CodeQuest() {
     >
       {/* Título del juego */}
       <h2
-        className="tituloPrincipal font-bold text-center w-full text-purple-400 drop-shadow-md"
+        className="tituloPrincipal font-bold text-center w-full text-purple-400 drop-shadow-md h-14"
         style={{ fontSize: '5rem' }}
       >
         CodeQuest
@@ -641,7 +684,7 @@ export default function CodeQuest() {
           {tipoJefe === 'scrum' && mostrarPregunta && estadoJuego === 'pregunta' && (
             <div className="flex flex-row items-center justify-center  ">
               {/* Escenario Scrum  */}
-              <div className="w-[30%] absolute -top-12 flex items-center justify-end">
+              <div className="w-[30%] absolute -top-4 flex items-center justify-end">
                 <EscenarioScrum fallosConsecutivos={fallosConsecutivos} preguntaActual={preguntaActual} />
               </div>
 
@@ -664,10 +707,15 @@ export default function CodeQuest() {
             </div>
           )}
 
-          {/* Contenedor de preguntas - centro (para otros jefes) */}
-          {tipoJefe !== 'scrum' &&
-            mostrarPregunta &&
-            estadoJuego === 'pregunta' &&
+          {/* Contenedor de Usuario_mamon */}
+
+          {tipoJefe === 'mamon' && estadoJuego === 'prueba-especial' && (
+            <UsuarioMamon onPruebaCompletada={manejarPruebaCompletada} onPruebaFallada={manejarPruebaFallada} />
+          )}
+
+          {/* Contenedor de preguntas - centro (para jefe mamón después de pruebas y otros jefes) */}
+          {((tipoJefe === 'mamon' && mostrarPregunta && estadoJuego === 'pregunta') ||
+            (tipoJefe !== 'scrum' && tipoJefe !== 'mamon' && mostrarPregunta && estadoJuego === 'pregunta')) &&
             preguntaActual < preguntasActuales.length && (
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl z-10">
                 <ContenedorPreguntas
@@ -731,7 +779,7 @@ export default function CodeQuest() {
           </div>
 
           {/* Comodines */}
-          <div className="absolute top-4 left-4 z-20">
+          <div className="absolute top-20 left-4 z-20">
             {tipoJefe === 'scrum' ? (
               <ComodinScrum
                 vida={comodinScrumVida}
