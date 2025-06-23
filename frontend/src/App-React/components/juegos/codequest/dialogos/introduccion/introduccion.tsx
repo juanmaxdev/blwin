@@ -7,6 +7,7 @@ import { TextPlugin } from 'gsap/TextPlugin';
 import Fondo from '../../../../../assets/juegos/codequest/campoDeBatalla/campoBatalla_java.jpg';
 import ImagenPersonaje from '../../../../../assets/juegos/codequest/personaje/personaje_principal_front.png';
 import '../../../../../assets/juegos/codequest/styles/styles.css';
+import SonidoInicio from '../../../../../assets/juegos/codequest/sonido/game-music-loop.mp3';
 
 // Registrar el plugin de texto
 gsap.registerPlugin(TextPlugin);
@@ -39,7 +40,7 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
 
   const [indexActual, setIndexActual] = useState(0);
   const [mostrarModal, setMostrarModal] = useState(false);
-  const [sonidoActivo, setSonidoActivo] = useState(true);
+  const [sonidoActivo, setSonidoActivo] = useState(false);
   const [mostrarAyuda, setMostrarAyuda] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const tituloRef = useRef<HTMLDivElement>(null);
@@ -51,13 +52,12 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
   // Inicializar animaciones al montar el componente
   useEffect(() => {
     iniciarAnimaciones();
-    iniciarMusica();
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
       if (musicaRef.current) {
         musicaRef.current.pause();
-        musicaRef.current = null;
+        musicaRef.current.currentTime = 0;
       }
     };
   }, []);
@@ -80,27 +80,22 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
     };
   }, [indexActual, mostrarModal, onFinish]);
 
-  const iniciarMusica = () => {
-    if (sonidoActivo) {
-      musicaRef.current = new Audio('/sonidos/musica-intro.mp3');
-      musicaRef.current.loop = true;
-      musicaRef.current.volume = 0.3;
-      musicaRef.current.play().catch(() => {
-        // Silenciar error si no se puede reproducir automáticamente
-      });
-    }
-  };
 
   const toggleSonido = () => {
-    setSonidoActivo(!sonidoActivo);
+  setSonidoActivo((prevActivo) => {
+    const nuevoEstado = !prevActivo;
     if (musicaRef.current) {
-      if (sonidoActivo) {
-        musicaRef.current.pause();
-      } else {
+      if (nuevoEstado) {
+        musicaRef.current.volume = 0.6;
+        musicaRef.current.loop = true;
         musicaRef.current.play().catch(() => {});
+      } else {
+        musicaRef.current.pause();
       }
     }
-  };
+    return nuevoEstado;
+  });
+};
 
   const iniciarAnimaciones = () => {
     const tl = gsap.timeline();
@@ -229,7 +224,7 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
 
   return (
     <>
-      <audio ref={musicaRef} preload="auto" />
+      <audio ref={musicaRef} preload="auto" src={SonidoInicio} />
 
       <div
         ref={fondoRef}
@@ -316,6 +311,7 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
         </div>
 
         {/* Botones inferiores */}
+        {/*
         <div
           ref={botonesRef}
           className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8 z-10 flex flex-col gap-2 sm:gap-3 md:gap-4"
@@ -334,6 +330,7 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
             Futura implementacion ➡️
           </button>
         </div>
+        */}
       </div>
 
       {/* Modal de Ayuda */}
