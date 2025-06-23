@@ -148,7 +148,7 @@ export default function UsuarioMamonMemoria({ onJuegoCompletado, onJuegoFallado 
   };
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-transparent px-2 sm:px-4">
+    <div className="absolute inset-0 flex items-center justify-center bg-transparent px-2 sm:px-4" data-testid="memoria">
       <div className="bg-white bg-opacity-90 rounded-2xl shadow-2xl p-3 sm:p-4 md:p-6 max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl w-full max-h-screen mx-2 sm:mx-4 mb-8 sm:mb-14 overflow-y-auto">
         <div className="text-center mb-3 sm:mb-4 md:mb-6">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold textoArcade text-purple-800 mb-1 sm:mb-2">

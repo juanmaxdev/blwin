@@ -48,17 +48,6 @@ export default function EscenarioScrum({ fallosConsecutivos, preguntaActual }: E
       transition={{ duration: 0.5 }}
       key={`${preguntaActual}-${fallosConsecutivos}`} 
     >
-      {/* Título de la reunión */}
-      {/*<div className="text-center mb-3">
-        <h3 className="text-xl font-bold text-blue-800 mb-1">📅 Daily Scrum</h3>
-        <div className="flex justify-center items-center gap-2 text-xs text-gray-600">
-          <span>Sprint 3 - Día {Math.floor(preguntaActual / 3) + 1}</span>
-          <span className="mx-1">•</span>
-          <span className={`font-bold ${fallosConsecutivos > 0 ? "text-red-600" : "text-green-600"}`}>
-            Fallos: {fallosConsecutivos}
-          </span>
-        </div>
-      </div>^*/}
 
       {/* Imagen de la reunión */}
       <motion.div
@@ -83,6 +72,7 @@ export default function EscenarioScrum({ fallosConsecutivos, preguntaActual }: E
           {Array.from({ length: Math.min(fallosConsecutivos, 3) }).map((_, i) => (
             <motion.div
               key={i}
+              data-testid="fallo-indicador"
               className="w-2 h-2 bg-red-500 rounded-full"
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 0.5, delay: i * 0.1, repeat: Number.POSITIVE_INFINITY }}

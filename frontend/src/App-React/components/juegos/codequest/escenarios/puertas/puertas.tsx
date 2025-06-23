@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
 // Tipos para las preguntas y puertas
-interface PreguntaPuerta {
+export interface PreguntaPuerta {
   id: number
   pregunta: string
   codigo?: string

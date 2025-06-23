@@ -156,11 +156,10 @@ export default function EmpezarJuego({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
               {jefes.map((jefe) => {
                 const estaDerrotado = jefesDerrotados.includes(jefe.id);
-                const puedeSeleccionar = !estaDerrotado && jefeSeleccionado !== jefe.id;
-
                 return (
                   <div
                     key={jefe.id}
+                    data-testid={`jefe-card-${jefe.id}`}
                     className={`border-2 rounded-lg p-2 sm:p-3 md:p-4 transition-all relative ${
                       estaDerrotado
                         ? 'border-gray-300 bg-gray-100 opacity-60 cursor-not-allowed'
