@@ -1,14 +1,14 @@
-"use client"
+'use client';
 
-import { useState, useEffect, useRef } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 interface TemporizadorProps {
-  duracion: number // Duración en segundos
-  onTiempoAgotado: () => void
-  activo: boolean
-  onReset?: () => void
-  className?: string
+  duracion: number; // Duración en segundos
+  onTiempoAgotado: () => void;
+  activo: boolean;
+  onReset?: () => void;
+  className?: string;
 }
 
 export default function Temporizador({
@@ -16,87 +16,90 @@ export default function Temporizador({
   onTiempoAgotado,
   activo,
   onReset,
-  className = "",
+  className = '',
 }: TemporizadorProps) {
-  const [tiempoRestante, setTiempoRestante] = useState(duracion)
-  const [progreso, setProgreso] = useState(100)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const [tiempoRestante, setTiempoRestante] = useState(duracion);
+  const [progreso, setProgreso] = useState(100);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reiniciar temporizador cuando cambie la duración o se active
   useEffect(() => {
-    setTiempoRestante(duracion)
-    setProgreso(100)
-  }, [duracion, onReset])
+    setTiempoRestante(duracion);
+    setProgreso(100);
+  }, [duracion, onReset]);
 
   // Manejar el conteo regresivo
   useEffect(() => {
     if (!activo) {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
-      return
+      return;
     }
 
     intervalRef.current = setInterval(() => {
       setTiempoRestante((prev) => {
-        const nuevo = prev - 1
-        const nuevoProgreso = (nuevo / duracion) * 100
+        const nuevo = prev - 1;
+        const nuevoProgreso = (nuevo / duracion) * 100;
 
-        setProgreso(nuevoProgreso)
+        setProgreso(nuevoProgreso);
 
         if (nuevo <= 0) {
           if (intervalRef.current) {
-            clearInterval(intervalRef.current)
-            intervalRef.current = null
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
           }
-          onTiempoAgotado()
-          return 0
+          onTiempoAgotado();
+          return 0;
         }
 
-        return nuevo
-      })
-    }, 1000)
+        return nuevo;
+      });
+    }, 1000);
 
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
-    }
-  }, [activo, duracion, onTiempoAgotado])
+    };
+  }, [activo, duracion, onTiempoAgotado]);
 
   // Limpiar interval al desmontar
   useEffect(() => {
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current)
+        clearInterval(intervalRef.current);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   // Determinar color según el tiempo restante
   const getColor = () => {
-    if (progreso > 60) return "text-green-600"
-    if (progreso > 30) return "text-yellow-600"
-    return "text-red-600"
-  }
+    if (progreso > 60) return 'text-green-600';
+    if (progreso > 30) return 'text-yellow-600';
+    return 'text-red-600';
+  };
 
   const getBarColor = () => {
-    if (progreso > 60) return "bg-green-500"
-    if (progreso > 30) return "bg-yellow-500"
-    return "bg-red-500"
-  }
+    if (progreso > 60) return 'bg-green-500';
+    if (progreso > 30) return 'bg-yellow-500';
+    return 'bg-red-500';
+  };
 
   // Formatear tiempo en MM:SS
   const formatearTiempo = (segundos: number) => {
-    const minutos = Math.floor(segundos / 60)
-    const segs = segundos % 60
-    return `${minutos.toString().padStart(2, "0")}:${segs.toString().padStart(2, "0")}`
-  }
+    const minutos = Math.floor(segundos / 60);
+    const segs = segundos % 60;
+    return `${minutos.toString().padStart(2, '0')}:${segs.toString().padStart(2, '0')}`;
+  };
 
- return (
-    <div className={`bg-white bg-opacity-90 rounded-xl shadow-lg p-2 sm:p-3 md:p-4 ${className}`}>
+  return (
+    <div
+      className={`bg-white bg-opacity-90 rounded-xl shadow-lg p-2 sm:p-3 md:p-4 ${className}`}
+      data-testid="temporizador"
+    >
       <div className="flex items-center justify-between mb-1 sm:mb-2">
         <span className="text-xs sm:text-sm font-medium text-gray-700">Tiempo restante</span>
         <motion.span
@@ -129,16 +132,16 @@ export default function Temporizador({
         </motion.div>
       )}
     </div>
-  )
+  );
 }
 
 // Hook personalizado para manejar diferentes dificultades
-export const useTiempoPorDificultad = (dificultad: "facil" | "media" | "dificil" | null) => {
+export const useTiempoPorDificultad = (dificultad: 'facil' | 'media' | 'dificil' | null) => {
   const tiempos = {
-    facil: 45, 
-    media: 35, 
+    facil: 45,
+    media: 35,
     dificil: 25,
-  }
+  };
 
-  return dificultad ? tiempos[dificultad] : 30 // 
-}
+  return dificultad ? tiempos[dificultad] : 30; //
+};
