@@ -35,7 +35,7 @@ La aplicación está compuesta por dos partes:
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/blwin.git
+   git clone https://dev.azure.com/savia/BL_Feedback/_git/blwin/
    cd blwin/backend
    ```
 
@@ -115,4 +115,4 @@ npm test
 - **Frontend**: React, TypeScript, Axios, React Router, Tailwind CSS  
 - **Backend**: ASP.NET Core, Entity Framework Core, SQL Server  
 - **Autenticación**: JWT  
-- **Control de versiones**: Git, GitHub
+- **Control de versiones**: Git

@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'CodeQuest';
+  src: url('../fonts/arcade/Arcade.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Tales';
+  src: url('../fonts/ancient-modern-tales/Ancient_Modern_Tales.woff') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'ArcadeClassic';
+  src: url('../fonts/arcade-classic/ArcadeClassic.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'BlockStepped';
+  src: url('../fonts/blockstepped/Blockstepped.ttf') format('truetype');
+  font-weight: normal;
+}
+
+
+@font-face {
+  font-family: 'Arcade';
+  src: url('../fonts/arcade/Arcade.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'LogWizard';
+  src: url('../fonts/log-wizard/log-Wizard.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Blox';
+  src: url('../fonts/blox/Blox2.ttf') format('truetype');
+  font-weight: normal;
+}
+
+.tituloPrincipal {
+    font-family: 'CodeQuest', sans-serif;;
+    font-size: 10rem;
+    text-align: center;
+    letter-spacing: 1rem;
+}
+
+.tituloFuente {
+    font-family: 'CodeQuest', sans-serif;
+}
+
+.tituloFuenteSecundario {
+    font-family:'ArcadeClassic', sans-serif;
+    letter-spacing: 1px;
+}
+
+.textoFuente {
+    font-family:  sans-serif;
+}
+
+.textoTales{
+    font-family: 'Tales', sans-serif;
+    letter-spacing: 0.2rem;
+}
+
+.textoArcade {
+  font-family: 'Arcade', 'Tales', sans-serif;
+}
+
+.blox {
+  font-family: 'Blox', sans-serif;
+  letter-spacing: 5px;
+}
