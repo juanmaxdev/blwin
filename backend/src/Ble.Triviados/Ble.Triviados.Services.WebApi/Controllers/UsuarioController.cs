@@ -1,4 +1,5 @@
-﻿using Ble.Triviados.Application.Dtos;
+﻿using System.Security.Claims;
+using Ble.Triviados.Application.Dtos;
 using Ble.Triviados.Application.Interfaces;
 using Ble.Triviados.Application.Services;
 using Ble.Triviados.Domain.Entity.Entities;
@@ -6,6 +7,7 @@ using Ble.Triviados.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Ble.Triviados.Services.WebApi.Controllers
 {
@@ -85,5 +87,76 @@ namespace Ble.Triviados.Services.WebApi.Controllers
                 return StatusCode(500, new { Message = "Ocurrió un error interno.", Error = ex.Message });
             }
         }
+
+        /// <summary>
+        /// GET: api/usuario/ranking
+        /// Muestra el listado de usuarios ordenados por puntos, a modo de raanking
+        /// </summary>
+        /// <returns>Lista de usuarios ordenados con mayor puntuación general de BBDD</returns>
+        [HttpGet("ranking")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ObtenerRankingUsuarios()
+        {
+            var ranking = await _usuarioService.ObtenerRankingUsuariosAsync();
+
+            if (ranking == null || !ranking.Any())
+                return NotFound(new { Message = "No se encontraron usuarios con puntuación." });
+
+            return Ok(ranking);
+        }
+
+
+        [HttpGet("mis-puntos")]
+        [Authorize]
+        public async Task<IActionResult> ObtenerMisPuntos()
+        {
+            // Obtener el ID del usuario desde el token JWT
+            var userIdClaim = User.FindFirst("id")?.Value; 
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { Message = "No se pudo identificar al usuario desde el token." });
+            }
+
+            // Obtener los puntos del usuario desde el servicio
+            var puntos = await _usuarioService.ObtenerPuntosUsuarioAsync(userIdClaim);
+
+            if (puntos == null)
+            {
+                return NotFound(new { Message = "No se encontraron puntos para este usuario." });
+            }
+
+            return Ok(new { Puntos = puntos });
+        }
+
+
+
+
+        [HttpPut("restar-puntos")]
+        [Authorize]
+        public async Task<IActionResult> RestarPuntos([FromBody] int puntos)
+        {
+            if (puntos <= 0)
+            {
+                return BadRequest(new { Message = "La cantidad de puntos a restar debe ser un entero positivo." });
+            }
+
+            var usuarioIdString = User.FindFirst("id")?.Value;
+            if (!int.TryParse(usuarioIdString, out var usuarioId))
+            {
+                return Unauthorized(new { Message = "No se pudo obtener la ID del usuario desde el token." });
+            }
+
+            var resultado = await _usuarioService.AgregarPuntosUsuarioAsync(usuarioId, -puntos);
+
+            if (resultado == null)
+            {
+                return NotFound(new { Message = "Usuario no encontrado." });
+            }
+
+            return Ok(new { Puntos = resultado.Puntos });
+        }
+
+
+
     }
 }

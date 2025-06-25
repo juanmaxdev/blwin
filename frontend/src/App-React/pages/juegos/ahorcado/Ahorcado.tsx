@@ -15,7 +15,6 @@ import {
 } from '../../../components/juegos/ahorcado/preguntas/Preguntas';
 import ModalGameOver from '../../../components/juegos/ahorcado/modalFin/Modal';
 import ModalSubidaNivel from '../../../components/juegos/ahorcado/modalFin/modalSubirNivel/modalNivel';
-import { useNavigate } from 'react-router-dom';
 import '../../../assets/juegos/ahorcado/styles/Styles.css';
 import { mandarPuntuacion } from '../../../hooks/MandarPuntuacion';
 
@@ -58,8 +57,6 @@ const Ahorcado = () => {
   const [mostrarModalNivel, setMostrarModalNivel] = useState(false);
   const [nivelSubido, setNivelSubido] = useState<number | null>(null);
 
-  const navigate = useNavigate();
-
   const preguntasNivelActual = (() => {
     if (puntuacion >= 450) return preguntasProgramacionWebNivel3;
     if (puntuacion >= 100) return preguntasProgramacionWebNivel2;
@@ -91,7 +88,7 @@ const Ahorcado = () => {
   const imgSegunFallo = imagenesAhorcado[numeroFallos];
 
   const handleIrInicio = () => {
-    navigate('/');
+    window.parent.location.reload();
   };
 
   const handleVolverAJugar = () => {
@@ -106,6 +103,7 @@ const Ahorcado = () => {
   const handleGameEnd = (finalScore: number) => {
     setPuntuacion(finalScore);
     setIsGameOver(true);
+    mandarPuntuacion('Ahorcado', finalScore);
   };
 
   const onClickLetra = (letra: string) => {
@@ -149,13 +147,6 @@ const Ahorcado = () => {
       setLetrasSeleccionadas([]);
       setNumeroFallos(0);
     }
-
-    {
-      /* Mandar puntuación */
-    }
-    async () => {
-      await mandarPuntuacion('Ahorcado', puntuacion);
-    };
   };
 
   return (
@@ -167,7 +158,8 @@ const Ahorcado = () => {
         <h1 className="text-4xl font-bold text-black text-center w-full titulo mb-5">Juego del Ahorcado</h1>
       </header>
 
-      <main className="flex-1 flex overflow-hidden">
+      <main className="mx-auto flex flex-col md:flex-row items-center justify-center h-[80vh] w-[auto] ">
+
         <div className="w-1/2 h-full flex flex-col items-center justify-center p-4">
           <p className="text-center text-lg font-semibold text-gray-800 puntuacion mt-8">
             Nivel: <span className="text-red-700">{nivelActual()}</span>
@@ -192,13 +184,12 @@ const Ahorcado = () => {
                 return (
                   <div
                     key={idx}
-                    className={`w-12 h-14 border-b-4 border-gray-800 text-center text-2xl font-medium fuente ${
-                      char === ' '
+                    className={`w-5 h-14 border-b-4 border-gray-800 text-center text-2xl font-medium fuente ${char === ' '
                         ? 'border-none bg-transparent'
                         : estaDescubierta
-                        ? 'text-gray-900'
-                        : 'text-transparent'
-                    }`}
+                          ? 'text-gray-900'
+                          : 'text-transparent'
+                      }`}
                   >
                     {char === ' ' ? '\u00A0' : estaDescubierta ? char : '_'}
                   </div>
@@ -222,10 +213,9 @@ const Ahorcado = () => {
                     className={`
                       flex-1 min-w-[5%] h-10 flex items-center justify-center text-lg font-semibold rounded-md
                       transition-colors duration-200 fuente
-                      ${
-                        yaSeleccionada
-                          ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
-                          : 'bg-violet-500 hover:bg-violet-700 text-white'
+                      ${yaSeleccionada
+                        ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
+                        : 'bg-violet-500 hover:bg-violet-700 text-white'
                       }
                     `}
                   >

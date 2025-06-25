@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ble.Triviados.Application.Dtos;
 using Ble.Triviados.Application.Interfaces;
 using Ble.Triviados.Domain.Entity.Entities;
 using Ble.Triviados.Domain.Entity.Interfaces;
@@ -44,5 +45,18 @@ namespace Ble.Triviados.Application.Services
         {
             return await _usuarioJuegoRepository.ActualizarRelacionAsync(usuarioJuego);
         }
+
+        public async Task<IEnumerable<UsuarioRankingDto>> ObtenerRankingDtoPorJuegoAsync(string nombreJuego)
+        {
+            var relaciones = await _usuarioJuegoRepository.ObtenerRankingPorJuegoAsync(nombreJuego);
+
+            return relaciones.Select(r => new UsuarioRankingDto
+            {
+                UsuarioId = r.Usuario.Id,
+                Nombre = r.Usuario.Name,
+                Puntos = r.Puntuacion
+            });
+        }
+
     }
 }

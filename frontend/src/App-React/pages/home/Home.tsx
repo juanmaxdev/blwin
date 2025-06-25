@@ -1,73 +1,17 @@
 import { Head } from '../../components/Head';
 import LoginButton from '../../components/home/LoginButton';
 import Slogan from '../../components/home/Slogan';
-import RankingPreview, { RankingItem } from '../../components/home/RankingPreview';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import PersonajeCarrusel from '../../components/home/PersonajeCarrusel';
 import BotonSonido from '../../components/ui/ButtonSound';
+import Ranking from '../../components/ranking/Ranking';
 
-function decodeToken(token: string) {
-  try {
-    const payload = token.split('.')[1];
-    const decoded = JSON.parse(atob(payload));
-    return decoded;
-  } catch {
-    return null;
-  }
-}
 
 const Home = () => {
-  const navigate = useNavigate();
-  const [ranking, setRanking] = useState<RankingItem[]>([]);
-  const [logueado, setLogueado] = useState(false);
-
-  const handleJugar = async () => {
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-
-    const decoded = decodeToken(token);
-    const usuarioId = decoded?.id;
-
-    if (!usuarioId) {
-      alert('Token inválido o expirado. Por favor, inicia sesión nuevamente.');
-      localStorage.removeItem('token');
-      navigate('/login');
-      return;
-    }
-
-    try {
-      const response = await axios.post('/api/Partida/Crear', {
-        usuarioId
-      });
-
-      const partidaId = response.data.partidaId;
-      localStorage.setItem('partidaId', partidaId);
-
-      navigate('/juego');
-    } catch (error) {
-      console.error('Error al crear la partida:', error);
-      alert('No se pudo iniciar la partida.');
-    }
-  };
+  const [, setLogueado] = useState(false);
 
   useEffect(() => {
-    const fetchRanking = async () => {
-      try {
-        const res = await axios.get('/api/Partida/ranking/top5');
-        setRanking(res.data);
-      } catch (err) {
-        console.error('Error al obtener el ranking:', err);
-      }
-    };
-
-    fetchRanking();
 
     const token = localStorage.getItem('token');
     setLogueado(!!token);
@@ -103,16 +47,8 @@ const Home = () => {
               transition={{ duration: 1 }}
             >
               <Slogan />
-
-              {logueado && (
-                <button
-                  onClick={handleJugar}
-                  className="mt-4 px-8 py-4 text-lg font-bold bg-indigo-600 text-white rounded-xl shadow-lg hover:bg-indigo-700 transition-all duration-300 hover:scale-105"
-                >
-                  Minijuego aleatorio
-                </button>
-              )}
             </motion.div>
+
 
             <motion.div
               className="flex flex-col items-center gap-6 text-center"
@@ -120,7 +56,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 3 }}
             >
-              <RankingPreview ranking={ranking} />
+              <Ranking tituloRanking={'Top 5 global'}></Ranking>
             </motion.div>
           </div>
         </main>
@@ -146,7 +82,6 @@ const Home = () => {
 
         <PersonajeCarrusel />
 
-        <div className="absolute bottom-[-80px] right-[-80px] w-[300px] h-[300px] bg-blue-300 rounded-full blur-3xl opacity-50 animate-pulse"></div>
       </div>
     </>
   );

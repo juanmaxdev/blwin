@@ -106,5 +106,23 @@ namespace Ble.Triviados.Application.Services
             };
         }
 
+        public async Task<List<UsuarioRankingDto>> ObtenerRankingUsuariosAsync()
+        {
+            var ranking = await _usuarioRepository.ObtenerRankingUsuariosAsync();
+
+            return ranking.Select(u => new UsuarioRankingDto
+            {
+                UsuarioId = u.Id,
+                Nombre = u.Name,
+                Puntos = u.Puntos
+            }).ToList();
+        }
+
+
+        public async Task<int?> ObtenerPuntosUsuarioAsync(string userId)
+        {
+            return await _usuarioRepository.ObtenerPuntosPorIdAsync(userId);
+        }
+
     }
 }
