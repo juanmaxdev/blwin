@@ -319,9 +319,6 @@ describe('CodeQuest Component', () => {
   it('debe mostrar puertas para el Jefe Programador', async () => {
     render(<CodeQuest />);
 
-    // Simular selección del jefe programador
-    const empezarJuego = screen.getByTestId('empezar-juego');
-
     // Crear un botón mock para programador
     const botonProgramador = document.createElement('button');
     botonProgramador.setAttribute('data-testid', 'seleccionar-programador');

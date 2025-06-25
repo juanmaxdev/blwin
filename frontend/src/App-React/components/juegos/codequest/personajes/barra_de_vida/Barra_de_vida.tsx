@@ -38,6 +38,10 @@ export default function BarraDeVida({ actual, max, width = 'w-full', height = 'h
         className={`${width} ${height} bg-gray-200 rounded-full overflow-hidden border-2 ${
           esJefe ? 'border-purple-800' : 'border-green-800'
         } shadow-inner relative`}
+        role="progressbar" // Agregar el rol
+        aria-valuenow={actual} // Agregar el valor actual
+        aria-valuemin={0} // Valor mínimo
+        aria-valuemax={max} // Valor máximo
       >
         <div
           className={`${getColorClass()} h-full rounded-full transition-all duration-500 ease-out`}
