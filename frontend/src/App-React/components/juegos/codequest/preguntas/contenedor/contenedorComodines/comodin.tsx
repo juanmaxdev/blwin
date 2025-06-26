@@ -37,9 +37,10 @@ export default function Comodin({
   onDanyo,
   onCincuentaPorCiento,
 }: ComodinProps) {
+
   return (
     <div className="bg-white bg-opacity-80 rounded-2xl shadow-lg p-2 sm:p-3 md:p-4">
-      <h3 className="text-sm sm:text-base md:text-lg font-bold mb-2 sm:mb-3 text-center text-gray-800">Comodines</h3>
+      <h3 className="text-sm sm:text-base md:text-lg font-bold mb-2 sm:mb-3 text-end text-gray-800">Comodines</h3>
       <div className="space-y-2 sm:space-y-3">
         <button
           onClick={onRecuperarVida}
@@ -93,7 +94,7 @@ export default function Comodin({
 export function ComodinScrum({ vida, retro, daily, onRecuperarVida, onRetro, onDaily }: ComodinScrumProps) {
   return (
     <div className="bg-white bg-opacity-80 rounded-2xl shadow-lg p-2 sm:p-3 md:p-4">
-      <h3 className="text-sm sm:text-base md:text-lg font-bold mb-2 sm:mb-3 text-center text-gray-800">Comodines</h3>
+      <h3 className="text-sm sm:text-base md:text-lg font-bold mb-2 sm:mb-3 text-end text-gray-800">Comodines</h3>
       <div className="space-y-2 sm:space-y-3">
         <button
           onClick={onRecuperarVida}
@@ -153,7 +154,7 @@ export function ComodinJefeMamon({
 }: ComodinMamonProps) {
   return (
     <div className="bg-white bg-opacity-80 rounded-2xl shadow-lg p-2 sm:p-3 md:p-4">
-      <h3 className="text-sm sm:text-base md:text-lg font-bold mb-2 sm:mb-3 text-center text-gray-800">Comodines</h3>
+      <h3 className="text-sm sm:text-base md:text-lg font-bold mb-2 sm:mb-3 text-end text-gray-800">Comodines</h3>
       <div className="space-y-2 sm:space-y-3">
         <button
           onClick={onRecuperarVida}

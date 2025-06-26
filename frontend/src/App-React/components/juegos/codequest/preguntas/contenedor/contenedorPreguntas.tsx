@@ -110,7 +110,7 @@ export default function ContenedorPreguntas({
   };
 
   return (
-    <div className="p-3 sm:p-4 md:p-6 max-w-xs sm:max-w-lg md:max-w-2xl mx-auto">
+    <div className="p-3 sm:p-4 md:p-6 max-w-xs sm:max-w-lg md:max-w-2xl mx-auto scrum-pregunta-responsive">
       {/* Temporizador */}
       {dificultad && (
         <div className="mb-2 sm:mb-4 flex justify-center">

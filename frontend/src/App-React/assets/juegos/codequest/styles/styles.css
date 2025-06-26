@@ -22,7 +22,6 @@
   font-weight: normal;
 }
 
-
 @font-face {
   font-family: 'Arcade';
   src: url('../fonts/arcade/Arcade.ttf') format('truetype');
@@ -42,28 +41,28 @@
 }
 
 .tituloPrincipal {
-    font-family: 'CodeQuest', sans-serif;;
-    font-size: 10rem;
-    text-align: center;
-    letter-spacing: 1rem;
+  font-family: 'CodeQuest', sans-serif;
+  font-size: 10rem;
+  text-align: center;
+  letter-spacing: 1rem;
 }
 
 .tituloFuente {
-    font-family: 'CodeQuest', sans-serif;
+  font-family: 'CodeQuest', sans-serif;
 }
 
 .tituloFuenteSecundario {
-    font-family:'ArcadeClassic', sans-serif;
-    letter-spacing: 1px;
+  font-family: 'ArcadeClassic', sans-serif;
+  letter-spacing: 1px;
 }
 
 .textoFuente {
-    font-family:  sans-serif;
+  font-family: sans-serif;
 }
 
-.textoTales{
-    font-family: 'Tales', sans-serif;
-    letter-spacing: 0.2rem;
+.textoTales {
+  font-family: 'Tales', sans-serif;
+  letter-spacing: 0.2rem;
 }
 
 .textoArcade {
@@ -74,3 +73,60 @@
   font-family: 'Blox', sans-serif;
   letter-spacing: 5px;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Media Query para el juego de jefe Scrum */
+@media (max-width: 1670px) and (max-height: 659px) {
+  .scrum-escenario-responsive {
+    position: relative !important; 
+    top: -5rem !important;
+  }
+
+  .scrum-preguntas-responsive {
+    margin-top: 5rem !important;
+    max-height: calc(100vh - 15rem); 
+    overflow-y: auto !important;
+
+
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+  }
+  .scrum-preguntas-responsive::-webkit-scrollbar {
+    display: none; 
+  }
+}
+
+/* Media Query para el juego de jefe programador */
+@media (max-width: 1670px) and (max-height: 659px) { 
+
+  .puertas-escenario{
+    max-width: 65%;
+    margin-bottom: 0;
+  }
+
+  .titulo{
+    margin-bottom: 0 !important;
+    margin-top: 3rem !important;
+    font-size: 2.5rem !important;
+  }
+
+  .container-text{
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }
+
+  .parr{
+    padding: 5px !important;
+  }
+
+  .imagenes{
+    height: 16rem;
+  }
+ }

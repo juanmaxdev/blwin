@@ -301,12 +301,12 @@ export default function Introduccion({ onFinish }: IntroduccionProps) {
         )}
 
         {/* Personaje */}
-        <div className="absolute bottom-2 sm:bottom-4 left-32 sm:left-40 md:left-56 z-10">
+        <div className="absolute bottom-2 sm:bottom-4 left-32 sm:left-10 lg:left-16 z-10">
           <img
             ref={personajeRef}
             src={ImagenPersonaje}
             alt="Personaje Principal"
-            className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-96 lg:h-3/4 filter drop-shadow-2xl"
+            className="w-64 h-64 sm:w-80 sm:h-80 md:w-80 md:h-80 lg:w-[60dvh] lg:h-[80dvh] filter drop-shadow-2xl"
           />
         </div>
 
