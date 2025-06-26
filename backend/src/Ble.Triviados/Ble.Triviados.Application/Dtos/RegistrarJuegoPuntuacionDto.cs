@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Ble.Triviados.Application.Dtos;
 
-namespace Ble.Triviados.Application.Dtos
+public class RegistrarJuegoPuntuacionDto
 {
-    public class RegistrarJuegoPuntuacionDto
-    {
-        public string NombreJuego { get; set; }
-        public int Puntuacion { get; set; }
-    }
+    public string NombreJuego { get; set; }
+    public int Puntuacion { get; set; }
 }
