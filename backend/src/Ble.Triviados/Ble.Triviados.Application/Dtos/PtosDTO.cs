@@ -1,9 +1,8 @@
 ﻿
-namespace Ble.Triviados.Application.Dtos
+namespace Ble.Triviados.Application.Dtos;
+
+public class PtosDto
 {
-    public class PtosDto
-    {
-        public int UsuarioId { get; set; }
-        public int Puntos { get; set; }
-    }
+    public int UsuarioId { get; set; }
+    public int Puntos { get; set; }
 }

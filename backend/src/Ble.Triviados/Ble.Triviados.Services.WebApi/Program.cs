@@ -1,13 +1,11 @@
 ﻿using Ble.Triviados.Domain.Entity.Interfaces;
 using Ble.Triviados.Application.Services;
-using Ble.Triviados.Infraestructure.Persistence;
 using Ble.Triviados.Infraestructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Ble.Triviados.Application.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.Extensions.Hosting;
 using Ble.Triviados.Infrastructure.Data;
 using Microsoft.OpenApi.Models;
 

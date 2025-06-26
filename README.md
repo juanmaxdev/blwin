@@ -30,6 +30,39 @@ La aplicación está compuesta por dos partes:
 
 ---
 
+## 🧰 Herramientas utilizadas
+
+Para el desarrollo y mantenimiento de Blwin, se han utilizado las siguientes herramientas esenciales:
+
+- **Git**: Sistema de control de versiones distribuido que permite gestionar el historial de cambios del código fuente, facilitar la colaboración entre desarrolladores y mantener un flujo de trabajo organizado mediante ramas y commits.
+
+- **Visual Studio Code**: Editor de código ligero, multiplataforma y altamente extensible, ideal para trabajar con tecnologías como JavaScript, TypeScript y React. Se utiliza principalmente para el desarrollo del frontend.
+
+- **Visual Studio 2022**: Entorno de desarrollo integrado (IDE) completo y potente, utilizado para desarrollar, depurar y administrar proyectos .NET. Es especialmente útil para trabajar con el backend de Blwin, ya que ofrece herramientas avanzadas para manejo de bases de datos, depuración, pruebas y migraciones.
+
+- **Docker** *(opcional)*: Plataforma de contenedores que permite empaquetar la aplicación y sus dependencias en entornos aislados. Facilita la implementación en diferentes entornos (local, pruebas, producción) asegurando consistencia y portabilidad.
+
+---
+
+## ⚙️ Preparación de la base de datos.
+
+### No dispones de servidor de base de datos:
+
+   Para usar nuestra base de datos en docker recomendamos usar la imagen "mssql/server". Para usarla tenemos que disponer de docker instalado y solo tendríamos que ejecutar el comando siguiente:
+
+   ```bash
+   docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=TuContraseña" \
+   -p 1433:1433 --name sqlserver-blwin \
+   -d mcr.microsoft.com/mssql/server:2022-latest
+
+   ```
+
+### Dispones de servidor de base de datos
+
+Si ya dispones de un servidor de base de datos podrías pasar a la instalación del backend sin ningun problema.
+
+---
+
 ## ⚙️ Instalación del Backend (.NET)
 
 1. Clona el repositorio:

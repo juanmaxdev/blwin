@@ -8,122 +8,121 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Ble.Triviados.Infraestructure.Persistence.Migrations
+namespace Ble.Triviados.Infraestructure.Persistence.Migrations;
+
+[DbContext(typeof(AppDbContext))]
+partial class AppDbContextModelSnapshot : ModelSnapshot
 {
-    [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+        modelBuilder
+            .HasAnnotation("ProductVersion", "9.0.4")
+            .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+        SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.Juego", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.Juego", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                b.Property<string>("Descripcion")
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Nombre")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("Nombre")
-                        .IsUnique();
+                b.HasIndex("Nombre")
+                    .IsUnique();
 
-                    b.ToTable("Juegos");
-                });
+                b.ToTable("Juegos");
+            });
 
-            modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.Usuario", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("FechaRegistro")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Password")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Puntos")
-                        .HasColumnType("int");
+                b.Property<int>("Puntos")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
-                });
+                b.ToTable("Usuarios");
+            });
 
-            modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.UsuarioJuego", b =>
-                {
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
+        modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.UsuarioJuego", b =>
+            {
+                b.Property<int>("UsuarioId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("JuegoId")
-                        .HasColumnType("int");
+                b.Property<int>("JuegoId")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Puntuacion")
-                        .HasColumnType("int");
+                b.Property<int>("Puntuacion")
+                    .HasColumnType("int");
 
-                    b.HasKey("UsuarioId", "JuegoId");
+                b.HasKey("UsuarioId", "JuegoId");
 
-                    b.HasIndex("JuegoId");
+                b.HasIndex("JuegoId");
 
-                    b.ToTable("UsuarioJuegos");
-                });
+                b.ToTable("UsuarioJuegos");
+            });
 
-            modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.UsuarioJuego", b =>
-                {
-                    b.HasOne("Ble.Triviados.Domain.Entity.Entities.Juego", "Juego")
-                        .WithMany("UsuariosJuego")
-                        .HasForeignKey("JuegoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.UsuarioJuego", b =>
+            {
+                b.HasOne("Ble.Triviados.Domain.Entity.Entities.Juego", "Juego")
+                    .WithMany("UsuariosJuego")
+                    .HasForeignKey("JuegoId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("Ble.Triviados.Domain.Entity.Entities.Usuario", "Usuario")
-                        .WithMany("UsuarioJuegos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Ble.Triviados.Domain.Entity.Entities.Usuario", "Usuario")
+                    .WithMany("UsuarioJuegos")
+                    .HasForeignKey("UsuarioId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Juego");
+                b.Navigation("Juego");
 
-                    b.Navigation("Usuario");
-                });
+                b.Navigation("Usuario");
+            });
 
-            modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.Juego", b =>
-                {
-                    b.Navigation("UsuariosJuego");
-                });
+        modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.Juego", b =>
+            {
+                b.Navigation("UsuariosJuego");
+            });
 
-            modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.Usuario", b =>
-                {
-                    b.Navigation("UsuarioJuegos");
-                });
+        modelBuilder.Entity("Ble.Triviados.Domain.Entity.Entities.Usuario", b =>
+            {
+                b.Navigation("UsuarioJuegos");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }
