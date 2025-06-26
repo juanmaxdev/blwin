@@ -31,11 +31,8 @@ const App = () => (
 
     {/* Página de login */}
     <Route path="/login" element={<Login />} />
-    <Route path="/login" element={<Login />} />
 
-    <Route path="/juego_esquivar" element={<PaginaJuegoEsquivar />} />
-    <Route path="/juegos_sopa_de_letras" element={<SopaLetras />} />
-    <Route path="/juego_esquivar" element={<PaginaJuegoEsquivar />} />
+    {/* Juego de sopa de letras */}
     <Route path="/juegos_sopa_de_letras" element={<SopaLetras />} />
 
     {/* Minijuego Ahorcado */}
@@ -80,12 +77,15 @@ const App = () => (
     {/* Página-Nivel 10 de Juego Detective CSS */}
     <Route path="/juego/selectores/nivel-10" element={<NivelDetectiveFlexbox />} />
 
+    {/* Juego de atrapa un millón */}
     <Route path="/juego_atrapa_puntos" element={<PaginaAtrapaPuntos />} />
 
+    {/* Juego de BlackJack */}
     <Route path="/juego/blackjack" element={<JuegoBlackjack />} />
 
     {/* Juego CodeQuest */}
     <Route path="/codequest" element={<CodeQuest />} />
+
   </Routes>
 );
 

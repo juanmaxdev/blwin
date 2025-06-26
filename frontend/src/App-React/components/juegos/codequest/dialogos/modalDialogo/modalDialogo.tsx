@@ -46,7 +46,7 @@ export function ModalDialogoIntro({ id, titulo, texto, onClose }: ModalDialogoPr
   }
 
   return (
-    <div id={id} className="fixed inset-0 flex items-center justify-center z-40">
+    <div id={id} className="fixed inset-0 flex justify-center items-end sm:mb-14 sm:items-end lg:items-end xl:items-center xl:mt-40 mt-20 z-30 sm:z-40">
       <div className="bg-gradient-to-br from-white via-purple-100 to-blue-100 bg-opacity-90 backdrop-blur-sm rounded-3xl shadow-2xl max-w-lg w-full mx-4 p-8 relative border border-purple-200">
         {/* Decoración superior */}
         <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">

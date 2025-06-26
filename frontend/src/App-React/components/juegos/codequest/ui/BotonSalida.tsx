@@ -6,8 +6,8 @@ import ImagenSalida from "../../../../assets/juegos/codequest/personaje/personaj
 export default function BotonSalida() {
   return (
     <motion.button
-      className="fixed top-2 sm:top-4 left-2 sm:left-4 z-50 px-2 sm:px-4 py-1 sm:py-2 rounded-lg shadow-none"
-      onClick={() => (window.location.href = "/")}
+      className="fixed top-2 sm:-top-4 left-2 sm:-left-6 z-50 px-2 sm:px-4 py-1 sm:py-2 rounded-lg shadow-none"
+      onClick={() => window.parent.location.reload()}
       whileHover={{ scale: 1.15 }}
       whileTap={{ scale: 0.95 }}
     >

@@ -169,7 +169,7 @@ export default function UsuarioMamonMemoria({ onJuegoCompletado, onJuegoFallado 
             </div>
             <div className="text-center">
               <span className="text-lg sm:text-xl md:text-2xl font-bold text-orange-600">
-                {cartas.filter((c) => c.emparejada).length / 2}/8
+                {cartas.filter((c) => c.emparejada).length / 2}/10
               </span>
               <p className="text-xs sm:text-sm text-gray-600">Pares de cartas</p>
             </div>
