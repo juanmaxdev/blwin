@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom'
 
 vi.mock('./ui/Progreso', () => ({
     Progreso: ({ value }: { value: number }) => (
-        <div data-testid="progreso">{`Progreso: ${value.toFixed(1)}%`}</div>
+        <div>{`Progreso: ${value.toFixed(1)}%`}</div>
     ),
 }))
 vi.mock('./ui/Boton', () => ({
@@ -36,7 +36,7 @@ describe('ResultadoJuego', () => {
         expect(screen.getByText('8')).toBeInTheDocument()
         expect(screen.getByText(/de 10 puntos posibles/i)).toBeInTheDocument()
         expect(screen.getByText('¡Excelente!')).toBeInTheDocument()
-        expect(screen.getByTestId('progreso')).toHaveTextContent('Progreso: 80.0%')
+        expect(screen.getByText(/80\.0\s*%/)).toBeInTheDocument() 
     })
 
     it('muestra "Puedes mejorar" si el porcentaje está entre 40 y 59', () => {
