@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, it, afterEach, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
 
-import DetectiveJuegoPanel from './DetectiveJuegoPanel';
+import {DetectiveJuegoPanel} from './DetectiveJuegoPanel';
 
 describe('DetectiveJuegoPanel', () => {
     // Función de rendeizar el componente

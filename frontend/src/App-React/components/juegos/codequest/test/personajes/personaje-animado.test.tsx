@@ -21,9 +21,6 @@ describe('Componente PersonajeAnimado', () => {
   });
 
   it('aplica animación attack y luego vuelve a idle tras 1s', () => {
-    const { rerender } = render(
-      <PersonajeAnimado imagen={urlImagenPrueba} animacion="attack" />
-    );
     const contenedor = screen.getByRole('img', { name: /personaje/i }).parentElement;
 
     // Al iniciar, clase de ataque

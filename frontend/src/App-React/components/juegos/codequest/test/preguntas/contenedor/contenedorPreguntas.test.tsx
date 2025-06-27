@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 import ContenedorPreguntas from '../../../../codequest/preguntas/contenedor/contenedorPreguntas';
-import Temporizador from '../../../ui/Temporizador';
 
 // Mock del hook useTiempoPorDificultad para que devuelva 5000ms (5s)
 vi.mock('../../../ui/Temporizador', () => {
