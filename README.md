@@ -44,37 +44,27 @@ Para el desarrollo y mantenimiento de Blwin, se han utilizado las siguientes her
 
 ---
 
-## ⚙️ Preparación de la base de datos.
+## ⚙️ Base de datos local.
 
-### No dispones de servidor de base de datos:
+### Levantar una imagen Docker:
 
-   Para usar nuestra base de datos en docker recomendamos usar la imagen "mssql/server". Para usarla tenemos que disponer de docker instalado y solo tendríamos que ejecutar el comando siguiente:
+1. Para usar nuestra base de datos en docker recomendamos usar la imagen "mssql/server". Para usarla tenemos que disponer de docker instalado y solo tendríamos que ejecutar el comando siguiente:
 
    ```bash
    docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=TuContraseña" \
    -p 1433:1433 --name sqlserver-blwin \
    -d mcr.microsoft.com/mssql/server:2022-latest
-
    ```
 
-### Dispones de servidor de base de datos
-
-Si ya dispones de un servidor de base de datos podrías pasar a la instalación del backend sin ningun problema.
-
----
-
-## ⚙️ Instalación del Backend (.NET)
-
-1. Clona el repositorio:
+   Si tenemos algun error, podemos consultarlo con el siguiente comando:
 
    ```bash
-   git clone https://dev.azure.com/savia/BL_Feedback/_git/blwin/
-   cd blwin/backend
+   docker logs id_del_contenedor
    ```
 
 2. Configura el archivo `appsettings.json`:
 
-   Asegúrate de tener la cadena de conexión correcta a tu base de datos SQL Server.  
+   Asegúrate de tener la cadena de conexión correcta a tu base de datos SQL Server en el archivo appsettings.json dentro del proyecto del backend Ble.Triviados.Services.WebApi.  
    Ejemplo:
 
    ```json
@@ -85,19 +75,37 @@ Si ya dispones de un servidor de base de datos podrías pasar a la instalación 
    }
    ```
 
-3. Ejecuta las migraciones para crear la base de datos:
+3. Ejecuta las migraciones para crear la base de datos. Para ello debes tener primero instalado Entity Framework:
+   ```bash
+   dotnet tool install --global dotnet-ef
+   ```
+   
+   ```bash
+   dotnet tool restore
+   ```
+
+   Una vez lo tenemos instalado, para ejecutar las migraciones debemos ejecutar el siguiente comando:
 
    ```bash
    dotnet ef database update
    ```
 
-4. Inicia el servidor:
+
+## ⚙️ Instalación del Backend (.NET)
+
+1. Inicia el servidor desde la carpeta en la que tenemos la API:
 
    ```bash
    dotnet run
    ```
 
-   El backend estará disponible en `https://localhost:5001` (o el puerto configurado).
+   El backend se levantará localmente. El puerto del backend lo podemos consultar en la consola en la que lo hemos lanzado o en el archivo launchSettings.json.
+
+   Suponiendo que el backend se ha lanzado en el puerto 5290, en el siguiente fichero podemos consultar la documentación del mismo:
+
+   ```
+   http://localhost:5290/swagger/index.html
+   ```
 
 ---
 
@@ -106,7 +114,7 @@ Si ya dispones de un servidor de base de datos podrías pasar a la instalación 
 1. Abre una terminal y navega al directorio del frontend:
 
    ```bash
-   cd ../frontend
+   cd ./frontend
    ```
 
 2. Instala las dependencias:
@@ -115,14 +123,32 @@ Si ya dispones de un servidor de base de datos podrías pasar a la instalación 
    npm install
    ```
 
-3. Inicia la aplicación:
+3. Actualizamos el puerto del backend en el archivo viteconfig.ts, en mi caso es el 5290:
 
-   ```bash
-   npm start
+   ```json
+   proxy: {
+      '/api': {
+        target: 'http://localhost:5290',
+        changeOrigin: true,
+        secure: false
+      }
+    }
    ```
 
-   La aplicación se ejecutará en `http://localhost:3000`.
+4. Inicia la aplicación:
+   - En modo depuración:
+      ```bash
+      npm run dev
+      ```
+   - La versión completa:
 
+      ```bash
+      npm run build
+      ```
+
+      ```bash
+      npm start
+      ```
 ---
 
 ## 🧪 Pruebas
@@ -130,14 +156,12 @@ Si ya dispones de un servidor de base de datos podrías pasar a la instalación 
 ### Backend
 
 ```bash
-cd backend
 dotnet test
 ```
 
 ### Frontend
 
 ```bash
-cd frontend
 npm test
 ```
 
