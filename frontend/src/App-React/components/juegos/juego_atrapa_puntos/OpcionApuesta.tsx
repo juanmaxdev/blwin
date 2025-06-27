@@ -44,7 +44,7 @@ const OpcionApuesta: React.FC<Props> = ({
             {/* Input numérico para apostar puntos */}
             <div className="text-center">
                 <input
-                    type="text"
+                    type="number"
                     min={0}
                     max={puntos}
                     value={valor || 0}
