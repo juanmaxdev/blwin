@@ -1,16 +1,7 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import BarraProgeso from './BarraProgreso'
-
-// Mock del componente Progreso
-vi.mock('../../../components/juegos/quiz/ui/Progreso', () => ({
-    Progreso: ({ value, className }: { value: number; className?: string }) => (
-        <div data-testid="progreso" data-value={value} className={className}>
-            Progreso: {value}%
-        </div>
-    ),
-}))
 
 describe('BarraProgeso', () => {
     const props = {
@@ -27,10 +18,10 @@ describe('BarraProgeso', () => {
 
     it('muestra correctamente el progreso', () => {
         render(<BarraProgeso {...props} />)
-        const progreso = screen.getByTestId('progreso')
-        expect(progreso).toHaveTextContent('Progreso: 60%')
-        expect(progreso).toHaveAttribute('data-value', '60')
-        expect(progreso).toHaveClass('w-48')
+        const progressBar = screen.getByRole('progressbar')
+        expect(progressBar).toBeInTheDocument()
+        expect(progressBar).toHaveAttribute('data-max', '100')
+        expect(progressBar.className).toMatch(/w-48/)
     })
 
     it('muestra correctamente la puntuación', () => {

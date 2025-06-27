@@ -21,12 +21,17 @@ describe('BotonSalida', () => {
     expect(imagen.src).toContain('personaje_salida.png'); // esta línea sustituye al mock
   });
 
-  it('redirige a / cuando se hace clic', () => {
-    render(<BotonSalida />);
-
-    const boton = screen.getByRole('button');
-    fireEvent.click(boton);
-
-    expect(window.location.href).toBe('/');
+ it('redirige a / cuando se hace clic', () => {
+  const reloadMock = vi.fn();
+  Object.defineProperty(window, 'parent', {
+    value: { location: { reload: reloadMock } },
+    writable: true,
   });
+
+  render(<BotonSalida />);
+  const boton = screen.getByRole('button');
+  fireEvent.click(boton);
+
+  expect(reloadMock).toHaveBeenCalled(); 
+});
 });

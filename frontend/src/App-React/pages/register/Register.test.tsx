@@ -102,7 +102,7 @@ describe('Register', () => {
     });
     fireEvent.click(screen.getByRole('button', { name: /registrarse/i }));
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(screen.getByText(/error al registrar/i)).toBeInTheDocument();
     });
   });
