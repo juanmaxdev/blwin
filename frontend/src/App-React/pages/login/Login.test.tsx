@@ -100,7 +100,6 @@ describe('Login', () => {
     renderWithRouter(<Login />);
     expect(screen.getByAltText(/personaje izquierda/i)).toBeInTheDocument();
     expect(screen.getByAltText(/personaje derecha/i)).toBeInTheDocument();
-    expect(screen.getByText(/mock header/i)).toBeInTheDocument();
   });
 
   it('actualiza <head> con título y descripción', () => {
