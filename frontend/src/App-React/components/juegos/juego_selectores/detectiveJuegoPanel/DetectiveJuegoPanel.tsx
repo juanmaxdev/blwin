@@ -14,7 +14,7 @@ export const DetectiveJuegoPanel = () => {
       <img
         src="/foto-detective1.png"
         alt="Detective principal"
-        className="w-64 h-auto mb-8 drop-shadow-2xl drop-shadow-[0_0_25px_white]"
+        className="w-64 h-auto mb-8 drop-shadow-[0_0_25px_white]"
       />
 
       {/* Título principal del juego */}

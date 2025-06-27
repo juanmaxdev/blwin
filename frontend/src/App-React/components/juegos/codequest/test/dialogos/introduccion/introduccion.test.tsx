@@ -50,12 +50,12 @@ describe('Componente Introduccion', () => {
   test('Control de renderizado del boton de sonido', () => {
     render(<Introduccion onFinish={onFinishMock} />);
 
-    const soundButton = screen.getByTitle(/silenciar música/i);
+    const soundButton = screen.getByTitle(/Activar música/i);
     expect(soundButton).toBeInTheDocument();
-    expect(soundButton).toHaveTextContent('🔊');
+    expect(soundButton).toHaveTextContent('🔇');
 
     fireEvent.click(soundButton);
-    expect(soundButton).toHaveTextContent('🔇');
+    expect(soundButton).toHaveTextContent('🔊');
   });
 
   test('Mostrar el modal de ayuda cuando se hace click', () => {

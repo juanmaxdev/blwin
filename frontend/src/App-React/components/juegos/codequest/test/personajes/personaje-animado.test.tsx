@@ -1,9 +1,10 @@
 import { render, screen, act } from '@testing-library/react';
 import PersonajeAnimado from '../../../codequest/personajes/personaje-animado';
+import ImagenPersonaje from '../../../../../assets/juegos/codequest/personaje/personaje_principal_back.png'
 import { vi } from 'vitest'
 
 describe('Componente PersonajeAnimado', () => {
-  const urlImagenPrueba = 'https://example.com/animado.png';
+  const urlImagenPrueba = ImagenPersonaje;
 
   beforeEach(() => {
     vi.useFakeTimers();
@@ -21,6 +22,8 @@ describe('Componente PersonajeAnimado', () => {
   });
 
   it('aplica animación attack y luego vuelve a idle tras 1s', () => {
+
+    render(<PersonajeAnimado imagen={urlImagenPrueba} animacion="attack" />);
     const contenedor = screen.getByRole('img', { name: /personaje/i }).parentElement;
 
     // Al iniciar, clase de ataque
