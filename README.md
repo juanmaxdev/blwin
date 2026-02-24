@@ -10,7 +10,7 @@ La aplicación está compuesta por dos partes:
 
 ---
 
-## 📚 Características principales
+## Características principales
 
 - Interfaz de usuario intuitiva y responsiva  
 - Sistema de autenticación de usuarios  
@@ -18,7 +18,7 @@ La aplicación está compuesta por dos partes:
 
 ---
 
-## 🚀 Requisitos previos
+## Requisitos previos
 
 ### Generales
 
@@ -30,7 +30,7 @@ La aplicación está compuesta por dos partes:
 
 ---
 
-## 🧰 Herramientas utilizadas
+## Herramientas utilizadas
 
 Para el desarrollo y mantenimiento de Blwin, se han utilizado las siguientes herramientas esenciales:
 
@@ -44,7 +44,7 @@ Para el desarrollo y mantenimiento de Blwin, se han utilizado las siguientes her
 
 ---
 
-## ⚙️ Base de datos local.
+## Base de datos local.
 
 ### Levantar una imagen Docker:
 
@@ -91,7 +91,7 @@ Para el desarrollo y mantenimiento de Blwin, se han utilizado las siguientes her
    ```
 
 
-## ⚙️ Instalación del Backend (.NET)
+## Instalación del Backend (.NET)
 
 1. Inicia el servidor desde la carpeta en la que tenemos la API:
 
@@ -109,7 +109,7 @@ Para el desarrollo y mantenimiento de Blwin, se han utilizado las siguientes her
 
 ---
 
-## 💻 Instalación del Frontend (React)
+## Instalación del Frontend (React)
 
 1. Abre una terminal y navega al directorio del frontend:
 
@@ -151,7 +151,7 @@ Para el desarrollo y mantenimiento de Blwin, se han utilizado las siguientes her
       ```
 ---
 
-## 🧪 Pruebas
+## Pruebas
 
 ### Backend
 
@@ -173,3 +173,4 @@ npm test
 - **Backend**: ASP.NET Core, Entity Framework Core, SQL Server  
 - **Autenticación**: JWT  
 - **Control de versiones**: Git
+
